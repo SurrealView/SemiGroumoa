@@ -8,5 +8,7 @@
 </head>
 <body>
 	<h1>인덱스</h1>
+	<%@ include file="views/common/menubar.jsp" %>
+	
 </body>
 </html>
