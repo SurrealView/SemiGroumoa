@@ -1,0 +1,92 @@
+body {
+    font-family: "Lato", sans-serif;
+    background-color: gray;
+  }
+  
+  .side-nav {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 10px;
+  }
+  
+  .side-nav a {
+    padding: 20px 20px 20px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  .side-nav a:hover {
+    color: #f1f1f1;
+  }
+  
+  .side-nav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+  
+  #logo {
+      margin-left: 40px;
+  }
+  
+  @media screen and (max-height: 450px) {
+    .side-nav {padding-top: 15px;}
+    .side-nav a {font-size: 18px;}
+  }
+  
+  .header {
+      height: 35px;
+      width: 180px;
+      position: fixed;
+      display: inline-block;
+      float: left;
+      padding-top: 10px;
+      padding-left: 1020px;
+      left: 260px;
+      background-color: white;
+  }
+
+  nav {
+    background:white;
+    overflow: auto;
+    color: white;
+    height: 50px;
+}
+
+.search-form {
+text-align: center;
+}
+
+.search-form input[type=text] {
+padding: 7px;
+border: none;
+width: 300px;
+border-radius: 50px;
+font-size: 16px;
+font-family: sans-serif;
+margin-top: 7px;
+float: left;
+}
+
+.search-form input[type=image]{
+padding: 7px;
+border: none;
+border-radius: 10px;
+float: left;
+margin-top: 4px;
+margin-left: 5px;
+width: 30px;
+height: 30px;        
+}

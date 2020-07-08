@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready( function() {
+        $("header").load("form/header.html");
+        $("nav").load("form/nav.html");
+        $("footer").load("form/footer.html"); 
+    });
+    </script>
+    
+    <style>
+        .wrapper {
+            border: 1px solid black;
+            margin: auto;
+            padding-top: 50px;
+            padding-bottom: 50px;
+            
+            height: auto;
+            width: 1000px;
+          /* display: table-cell;
+          vertical-align: middle; */
+            
+            display: block;
+            margin: 0px auto;
+        }
+        .content {
+            border: 1px solid black;
+            display: block;
+            margin: 0px auto;
+            /* position: absolute;
+            top: 50%;
+            left: 50%;  */
+            height: 900px;
+            width: 800px;
+            padding-inline-start: 25px;
+            padding-inline-end: 25px;
+        }
+        #first {
+            width: 800px;
+            margin: 0 auto;
+            position: absolute;
+            top: 210px;
+        }
+        
+        .content button{
+            width: 70px;
+            height: 25px;
+            border-radius: 50px;
+            background: transparent;
+            border: 1px solid black;
+            margin: 7px;
+            position: relative;
+            left: 30px;
+        }
+
+        #delete {
+            position: absolute;
+            top: 173px;
+            left: 900px;
+        }
+
+        #menu {
+            position: absolute;
+            top: 230px;
+            left: 500px;
+        }
+        #incontent {
+            margin-left: 20px;
+            margin-top: 20px;
+        }
+        #thumbsetting {
+            position: absolute;
+            top: 520px;
+            left: 550px;
+        }
+        #intro {
+            position: absolute;
+            top: 600px;
+            left: 550px;
+        }
+        #groupopen {
+            position: absolute;
+            top: 850px;
+            left: 550px;
+        }
+        #nickradio {
+            position: absolute;
+            top: 850px;
+            left: 800px;
+        }
+        #submitbutton {
+            position: absolute;
+            top: 1000px;
+            left: 600px;
+        }
+        #profileline {
+            position: fixed;
+            top: 750px;
+            left: 600px;
+        }
+    </style>
+
+</head>
+<body>
+    <header></header>
+    <div class="blank"><strong>
+    <nav></nav>
+    </nav>
+    <div class="wrapper">
+        <div class="content">
+            <div>
+                <br>
+                <button id="imsi">최근일정</button>
+                <button>회비내역</button>
+                <button>게시판</button>
+                <button>모임회원</button>
+                <div id="delete">
+                    <button>모임해산</button>
+                    <button>탈퇴하기</button>
+                </div>
+            </div>
+            <br>
+            <hr noshade="noshade" size="1" id="first">
+            <div id="menu">
+                <button>기본정보</button>
+                <button>게시판관리</button>
+                <button>결제내역</button>
+                <button>광고관리</button>
+                <button>동호회 페이지</button>
+            </div>
+            <br>
+            <br>
+            <br>
+            <form id="incontent">
+            <h2>기본 정보</h2>
+            <br>
+            <hr noshade="noshade" size="1">
+            <br>
+            <label>동호회 주소</label>
+            <input type="text" size="50px">
+            <br>
+            <br>
+            <hr noshade="noshade" size="1">
+            <br>
+            <label>동호회 이름</label>
+            <input type="text" size="50px">
+            <br>
+            <br>
+            <hr noshade="noshade" size="1">
+            <br>
+            <label>동호회 프로필</label>
+            <div id="thumbsetting">
+            <label>썸네일 설정</label>&nbsp;<input type="text" id="thumb"><button>이미지파일</button>
+            </div>
+            <div id="intro">
+            <label style="float: left;">동호회 소개</label>&nbsp;
+            <textarea style="width: 400px; height: 200px;"></textarea>
+            </div>
+            <br>
+            <br>
+            <hr noshade="noshade" size="1" id="profileline">
+            <div id="groupopen">
+            <label>동호회 공개 여부</label>
+            <br>
+            <br>
+            <input type="radio" value="open" id="open" name="group" checked>
+            <label for="open">공개</label>
+            <input type="radio" value="secret" id="secret" name="group">
+            <label for="secret">비공개</label>
+            </div>
+            <div id="nickradio">
+            <label>닉네임 사용 설정</label>
+            <br>
+            <br>
+            <input type="radio" value="open" id="open" name="nickname" checked>
+            <label for="open">공개</label>
+            <input type="radio" value="secret" id="secret" name="nickname">
+            <label for="secret">비공개</label>
+            </div>
+            <div id="submitbutton">
+            <button>확인</button>
+            <button>취소</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
