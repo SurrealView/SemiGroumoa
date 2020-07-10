@@ -1,0 +1,19 @@
+.noticeArea td {
+    padding: 10px;
+}
+.noticeArea tr {
+    border-bottom: 1px solid black;
+}
+
+.noticeArea{
+    border-collapse:collapse;
+    vertical-align: auto;
+}
+
+button{
+    background:purple;
+    color:white;
+    width:100px;
+    height:50px;
+    border-radius: 10%;
+}
