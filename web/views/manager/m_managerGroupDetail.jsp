@@ -53,27 +53,28 @@
 </head>
 <body>
 	<div id="manager">
-		<label style="font-weight:bold; position:absolute; top: 20px; left: 20px; font-size:20px;">회원 정보</label>
+		<label style="font-weight:bold; position:absolute; top: 20px; left: 20px; font-size:20px;">동호회 정보</label>
    		<div style="border-radius: 50%; height: 200px; width: 200px; background-color: gray; position: absolute; top: 50px; left: 250px;"></div>
-   		<label id="label2" style="top:290px; left: 20px;">닉네임 : </label>
-   		<label id="label2" style="top:380px; left: 20px;">계정 : </label>
-   		<label id="label2" style="top:450px; left: 20px;">비밀번호(변경시에만 입력) : </label>
-   		<label id="label2" style="top:530px; left: 20px;">구분 : </label>
+   		<label id="label2" style="top:290px; left: 20px;">동호회명 : </label>
+   		<label id="label2" style="top:350px; left: 20px;">모임장명 : </label>
+   		<label id="label2" style="top:410px; left: 20px;">인원 : </label>
+   		<label id="label2" style="top:470px; left: 20px;">관심사 : </label>
+   		<label id="label2" style="top:530px; left: 20px;">상세 관심사 : </label>
 	</div>
 	<div id="activity">
-		<label style="font-weight:bold; position:absolute; top:20px; left: 20px; font-size:20px;">활동정보</label>
-		<label id="label2" style="top:60px; left:20px;">가입일</label>
-    	<label id="label2" style="top:60px; left:200px;">로그인</label>
+		<label style="font-weight:bold; position:absolute; top:20px; left: 20px; font-size:20px;">상세정보</label>
+		<label id="label2" style="top:60px; left:20px;">개설일</label>
+    	<label id="label2" style="top:60px; left:200px;">결제 금액</label>
    		<label id="label" style="top:160px; left:20px;">작성</label>
-  	    <label id="label2" style="top:210px; left:20px;">글</label>
+  	    <label id="label2" style="top:210px; left:20px;">게시글</label>
         <label id="label2" style="top:250px; left:20px;">댓글</label>
-        <label id="label2" style="top:290px; left:20px;">문의</label>
-        <label id="label" style="top:160px; left:200px;">제재횟수</label>
+        <label id="label" style="top:160px; left:200px;">해산여부</label>
 	</div>
 	<div id="group">
-		<label style="font-weight:bold; position:absolute; top:20px; left:20px; font-size:20px;">가입한 모임</label>
-		<label id="label2" style="top: 60px; left: 20px;">동호회명</label>
-   		<label id="label2" style="top: 60px; left: 200px;">직책</label>
+		<label style="font-weight:bold; position:absolute; top:20px; left:20px; font-size:20px;">모임장 정보</label>
+		<label id="label2" style="top: 60px; left: 20px;">이름</label>
+		<label id="label2" style="top: 140px; left: 20px;">계정</label>
+   		<label id="label2" style="top: 60px; left: 200px;">연락처</label>
 	</div>
 </body>
 </html>
