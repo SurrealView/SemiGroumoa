@@ -24,22 +24,26 @@
   		  <thead>
    		   <tr>
    		   	 <th><input type="checkbox"></th>
-     		 <th>닉네임</th>
-     		 <th>계정</th>
-     		 <th>가입일</th>
-     		 <th>직책</th>
-     		 <th>글/댓글/문의</th>
+     		 <th>모임명</th>
+     		 <th>모임장</th>
+     		 <th>개설일</th>
+     		 <th>관심사</th>
+     		 <th>상세관심사</th>
+     		 <th>인원</th>
+     		 <th>게시글</th>
      		 <th>메모</th>
     	   </tr>
   		  </thead>
     	<tbody>
      	   <tr>
        		 <td><input type="checkbox"></td>
-        	 <td>김형진</td>
-             <td>john@example.com</td>
+        	 <td>푸른뱃고동</td>
+             <td>김승열</td>
              <td>2020/07/01</td>
-             <td>모임장</td>
-             <td>1/1/0</td>
+             <td>아웃도어/여행</td>
+             <td>낚시</td>
+             <td>10/30</td>
+             <td>10</td>
              <td><input type="checkbox"></td>
           </tr>
         </tbody>
