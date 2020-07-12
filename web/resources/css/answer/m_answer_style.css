@@ -1,0 +1,31 @@
+
+        .writeArea td{
+            padding:10px;
+        }
+        .writeArea tr{
+            border-bottom: 1px solid black;
+        }
+
+        .writeArea{
+            border-collapse:collapse;
+            vertical-align: auto;
+        }
+
+        .upload{
+            border:1px solid black;
+            text-decoration: none;
+            font-size: 13px;
+            padding:5px;
+        }
+
+        .upload:hover{
+            text-decoration: underline;
+        }
+
+        .writeBtn{
+            background:purple;
+            color:white;
+            width:100px;
+            height:50px;
+            border-radius: 10%;
+        }
