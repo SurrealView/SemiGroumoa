@@ -3,11 +3,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+<meta charset="UTF-8">
+<title>Insert title here</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link href="../../../resources/css/answer/m_answer_style.css" rel="stylesheet">
+    <link href="../../../resources/css/answer/m_answerDetail.css" rel="stylesheet">
 </head>
 <body>
 	<table>
@@ -16,28 +15,29 @@
         </tr>
         <tr class="content">
             <td>
-                <div align="center" class="AnswerWrite" id="AnswerWrite">
-                    <div class="AnserInfo">
-                        <table class="writeArea">
+                <div align="center" class="answerDetail" id="answerDetail">
+                    <div class="answerDetailInfo">
+                        <table class="detailArea">
                             <tr>
                                 <td colspan="7"> </td>
                             </tr>
                             <tr>
                                 <td><label>담당자 </label></td>
-                                <td colspan="2"><input type="text"></td>
-                                <td><label>연락처 </label></td>
-                                <td><input type="tel"></td>
+                                <td colspan="6"><input type="text"></td>                                
                             </tr>
                             <tr>
+                            	<td><label>연락처 </label></td>
+                                <td colspan="2"><input type="tel"></td>
                                 <td><label>이메일 </label></td>
-                                <td colspan="6"><input type="email"></td>
+                                <td><input type="email"></td>
                             </tr>
                             <tr>
                                 <td><label>내용</label></td>
-                                <td colspan="6"><textarea cols="62" rows="10" style="resize:none"></textarea></td>
+                                <td colspan="6"><p>내용 내용내용 <br>내용내용<br><br><br><br><br>내용	</p></textarea></td>
                             </tr>
                         </table>
-                        <button type="submit" class="writeBtn">등록</button>
+                        <button type="submit" class="correctBtn">수정하기</button>
+                        <button type="submit" class="deleteBtn">삭제하기</button>
                     </div>      
                 </div>
             </td>
@@ -47,28 +47,29 @@
         </tr>
         <tr class="content">
             <td>
-                <div align="center" class="AnswerWrite" id="AnswerWrite">
-                    <div class="AnserInfo">
-                        <table class="writeArea">
+                <div align="center" class="answerDetail" id="answerDetail">
+                    <div class="answerDetailInfo">
+                        <table class="detailArea">
                             <tr>
                                 <td colspan="7"> </td>
                             </tr>
                             <tr>
                                 <td><label>담당자 </label></td>
-                                <td colspan="2"><input type="text"></td>
-                                <td><label>연락처 </label></td>
-                                <td><input type="tel"></td>
+                                <td colspan="6"><input type="text"></td>                                
                             </tr>
                             <tr>
+                            	<td><label>연락처 </label></td>
+                                <td colspan="2"><input type="tel"></td>
                                 <td><label>이메일 </label></td>
-                                <td colspan="6"><input type="email"></td>
+                                <td><input type="email"></td>
                             </tr>
                             <tr>
                                 <td><label>내용</label></td>
-                                <td colspan="6"><textarea cols="62" rows="10" style="resize:none"></textarea></td>
+                                <td colspan="6"><p>내용 내용내용 <br>내용내용<br><br><br><br><br>내용	</p></textarea></td>
                             </tr>
                         </table>
-                        <button type="submit" class="writeBtn">등록</button>                        
+                        <button type="submit" class="correctBtn">수정하기</button>
+                        <button type="submit" class="deleteBtn">삭제하기</button>
                     </div>      
                 </div>
             </td>
