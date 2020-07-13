@@ -10,78 +10,41 @@
     <link href="../../../resources/css/answer/m_answer_style.css" rel="stylesheet">
 </head>
 <body>
-	<table>
-        <tr>
-            <td class="title">제목1</td>
-        </tr>
-        <tr class="content">
-            <td>
+	
                 <div align="center" class="AnswerWrite" id="AnswerWrite">
                     <div class="AnserInfo">
-                        <table class="writeArea">
-                            <tr>
+                        <table class="writeArea" id="writeArea">
+                            <tr id="blankRow">
                                 <td colspan="7"> </td>
                             </tr>
-                            <tr>
+                            <tr id="infoRow">
                                 <td><label>담당자 </label></td>
                                 <td colspan="2"><input type="text"></td>
                                 <td><label>연락처 </label></td>
                                 <td><input type="tel"></td>
                             </tr>
-                            <tr>
+                            <tr id="emailRow">
                                 <td><label>이메일 </label></td>
                                 <td colspan="6"><input type="email"></td>
                             </tr>
-                            <tr>
+                            <tr id="contentRow">
                                 <td><label>내용</label></td>
                                 <td colspan="6"><textarea cols="62" rows="10" style="resize:none"></textarea></td>
                             </tr>
                         </table>
                         <button type="submit" class="writeBtn">등록</button>
                     </div>      
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td class="title">제목2</td>
-        </tr>
-        <tr class="content">
-            <td>
-                <div align="center" class="AnswerWrite" id="AnswerWrite">
-                    <div class="AnserInfo">
-                        <table class="writeArea">
-                            <tr>
-                                <td colspan="7"> </td>
-                            </tr>
-                            <tr>
-                                <td><label>담당자 </label></td>
-                                <td colspan="2"><input type="text"></td>
-                                <td><label>연락처 </label></td>
-                                <td><input type="tel"></td>
-                            </tr>
-                            <tr>
-                                <td><label>이메일 </label></td>
-                                <td colspan="6"><input type="email"></td>
-                            </tr>
-                            <tr>
-                                <td><label>내용</label></td>
-                                <td colspan="6"><textarea cols="62" rows="10" style="resize:none"></textarea></td>
-                            </tr>
-                        </table>
-                        <button type="submit" class="writeBtn">등록</button>                        
-                    </div>      
-                </div>
-            </td>
-        </tr>
-    </table>
+                </div>           
 
     <script>
         $(function() {
-            $(".content").hide();
-            var tr = $(".content");
+        	$(".writeArea").removeAttr("style");
+            $(".answerContent").hide();
+            var tr = $(".answerContent");
             console.log(tr);
-            $(".title").each(function(i, e){                
-                $(this).parent().click(function(){
+            $(".answerTitle").each(function(i, e){                
+            	$(this).click(function(){
+            	//$(this).parent().click(function(){
                     var idx = i;   
                     for(var j = 0; j < tr.length; j++){
 
