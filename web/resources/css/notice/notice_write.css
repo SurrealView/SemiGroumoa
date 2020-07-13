@@ -5,9 +5,9 @@
     border-bottom: 1px solid black;
 }
 
-.writeArea{
+#writeArea{
     border-collapse:collapse;
-    vertical-align: auto;
+    vertical-align: auto
 }
 
 .upload{
