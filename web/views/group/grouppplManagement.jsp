@@ -84,15 +84,50 @@
 		cursor:pointer;
 	}
 	.kickBtn {
-		border-radius: 30px;
 		float:left;
 		margin-left:30px;
-		margin-top:-45px;	
+		border: none;
+  		color: white;
+  		padding: 5px 10px;
+  		text-align: center;
+  		text-decoration: none;
+  		display: inline-block;
+  		font-size: 16px;
+  		margin: 4px 10px;
+  		transition-duration: 0.4s;
+  		cursor: pointer;
+  		background-color: white;
+  		color: black;
+ 		border: 2px solid #555555;
+ 		margin-left:50px;
+ 		position:absolute;
+ 		top: 900px;
 	}
 	.inviteBtn{
-		border-radius:30px;
-		margin-left: 120px;
-		margin-top:-45px;
+		border: none;
+  		color: white;
+  		padding: 5px 10px;
+  		text-align: center;
+  		text-decoration: none;
+  		display: inline-block;
+  		font-size: 16px;
+  		margin: 4px 10px;
+ 		transition-duration: 0.4s;
+  		cursor: pointer;
+  		background-color: white;
+  		color: black;
+  		border: 2px solid #555555;
+  		position:absolute;
+ 		top: 900px;
+ 		left:400px;
+	}
+	.kickBtn:hover {
+ 		background-color: #555555;
+  		color: white;
+	}
+	.inviteBtn:hover {
+		background-color: #555555;
+  		color: white;
 	}
 </style>
 </head>
@@ -342,12 +377,9 @@
 				</ul>
 				</div>
 
-				<div class="kickBtn" style="float:left;">
-					<button class="">강퇴하기</button>
-				</div>
-				<div class="inviteBtn" style="float:left">
-					<button class="">초대하기</button>
-				</div>
+				
+				<button class="kickBtn">강퇴하기</button>
+				<button class="inviteBtn">초대하기</button>
                 <div class="searchbox" id="searchbox">
 					<form>
 						<select class="form-control">

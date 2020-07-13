@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<%@ include file="../common/manager/menubar.jsp" %>
+<%@ include file="menubar.jsp" %>
 <title>Groumoa</title>
 <style>
 	#jeje {

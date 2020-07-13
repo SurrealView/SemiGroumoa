@@ -34,7 +34,7 @@
     <button>로그아웃</button>
 </div>
 <div id="side-nav" class="side-nav">
-  <img src="image/logo_groumoa.png" width="50%" id="logo">
+  <img src="../../resources/image/logo_groumoa.png" width="50%" id="logo">
   <a href="#">메인페이지</a>
   <a href="#">공지사항</a>
   <a href="#">회원관리</a>

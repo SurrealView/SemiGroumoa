@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<%@ include file="../common/manager/menubar.jsp" %>
+<%@ include file="menubar.jsp" %>
 <title>Groumoa</title>
 <style>
 	#manager {
@@ -41,39 +41,115 @@
 		overflow-x: hidden;
 	}
 	
-	#label2 {
-		position: absolute;
+	.managerList {
+		position:absolute;
+		top :260px;
+		margin-left:20px;
 	}
-	#label {
-		position: absolute;
+	
+	.list {
+		margin-top:37px;
+	}
+	
+	.fname {
+		position:absolute;
+		left:100px;
+		width:150px;
+	}
+	
+	#list6 {
+		position:absolute;
+		top:60px;
+		left:20px;
+	}
+	
+	#list7 {
+		position:absolute;
+		top:60px;
+		left:200px;
+	}
+	
+	#list9 {
+		position:absolute;
+		top:210px;
+		left:20px;
+	}
+	
+	#list10{
+		position:absolute;
+		top:250px;
+		left:20px;
+	}
+	
+	#list11 {
+		position:absolute;
+		top:160px;
+		left:200px;
+		font-size:20px;
 		font-weight:bold;
-		font-size: 20px;
 	}
+	
+	#list12 {
+		 top: 60px; 
+		 left: 20px;
+		 position:absolute;
+	}
+	
+	#list13 {
+		 top: 140px; 
+		 left: 20px;
+		 position:absolute;
+	}
+	#list14 {
+		position:absolute;
+		top:290px;
+		left:20px;
+	}
+	
 </style>
 </head>
 <body>
 	<div id="manager">
 		<label style="font-weight:bold; position:absolute; top: 20px; left: 20px; font-size:20px;">회원 정보</label>
    		<div style="border-radius: 50%; height: 200px; width: 200px; background-color: gray; position: absolute; top: 50px; left: 250px;"></div>
-   		<label id="label2" style="top:290px; left: 20px;">닉네임 : </label>
-   		<label id="label2" style="top:380px; left: 20px;">계정 : </label>
-   		<label id="label2" style="top:450px; left: 20px;">비밀번호(변경시에만 입력) : </label>
-   		<label id="label2" style="top:530px; left: 20px;">구분 : </label>
+   		<div class="managerList" id="managerlistup">
+   		<div class="list" id="list1"><label>닉네임  </label>&nbsp;&nbsp;&nbsp;
+   		<input type="text"  class ="form-control" id="fname" name="fname"></div>
+   		<div class="list" id="list2"><label>계정  </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   		<input type="text" class ="form-control" id="fname" name="fname"></div>
+   		<div class="list" id="list3"><label>비밀번호</label>&nbsp;
+   		<input type="text" class ="form-control" id="fname" name="fname">
+   		<br>(변경시에만 입력)</div>
+   		<div class="list" id="list4"><label>구분 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   		<input type="text" class ="form-control" id="fname" name="fname"></div>
+   		</div>
 	</div>
 	<div id="activity">
 		<label style="font-weight:bold; position:absolute; top:20px; left: 20px; font-size:20px;">활동정보</label>
-		<label id="label2" style="top:60px; left:20px;">가입일</label>
-    	<label id="label2" style="top:60px; left:200px;">로그인</label>
-   		<label id="label" style="top:160px; left:20px;">작성</label>
-  	    <label id="label2" style="top:210px; left:20px;">글</label>
-        <label id="label2" style="top:250px; left:20px;">댓글</label>
-        <label id="label2" style="top:290px; left:20px;">문의</label>
-        <label id="label" style="top:160px; left:200px;">제재횟수</label>
+		<div id="list1">
+		<div class="activityList" id="list6"><label>가입일</label><br>
+		<input type="text" id="detail"></div>
+    	<div class="activityList" id="list7"><label>로그인</label>
+    	<input type="text" id="detail"></div>
+    	</div>
+   		<label id="write" style=" position:absolute; top:160px; left:20px; font-weight:bold; font-size:20px;">작성</label>
+    	<div id="list2">
+  	    <div class="activityList2" id="list9"><label>게시글</label>
+  	    <input type="text" id="detail"></div>
+        <div class="activityList2" id="list10"><label>댓글</label>
+        <input type="text" id="detail"></div>
+        <div class="activityList2" id="list11"><label>제재횟수</label>
+        <input type="text" id="detail"></div>
+        <div class="activityList2" id="list14"><label>문의횟수</label>
+        <input type="text" id="detail"></div>
+        </div>
 	</div>
 	<div id="group">
 		<label style="font-weight:bold; position:absolute; top:20px; left:20px; font-size:20px;">가입한 모임</label>
-		<label id="label2" style="top: 60px; left: 20px;">동호회명</label>
-   		<label id="label2" style="top: 60px; left: 200px;">직책</label>
+		<div class="groupList" id="list12"><label>동호회명</label><br>
+		<input type="text" id="detail"></div>
+		<div class="groupList" id="list13"><label>직책</label><br>
+		<input type="text" id="detail"></div>
 	</div>
 </body>
 </html>

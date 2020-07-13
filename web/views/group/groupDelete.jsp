@@ -83,16 +83,33 @@
         margin-left: 20px;
     }
         
-    #deleteBtn {
-        position: absolute;
-        top: 1000px;
-        left: 700px;
+    .deleteBtn {
+        background-color: #f44336;
+        border: none;
+  		color: white;
+ 		padding: 10px 20px;
+  		text-align: center;
+  		text-decoration: none;
+  		display: inline-block;
+  		font-size: 16px;
+ 		margin: 8px 10px;
+  		cursor: pointer;
+  		margin-left:350px;
     }
         
-    #cancelBtn {
-        position:absolute;
-        top: 1000px;
-        left:800px;
+    .cancelBtn {
+        background-color: #f44336;
+        border: none;
+  		color: white;
+ 		padding: 10px 20px;
+  		text-align: center;
+  		text-decoration: none;
+  		display: inline-block;
+  		font-size: 16px;
+ 		margin: 4px 10px;
+  		cursor: pointer;
+  		margin-left:20px;
+  		
     }
     .reason {
     	padding-top:20px;
@@ -141,15 +158,11 @@
             <br>
             <br>
             <div class="detail"><label style="float: left;">해산 사유 상세</label></div>&nbsp;
-            <textarea style="width: 600px; height: 400px;"></textarea>
+            <textarea style="width: 600px; height: 400px; resize:none;"></textarea>
             <br>
             <br>
-            <div id="deleteBtn">
-            <button>해산</button>
-            </div>
-            <div id="cancelBtn">
-            <button>취소</button>
-            </div>
+            <button class="deleteBtn">해산</button>
+            <button class="cancelBtn">취소</button>
             </div>
             </form>
         </div>
