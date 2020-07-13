@@ -72,7 +72,7 @@
 	.form-area{
 		margin:15px 25px;
 	}
-	.category, .title, .writer {
+	.category, .title, .writer, .payedDate {
 		display:inline-block;
 		width:100px;
 	}
@@ -80,49 +80,42 @@
 </head>
 <body>
 	<!-- 여기 헤더 추가할것 -->
-	<%@include file="../common/header/header_old.html" %>
+<%-- 	<%@include file="../common/header/header_old.html" %> --%>
 	<%@include file="subMenubar.jsp" %>
 	<br>
 	<div class="content">
 	<p align="right" style="font-size:10px; padding-right: 25px; padding-top: 15px;">개인정보취급방침에 따라 최근 5년간의 내역이 제공됩니다.</p>
-		<div id="sub-title"><span style="font-size: 15px">게시판 관리</span></div>
+		<div id="sub-title"><span style="font-size: 20px; margin-left:25px">환불신청</span></div>
 		<!-- 뒤로가기 glyphicon 추가하기 -->
-		<div class="tab" id="tab">
-			<div class="item active" id="board"><a href="#">게시글 관리</a></div>
-			<div class="item" id="reply"><a href="#">댓글 관리</a></div>
-		</div>
-		<span id="temp">* 게시판을 조회 및 수정하실 수 있습니다.</span>
+		
+		
 		<br><br>
 		
 		<div class="content-area">
 			<div class="form-area">
 				<form>
-					<label for="title">제목</label>&nbsp;&nbsp;
-					<input type="text" class="form-control title" value="방가방가" id="title" style="width:350px">&nbsp;
+					<label for="title">결제금액(원)</label>&nbsp;&nbsp;
+					<input type="text" class="form-control title" value="25,000" id="title" style="width:350px" readonly>&nbsp;
 					<br><br>
 					<label for="category">분류</label>&nbsp;&nbsp;
-					<select class="form-control category" id="category"><!-- 분류 뭐뭐있는지 정하기 -->
-						<option value="common">일반</option>
-						<option value="notice">공지</option>
-						<option value="greeting">가입인사</option>
-					</select>&nbsp;&nbsp;
-					<label for="writer">작성자</label>&nbsp;&nbsp;
+					<input type="text" class="form-control category" value="인원증설" readonly>&nbsp;&nbsp;	
+					<label for="writer">결제자</label>&nbsp;&nbsp;
 					<input type="text" class="form-control writer" value="김형진" readonly>&nbsp;&nbsp;
-					<label for="date-written">작성일</label>&nbsp;&nbsp;
-					<input type="date" readonly><br><br>
-					<textarea class="form-control" cols="120" rows="20" style="resize:none;"></textarea>
+					<label for="payedDate">결제일</label>&nbsp;&nbsp;
+					<input type="date" class="form-control payedDate" style="width:200px;" readonly><br><br>
 					<br><br>
-					<button class="btn btn-danger" onclick="">삭제하기</button>
 					<!-- 자기 자신의 게시글일 경우에만 보임 -->
 					<!--<button class="btn btn-primary" onclick="">수정하기</button>  -->
 				</form>
+				<button class="btn btn-danger" onclick="refund();">환불신청</button>	
 			</div>
-		
-			
-		
-		
 		</div>
 	</div>
-		<%@include file="../common/footer/footer.jsp" %>
+	<script>
+		function refund() {
+			location.href="refund.jsp";
+		}
+	</script>
+ 		<%@include file="../common/footer/footer.jsp" %> 
 </body>
 </html>
