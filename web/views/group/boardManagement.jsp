@@ -73,7 +73,7 @@
 		padding-top: 15px;
 		color:rgba(75, 75, 75, 0.493);
 	}
-	.table{
+	.boardTable{
 		width:950px;
 		margin-left:25px;
 	}
@@ -97,7 +97,7 @@
 </style>
 </head>
 <body>
-	<!-- 여기 헤더 추가할것 -->
+	<!-- 헤더추가하기 -->
 	<%@include file="subMenubar.jsp" %>
 	<div class="content">
 		<p align="right" style="font-size:10px; padding-right: 25px; padding-top: 15px;">개인정보취급방침에 따라 최근 5년간의 내역이 제공됩니다.</p>
@@ -111,7 +111,7 @@
 		<br><br><!-- 게시판 관리일경우 -->
 		<div class="table-div">
 			<h2 align="center">게시판</h2>         
-   			<table class="table table-striped">
+   			<table class="table table-striped boardTable">
                   <thead>
                     <tr>
                       <th><input type="checkbox"></th>
@@ -363,5 +363,7 @@
 				</div>
 		</div>
 		<!-- footer 추가할것 -->
+		
+		
 </body>
 </html>
