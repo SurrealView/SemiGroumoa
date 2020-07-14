@@ -57,14 +57,14 @@
  			<li class="item" id="messages">
  				<a href="#messages" class="btn"><i class="fas fa-ballot"></i>메인페이지</a>
  				<div class="smenu">
- 					<a href="#">공지사항</a>
- 					<a href="#">회원관리</a>
+ 					<a href="#">공지</a>
+ 					<a href="#">공지2</a>
  				</div>
  			</li>
  			<li class="item" id="settings">
  				<a href="#settings" class="btn"><i class="fal fa-betamax"></i>회원관리</a>
  				<div class="smenu">
- 					<a href="#">동호회관리</a>
+ 					<a href="#">회원2</a>
  					<a href="#">결제내역</a>
  				</div>
  			</li>
