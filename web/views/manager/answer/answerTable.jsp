@@ -11,13 +11,17 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <%-- <%@ include file="../menubar.jsp" %> --%>
 <style>
    .content{
+   	  position:relative;
+   	  left:110px;
+   	  top:60px;
       width:1000px;
-      height:1500px;
+      height:800px;
       margin:0 auto;
       border: 1px solid #e2d8d8;
-      border-radius: 10px;
+      background:white;
    }
    .tab{
       width:950px;
@@ -98,6 +102,7 @@
 </style>
 </head>
 <body>
+	<%@ include file="/views/manager/menubar.jsp" %>
 	<div class="content">      
       <span id="temp">* 게시판을 조회 및 수정하실 수 있습니다.</span>
       
