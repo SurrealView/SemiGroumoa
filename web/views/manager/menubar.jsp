@@ -12,13 +12,13 @@
     background-color : #eaeaea;
     top: 40px;
     left: 160px;
-    position: absolute;
+    position: fixed;
     margin-left: 100px;
     margin-top: 20px;
 }
 
 .aside {
-    position: absolute;
+    position: fixed;
     background-color: black;
     width: 260px;
     height: 350px;
@@ -72,7 +72,7 @@
  				<a href="#items" class="btn"><i class="fal fa-betamax"></i>동호회관리</a>
  				<div class="smenu">
  					<a href="#">푸른뱃고동</a>
- 					<a href="#">승열이뭐해</a>
+ 					<a href="#">축구팀</a>
  				</div>
  			</li>
  			<li class="item" id="adver">
