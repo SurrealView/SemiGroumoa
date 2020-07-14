@@ -76,6 +76,11 @@
 		display:inline-block;
 		width:100px;
 	}
+	.reason{
+		display:inline-block;
+		width:200px;
+		
+	}
   </style>
 </head>
 <body>
@@ -101,13 +106,24 @@
 					<input type="text" class="form-control category" value="인원증설" readonly>&nbsp;&nbsp;	
 					<label for="writer">결제자</label>&nbsp;&nbsp;
 					<input type="text" class="form-control writer" value="김형진" readonly>&nbsp;&nbsp;
-					<label for="payedDate">결제일</label>&nbsp;&nbsp;
+					<label for="payed-date">결제일</label>&nbsp;&nbsp;
 					<input type="date" class="form-control payedDate" style="width:200px;" readonly><br><br>
 					<br><br>
-					<!-- 자기 자신의 게시글일 경우에만 보임 -->
-					<!--<button class="btn btn-primary" onclick="">수정하기</button>  -->
 				</form>
-				<button class="btn btn-danger" onclick="refund();">환불신청</button>	
+				<form>
+					<label for="">환불 사유 선택</label>
+					<select class="form-control reason" name="">
+						<option value="change-mind">단순변심</option>
+						<option value="defect">서비스 불량</option>
+						<option value="error">시스템 오류</option>
+					</select>
+					<br><br>
+					<label for="">사유 상세</label>
+					<textarea class="reason-specific" placeholder="환불 요청 사유를 적어주세요" cols="140" rows="15"></textarea>
+				</form>
+				<br>
+				<button class="btn btn-danger" onclick="">환불신청</button>
+				<button class="btn btn-default">취소</button>	
 			</div>
 		</div>
 	</div>
