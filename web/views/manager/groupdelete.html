@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready( function() {
+        $("header").load("form/header.html");
+        $("nav").load("form/nav.html");
+        $("footer").load("form/footer.html"); 
+    });
+    </script>
+    
+    <style>
+        .wrapper {
+            border: 1px solid black;
+            margin: auto;
+            padding-top: 50px;
+            padding-bottom: 50px;
+            
+            height: auto;
+            width: 1000px;
+          /* display: table-cell;
+          vertical-align: middle; */
+            
+            display: block;
+            margin: 0px auto;
+        }
+        .content {
+            border: 1px solid black;
+            display: block;
+            margin: 0px auto;
+            /* position: absolute;
+            top: 50%;
+            left: 50%;  */
+            height: 900px;
+            width: 800px;
+            padding-inline-start: 25px;
+            padding-inline-end: 25px;
+        }
+        #first {
+            width: 800px;
+            margin: 0 auto;
+            position: absolute;
+            top: 210px;
+        }
+        
+        .content button{
+            width: 70px;
+            height: 25px;
+            border-radius: 50px;
+            background: transparent;
+            border: 1px solid black;
+            margin: 7px;
+            position: relative;
+            left: 30px;
+        }
+
+        #delete {
+            position: absolute;
+            top: 173px;
+            left: 900px;
+        }
+
+        #menu {
+            position: absolute;
+            top: 230px;
+            left: 500px;
+        }
+        #incontent {
+            margin-left: 20px;
+            margin-top: 20px;
+        }
+        
+        #deletebutton {
+            position: absolute;
+            top: 1000px;
+            left: 630px;
+        }
+    </style>
+
+</head>
+<body>
+    <header></header>
+    <div class="blank"><strong>
+    <nav></nav>
+    </nav>
+    <div class="wrapper">
+        <div class="content">
+            <div>
+                <br>
+                <button id="imsi">최근일정</button>
+                <button>회비내역</button>
+                <button>게시판</button>
+                <button>모임회원</button>
+                <div id="delete">
+                    <button>모임해산</button>
+                    <button>탈퇴하기</button>
+                </div>
+            </div>
+            <br>
+            <hr noshade="noshade" size="1" id="first">
+            <div id="menu">
+                <button>기본정보</button>
+                <button>게시판관리</button>
+                <button>결제내역</button>
+                <button>광고관리</button>
+                <button>동호회 페이지</button>
+            </div>
+            <br>
+            <br>
+            <br>
+            <form id="incontent">
+            <h2>모임해산</h2>
+            <br>
+            <hr noshade="noshade" size="1">
+            <br>
+            <label>해산 사유</label>
+            <input type="text" size="50px">
+            <br>
+            <br>
+            <hr noshade="noshade" size="1">
+            <br>
+            <label>해산 일시</label>
+            <input type="text" size="50px">
+            <br>
+            <br>
+            <hr noshade="noshade" size="1">
+            <br>
+            <label style="float: left;">해산 사유 상세</label>&nbsp;
+            <textarea style="width: 600px; height: 400px;"></textarea>
+            <br>
+            <br>
+            <hr noshade="noshade" size="1">
+            <br>
+            <div id="deletebutton">
+            <button>해산</button>
+            <button>취소</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
