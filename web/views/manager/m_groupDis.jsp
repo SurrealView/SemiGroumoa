@@ -32,11 +32,11 @@
 		width: 550px;
 	}
 	
-	.item {
+ 	.item {
 		margin-top:30px;
 		padding-left: 30px;
 		padding-bottom:10px;
-	}
+	} 
 	
 	#jejeBtn {
 		position: absolute;
