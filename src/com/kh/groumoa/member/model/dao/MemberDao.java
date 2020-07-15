@@ -14,6 +14,7 @@ import com.kh.groumoa.member.model.dao.MemberDao;
 
 import static com.kh.groumoa.common.JDBCTemplate.*;
 
+
 public class MemberDao {
 	
 private Properties prop = new Properties();
@@ -76,6 +77,35 @@ private Properties prop = new Properties();
 		
 		
 		return loginUser;
+	}
+
+	public int insertMember(Connection con, MemberVO requestMember) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("insertMember");
+			
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, requestMember.getEmail());
+			pstmt.setString(2, requestMember.getUserPwd());
+			pstmt.setString(3, requestMember.getUserName());
+			pstmt.setString(4, requestMember.getGender());
+			pstmt.setString(5, requestMember.getRnCode());
+			pstmt.setString(6, requestMember.getAddress());
+			pstmt.setString(7, requestMember.getPhone());
+			pstmt.setDate(8, requestMember.getBirthDate());
+	
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
 	}
 
 }

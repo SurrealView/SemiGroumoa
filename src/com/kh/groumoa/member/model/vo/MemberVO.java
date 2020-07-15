@@ -2,7 +2,7 @@ package com.kh.groumoa.member.model.vo;
 
 import java.sql.Date;
 
-public class MemberVO {
+public class MemberVO implements java.io.Serializable {
 	private int memberCode;
 	private String email;
 	private String userName;
@@ -14,10 +14,6 @@ public class MemberVO {
 	private Date birthDate;
 	private Date enrollDate;
 	private String status;
-	
-	
-	
-	
 	
 	public MemberVO() {
 		super();

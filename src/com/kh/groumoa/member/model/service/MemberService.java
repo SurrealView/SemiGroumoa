@@ -1,7 +1,10 @@
 package com.kh.groumoa.member.model.service;
 
-import static com.kh.groumoa.common.JDBCTemplate.close;
+
 import static com.kh.groumoa.common.JDBCTemplate.getConnection;
+import static com.kh.groumoa.common.JDBCTemplate.close;
+import static com.kh.groumoa.common.JDBCTemplate.commit;
+import static com.kh.groumoa.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 
@@ -20,6 +23,22 @@ public class MemberService {
 		
 		return loginUser;
 		
+	}
+
+	public int insertMember(MemberVO requestMember) {
+		Connection con = getConnection();
+		
+		int result = new MemberDao().insertMember(con, requestMember);
+		
+		if(result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		close(con);
+		
+		return result;
 	}
 
 }
