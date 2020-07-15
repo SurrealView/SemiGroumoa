@@ -4,18 +4,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link href='../../resources/fullcalendar/packages/core/main.css' rel='stylesheet' />
-<link href='../../resources/fullcalendar/packages/daygrid/main.css' rel='stylesheet' />
-<link href='../../resources/fullcalendar/packages/timegrid/main.min.css'
+<link href='../../../resources/fullcalendar/packages/core/main.css'
 	rel='stylesheet' />
-<link href='../../resources/fullcalendar/packages/list/main.min.css' rel='stylesheet' />
-<script src='../../resources/fullcalendar/packages/core/main.js'></script>
-<script src='../../resources/fullcalendar/packages/daygrid/main.js'></script>
-<script src='../../resources/fullcalendar/packages/core/locales/ko.js'></script>
-<script src="../../resources/fullcalendar/packages/timegrid/main.min.js"></script>
-<script src="../../resources/fullcalendar/packages/list/main.min.js"></script>
+<link href='../../../resources/fullcalendar/packages/daygrid/main.css'
+	rel='stylesheet' />
+<link
+	href='../../../resources/fullcalendar/packages/timegrid/main.min.css'
+	rel='stylesheet' />
+<link href='../../../resources/fullcalendar/packages/list/main.min.css'
+	rel='stylesheet' />
+<script src='../../../resources/fullcalendar/packages/core/main.js'></script>
+<script src='../../../resources/fullcalendar/packages/daygrid/main.js'></script>
+<script
+	src='../../../resources/fullcalendar/packages/core/locales/ko.js'></script>
+<script
+	src="../../../resources/fullcalendar/packages/timegrid/main.min.js"></script>
+<script src="../../../resources/fullcalendar/packages/list/main.min.js"></script>
 <!-- interaction 끌어오기. 플러그인에 표시해야 이벤트 작동 -->
-<script src="../../resources/fullcalendar/packages/interaction/main.js"></script>
+<script
+	src="../../../resources/fullcalendar/packages/interaction/main.js"></script>
 <script>
 	document.addEventListener('DOMContentLoaded', function() {
 		var calendarEl = document.getElementById('calendar');
@@ -47,7 +54,8 @@
 </script>
 <style>
 #imsi {
-	border: 1px solid black; width : 1000px;
+	border: 1px solid black;
+	width: 1000px;
 	height: 900px;
 	display: block;
 	margin: 0px auto;
@@ -57,7 +65,8 @@
 #cal-wrap {
 	display: block;
 	margin: 0px auto;
-	margin-top: 50px; width : 800px;
+	margin-top: 50px;
+	width: 800px;
 	height: 700px;
 	width: 800px
 }
@@ -73,6 +82,8 @@
 </style>
 </head>
 <body>
+	<!-- 헤더 추가 필요 -->
+	<%@include file="../subMenubar.jsp"%>
 	<div id="imsi">
 		<!-- 이 밖을 1000px로 감싼다. -->
 		<div id="cal-wrap">
