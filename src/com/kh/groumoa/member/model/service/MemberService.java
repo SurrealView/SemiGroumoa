@@ -7,8 +7,10 @@ import static com.kh.groumoa.common.JDBCTemplate.commit;
 import static com.kh.groumoa.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import com.kh.groumoa.member.model.dao.MemberDao;
+import com.kh.groumoa.member.model.vo.MemberInterestVO;
 import com.kh.groumoa.member.model.vo.MemberVO;
 
 
@@ -25,20 +27,29 @@ public class MemberService {
 		
 	}
 
-	public int insertMember(MemberVO requestMember) {
+	public int insertMember(MemberVO requestMember, ArrayList<MemberInterestVO> requestMemberInterest) {
 		Connection con = getConnection();
 		
-		int result = new MemberDao().insertMember(con, requestMember);
+		int result1 = new MemberDao().insertMember(con, requestMember);
 		
-		if(result > 0) {
-			commit(con);
-		} else {
-			rollback(con);
-		}
+		MemberVO loginUser = new MemberDao().loginCheck(con, requestMember);
+		
+		int result2 = new MemberDao().insertMemberInterest(con, requestMemberInterest);
+		
+//		
+//		if(result > 0) {
+//			if(true) { //
+//				commit(con);
+//			} else {
+//				rollback(con);
+//			}
+//		} else {
+//			rollback(con);
+//		}
 		
 		close(con);
 		
-		return result;
+		return result1;
 	}
 
 }

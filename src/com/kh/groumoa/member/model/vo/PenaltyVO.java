@@ -18,7 +18,7 @@ public class PenaltyVO implements java.io.Serializable {
 		this.penaltyCode = penaltyCode;
 		this.ptCode = ptCode;
 		this.penaltyReason = penaltyReason;
-		MemberCode = memberCode;
+		this.MemberCode = memberCode;
 		this.penaltyDate = penaltyDate;
 	}
 	public String getPenaltyCode() {
