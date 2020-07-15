@@ -7,8 +7,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Properties;
 
+import com.kh.groumoa.member.model.vo.MemberInterestVO;
 import com.kh.groumoa.member.model.vo.MemberVO;
 import com.kh.groumoa.member.model.dao.MemberDao;
 
@@ -106,6 +108,11 @@ private Properties prop = new Properties();
 		
 		return result;
 		
+	}
+
+	public int insertMemberInterest(Connection con, ArrayList<MemberInterestVO> requestMemberInterest) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }
