@@ -154,10 +154,10 @@
 		
 		<br><br>
      <div class="wrapper">
-     <form>
+     <form id="updateForm">
 	  <table border="1">
         <tr>
-            <td colspan="12" height="50px" style="border-right:hidden;">동호회주소
+            <td colspan="12" height="50px" style="border-right:hidden; border-top:hidden;">동호회주소
             &nbsp;<input type="text" style="width:350px" class="form-control"></td>
         </tr>
         <tr>
@@ -195,15 +195,21 @@
             
         </tr>
         <tr>
-            <td rowspan="12" colspan="20" style="border-right:hidden;"><label style="float:left;">우리 동호회 회칙 </label>&nbsp;&nbsp;<textarea id="rule"></textarea></td>
+            <td rowspan="12" colspan="20" style="border-right:hidden; border-bottom:hidden;"><label style="float:left;">우리 동호회 회칙 </label>&nbsp;&nbsp;<textarea id="rule"></textarea></td>
         </tr>
         </table>
           <br>
           <br>
-            <input type="submit" id="deleteBtn" value="확인">
+            <input type="submit" id="deleteBtn" value="수정" onclick="update();">
             <input type="button" id="cancelBtn" value="취소">
         </form>
      </div>
+     
+     <script>
+     	function update() {
+     		("#updateForm").attr("action", "<%= request.getContextPath() %>/update.no");
+     	}
+     </script>
 </div>
 </body>
 </html>
