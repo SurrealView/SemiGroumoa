@@ -10,9 +10,10 @@
     <link href="../../../resources/css/notice/notice_write.css" rel="stylesheet">
 </head>
 <body>
+	<%@ include file="/views/manager/menubar.jsp" %>
 	<div class="noticeWrite">
         <div class="writerInfo" align="center">
-            <table class="writeArea">
+            <table id="writeArea">
                 <tr>
                     <td colspan="7"><strong>공지사항</strong></td>
                 </tr>
@@ -37,7 +38,7 @@
                 </tr>
                 <tr>
                     <td><label>내용</label></td>
-                    <td colspan="6"><textarea cols="62" rows="10" style="resize:none"></textarea></td>
+                    <td colspan="6"><textarea cols="67" rows="20" style="resize:none"></textarea></td>
                 </tr>
                 <tr>
                     <td>파일첨부</td>

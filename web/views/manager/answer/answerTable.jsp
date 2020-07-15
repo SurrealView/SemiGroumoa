@@ -6,13 +6,21 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <%-- <%@ include file="../menubar.jsp" %> --%>
 <style>
+
+	/* .everylist {
+      width:1200px;
+      height:650px;
+      position:absolute;
+      top: 90px;
+      left: 230px;
+      background-color: white;
+   } */
+
    .content{
    	  position:relative;
    	  left:110px;
@@ -42,6 +50,7 @@
       margin-top: 30px;
       background-color:rgba(235, 235, 235, 0.493);
    }
+   
    #sub-title{
       margin-left: 25px;
    }
@@ -80,7 +89,7 @@
    }
    .table{
       width:950px;
-      margin-left:25px;
+/*       margin-left:25px; */
    }
    .pagination-div{
       margin:0 330px   ;
@@ -99,15 +108,125 @@
       margin-left: 90px;
       margin-top:-45px;
    }
+   
+   .table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 10px;
+    border-collapse: collapse;
+    text-align:center;
+   }
+   
+   .questList {
+    border-spacing: 0;
+    border-collapse: collapse;
+    border-color: black;
+    vertical-align: middle;
+   }
+   
+   .answerTitle, .answerTitle td {
+		padding:10px;
+	}
+	
+	.answerTitle {
+		border-bottom:1px solid black;
+	}
+   
 </style>
 </head>
 <body>
 	<%@ include file="/views/manager/menubar.jsp" %>
 	<div class="content">      
-      <span id="temp">* 게시판을 조회 및 수정하실 수 있습니다.</span>
-      
+      <span id="temp">* 질문에 대한 조회 및 답변을 작성하실 수 있습니다.</span>
+      <br>
+      <h2 id="name" align="center">Q&A 게시판</h4>
+      <hr>
       <br><br><!-- 게시판 관리일경우 -->
-      <div class="table-div">
+      <table class="table">
+      <thead>
+          <tr>
+           <th><input type="checkbox"></th>
+           <th>글번호</th>
+           <th>분류</th>
+           <th>작성자</th>
+           <th>제목</th>
+           <th>작성일</th>
+           <th>조회수</th>
+          </tr>                    
+      </thead>
+      <tbody>
+      <tr class="answerTitle">
+         <td><input type="checkbox"></td>
+         <td><a href="boardManagement-detail.jsp">1</a></td>
+         <td>공지</td>
+         <td>김형진</td>
+         <td>방가방가</td>
+         <td>2020-07-05</td>
+         <td>2</td>
+      </tr>
+      <tr class="answerContent">
+    	<td colspan="7">                    	
+          	<% if(!isAnswered) { %>
+       		<%@ include file="answer.jsp" %>
+       		<% } else { %>
+       		<%@ include file="answerDetail.jsp" %>
+    		<% } %>
+       	</td>
+       	<tr class="answerTitle">
+         <td><input type="checkbox"></td>
+         <td><a href="boardManagement-detail.jsp">1</a></td>
+         <td>공지</td>
+         <td>김형진</td>
+         <td>방가방가</td>
+         <td>2020-07-05</td>
+         <td>2</td>
+      </tr>
+      <tr class="answerContent">
+    	<td colspan="7">                    	
+          	<% if(!isAnswered) { %>
+       		<%@ include file="answer.jsp" %>
+       		<% } else { %>
+       		<%@ include file="answerDetail.jsp" %>
+    		<% } %>
+       	</td>
+      </tr>
+      </tr>           
+      </tbody>
+      </table>
+    </div>
+    
+    <script>
+        $(function() {
+        	$(".writeArea").removeAttr("style");
+            $(".answerContent").hide();
+            var tr = $(".answerContent");
+            console.log(tr);            
+            $(".answerTitle").each(function(i, e){                
+            	$(this).click(function(){            		
+           		//$(this).parent().click(function(){
+            		console.log(i);
+                    var idx = i;   
+                    for(var j = 0; j < tr.length; j++){
+
+                        if(j == i){
+                            continue;
+                        }
+                        $(tr[j]).hide();
+                    }
+
+                    if($(tr[idx]).is(":visible")){
+                        $(tr[idx]).hide();
+                    } else{
+                        $(tr[idx]).show();
+                    }                    
+                    
+                })
+            })
+
+        });
+    </script>
+      
+      <%-- <div class="table-div">
          <h2 align="center">게시판</h2>         
          <!-- table table-striped -->
             <table class="table">
@@ -258,6 +377,6 @@
                </form>
                
             </div>
-      </div>
+      </div> --%>
 </body>
 </html>

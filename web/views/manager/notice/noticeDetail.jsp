@@ -10,6 +10,7 @@
     <link href="../../../resources/css/notice/noticeDetail.css" rel="stylesheet">
 </head>
 <body>
+	<%@ include file="/views/manager/menubar.jsp" %>
 	<div class="noticeSection">
         <div class="noticeInfo" align="center">
             <table class="noticeArea">
@@ -23,9 +24,10 @@
                 <tr>
                     <td><label>연락처 </label></td>
                     <td colspan="2"><input type="tel"></td>
-
                     <td><label>이메일 </label></td>
-                    <td><input type="email"></td>
+                    <td colspan="2"><input type="email"></td>
+		                          <!--  줄맞추기 용. -->
+                    <td></td>
                 </tr>
                 <tr>
                     <td><label>제목</label></td>                    
