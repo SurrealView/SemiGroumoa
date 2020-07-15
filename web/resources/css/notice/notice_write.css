@@ -1,14 +1,39 @@
-.writeArea td{
+
+#writeArea td{
     padding:10px;
 }
-.writeArea tr{
+
+#writeArea tr{
     border-bottom: 1px solid black;
+}
+
+.noticeArea td {
+    padding: 10px;
+}
+.noticeArea tr {
+    border-bottom: 1px solid black;
+}
+
+.noticeArea{
+    border-collapse:collapse;
+    vertical-align: auto;
 }
 
 #writeArea{
     border-collapse:collapse;
     vertical-align: auto
 }
+
+.noticeWrite{
+   	  position:relative;
+   	  left:110px;
+   	  top:60px;
+      width:1000px;
+      height:600px;
+      margin:0 auto;
+      border: 1px solid #e2d8d8;
+      background:white;
+   }
 
 .upload{
     border:1px solid black;

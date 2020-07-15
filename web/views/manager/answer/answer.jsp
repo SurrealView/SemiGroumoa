@@ -35,35 +35,6 @@
                         <button type="submit" class="writeBtn">등록</button>
                     </div>      
                 </div>           
-
-    <script>
-        $(function() {
-        	$(".writeArea").removeAttr("style");
-            $(".answerContent").hide();
-            var tr = $(".answerContent");
-            console.log(tr);
-            $(".answerTitle").each(function(i, e){                
-            	$(this).click(function(){
-            	//$(this).parent().click(function(){
-                    var idx = i;   
-                    for(var j = 0; j < tr.length; j++){
-
-                        if(j == i){
-                            continue;
-                        }
-                        $(tr[j]).hide();
-                    }
-
-                    if($(tr[idx]).is(":visible")){
-                        $(tr[idx]).hide();
-                    } else{
-                        $(tr[idx]).show();
-                    }                    
-                    
-                })
-            })
-
-        });
-    </script>
+    
 </body>
 </html>
