@@ -36,7 +36,7 @@
                 </div>            
         
 
-    <script>
+    <!-- <script>
         $(function() {
             $(".answerContent").hide();
             var tr = $(".answerContent");
@@ -61,7 +61,7 @@
                 })
             })
 
-        });
+        }); -->
     </script>
 </body>
 </html>
