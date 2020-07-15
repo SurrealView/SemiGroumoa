@@ -15,7 +15,7 @@ import com.kh.groumoa.scheduler.model.vo.SchedulerVO;
 /**
  * Servlet implementation class InsertSchedulerServlet
  */
-@WebServlet("/Insert.sch")
+@WebServlet("/insert.sch")
 public class InsertSchedulerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
