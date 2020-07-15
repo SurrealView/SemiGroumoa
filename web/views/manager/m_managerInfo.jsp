@@ -47,7 +47,7 @@
 		margin-left:20px;
 	}
 	
-	.list {
+	.num {
 		margin-top:37px;
 	}
 	
@@ -113,14 +113,14 @@
 		<label style="font-weight:bold; position:absolute; top: 20px; left: 20px; font-size:20px;">회원 정보</label>
    		<div style="border-radius: 50%; height: 200px; width: 200px; background-color: gray; position: absolute; top: 50px; left: 250px;"></div>
    		<div class="managerList" id="managerlistup">
-   		<div class="list" id="list1"><label>닉네임  </label>&nbsp;&nbsp;&nbsp;
+   		<div class="num" id="list1"><label>닉네임  </label>&nbsp;&nbsp;&nbsp;
    		<input type="text"  class ="form-control" id="fname" name="fname"></div>
-   		<div class="list" id="list2"><label>계정  </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   		<div class="num" id="list2"><label>계정  </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
    		<input type="text" class ="form-control" id="fname" name="fname"></div>
-   		<div class="list" id="list3"><label>비밀번호</label>&nbsp;
+   		<div class="num" id="list3"><label>비밀번호</label>&nbsp;
    		<input type="text" class ="form-control" id="fname" name="fname">
    		<br>(변경시에만 입력)</div>
-   		<div class="list" id="list4"><label>구분 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   		<div class="num" id="list4"><label>구분 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
    		<input type="text" class ="form-control" id="fname" name="fname"></div>
    		</div>
 	</div>
