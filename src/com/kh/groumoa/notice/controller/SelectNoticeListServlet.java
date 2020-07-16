@@ -1,4 +1,6 @@
-package com.kh.groumoa.payment.controller;
+package com.kh.groumoa.notice.controller;
+
+import static com.kh.groumoa.common.CustomUtil.inst;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,22 +12,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.groumoa.common.PageInfo;
+import com.kh.groumoa.notice.model.service.NoticeService;
+import com.kh.groumoa.notice.model.vo.NoticeVo;
 import com.kh.groumoa.payment.model.service.PaymentService;
 import com.kh.groumoa.payment.model.vo.PaymentHistoryVo;
 
-import static com.kh.groumoa.common.CustomUtil.inst;
-
 /**
- * Servlet implementation class SearchPaymentServlet
+ * Servlet implementation class SelectNoticeListServlet
  */
-@WebServlet("/Payment.se")
-public class SearchPaymentServlet extends HttpServlet {
+@WebServlet("/selectList.no")
+public class SelectNoticeListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchPaymentServlet() {
+    public SelectNoticeListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,21 +36,20 @@ public class SearchPaymentServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub		
+		// TODO Auto-generated method stub
 		int currentPage;
 		int limit;
-		PaymentService ps = new PaymentService();		
+		NoticeService ns = new NoticeService();		
 		currentPage= 1;
 		if(request.getParameter("currentPage") != null) {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 		limit = 10;
-		int listCount = ps.getListCount();
-		System.out.println("list Count : " + listCount);
+		int listCount = ns.getListCount();
 		
 		PageInfo pi = inst().getPageInfo(currentPage, limit, listCount);
 		
-		ArrayList<PaymentHistoryVo> list = ps.selectList(pi);
+		ArrayList<NoticeVo> list = ns.selectList(pi);
 		
 		String page = "";
 			
@@ -62,7 +63,6 @@ public class SearchPaymentServlet extends HttpServlet {
 		}
 		
 		request.getRequestDispatcher(page).forward(request, response);
-		
 	}
 
 	/**

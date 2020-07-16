@@ -49,11 +49,15 @@ public class CustomUtil {
 		return prop.getProperty(key);		
 	}
 	
-	public Connection getCon(String url, String user, String pwd) {
+	public Connection getCon(String url, String user, String pwd, String driver) {
 		
 		try {
-			con = DriverManager.getConnection(url, user, pwd);
+			Class.forName(prop.getProperty(driver));
+			con = DriverManager.getConnection(prop.getProperty(url), prop.getProperty(user), prop.getProperty(pwd));
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
