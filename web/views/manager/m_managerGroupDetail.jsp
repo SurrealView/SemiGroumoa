@@ -121,8 +121,6 @@
    		<input type="text" class ="form-control" id="fname" name="fname"></div>
    		<div class="num" id="list4"><label>관심사 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
    		<input type="text" class ="form-control" id="fname" name="fname"></div>
-   		<div class="num" id="list5"><label>상세 관심사  </label>
-   		<input type="text" class ="form-control" id="fname" name="fname"></div>
    		</div>
 	</div>
 	<div id="activity">
