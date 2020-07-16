@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Properties;
 
 public class CustomUtil {
@@ -180,9 +181,63 @@ public class CustomUtil {
 		return randNum;
 	}
 	
-	//사용법
-	//import static로 CustomUtil.inst;를 해줍니다.
-	//inst()함수를 통해서 다른 public 함수들을 불러오면 됩니다.
+	public PageInfo getPageInfo(int currentPage, int limit, int totalCount) {
+		
+		int maxPage;     //전체 페이지에서 가장 마지막 페이지
+		int startPage;   //한번에 표시될 페이지가 시작할 페이지.
+		int endPage;     //한번에 표시될 페이지가 끝나는 페이지.
+				
+		//총 페이지 수 계산.
+		//ex) 123개의 목록이 있다면 총 필요한 페이지 수는 13개.
+		//총 열개의 페이지를 1페이지에 보여줄 때 가중치에 해당하는 0.1이 1이 될 수 있게끔 0.9를 더해줌.
+		//즉, 게시물 목록이 1개 더 있음 한페이지가 더 보이도록함.
+		maxPage = (int) ((double) totalCount / limit + 0.9);
+		
+		//현재 페이지에 보여줄 시작 페이지 수 (10개씩 보여지게 할 경우)
+		//아래 쪽 페이지 수가 10개씩 보여진다면
+		//1, 11, 21, 31...
+		
+		startPage = (((int) ((double)currentPage / 10 + 0.9)) - 1) * 10 + 1;
+		
+		//목록 아래쪽에 보여질 마지막 페이지 수(10, 20, 30)
+		endPage = startPage + 10 - 1;
+		
+		if(maxPage < endPage) {
+			endPage = maxPage;
+		}
+		
+		PageInfo pi = new PageInfo(limit, currentPage, maxPage, startPage, endPage, totalCount);
+		
+		return pi;
+		
+		/*
+		 강사님 코드 기준 사용법.
+		currentPage= 1;
+		if(request.getParameter("currentPage") != null) {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+		limit = 10;
+		int listCount = new BoardService().getListCount();
+		System.out.println("list Count : " + listCount);
+		
+		PageInfo pi = inst().getPageInfo(currentPage, limit, listCount);
+		
+		ArrayList<Board> list = new BoardService().selectList(pi);
+		
+		String page = "";
+		
+		if(list != null) {
+			page = "views/board/boardList.jsp";
+			request.setAttribute("list", list);
+			request.setAttribute("pi", pi);
+		} else {
+			page = "views/common/errorPage.jsp";
+			request.setAttribute("msg", "게시판 조회 실패!");
+		}
+		
+		request.getRequestDispatcher(page).forward(request, response);
+		 * */
+	}	
 	
-	//ex) int result = inst().getResult(); 
+	
 }
