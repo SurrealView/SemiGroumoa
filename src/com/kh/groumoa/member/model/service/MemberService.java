@@ -29,27 +29,33 @@ public class MemberService {
 
 	public int insertMember(MemberVO requestMember, ArrayList<MemberInterestVO> requestMemberInterest) {
 		Connection con = getConnection();
+		int result = 0;
 		
 		int result1 = new MemberDao().insertMember(con, requestMember);
 		
-		MemberVO loginUser = new MemberDao().loginCheck(con, requestMember);
+		//MemberVO loginUser = new MemberDao().loginCheck(con, requestMember);
 		
-		int result2 = new MemberDao().insertMemberInterest(con, requestMemberInterest);
+		int[] resultArr = new MemberDao().insertMemberInterest(con, requestMember, requestMemberInterest);
 		
-//		
-//		if(result > 0) {
-//			if(true) { //
-//				commit(con);
-//			} else {
-//				rollback(con);
-//			}
-//		} else {
-//			rollback(con);
-//		}
+		for(int i = 0; i < resultArr.length; i++) {
+			if(resultArr[i] == 0) {
+				result = 0; 
+				break;
+			} result = 1;
+		}
+		
+		if(result1 != 0 && result != 0) {
+			commit(con);
+			result = 1;
+		} else {
+			rollback(con);
+			result = 0;
+		}
+		
 		
 		close(con);
 		
-		return result1;
+		return result;
 	}
 
 }
