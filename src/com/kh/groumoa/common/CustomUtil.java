@@ -174,6 +174,11 @@ public class CustomUtil {
 		}
 	}
 	
+	public int RandNum(int min, int max) {
+		int randNum = (int)(Math.random() * max + min);
+		
+		return randNum;
+	}
 	
 	//사용법
 	//import static로 CustomUtil.inst;를 해줍니다.
