@@ -9,7 +9,7 @@
 #outer {
 	border: 1px solid black;
 	width: 1000px;
-	height: 900px;
+	height: 600px;
 	display: block;
 	margin: 0px auto;
 }
@@ -19,7 +19,54 @@
 	margin: 0px auto;
 	margin-top: 50px;
 	width: 800px;
-	height: 700px;
+	height: 500px;
+}
+
+#event-area {
+	border: 1px solid lightgray;
+	border-radius: 10px;
+}
+
+#event-area td {
+	padding: 10px;
+}
+
+#event-area { /* 
+	border-collapse: collapse; */
+	width: 600px;
+	vertical-align: auto
+}
+
+#title-tr {
+	height: 50px;
+	width: 600px;
+	background: orange;
+	border-radius: 10px;
+	vertical-align: middle;
+}
+
+#title-tr h2 {
+	
+}
+
+.writeBtn, .cancelBtn {
+	border: 0px;
+	color: white;
+	width: 75px;
+	height: 30px;
+	border-radius: 10px;
+}
+
+.cancelBtn {
+	background: #d9534f;
+}
+
+.writeBtn {
+	background: #0275d8;
+}
+
+.writeBtn:hover, .cancelBtn:hover {
+	cursor: pointer;
 }
 </style>
 </head>
@@ -27,12 +74,37 @@
 	<!-- 헤더 추가 필요 -->
 	<%@include file="../subMenubar.jsp"%>
 	<%-- <% if(loginUser != null) { %> 여기서는 유저가 모임장인지 아닌지 판단할 코드 작성할것 --%>
-	<div class="outer">
-		<div class="insert-wrap">
-			<div align="center">
-				<button type="reset">취소하기</button>
-				<button type="submit">등록하기</button>
+	<div id="outer">
+		<div id="insert-wrap" align="center">
+			<div id="title-tr">
+				<h2>일정 추가</h2>
 			</div>
+			<br>
+			<form action="<%=request.getContextPath()%>/insert.sch" method="post">
+				<table id="event-area">
+					<tr>
+						<td><label>제목</label></td>
+						<td colspan="5"><input type="text" name="schTitle"
+							placeholder="이벤트 제목을 입력하세요" style="width: 495px"></td>
+					</tr>
+					<tr>
+						<td><label>날짜</label></td>
+						<td><input type="date" name="schDate"></td>
+						<td><label>장소</label></td>
+						<td><input type="text" name="imsi" placeholder="임시"
+							style="width: 250px"></td>
+					</tr>
+					<tr>
+						<td><label>내용</label></td>
+						<td colspan="6"><textarea name="schDetail" cols="67"
+								rows="20" style="resize: none"></textarea></td>
+					</tr>
+
+				</table>
+				<br>
+				<button type="submit" class="writeBtn">등록하기</button>
+				<button type="reset" class="cancelBtn">취소하기</button>
+			</form>
 		</div>
 	</div>
 	<%-- 	<% } else {
