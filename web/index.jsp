@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="java.sql.DriverManager" import="java.sql.SQLException"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,6 +31,22 @@ body {
 		피고, 인간은 같이, 우리의 꽃이 봄바람이다. 평화스러운 투명하되 온갖 우리의 인간의 약동하다. 이것을 눈에 힘차게 가슴에
 		되는 운다. 남는 그들의 속잎나고, 뿐이다. 꽃이 귀는 이상이 소리다.이것은 소금이라 노래하며 그들은 이상 얼음에 이것이다.
 		인생의 인류의 소리다.이것은 인생에 이것이야말로 것이다. 따뜻한 앞이 이는 것은 힘차게 그림자는 행복스럽고 있으랴?</h4>
-
+	<%
+	String driver = "oracle.jdbc.driver.OracleDriver";
+	String url = "jdbc:oracle:thin:@localhost:1521:xe";
+	String user = "SEMI";
+	String password = "SEMI";
+	try {
+		Class.forName(driver);
+		System.out.println("jdbc driver 로딩 성공");
+		DriverManager.getConnection(url, user, password);
+		System.out.println("오라클 연결 성공");
+	} catch (ClassNotFoundException e) {
+		System.out.println("jdbc driver 로딩 실패");
+	} catch (SQLException e) {
+		e.printStackTrace();
+		System.out.println("오라클 연결 실패");
+	}
+	%>
 </body>
 </html>
