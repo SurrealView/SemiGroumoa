@@ -31,20 +31,19 @@ public class MemberService {
 		Connection con = getConnection();
 		int result = 0;
 		
-		int result1 = new MemberDao().insertMember(con, requestMember);
+		MemberVO responseMember = new MemberDao().insertMember(con, requestMember);
 		
-		//MemberVO loginUser = new MemberDao().loginCheck(con, requestMember);
-		
-		int[] resultArr = new MemberDao().insertMemberInterest(con, requestMember, requestMemberInterest);
+		int[] resultArr = new MemberDao().insertMemberInterest(con, responseMember, requestMemberInterest);
 		
 		for(int i = 0; i < resultArr.length; i++) {
 			if(resultArr[i] == 0) {
 				result = 0; 
 				break;
-			} result = 1;
+			} 
+			result = 1;
 		}
 		
-		if(result1 != 0 && result != 0) {
+		if(responseMember != null && result != 0) {
 			commit(con);
 			result = 1;
 		} else {

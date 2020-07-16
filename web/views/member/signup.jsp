@@ -31,7 +31,7 @@
 	 	<h1 align="center">회원가입</h1>
 	 		<br>
 	 		<!-- 완성후 action 태그 insert.me로 바꾸기 -->
-	 		<form action="insert.me" method="post">
+	 		<form action="<%=request.getContextPath() %>/insert.me" method="post">
 	 			<label for="email">이메일(아이디)</label>
 	 			<input type="email" class="form-control" name="email" id="email" placeholder="이메일 주소 입력">
 	 			<br><br>
@@ -69,31 +69,31 @@
                 <br><br>
 	 			<label for="">주소</label>
 	 			<select class="form-control" name="rnCode">
-	 				<option value="r0001">서울시 동작구</option>
-	 				<option value="r0002">서울시 강동구</option>
-	 				<option value="r0003">서울시 강서구</option>
-	 				<option value="r0004">서울시 강북구</option>
-	 				<option value="r0005">서울시 관악구</option>
-	 				<option value="r0006">서울시 광진구</option>
-	 				<option value="r0007">서울시 구로구</option>
-	 				<option value="r0008">서울시 금천구</option>
-	 				<option value="r0009">서울시 노원구</option>
-	 				<option value="r0010">서울시 동대문구</option>
-	 				<option value="r0011">서울시 도봉구</option>
-	 				<option value="r0012">서울시 동작구</option>
-	 				<option value="r0013">서울시 마포구</option>
-	 				<option value="r0014">서울시 서대문구</option>
-	 				<option value="r0015">서울시 성동구</option>
-	 				<option value="r0016">서울시 성북구</option>
-	 				<option value="r0017">서울시 서초구</option>
-	 				<option value="r0018">서울시 송파구</option>
-	 				<option value="r0019">서울시 영등포구</option>
-	 				<option value="r0020">서울시 용산구</option>
-	 				<option value="r0021">서울시 양천구</option>
-	 				<option value="r0022">서울시 은평구</option>
-	 				<option value="r0023">서울시 송로구</option>
-	 				<option value="r0024">서울시 중구</option>
-	 				<option value="r0025">서울시 중랑구</option>
+	 				<option value="R0001">서울시 동작구</option>
+	 				<option value="R0002">서울시 강동구</option>
+	 				<option value="R0003">서울시 강서구</option>
+	 				<option value="R0004">서울시 강북구</option>
+	 				<option value="R0005">서울시 관악구</option>
+	 				<option value="R0006">서울시 광진구</option>
+	 				<option value="R0007">서울시 구로구</option>
+	 				<option value="R0008">서울시 금천구</option>
+	 				<option value="R0009">서울시 노원구</option>
+	 				<option value="R0010">서울시 동대문구</option>
+	 				<option value="R0011">서울시 도봉구</option>
+	 				<option value="R0012">서울시 동작구</option>
+	 				<option value="R0013">서울시 마포구</option>
+	 				<option value="R0014">서울시 서대문구</option>
+	 				<option value="R0015">서울시 성동구</option>
+	 				<option value="R0016">서울시 성북구</option>
+	 				<option value="R0017">서울시 서초구</option>
+	 				<option value="R0018">서울시 송파구</option>
+	 				<option value="R0019">서울시 영등포구</option>
+	 				<option value="R0020">서울시 용산구</option>
+	 				<option value="R0021">서울시 양천구</option>
+	 				<option value="R0022">서울시 은평구</option>
+	 				<option value="R0023">서울시 송로구</option>
+	 				<option value="R0024">서울시 중구</option>
+	 				<option value="R0025">서울시 중랑구</option>
 	 			</select>
 	 			<input type="text" id="address" class="form-control" name="address" placeholder="상세 주소 입력" style="width:350px;">
 	 			<br><br>
