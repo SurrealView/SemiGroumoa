@@ -11,7 +11,7 @@ public class MemberVO implements java.io.Serializable {
 	private String rnCode;
 	private String address;
 	private String phone;
-	private Date birthDate;
+	private String birthDate;
 	private Date enrollDate;
 	private String status;
 	
@@ -27,7 +27,7 @@ public class MemberVO implements java.io.Serializable {
 
 
 	public MemberVO(int memberCode, String email, String userName, String userPwd, String gender, String rnCode,
-			String address, String phone, Date birthDate, Date enrollDate, String status) {
+			String address, String phone, String birthDate, Date enrollDate, String status) {
 		super();
 		this.memberCode = memberCode;
 		this.email = email;
@@ -111,10 +111,10 @@ public class MemberVO implements java.io.Serializable {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public Date getBirthDate() {
+	public String getBirthDate() {
 		return birthDate;
 	}
-	public void setBirthDate(Date birthDate) {
+	public void setBirthDate(String birthDate) {
 		this.birthDate = birthDate;
 	}
 	public Date getEnrollDate() {

@@ -31,7 +31,7 @@
 	 	<h1 align="center">회원가입</h1>
 	 		<br>
 	 		<!-- 완성후 action 태그 insert.me로 바꾸기 -->
-	 		<form action="#" method="post">
+	 		<form action="insert.me" method="post">
 	 			<label for="email">이메일(아이디)</label>
 	 			<input type="email" class="form-control" name="email" id="email" placeholder="이메일 주소 입력">
 	 			<br><br>
@@ -43,6 +43,12 @@
 	 			<br><br>
 	 			<label for="userName">이름</label>
 	 			<input type="text" class="form-control" name="userName" id="userName" placeholder="이름 입력(최소 2자 이상)">
+	 			<br><br>
+	 			<label for="gender">성별</label>
+	 			<label for="male">남</label>
+	 			<input type="radio" class="" name="gender" id="male" value="M">
+	 			<label for="female">여</label>
+	 			<input type="radio" class="" name="gender" id="female" value="F">
 	 			<br><br>
 	 			<label for="">휴대번호</label>
 	 			<select name="phoneHead" class="form-control" style="width:100px;">
@@ -93,43 +99,43 @@
 	 			<br><br>
 	 			<label for="interest">관심 분야</label>
 	 			<br>
-	 			<input type="checkbox" id="i1" name="interest" value="i1">
+	 			<input type="checkbox" id="i1" name="interest" value="I1">
 	 			<label for="i1">문화/공연</label>
-	 			<input type="checkbox" id="i2" name="interest" value="i2">
+	 			<input type="checkbox" id="i2" name="interest" value="I2">
 	 			<label for="i2">게임/오락</label>
-	 			<input type="checkbox" id="i3" name="interest" value="i3">
+	 			<input type="checkbox" id="i3" name="interest" value="I3">
 	 			<label for="i3">아웃도어/여행</label>
-	 			<input type="checkbox" id="i4" name="interest" value="i4">
+	 			<input type="checkbox" id="i4" name="interest" value="I4">
 	 			<label for="i4">운동/스포츠</label>
-	 			<input type="checkbox" id="i5" name="interest" value="i5">
+	 			<input type="checkbox" id="i5" name="interest" value="I5">
 	 			<label for="i5">인문학/책/글</label>
-	 			<input type="checkbox" id="i6" name="interest" value="i6">
+	 			<input type="checkbox" id="i6" name="interest" value="I6">
 	 			<label for="i6">업종/직무</label>
-	 			<input type="checkbox" id="i7" name="interest" value="i7">
+	 			<input type="checkbox" id="i7" name="interest" value="I7">
 	 			<label for="i7">외국/언어</label>
-	 			<input type="checkbox" id="i8" name="interest" value="i8">
+	 			<input type="checkbox" id="i8" name="interest" value="I8">
 	 			<label for="i8">음악/악기</label>
-	 			<input type="checkbox" id="i9" name="interest" value="i9">
+	 			<input type="checkbox" id="i9" name="interest" value="I9">
 	 			<label for="i9">패션/뷰티</label>
-	 			<input type="checkbox" id="i10" name="interest" value="i10">
+	 			<input type="checkbox" id="i10" name="interest" value="I10">
 	 			<label for="i10">공예/만들기</label>
-	 			<input type="checkbox" id="i11" name="interest" value="i11">
+	 			<input type="checkbox" id="i11" name="interest" value="I11">
 	 			<label for="i11">댄스/무용</label>
-	 			<input type="checkbox" id="i12" name="interest" value="i12">
+	 			<input type="checkbox" id="i12" name="interest" value="I12">
 	 			<label for="i12">사교/인맥</label>
-	 			<input type="checkbox" id="i13" name="interest" value="i13">
+	 			<input type="checkbox" id="i13" name="interest" value="I13">
 	 			<label for="i13">사진</label>
-	 			<input type="checkbox" id="i14" name="interest" value="i14">
+	 			<input type="checkbox" id="i14" name="interest" value="I14">
 	 			<label for="i14">차/오토바이</label>
-	 			<input type="checkbox" id="i15" name="interest" value="i15">
+	 			<input type="checkbox" id="i15" name="interest" value="I15">
 	 			<label for="i15">요리/제조</label>
-	 			<input type="checkbox" id="i16" name="interest" value="i16">
+	 			<input type="checkbox" id="i16" name="interest" value="I16">
 	 			<label for="i16">가족/결혼</label>
-	 			<input type="checkbox" id="i17" name="interest" value="i17">
+	 			<input type="checkbox" id="i17" name="interest" value="I17">
 	 			<label for="i17">반려동물</label>
-	 			<input type="checkbox" id="i18" name="interest" value="i18">
+	 			<input type="checkbox" id="i18" name="interest" value="I18">
 	 			<label for="i18">봉사활동</label>
-	 			<input type="checkbox" id="i19" name="interest" value="i19">
+	 			<input type="checkbox" id="i19" name="interest" value="I19">
 	 			<label for="i19">자유주제</label>
 	 			<br>
 	 			<input type="submit" value="가입하기">

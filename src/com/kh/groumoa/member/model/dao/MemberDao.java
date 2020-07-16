@@ -61,7 +61,7 @@ private Properties prop = new Properties();
 				loginUser.setRnCode(rset.getString("RN_CODE"));
 				loginUser.setAddress(rset.getString("ADDRESS"));
 				loginUser.setPhone(rset.getString("PHONE"));
-				loginUser.setBirthDate(rset.getDate("BIRTH_DATE"));
+				//loginUser.setBirthDate(rset.getDate("BIRTH_DATE"));
 				loginUser.setEnrollDate(rset.getDate("ENROLL_DATE"));
 				loginUser.setStatus(rset.getString("STATUS"));
 				
@@ -96,7 +96,7 @@ private Properties prop = new Properties();
 			pstmt.setString(5, requestMember.getRnCode());
 			pstmt.setString(6, requestMember.getAddress());
 			pstmt.setString(7, requestMember.getPhone());
-			pstmt.setDate(8, requestMember.getBirthDate());
+			pstmt.setString(8, requestMember.getBirthDate());
 	
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -109,10 +109,34 @@ private Properties prop = new Properties();
 		return result;
 		
 	}
-
-	public int insertMemberInterest(Connection con, ArrayList<MemberInterestVO> requestMemberInterest) {
-		// TODO Auto-generated method stub
-		return 0;
+	
+	public int[] insertMemberInterest(Connection con, MemberVO requestMember, ArrayList<MemberInterestVO> requestMemberInterest) {
+		PreparedStatement pstmt = null;
+		int[] result = null;
+		
+		String query = prop.getProperty("insertMemberInterest");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			result = new int[requestMemberInterest.size()];
+			
+			for(int i = 0; i < requestMemberInterest.size(); i++) {
+			pstmt.setInt(1, requestMember.getMemberCode());
+			pstmt.setString(2, requestMemberInterest.get(i).getInterestCode());
+			//pstmt.executeUpdate();
+			result[i] = pstmt.executeUpdate();
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
 	}
 
 }

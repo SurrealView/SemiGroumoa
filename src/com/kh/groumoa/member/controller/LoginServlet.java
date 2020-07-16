@@ -26,7 +26,7 @@ public class LoginServlet extends HttpServlet {
         super();
        
     }
-
+    
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -44,8 +44,8 @@ public class LoginServlet extends HttpServlet {
 		if(loginUser != null) {
 			request.getSession().setAttribute("loginUser", loginUser);
 			response.sendRedirect("index.jsp");
-		} else {
 			request.setAttribute("msg", "로그인 실패!");
+		} else {
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
 	}
