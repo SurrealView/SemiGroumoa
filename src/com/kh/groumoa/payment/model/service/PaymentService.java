@@ -35,7 +35,7 @@ public class PaymentService {
 		
 		inst().closeCon();
 		
-		return null;
+		return list;
 	}
 	
 //	public int getListCount(Connection con) {		

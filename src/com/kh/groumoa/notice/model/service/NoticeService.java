@@ -14,6 +14,8 @@ public class NoticeService {
 	public int getListCount() {
 		int result = 0;
 		
+		inst().setProp("/sql/driver.properties");
+		
 		Connection con = inst().getCon("url", "user", "password", "driver");
 		
 		NoticeDao nd = new NoticeDao();
@@ -25,6 +27,8 @@ public class NoticeService {
 
 	public ArrayList<NoticeVo> selectList(PageInfo pi) {
 		ArrayList<NoticeVo> list = null;
+		inst().setProp("/sql/driver.properties");
+		
 		Connection con = inst().getCon("url", "user", "password", "driver");
 		
 		NoticeDao nd = new NoticeDao();

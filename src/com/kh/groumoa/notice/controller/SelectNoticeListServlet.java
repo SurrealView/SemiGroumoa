@@ -54,7 +54,7 @@ public class SelectNoticeListServlet extends HttpServlet {
 		String page = "";
 			
 		if(list != null) {
-			page = "views/board/boardList.jsp";
+			page = "views/manager/notice/noticeList.jsp";
 			request.setAttribute("list", list);
 			request.setAttribute("pi", pi);
 		} else {
