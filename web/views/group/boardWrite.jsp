@@ -106,7 +106,7 @@
 					<label for="writer">작성자</label>&nbsp;&nbsp;
 					<input type="text" class="form-control writer" value="" readonly>&nbsp;&nbsp;
 					<label for="date-written">작성일</label>&nbsp;&nbsp;
-					<input type="date" value="" readonly><br><br>
+					<input type="date" id="currentDate" value="" readonly><br><br>
 					<textarea class="form-control" cols="120" rows="20" style="resize:none;" name="content"></textarea>
 					<br><br>
 					<label for="attachment">파일 첨부</label>&nbsp;
@@ -117,7 +117,9 @@
 					<button class="btn btn-dark" onclick="reset();">취소</button>
 				</form>
 			</div>
-		
+			<script>
+  				document.getElementById('currentDate').value = new Date().toISOString().substring(0, 10);
+			</script>
 			
 		
 		

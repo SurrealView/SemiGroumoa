@@ -59,12 +59,17 @@ public class MemberInsertServlet extends HttpServlet {
 		String[] iarr = request.getParameterValues("interest");
 		
 		ArrayList<MemberInterestVO> requestMemberInterest = new ArrayList<MemberInterestVO>();
-		for(int i = 0; i < iarr.length; i++) {
-			MemberInterestVO memberInterest = new MemberInterestVO();
-			memberInterest.setInterestCode(iarr[i]);
+		
+		
 			
-			requestMemberInterest.add(memberInterest);
-		}
+			for(int i = 0; i < iarr.length; i++) {
+				MemberInterestVO memberInterest = new MemberInterestVO();
+				memberInterest.setInterestCode(iarr[i]);
+				
+				requestMemberInterest.add(memberInterest);
+			}
+			
+		
 		
 		int result = new MemberService().insertMember(requestMember, requestMemberInterest);
 		

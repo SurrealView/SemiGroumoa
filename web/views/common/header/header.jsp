@@ -77,7 +77,7 @@
                             <strong><%=loginUser.getUserName()%></strong>님
                         </a>
                     </li>                        
-                    <li class="list_item logout"><a href="/account/logout">로그아웃</a></li>
+                    <li class="list_item logout"><a href="<%=request.getContextPath() %>/logout.me">로그아웃</a></li>
                     <%} else { %>
                     	<li class="list_item"><a href="<%=request.getContextPath() %>/views/member/login.jsp">로그인</a></li>
                     	<li class="list_item"><a href="<%=request.getContextPath() %>/views/member/signup.jsp">회원가입</a></li>

@@ -56,10 +56,8 @@ public class MemberService {
 		
 		if(responseMember != null && result != 0) {
 			commit(con);
-			result = 1;
 		} else {
 			rollback(con);
-			result = 0;
 		}
 		
 		
