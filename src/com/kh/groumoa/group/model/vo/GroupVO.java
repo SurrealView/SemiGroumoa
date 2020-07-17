@@ -2,7 +2,7 @@ package com.kh.groumoa.group.model.vo;
 
 import java.sql.Date;
 
-public class GroupVO {
+public class GroupVO implements java.io.Serializable {
 	
 	private String groupCode;
 	private String groupName;
