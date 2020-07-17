@@ -10,7 +10,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.groumoa.member.model.vo.MemberInterestVO;
@@ -70,7 +69,7 @@ private Properties prop = new Properties();
 				String birthDateString = sdf.format(birthDate);
 				
 				loginUser.setBirthDate(birthDateString);
-				System.out.println(birthDateString);
+				//System.out.println(birthDateString);
 				//loginUser.setBirthDate(rset.getDate("BIRTH_DATE"));
 				
 			}
