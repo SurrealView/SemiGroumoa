@@ -47,7 +47,7 @@
                     </div>
                     <div class="tab_content" style="margin-top:-30px">
                         
-                        <form action="login.me" method="post" accept-charset="utf-8" class="login_access_form">
+                        <form action="<%=request.getContextPath() %>/login.me" method="post" accept-charset="utf-8" class="login_access_form">
                             <input type="hidden" name="returnUrl" value="/">
                             <input type="hidden" name="login_type" value="user">
                             <div class="login_form">

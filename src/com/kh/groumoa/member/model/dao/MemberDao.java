@@ -120,7 +120,9 @@ private Properties prop = new Properties();
 		} finally {
 			close(pstmt);
 		}
+		
 		System.out.println(responseMember);
+		
 		return responseMember;
 		
 	}
@@ -133,10 +135,7 @@ private Properties prop = new Properties();
 		
 		try {
 			pstmt = con.prepareStatement(query);
-			
-			
-			
-			
+
 			pstmt.setInt(1, requestMember.getMemberCode());
 			pstmt.setString(2, requestMemberInterest.getInterestCode());
 			result = pstmt.executeUpdate();
