@@ -1,9 +1,9 @@
 package com.kh.groumoa.member.model.service;
 
 
-import static com.kh.groumoa.common.JDBCTemplate.getConnection;
 import static com.kh.groumoa.common.JDBCTemplate.close;
 import static com.kh.groumoa.common.JDBCTemplate.commit;
+import static com.kh.groumoa.common.JDBCTemplate.getConnection;
 import static com.kh.groumoa.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
@@ -30,10 +30,21 @@ public class MemberService {
 	public int insertMember(MemberVO requestMember, ArrayList<MemberInterestVO> requestMemberInterest) {
 		Connection con = getConnection();
 		int result = 0;
+		int[] resultArr = new int[requestMemberInterest.size()];
 		
 		MemberVO responseMember = new MemberDao().insertMember(con, requestMember);
 		
-		int[] resultArr = new MemberDao().insertMemberInterest(con, responseMember, requestMemberInterest);
+		for(int i = 0; i < requestMemberInterest.size(); i++) {
+		MemberInterestVO requestMemberInterestEach = requestMemberInterest.get(i);	 
+			
+			
+			int resultEach = new MemberDao().insertMemberInterest(con, responseMember, requestMemberInterestEach);
+			
+			resultArr[i] = resultEach;
+		}
+		
+		
+		
 		
 		for(int i = 0; i < resultArr.length; i++) {
 			if(resultArr[i] == 0) {
