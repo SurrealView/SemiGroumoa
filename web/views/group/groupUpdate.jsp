@@ -163,12 +163,12 @@
 	  <table border="1">
         <tr>
             <td colspan="12" height="50px" style="border-right:hidden; border-top:hidden;">동호회이름
-            &nbsp;<input type="text" style="width:350px" class="form-control" name="name">
+            &nbsp;<input type="text" style="width:350px" class="form-control" name="name" value="<%=group.getGroupName() %>" readonly>
             <input type="hidden" name="groupCode"></td>
         </tr>
         <tr>
             <td colspan="12" height="50px" style="border-right:hidden;">동호회 활동 지역
-            &nbsp;<input type="text" style="width:350px" class="form-control" name="rnCode">
+            &nbsp;<input type="text" style="width:350px" class="form-control" name="rnCode" value="<%=group.getRnCode() %>" readonly>
             </td>
         </tr>
         <tr>
