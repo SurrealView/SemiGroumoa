@@ -11,12 +11,14 @@ public class NoticeVo {
 	MN_WRITER_CODE	VARCHAR2(5 BYTE)
 	NOTICE_STATUS	CHAR(1 BYTE)*/
 	
+	int nNo;
 	String noticeCode;
 	String noticeCategory;
 	String noticeTitle;
 	String noticeDetail;
 	Date noticeDate;
 	String mnWriterCode;
+	String mnWriterID;
 	String noticeStatus;
 	
 	public NoticeVo() {
@@ -33,6 +35,14 @@ public class NoticeVo {
 		this.noticeDate = noticeDate;
 		this.mnWriterCode = mnWriterCode;
 		this.noticeStatus = noticeStatus;
+	}
+
+	public int getnNo() {
+		return nNo;
+	}
+
+	public void setnNo(int nNo) {
+		this.nNo = nNo;
 	}
 
 	public String getNoticeCode() {
@@ -90,13 +100,23 @@ public class NoticeVo {
 	public void setNoticeStatus(String noticeStatus) {
 		this.noticeStatus = noticeStatus;
 	}
+	
+	
+
+	public String getMnWriterID() {
+		return mnWriterID;
+	}
+
+	public void setMnWriterID(String mnWriterID) {
+		this.mnWriterID = mnWriterID;
+	}
 
 	@Override
 	public String toString() {
-		return "NoticeVo [noticeCode=" + noticeCode + ", noticeCategory=" + noticeCategory + ", noticeTitle="
-				+ noticeTitle + ", noticeDetail=" + noticeDetail + ", noticeDate=" + noticeDate + ", mnWriterCode="
-				+ mnWriterCode + ", noticeStatus=" + noticeStatus + "]";
+		return "NoticeVo [nNo=" + nNo + ", noticeCode=" + noticeCode + ", noticeCategory=" + noticeCategory
+				+ ", noticeTitle=" + noticeTitle + ", noticeDetail=" + noticeDetail + ", noticeDate=" + noticeDate
+				+ ", mnWriterCode=" + mnWriterCode + ", noticeStatus=" + noticeStatus + ", mnWriterID=" + mnWriterID
+				+ "]";
 	}
-	
 	
 }

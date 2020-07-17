@@ -21,21 +21,22 @@ public class CustomUtil {
 	private ResultSet rset = null;
 	
 	
-	public CustomUtil() {		
+	public CustomUtil() {
+		prop = new Properties();
 	}
 	
 	public static CustomUtil inst() {
 		if(instance == null) {
 			instance = new CustomUtil();
-		}
-		
+		}		
 		return instance;
 	}
 	
 	public void setProp(String filePath) {
 		try {
 			//String fileName = JDBCTemplate.class.getResource("/sql/driver.properties").getPath();
-			prop.load(new FileReader(CustomUtil.class.getResource(filePath).getPath()));
+			String file = CustomUtil.class.getResource(filePath).getPath();
+			prop.load(new FileReader(file));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -46,7 +47,8 @@ public class CustomUtil {
 	}
 	
 	public String getPropVal(String key) {
-		return prop.getProperty(key);		
+		String nnn = prop.getProperty(key);
+		return nnn;		
 	}
 	
 	public Connection getCon(String url, String user, String pwd, String driver) {
@@ -90,7 +92,9 @@ public class CustomUtil {
 	
 	public ResultSet getResultSet(String key) {		
 		try {
-			rset = stmt.executeQuery(prop.getProperty(key));
+			String query = prop.getProperty(key);
+			
+			rset = stmt.executeQuery(query);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -243,5 +247,21 @@ public class CustomUtil {
 		 * */
 	}	
 	
+	public void commit() {
+		try {
+			con.commit();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
+	public void rollback() {
+		try {
+			con.rollback();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

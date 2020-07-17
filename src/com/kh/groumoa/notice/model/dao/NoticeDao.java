@@ -22,9 +22,9 @@ public class NoticeDao {
 		
 		stmt = inst().getStmt();
 		
-		String query = inst().getPropVal("listCount");
+		//String query = inst().getPropVal("listCount");
 		
-		rset = inst().getResultSet(query);		
+		rset = inst().getResultSet("listCount");		
 		
 		try {
 			if(rset.next()) {
@@ -69,13 +69,15 @@ public class NoticeDao {
 				NOTICE_DATE	DATE
 				MN_WRITER_CODE	VARCHAR2(5 BYTE)
 				NOTICE_STATUS	CHAR(1 BYTE)*/
-				
+				//RNUM, NOTICE_CODE, NOTICE_CATEGORY, NOTICE_TITLE, NOTICE_DETAIL, NOTICE_DATE, MANAGER_ID, NOTICE_STATUS
+				n.setnNo(rset.getInt("RNUM"));
 				n.setNoticeCode(rset.getString("NOTICE_CODE"));
 				n.setNoticeCategory(rset.getString("NOTICE_CATEGORY"));
 				n.setNoticeTitle(rset.getString("NOTICE_TITLE"));
 				n.setNoticeTitle(rset.getString("NOTICE_DETAIL"));
 				n.setNoticeDate(rset.getDate("NOTICE_DATE"));
 				n.setMnWriterCode(rset.getString("MN_WRITER_CODE"));
+				n.setMnWriterID(rset.getString("MANAGER_ID"));
 				n.setNoticeStatus(rset.getString("NOTICE_STATUS"));
 				
 				list.add(n);
