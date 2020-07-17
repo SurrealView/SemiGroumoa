@@ -126,23 +126,23 @@ private Properties prop = new Properties();
 		
 	}
 	
-	public int[] insertMemberInterest(Connection con, MemberVO requestMember, ArrayList<MemberInterestVO> requestMemberInterest) {
+	public int insertMemberInterest(Connection con, MemberVO requestMember, MemberInterestVO requestMemberInterest) {
 		PreparedStatement pstmt = null;
-		int[] result = null;
+		int result = 0;
 		
 		String query = prop.getProperty("insertMemberInterest");
 		
 		try {
 			pstmt = con.prepareStatement(query);
 			
-			result = new int[requestMemberInterest.size()];
 			
-			for(int i = 0; i < requestMemberInterest.size(); i++) {
-			pstmt.setInt(1, requestMember.getMemberCode());//
-			pstmt.setString(2, requestMemberInterest.get(i).getInterestCode());
-			result[i] = pstmt.executeUpdate();
-			}
-			//포문을 서비스에서 돌려보자
+			
+			
+			pstmt.setInt(1, requestMember.getMemberCode());
+			pstmt.setString(2, requestMemberInterest.getInterestCode());
+			result = pstmt.executeUpdate();
+			
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
