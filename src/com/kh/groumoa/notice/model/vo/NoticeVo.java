@@ -38,11 +38,20 @@ public class NoticeVo {
 	}
 
 	public int getnNo() {
+		if(noticeCode != null && !noticeCode.equals("")) {
+			nNo = Integer.parseInt(noticeCode.replaceFirst("N", ""));
+		}
+		
 		return nNo;
 	}
 
-	public void setnNo(int nNo) {
-		this.nNo = nNo;
+	public void setnNo(String code) {
+		if(code != null && !code.equals("")) {
+			
+			String ss = code.replace("N", "");
+			nNo = Integer.parseInt(code.replaceFirst("N", ""));
+			int b= nNo;
+		}		
 	}
 
 	public String getNoticeCode() {

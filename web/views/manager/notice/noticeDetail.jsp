@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.kh.groumoa.notice.model.vo.*, java.util.*"%>
+<%
+	NoticeVo notice = (NoticeVo) request.getAttribute("notice");
+	ArrayList<NoAttach> list = (ArrayList<NoAttach>) request.getAttribute("fileList");
+	int idx = 0;
+	NoAttach attach = list.get(idx);
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link href="../../../resources/css/notice/noticeDetail.css" rel="stylesheet">
+    <link href="/groumoa/resources/css/notice/noticeDetail.css" rel="stylesheet">
 </head>
 <body>
 	<%@ include file="/views/manager/menubar.jsp" %>
@@ -19,12 +25,15 @@
                 </tr>
                 <tr>
                     <td><label>담당자 </label></td>
-                    <td colspan="6"><input type="text"></td>
+				<!--<td colspan="6"><input type="text"></td> -->
+					<td colspan="6"><%=notice.getMnWriterID() %></td>
                 </tr>
                 <tr>
                     <td><label>연락처 </label></td>
                     <td colspan="2"><input type="tel"></td>
+<!--                     <td colspan="2"><input type="tel"></td> -->
                     <td><label>이메일 </label></td>
+<%--                     <td colspan="2"><%=notice.getMnWriterID() %></td> --%>
                     <td colspan="2"><input type="email"></td>
 		                          <!--  줄맞추기 용. -->
                     <td></td>
@@ -32,16 +41,17 @@
                 <tr>
                     <td><label>제목</label></td>                    
                     <td colspan="5"><input type="text" placeholder="제목을입력해주세요" style="width:400px"></td>
+                    <%-- <td colspan="5"><%=notice.getNoticeTitle() %></td> --%>
                     <td><input type="text" style="width:80px"></td>
                 </tr>
                 <tr>
                     <td><label>내용</label></td>
                     <!-- <td colspan="6"><textarea cols="62" rows="10" style="resize:none"></textarea></td> -->
-                    <td colspan="6">내용. 내용내용내용내용<br><br><br><br><br><br><br><br><br>내용</td>
+                    <td colspan="6"><%=notice.getNoticeDetail() %><br><%=attach.getChangeName() %></td>
                 </tr>
             </table>
-            <button type="submit" class="gotoMain">목록</button>
-            <button type="submit" class="adjust">수정하기</button>
+            <button type="submit" class="noDetailBtn" id="gotoNoticeMenu">목록</button>
+            <button type="submit" class="noDetailBtn" id="adjust">수정하기</button>
         </div>      
                         <!-- <span>내용</span> -->                
     </div>

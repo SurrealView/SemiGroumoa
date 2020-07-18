@@ -10,7 +10,7 @@
     vertical-align: auto;
 }
 
-button{
+.noDetailBtn {
     background:purple;
     color:white;
     width:100px;
