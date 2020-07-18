@@ -26,9 +26,12 @@ public class GroupService {
 			
 			for(int i = 0; i < fileList.size(); i++) {
 				fileList.get(i).setGroupCode(groupCode);
+//				group.setGroupCode(groupCode);
 				
 				result2 += new GroupDao().insertAttachment(con, fileList.get(i));
 			}
+			
+			System.out.println(groupCode);
 		}
 		
 		if(result1 > 0 && result2 == fileList.size()) {

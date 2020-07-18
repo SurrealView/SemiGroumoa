@@ -70,7 +70,15 @@ public class GroupDao {
 			rset = stmt.executeQuery(query);
 			
 			if(rset.next()) {
-				groupCode = rset.getString("currval");
+				int id = rset.getInt("currval");
+				
+//				groupCode = Integer.toString(id);
+				
+				if(id < 10) {
+					groupCode = "G000"+ id;					
+				} else if(id >= 10) {
+					groupCode = "G00" + id;
+				}
 			}
 			
 		} catch (SQLException e) {
@@ -90,7 +98,13 @@ public class GroupDao {
 		String query = prop.getProperty("insertAttachment");
 		
 		try {
+			GroupVO group = new GroupVO();
 			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, attachment.getOriginName());
+			pstmt.setString(2, attachment.getChangeName());
+			pstmt.setString(3, attachment.getFilePath());
+			pstmt.setInt(4, attachment.getFileLevel());
+			pstmt.setString(5, attachment.getGroupCode());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -114,8 +128,7 @@ public class GroupDao {
 			pstmt.setString(2, requestGroup.getNickNameyn());
 			pstmt.setString(3, requestGroup.getGroupRule());
 			pstmt.setString(4, requestGroup.getDescription());
-			pstmt.setString(5, requestGroup.getThumbNail());
-			pstmt.setString(6, requestGroup.getGroupCode());
+			pstmt.setString(5, requestGroup.getGroupCode());
 			
 			result = pstmt.executeUpdate();
 			
