@@ -95,7 +95,7 @@
 </style>
 </head>
 <body>
-	<!-- 헤더추가하기 -->
+	<%@include file="/views/common/header/newHeader.jsp" %>
 	<%@include file="subMenubar_myGroup.jsp" %>
 	<div class="content">
 		<p align="right" style="font-size:10px; padding-right: 25px; padding-top: 15px;">개인정보취급방침에 따라 최근 5년간의 내역이 제공됩니다.</p>
