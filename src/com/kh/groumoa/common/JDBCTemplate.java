@@ -9,20 +9,30 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
+import static com.kh.groumoa.common.CustomUtil.inst;
 
 public class JDBCTemplate {
 	public static Connection getConnection() {
 		Connection con = null;
-		Properties prop = new Properties();
+		//Properties prop = new Properties();
+		inst().setProp("/sql/driver.properties");
 		
-		String fileName = JDBCTemplate.class.getResource("/sql/driver.properties").getPath();
+		
+		//String fileName = JDBCTemplate.class.getResource("/sql/driver.properties").getPath();
+		
+		inst().getPropVal("driver");
 		
 		try {
-			prop.load(new FileReader(fileName));
-			String driver = prop.getProperty("driver");
-			String url = prop.getProperty("url");
-			String user = prop.getProperty("user");
-			String password = prop.getProperty("password");
+			//prop.load(new FileReader(fileName));
+//			String driver = prop.getProperty("driver");
+//			String url = prop.getProperty("url");
+//			String user = prop.getProperty("user");
+//			String password = prop.getProperty("password");
+			
+			String driver = inst().getPropVal("driver");
+			String url = inst().getPropVal("url");
+			String user = inst().getPropVal("user");
+			String password = inst().getPropVal("password");
 			
 			Class.forName(driver);
 			
@@ -30,13 +40,15 @@ public class JDBCTemplate {
 			
 			con.setAutoCommit(false);
 			
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
+//			catch (FileNotFoundException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+			
+		}  catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {

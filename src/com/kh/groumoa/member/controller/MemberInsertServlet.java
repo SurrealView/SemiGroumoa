@@ -42,8 +42,8 @@ public class MemberInsertServlet extends HttpServlet {
 		String phone = phoneHead + "-" + tel1 + "-" + tel2;
 		String rnCode = request.getParameter("rnCode"); // 주소 api 사용시 수정
 		String address = request.getParameter("address"); // 주소 api 사용시 수정
-		String[] iarr = request.getParameterValues("interest");
-		
+		String gender = request.getParameter("gender");
+		String birthDate = request.getParameter("birthDate");
 		
 		
 		MemberVO requestMember = new MemberVO();
@@ -53,17 +53,22 @@ public class MemberInsertServlet extends HttpServlet {
 		requestMember.setPhone(phone);
 		requestMember.setRnCode(rnCode);
 		requestMember.setAddress(address);
+		requestMember.setGender(gender);
+		requestMember.setBirthDate(birthDate);
+		
+		String[] iarr = request.getParameterValues("interest");
 		
 		ArrayList<MemberInterestVO> requestMemberInterest = new ArrayList<MemberInterestVO>();
-		for(int i = 0; i < iarr.length; i++) {
-			MemberInterestVO memberInterest = new MemberInterestVO();
-			memberInterest.setInterestCode(iarr[i]);
+		
+		
 			
-			requestMemberInterest.add(memberInterest);
-		}
-		//
-		
-		
+			for(int i = 0; i < iarr.length; i++) {
+				MemberInterestVO memberInterest = new MemberInterestVO();
+				memberInterest.setInterestCode(iarr[i]);
+				
+				requestMemberInterest.add(memberInterest);
+			}
+			
 		
 		
 		int result = new MemberService().insertMember(requestMember, requestMemberInterest);

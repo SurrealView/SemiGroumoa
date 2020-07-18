@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.GregorianCalendar;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,19 +18,20 @@ import com.kh.groumoa.common.MyFileRenamePolicy;
 import com.kh.groumoa.group.model.service.GroupService;
 import com.kh.groumoa.group.model.vo.Attachment;
 import com.kh.groumoa.group.model.vo.GroupVO;
+import com.kh.groumoa.member.model.vo.MemberInterestVO;
 import com.oreilly.servlet.MultipartRequest;
 
 /**
- * Servlet implementation class UpdategroupServlet
+ * Servlet implementation class InsertgroupServlet
  */
-@WebServlet("/update.gr")
-public class UpdategroupServlet extends HttpServlet {
+@WebServlet("/insert.gr")
+public class InsertgroupServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UpdategroupServlet() {
+    public InsertgroupServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -62,10 +64,28 @@ public class UpdategroupServlet extends HttpServlet {
 			String rnCode = multiRequest.getParameter("rnCode");
 			String name = multiRequest.getParameter("name");
 			String description = multiRequest.getParameter("description");
+		/*	String [] iarr = request.getParameterValues("interest"); */
 			String interest = multiRequest.getParameter("interest");
 			String openYn = multiRequest.getParameter("openYn");
 			String nickNameyn = multiRequest.getParameter("nickNameyn");
 			String groupRule = multiRequest.getParameter("groupRule");		
+			
+/*			String interest = "";
+			if(iarr != null) {
+				for(int i = 0; i < iarr.length; i++) {
+					interest += iarr[i];
+				}
+			}
+			
+			System.out.println("interest" + interest);
+*/			
+		/*	ArrayList<MemberInterestVO> requestMemberInterest = new ArrayList<MemberInterestVO>();
+			for(int i = 0; i < iarr.length; i++) {
+				MemberInterestVO memberInterest = new MemberInterestVO();
+				memberInterest.setInterestCode(iarr[i]);
+				
+				requestMemberInterest.add(memberInterest);
+			}  */
 			
 			GroupVO group = new GroupVO();
 			group.setInterestCode(interest);
@@ -109,7 +129,7 @@ public class UpdategroupServlet extends HttpServlet {
 				}
 				
 				page = "views/common/errorPage.jsp";
-				request.setAttribute("msg", "동호회 수정 실패!!");
+				request.setAttribute("msg", "동호회 등록 실패!!");
 				request.getRequestDispatcher(page).forward(request, response);	
 			}
 		}

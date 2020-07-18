@@ -1,6 +1,7 @@
 package com.kh.groumoa.member.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,52 +10,49 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.groumoa.member.model.service.MemberService;
-import com.kh.groumoa.member.model.vo.MemberVO;
-
 
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class IdCheckServlet
  */
-@WebServlet("/login.me")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/idCheck.me")
+public class IdCheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public IdCheckServlet() {
         super();
-       
+        // TODO Auto-generated constructor stub
     }
-    
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String email = request.getParameter("email");
-		String userPwd = request.getParameter("userPwd");
 		
+		System.out.println("idCheck email : " + email);
 		
-		MemberVO requestMember = new MemberVO();
-		requestMember.setEmail(email);
-		requestMember.setUserPwd(userPwd);
+		int result = new MemberService().idCheck(email);
 		
-		MemberVO loginUser = new MemberService().loginCheck(requestMember);
+		PrintWriter out = response.getWriter();
 		
-		if(loginUser != null) {
-			request.getSession().setAttribute("loginUser", loginUser);
-			response.sendRedirect("index.jsp");
+		if(result > 0) {
+			out.append("fail");
 		} else {
-			request.setAttribute("msg", "로그인 실패!");
-			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+			out.append("success");
 		}
+		
+		out.flush();
+		out.close();
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

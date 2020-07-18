@@ -1,25 +1,38 @@
 package com.kh.groumoa.scheduler.model.service;
 
-
-
-import static com.kh.groumoa.common.JDBCTemplate.close;
-import static com.kh.groumoa.common.JDBCTemplate.getConnection;
+import static com.kh.groumoa.common.JDBCTemplate.*;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import com.kh.groumoa.scheduler.model.dao.SchedulerDao;
 import com.kh.groumoa.scheduler.model.vo.SchedulerVO;
 
 public class SchedulerService {
-	
-	public SchedulerVO ScheduleInsert(SchedulerVO reqestMember) {
-		Connection con = getConnection();
-		
-		SchedulerVO loginUser = new SchedulerDao().ScheduleInsert(con,reqestMember);
 
+	public int insertSchedule(SchedulerVO schedule) {
+		Connection con = getConnection();
+
+		int result = new SchedulerDao().insertSchedule(con, schedule);
+
+		if (result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
 		close(con);
 		
-		return loginUser;
+		return result;
+	}
+
+	public ArrayList<SchedulerVO> selectSchedule() {
+		Connection con = getConnection();
+		ArrayList<SchedulerVO> list = new SchedulerDao().selectSchedule(con);
+		
+		close(con);
+		
+		return list;
 	}
 
 }

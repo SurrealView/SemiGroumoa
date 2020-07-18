@@ -1,9 +1,9 @@
 package com.kh.groumoa.member.model.service;
 
 
-import static com.kh.groumoa.common.JDBCTemplate.getConnection;
 import static com.kh.groumoa.common.JDBCTemplate.close;
 import static com.kh.groumoa.common.JDBCTemplate.commit;
+import static com.kh.groumoa.common.JDBCTemplate.getConnection;
 import static com.kh.groumoa.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
@@ -29,27 +29,51 @@ public class MemberService {
 
 	public int insertMember(MemberVO requestMember, ArrayList<MemberInterestVO> requestMemberInterest) {
 		Connection con = getConnection();
+		int result = 0;
+		int[] resultArr = new int[requestMemberInterest.size()];
 		
-		int result1 = new MemberDao().insertMember(con, requestMember);
+		MemberVO responseMember = new MemberDao().insertMember(con, requestMember);
 		
-		MemberVO loginUser = new MemberDao().loginCheck(con, requestMember);
+		for(int i = 0; i < requestMemberInterest.size(); i++) {
+		MemberInterestVO requestMemberInterestEach = requestMemberInterest.get(i);	 
+			
+			
+			int resultEach = new MemberDao().insertMemberInterest(con, responseMember, requestMemberInterestEach);
+			
+			resultArr[i] = resultEach;
+		}
 		
-		int result2 = new MemberDao().insertMemberInterest(con, requestMemberInterest);
 		
-//		
-//		if(result > 0) {
-//			if(true) { //
-//				commit(con);
-//			} else {
-//				rollback(con);
-//			}
-//		} else {
-//			rollback(con);
-//		}
+		
+		
+		for(int i = 0; i < resultArr.length; i++) {
+			if(resultArr[i] == 0) {
+				result = 0; 
+				break;
+			} 
+			result = 1;
+		}
+		
+		if(responseMember != null && result != 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
 		
 		close(con);
 		
-		return result1;
+		return result;
+	}
+
+	public int idCheck(String email) {
+		Connection con = getConnection();
+		
+		int result = new MemberDao().idCheck(con, email);
+		
+		close(con);
+		
+		return result;
 	}
 
 }

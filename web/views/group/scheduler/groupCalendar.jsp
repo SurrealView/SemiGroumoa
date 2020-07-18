@@ -23,6 +23,7 @@
 	rel='stylesheet' />
 <!-- bootstrap link end -->
 
+
 <script src='../../../resources/fullcalendar/packages/core/main.js'></script>
 <script src='../../../resources/fullcalendar/packages/daygrid/main.js'></script>
 <script
@@ -35,6 +36,11 @@
 	src="../../../resources/fullcalendar/packages/interaction/main.js"></script>
 <script src='../../../resources/fullcalendar/packages/bootstrap/main.js'></script>
 
+<!-- popper.js 사용을 위한 jquery -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
 <script>
 	document.addEventListener('DOMContentLoaded', function() {
 		var calendarEl = document.getElementById('calendar');
@@ -42,11 +48,11 @@
 		var calendar = new FullCalendar.Calendar(calendarEl, {
 			/* dateClick : function() {
 				alert('a day has been clicked!');
-			}, */
+			}, */ 
 			plugins : [ 'dayGrid', 'timeGrid', 'list', 'interaction',
 					'bootstrap' ],
-			themeSystem : 'bootstrap',
-			editable: true,
+			/* themeSystem : 'bootstrap', */
+			editable : true,
 			locale : 'ko',
 			customButtons : {
 				addEventBtn : {
@@ -54,7 +60,7 @@
 					text : '일정추가',
 					click : function() {
 						//스케줄러에 이벤트를 추가할 페이지로 이동
-						location.href='scheduleInsertForm.jsp';
+						location.href = 'scheduleInsertForm.jsp';
 					}
 				}
 			},
@@ -63,11 +69,21 @@
 				center : 'title',
 				right : 'prevYear,prev,next,nextYear'
 			},
+			/* eventRender: function(event, element) {
+			    $(element).popover({
+			        placement : 'top',
+			        html : true,
+			        trigger : 'hover',
+			        title : event.title + ' <a href="#" class="close" data-dismiss="alert">×</a>',
+			        content : '<p>' + event.start + '</p><p>' + event.end + '<p>' + event.description + '</p>'
+			    })
+			}, */
 			events : [ {
 				id : '0000001',
 				title : '모임회',
 				start : '2020-07-22',
-				end : '2019-07-22'
+				end : '2019-07-22',
+				description : 'event no.1'
 			} ],
 			dateClick : function(info) {
 				alert('Clicked on: ' + info.dateStr);
@@ -125,12 +141,12 @@
 		</div>
 	</div>
 	<script>
-/* 		$(function() {
-			calendar.changeView('timeGrid', {
-				start : '2020-07-01',
-				end : '2020-07-05'
-			});
-		}); */
+		/* 		$(function() {
+		 calendar.changeView('timeGrid', {
+		 start : '2020-07-01',
+		 end : '2020-07-05'
+		 });
+		 }); */
 	</script>
 </body>
 </html>

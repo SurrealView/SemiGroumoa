@@ -110,7 +110,6 @@
      		 <th>모임장</th>
      		 <th>개설일</th>
      		 <th>관심사</th>
-     		 <th>상세관심사</th>
      		 <th>인원</th>
      		 <th>게시글</th>
      		 <th>메모</th>
@@ -123,7 +122,6 @@
              <td>김승열</td>
              <td>2020/07/01</td>
              <td>아웃도어/여행</td>
-             <td>낚시</td>
              <td>10/30</td>
              <td>10</td>
              <td><input type="checkbox"></td>
