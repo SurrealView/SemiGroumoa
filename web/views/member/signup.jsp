@@ -34,6 +34,7 @@
 	 		<form action="<%=request.getContextPath() %>/insert.me" method="post">
 	 			<label for="email">이메일(아이디)</label>
 	 			<input type="email" class="form-control" name="email" id="email" placeholder="이메일 주소 입력">
+	 			<button id="idCheck" onclick="idCheck();">중복확인</button>
 	 			<br><br>
 	 			<label for="password">비밀번호 </label>
 	 			<input type="password" class="form-control" name="userPwd" id="password" placeholder="비밀번호 입력(최소 8자 이상)">
@@ -141,7 +142,31 @@
 	 			<input type="submit" value="가입하기">
 	 		</form>
 	 	</div>
-	
+		<script>
+		 $(function(){
+	   		  $("#idCheck").click(function(){
+	   			  var email = $("#email").val();
+	   			  
+	   			  console.log(email);
+	   			  //디버깅하기 에러남
+	   			  $.ajax({
+	   				  url: "<%=request.getContextPath()%>/idCheck.me",
+	   				  type: "post",
+	   				  data: {email: email},
+	   				  success: function(data) {
+	   					  if(data == "fail") {
+	   						  alert("아이디가 중복됩니다.");
+	   					  } else {
+	   						  alert("사용 가능한 아이디입니다.");
+	   					  }
+	   				  },
+	   				  error: function(data) {
+	   					  console.log("실패!");
+	   				  }
+	   			  });
+	   		  }) ;
+	   	   });
+		</script>
 	</div>
 	 
 </body>

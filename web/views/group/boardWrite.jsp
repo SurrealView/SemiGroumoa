@@ -80,7 +80,7 @@
 </head>
 <body>
 	<!-- 여기 헤더 추가할것 -->
-	<%@include file="../common/header/header_old.html" %>
+	<%@include file="../common/header/header.jsp" %>
 	<%@include file="subMenubar.jsp" %>
 	<br>
 	<div class="content">
@@ -93,7 +93,7 @@
 		<div class="content-area">
 			<div class="form-area">
 			<!-- 완성 후 action태그 속성값 insert.bo로 변경하기 -->
-				<form action="#" method="post">
+				<form action="<%=request.getContextPath() %>/insert.bo" method="post">
 					<label for="title">제목</label>&nbsp;&nbsp;
 					<input type="text" class="form-control title" id="title" style="width:350px" name="title">&nbsp;
 					<br><br>
@@ -104,15 +104,16 @@
 						<option value="C3">일반</option>
 					</select>&nbsp;&nbsp;
 					<label for="writer">작성자</label>&nbsp;&nbsp;
-					<input type="text" class="form-control writer" value="" readonly>&nbsp;&nbsp;
+					<input type="text" class="form-control writer" value="<%=loginUser.getUserName() %>" readonly>&nbsp;&nbsp;
 					<label for="date-written">작성일</label>&nbsp;&nbsp;
-					<input type="date" id="currentDate" value="" readonly><br><br>
+					<input type="date" id="currentDate" readonly><br><br>
 					<textarea class="form-control" cols="120" rows="20" style="resize:none;" name="content"></textarea>
 					<br><br>
-					<label for="attachment">파일 첨부</label>&nbsp;
+					<label for="attachment">파일 첨부</label>&nbsp;<!-- 파일 첨부하는 로직 추가하기 -->
 					<input type="file" class="attachment" id="attachment" name="attachment">
 					<br><br>
-					<input type="hidden" name="groupCode" value="">
+					<input type="hidden" name="groupCode" value=""><!-- 그룹코드 받아오는 로직 추가하기 -->
+					<input type="hidden" name="writerCode" value=" name="<%=loginUser.getMemberCode() %>">
 					<button class="btn btn-primary" onclick="submit();">작성하기</button>
 					<button class="btn btn-dark" onclick="reset();">취소</button>
 				</form>
