@@ -1,5 +1,8 @@
 package com.kh.groumoa.group.model.service;
-import static com.kh.groumoa.common.JDBCTemplate.*;
+import static com.kh.groumoa.common.JDBCTemplate.close;
+import static com.kh.groumoa.common.JDBCTemplate.commit;
+import static com.kh.groumoa.common.JDBCTemplate.getConnection;
+import static com.kh.groumoa.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -7,8 +10,6 @@ import java.util.ArrayList;
 import com.kh.groumoa.group.model.dao.GroupDao;
 import com.kh.groumoa.group.model.vo.Attachment;
 import com.kh.groumoa.group.model.vo.GroupVO;
-import com.kh.groumoa.member.model.dao.MemberDao;
-import com.kh.groumoa.member.model.vo.MemberInterestVO;
 
 public class GroupService {
 	
@@ -69,6 +70,17 @@ public class GroupService {
 		
 		
 		return null;
+	}
+	
+	//동호회 조회(일반페이지)
+	public GroupVO selectOneGroup(GroupVO requestGroup) {
+		Connection con = getConnection();
+		
+		GroupVO selectedGroup = new GroupDao().selectOneGroup(con, requestGroup);
+		
+		close(con);
+		
+		return selectedGroup;
 	}
 
 
