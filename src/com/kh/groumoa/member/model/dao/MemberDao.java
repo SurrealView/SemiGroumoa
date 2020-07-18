@@ -1,5 +1,7 @@
 package com.kh.groumoa.member.model.dao;
 
+import static com.kh.groumoa.common.JDBCTemplate.close;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -7,14 +9,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
 import java.util.Properties;
 
 import com.kh.groumoa.member.model.vo.MemberInterestVO;
 import com.kh.groumoa.member.model.vo.MemberVO;
-import com.kh.groumoa.member.model.dao.MemberDao;
-
-import static com.kh.groumoa.common.JDBCTemplate.*;
 
 
 public class MemberDao {
@@ -55,15 +54,23 @@ private Properties prop = new Properties();
 				
 				loginUser.setMemberCode(rset.getInt("MEMBER_CODE"));
 				loginUser.setEmail(rset.getString("EMAIL"));
-				loginUser.setUserPwd(rset.getString("USER_PWD"));
-				loginUser.setUserName(rset.getString("USER_NAME"));
+				loginUser.setUserPwd(rset.getString("MEMBER_PWD"));
+				loginUser.setUserName(rset.getString("MEMBER_NAME"));
 				loginUser.setGender(rset.getString("GENDER"));
 				loginUser.setRnCode(rset.getString("RN_CODE"));
 				loginUser.setAddress(rset.getString("ADDRESS"));
 				loginUser.setPhone(rset.getString("PHONE"));
-				//loginUser.setBirthDate(rset.getDate("BIRTH_DATE"));
 				loginUser.setEnrollDate(rset.getDate("ENROLL_DATE"));
 				loginUser.setStatus(rset.getString("STATUS"));
+				
+				java.sql.Date birthDate = rset.getDate("BIRTH_DATE");
+				
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+				String birthDateString = sdf.format(birthDate);
+				
+				loginUser.setBirthDate(birthDateString);
+				//System.out.println(birthDateString);
+				//loginUser.setBirthDate(rset.getDate("BIRTH_DATE"));
 				
 			}
 			
@@ -81,8 +88,9 @@ private Properties prop = new Properties();
 		return loginUser;
 	}
 
-	public int insertMember(Connection con, MemberVO requestMember) {
+	public MemberVO insertMember(Connection con, MemberVO requestMember) {
 		PreparedStatement pstmt = null;
+		MemberVO responseMember = null;
 		int result = 0;
 		
 		String query = prop.getProperty("insertMember");
@@ -97,8 +105,15 @@ private Properties prop = new Properties();
 			pstmt.setString(6, requestMember.getAddress());
 			pstmt.setString(7, requestMember.getPhone());
 			pstmt.setString(8, requestMember.getBirthDate());
-	
+
 			result = pstmt.executeUpdate();
+			
+			if(result > 0) {
+				responseMember = loginCheck(con, requestMember);
+			}
+			
+			
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -106,27 +121,25 @@ private Properties prop = new Properties();
 			close(pstmt);
 		}
 		
-		return result;
+		System.out.println(responseMember);
+		
+		return responseMember;
 		
 	}
 	
-	public int[] insertMemberInterest(Connection con, MemberVO requestMember, ArrayList<MemberInterestVO> requestMemberInterest) {
+	public int insertMemberInterest(Connection con, MemberVO requestMember, MemberInterestVO requestMemberInterest) {
 		PreparedStatement pstmt = null;
-		int[] result = null;
+		int result = 0;
 		
 		String query = prop.getProperty("insertMemberInterest");
 		
 		try {
 			pstmt = con.prepareStatement(query);
-			
-			result = new int[requestMemberInterest.size()];
-			
-			for(int i = 0; i < requestMemberInterest.size(); i++) {
+
 			pstmt.setInt(1, requestMember.getMemberCode());
-			pstmt.setString(2, requestMemberInterest.get(i).getInterestCode());
-			//pstmt.executeUpdate();
-			result[i] = pstmt.executeUpdate();
-			}
+			pstmt.setString(2, requestMemberInterest.getInterestCode());
+			result = pstmt.executeUpdate();
+			
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

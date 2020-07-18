@@ -31,7 +31,7 @@
 	 	<h1 align="center">회원가입</h1>
 	 		<br>
 	 		<!-- 완성후 action 태그 insert.me로 바꾸기 -->
-	 		<form action="insert.me" method="post">
+	 		<form action="<%=request.getContextPath() %>/insert.me" method="post">
 	 			<label for="email">이메일(아이디)</label>
 	 			<input type="email" class="form-control" name="email" id="email" placeholder="이메일 주소 입력">
 	 			<br><br>
@@ -69,74 +69,74 @@
                 <br><br>
 	 			<label for="">주소</label>
 	 			<select class="form-control" name="rnCode">
-	 				<option value="r0001">서울시 동작구</option>
-	 				<option value="r0002">서울시 강동구</option>
-	 				<option value="r0003">서울시 강서구</option>
-	 				<option value="r0004">서울시 강북구</option>
-	 				<option value="r0005">서울시 관악구</option>
-	 				<option value="r0006">서울시 광진구</option>
-	 				<option value="r0007">서울시 구로구</option>
-	 				<option value="r0008">서울시 금천구</option>
-	 				<option value="r0009">서울시 노원구</option>
-	 				<option value="r0010">서울시 동대문구</option>
-	 				<option value="r0011">서울시 도봉구</option>
-	 				<option value="r0012">서울시 동작구</option>
-	 				<option value="r0013">서울시 마포구</option>
-	 				<option value="r0014">서울시 서대문구</option>
-	 				<option value="r0015">서울시 성동구</option>
-	 				<option value="r0016">서울시 성북구</option>
-	 				<option value="r0017">서울시 서초구</option>
-	 				<option value="r0018">서울시 송파구</option>
-	 				<option value="r0019">서울시 영등포구</option>
-	 				<option value="r0020">서울시 용산구</option>
-	 				<option value="r0021">서울시 양천구</option>
-	 				<option value="r0022">서울시 은평구</option>
-	 				<option value="r0023">서울시 송로구</option>
-	 				<option value="r0024">서울시 중구</option>
-	 				<option value="r0025">서울시 중랑구</option>
+	 				<option value="R0001">서울시 동작구</option>
+	 				<option value="R0002">서울시 강동구</option>
+	 				<option value="R0003">서울시 강서구</option>
+	 				<option value="R0004">서울시 강북구</option>
+	 				<option value="R0005">서울시 관악구</option>
+	 				<option value="R0006">서울시 광진구</option>
+	 				<option value="R0007">서울시 구로구</option>
+	 				<option value="R0008">서울시 금천구</option>
+	 				<option value="R0009">서울시 노원구</option>
+	 				<option value="R0010">서울시 동대문구</option>
+	 				<option value="R0011">서울시 도봉구</option>
+	 				<option value="R0012">서울시 동작구</option>
+	 				<option value="R0013">서울시 마포구</option>
+	 				<option value="R0014">서울시 서대문구</option>
+	 				<option value="R0015">서울시 성동구</option>
+	 				<option value="R0016">서울시 성북구</option>
+	 				<option value="R0017">서울시 서초구</option>
+	 				<option value="R0018">서울시 송파구</option>
+	 				<option value="R0019">서울시 영등포구</option>
+	 				<option value="R0020">서울시 용산구</option>
+	 				<option value="R0021">서울시 양천구</option>
+	 				<option value="R0022">서울시 은평구</option>
+	 				<option value="R0023">서울시 송로구</option>
+	 				<option value="R0024">서울시 중구</option>
+	 				<option value="R0025">서울시 중랑구</option>
 	 			</select>
 	 			<input type="text" id="address" class="form-control" name="address" placeholder="상세 주소 입력" style="width:350px;">
 	 			<br><br>
 	 			<label for="interest">관심 분야</label>
 	 			<br>
-	 			<input type="checkbox" id="i1" name="interest" value="I1">
-	 			<label for="i1">문화/공연</label>
-	 			<input type="checkbox" id="i2" name="interest" value="I2">
-	 			<label for="i2">게임/오락</label>
-	 			<input type="checkbox" id="i3" name="interest" value="I3">
-	 			<label for="i3">아웃도어/여행</label>
-	 			<input type="checkbox" id="i4" name="interest" value="I4">
-	 			<label for="i4">운동/스포츠</label>
-	 			<input type="checkbox" id="i5" name="interest" value="I5">
-	 			<label for="i5">인문학/책/글</label>
-	 			<input type="checkbox" id="i6" name="interest" value="I6">
-	 			<label for="i6">업종/직무</label>
-	 			<input type="checkbox" id="i7" name="interest" value="I7">
-	 			<label for="i7">외국/언어</label>
-	 			<input type="checkbox" id="i8" name="interest" value="I8">
-	 			<label for="i8">음악/악기</label>
-	 			<input type="checkbox" id="i9" name="interest" value="I9">
-	 			<label for="i9">패션/뷰티</label>
-	 			<input type="checkbox" id="i10" name="interest" value="I10">
-	 			<label for="i10">공예/만들기</label>
-	 			<input type="checkbox" id="i11" name="interest" value="I11">
-	 			<label for="i11">댄스/무용</label>
-	 			<input type="checkbox" id="i12" name="interest" value="I12">
-	 			<label for="i12">사교/인맥</label>
-	 			<input type="checkbox" id="i13" name="interest" value="I13">
-	 			<label for="i13">사진</label>
-	 			<input type="checkbox" id="i14" name="interest" value="I14">
-	 			<label for="i14">차/오토바이</label>
-	 			<input type="checkbox" id="i15" name="interest" value="I15">
-	 			<label for="i15">요리/제조</label>
-	 			<input type="checkbox" id="i16" name="interest" value="I16">
-	 			<label for="i16">가족/결혼</label>
-	 			<input type="checkbox" id="i17" name="interest" value="I17">
-	 			<label for="i17">반려동물</label>
-	 			<input type="checkbox" id="i18" name="interest" value="I18">
-	 			<label for="i18">봉사활동</label>
-	 			<input type="checkbox" id="i19" name="interest" value="I19">
-	 			<label for="i19">자유주제</label>
+	 			<input type="checkbox" id="I01" name="interest" value="I01">
+	 			<label for="I01">문화/공연</label>
+	 			<input type="checkbox" id="I02" name="interest" value="I02">
+	 			<label for="I02">게임/오락</label>
+	 			<input type="checkbox" id="I03" name="interest" value="I03">
+	 			<label for="I03">아웃도어/여행</label>
+	 			<input type="checkbox" id="I04" name="interest" value="I04">
+	 			<label for="I04">운동/스포츠</label>
+	 			<input type="checkbox" id="I05" name="interest" value="I05">
+	 			<label for="I05">인문학/책/글</label>
+	 			<input type="checkbox" id="I06" name="interest" value="I06">
+	 			<label for="I06">업종/직무</label>
+	 			<input type="checkbox" id="I07" name="interest" value="I07">
+	 			<label for="I07">외국/언어</label>
+	 			<input type="checkbox" id="I08" name="interest" value="I08">
+	 			<label for="I08">음악/악기</label>
+	 			<input type="checkbox" id="I09" name="interest" value="I09">
+	 			<label for="I09">패션/뷰티</label>
+	 			<input type="checkbox" id="I10" name="interest" value="I10">
+	 			<label for="I10">공예/만들기</label>
+	 			<input type="checkbox" id="I11" name="interest" value="I11">
+	 			<label for="I11">댄스/무용</label>
+	 			<input type="checkbox" id="I12" name="interest" value="I12">
+	 			<label for="I12">사교/인맥</label>
+	 			<input type="checkbox" id="I13" name="interest" value="I13">
+	 			<label for="I13">사진</label>
+	 			<input type="checkbox" id="I14" name="interest" value="I14">
+	 			<label for="I14">차/오토바이</label>
+	 			<input type="checkbox" id="I15" name="interest" value="I15">
+	 			<label for="I15">요리/제조</label>
+	 			<input type="checkbox" id="I16" name="interest" value="I16">
+	 			<label for="I16">가족/결혼</label>
+	 			<input type="checkbox" id="I17" name="interest" value="I17">
+	 			<label for="I17">반려동물</label>
+	 			<input type="checkbox" id="I18" name="interest" value="I18">
+	 			<label for="I18">봉사활동</label>
+	 			<input type="checkbox" id="I19" name="interest" value="I19">
+	 			<label for="I19">자유주제</label>
 	 			<br>
 	 			<input type="submit" value="가입하기">
 	 		</form>

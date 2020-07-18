@@ -42,31 +42,25 @@
 <body>
 <div class="pick">
         <div id="pic">
-        <img src="image/soccerClub 1.png">
-        <figcaption>축구동호회 범호축구단</figcaption>
+        <img src="image/soccerClub 1.png" alt="축구동호회 범호축구단">
         </div>    
         <div id="pic">
-         <img src="image/Wac! 1.png">
-        <figcaption>산악동호회 WAC</figcaption> 
+         <img src="image/Wac! 1.png" alt="등산동호회 WAC">
         </div>
         <div id="pic">
-            <img src="image/푸른뱃고동 (2).png">
-         <figcaption>낚시동호회 푸른뱃고동</figcaption> 
+            <img src="image/푸른뱃고동 (2).png" alt="낚시동호회 푸른 뱃고동">
         </div>
     </div>
     <br><br><br><br><br>
     <div class="wrap">
         <div id="pic">
-            <img src="image/jj살사 1.png">
-        <strong>살사동호회 JJ살사</strong>
+            <img src="image/jj살사 1.png" alt="살사동호회 JJ살사">
         </div>
         <div id="pic">
-            <img src="image/밥풀_ 1.png">
-        <figcaption>맛집탐방동호회 밥풀</figcaption> 
+            <img src="image/밥풀_ 1.png" alt="맛집동호회 밥풀">
         </div> 
         <div id="pic">
-            <img src="image/보드게임 1.png">
-         <figcaption>보드게임동호회 외게인</figcaption> 
+            <img src="image/boardGame.png" alt="보드게임동호회 외게인">
         </div>
     </div>
 </body>

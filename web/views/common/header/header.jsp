@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.kh.groumoa.member.model.vo.MemberVO"%>
+    
+<% MemberVO loginUser = (MemberVO) session.getAttribute("loginUser"); %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -69,12 +71,17 @@
 
         <div class="user_area">
             <ul class="service_menu">
+            <%if(loginUser != null){ %>
                                         <li class="list_item">
-                        <a href="/account/main" class="user_name" title="클릭시 마이페이지로 이동">
-                            <strong>김형진</strong>님
+                        <a href="#" class="user_name" title="클릭시 마이페이지로 이동">
+                            <strong><%=loginUser.getUserName()%></strong>님
                         </a>
                     </li>                        
-                    <li class="list_item logout"><a href="/account/logout">로그아웃</a></li>
+                    <li class="list_item logout"><a href="<%=request.getContextPath() %>/logout.me">로그아웃</a></li>
+                    <%} else { %>
+                    	<li class="list_item"><a href="<%=request.getContextPath() %>/views/member/login.jsp">로그인</a></li>
+                    	<li class="list_item"><a href="<%=request.getContextPath() %>/views/member/signup.jsp">회원가입</a></li>
+                    <% }%>
                                     <li class="list_item service"><a href="/service">서비스안내</a></li>
                 <li class="list_item customer"><a href="/cs/main">고객센터</a></li>
             </ul>
