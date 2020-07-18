@@ -16,7 +16,7 @@ body {
 </style>
 </head>
 <body>
-	<%@include file="views/common/header/header.jsp" %>
+	<%@include file="views/common/header/newHeader.jsp" %>
 	<h1>인덱스</h1>
 
 	<h4>충분히 전인 인생에 그것은 피에 그들은 그림자는 찾아 것이다. 동산에는 충분히 바로 갑 만물은 뛰노는 소담스러운

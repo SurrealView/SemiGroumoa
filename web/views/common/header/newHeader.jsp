@@ -62,6 +62,7 @@
    font-family: sans-serif;
    padding: 7px;
    margin-left: -70px;
+   cursor:pointer;
 }
 
 #first-tr .sub-menu {
@@ -118,8 +119,13 @@
 						<button>search</button>
 					</form>
 				</td>
-				<td class="sub-menu" height="30" width="100"><a href="#">로그인</a></td>
-				<td class="sub-menu" height="30" width="100"><a href="#">회원가입</a></td>
+				<%if(loginUser != null) { %>
+					<td class="sub-menu" height="30" width="100"><a href="#"><strong><%=loginUser.getUserName() %><strong></a> 님</td>
+					<td class="sub-menu" height="30" width="100"><a href="<%=request.getContextPath() %>/logout.me">로그아웃</a></td>
+				<% } else {%>
+				<td class="sub-menu" height="30" width="100"><a href="<%=request.getContextPath() %>/views/member/login.jsp">로그인</a></td>
+				<td class="sub-menu" height="30" width="100"><a href="<%=request.getContextPath() %>/views/member/signup.jsp">회원가입</a></td>
+				<% } %>
 				<td class="sub-menu" height="30" width="100"><a href="#">서비스안내</a></td>
 				<td class="sub-menu" height="30" width="100"><a href="#">고객센터</a></td>
 			</tr>
