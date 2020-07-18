@@ -36,6 +36,7 @@
 	text-align: center;
 	padding-left: 100px;
 	padding-right: 100px;
+	padding-top: 50px;
 }
 
 .search-form input[type=text] {
@@ -44,7 +45,7 @@
 	width: 400px;
 	height: 30px;
 	border-radius: 50px;
-	border: 2px solid blue;
+	border: 2px solid #blue;
 	font-size: 16px;
 	font-family: sans-serif;
 	margin-top: 7px;
@@ -79,10 +80,6 @@
 .div-bar {
 	background: lightgray;
 	border: 1px solid lightgray;
-}
-
-.nav-bar {
-	height: 40px;
 }
 
 .table-nav-bar {
