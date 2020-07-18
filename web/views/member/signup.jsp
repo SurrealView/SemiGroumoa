@@ -34,7 +34,7 @@
 	 		<form action="<%=request.getContextPath() %>/insert.me" method="post">
 	 			<label for="email">이메일(아이디)</label>
 	 			<input type="email" class="form-control" name="email" id="email" placeholder="이메일 주소 입력">
-	 			<div id="idCheck">중복확인</div>
+	 			<div id="idCheck" class="btn btn-primary" style="display:inline-block">중복확인</div>
 	 			<br><br>
 	 			<label for="password">비밀번호 </label>
 	 			<input type="password" class="form-control" name="userPwd" id="password" placeholder="비밀번호 입력(최소 8자 이상)">
@@ -47,7 +47,7 @@
 	 			<br><br>
 	 			<label for="gender">성별</label>
 	 			<label for="male">남</label>
-	 			<input type="radio" class="" name="gender" id="male" value="M">
+	 			<input type="radio" class="" name="gender" id="male" value="M" checked>
 	 			<label for="female">여</label>
 	 			<input type="radio" class="" name="gender" id="female" value="F">
 	 			<br><br>
@@ -69,7 +69,7 @@
                 <input type="text" id="birthDate" class="form-control birthDate" name="birthDate">
                 <br><br>
 	 			<label for="">주소</label>
-	 			<select class="form-control" name="rnCode">
+	 			<select class="form-control" name="rnCode" id="rnCode">
 	 				<option value="R0001">서울시 동작구</option>
 	 				<option value="R0002">서울시 강동구</option>
 	 				<option value="R0003">서울시 강서구</option>
@@ -139,16 +139,16 @@
 	 			<input type="checkbox" id="I19" name="interest" value="I19">
 	 			<label for="I19">자유주제</label>
 	 			<br>
-	 			<input type="submit" value="가입하기">
+	 			<input type="submit" value="가입하기" onclick="return test();">
 	 		</form>
 	 	</div>
 		<script>
 		 $(function(){
+			 
+			 //id중복체크
 	   		  $("#idCheck").click(function(){
 	   			  var email = $("#email").val();
 	   			  
-	   			  console.log(email);
-	   			  //디버깅하기 에러남
 	   			  $.ajax({
 	   				  url: "<%=request.getContextPath()%>/idCheck.me",
 	   				  type: "post",
@@ -165,7 +165,92 @@
 	   				  }
 	   			  });
 	   		  }) ;
+
 	   	   });
+		 
+  			//아이디 중복시 event.preventDefault();처리
+		 	
+  			
+		 //회원가입 가능여부 체크
+  		  function test() {
+			
+			//비밀번호 일치 여부 확인
+  			var password = $("#password").val();
+  			var password2 = $("#password2").val();
+  			
+  			if(password != password2 || password == "" || password2 == ""){
+  				event.preventDefault();
+  				alert("비밀번호가 일치하지 않습니다.");
+  				$("#password2").select();
+  				
+  				$("#password").style.background = "red";
+  				$("#password2").style.background = "red";
+  				return false;
+  			}
+  			
+  			//비밀번호 8글자 이상인지 확인
+  			if(password.length < 8) {
+  				event.preventDefault();
+  				alert("비밀번호를 8자 이상 입력해주세요.");
+  				$("#password2").select();
+  				return false;
+  			}
+  			
+  			
+  			//이름 체크
+  			
+  			var regExp = /[가-힣]/g;
+  			
+  			var name = $("#userName").val();
+  			
+  			if(!regExp.test(name) || name.length < 2) {
+  				event.preventDefault();
+  				alert("이름을 다시 입력해 주세요");
+  				$("#userName").select();
+  				return false;
+  			}
+  			
+  			//휴대번호 체크
+  			var tel1 = $("#tel1").val();
+  			var tel2 = $("#tel2").val();
+  			
+  			if(tel1.length != 4 || tel2.length != 4) {
+  				event.preventDefault();
+  				alert("전화번호를 확인해주세요.");
+  				$("#tel1").select();
+  				return false;
+  			}
+  			
+  			
+  			//조금있다 다시확인하기
+  			//생년월일 체크
+  			var birthDate = $("#birthDate").val();
+  			
+  			var regExp2 = /(1[9][0-9][0-9]|2[0][0-2][0-9])\(0[1-9]|1[0-2])\(0[1-9]|[1-2][0-9]|3[0-1])/;
+  			
+  			if(!regExp2.test(birthDate)) {
+  				event.preventDefault();
+  				alert("생일을 다시 입력해주세요");
+  				$("#birthDate").select();
+  				return false;
+  			}
+  			
+  			
+  			//조금있다 다시확인하기
+  			//상세주소 체크
+  			var address = $("#address").val();
+  			
+  			if(address == "") {
+  				event.preventDefault();
+  				alert("상세 주소를 입력해 주세요.")
+  				$("#address").select();
+  				
+  				$("#address").style.background = "red";
+  				return false;
+  			}
+  			
+  			return true;
+  		  }
 		</script>
 	</div>
 	 
