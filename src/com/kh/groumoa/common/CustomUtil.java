@@ -70,6 +70,7 @@ public class CustomUtil {
 	public PreparedStatement getPstmt(String key) {
 		
 		try {
+			String query = prop.getProperty(key);
 			pstmt = con.prepareStatement(prop.getProperty(key));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

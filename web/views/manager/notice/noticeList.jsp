@@ -86,7 +86,7 @@
       <h2 id="name" align="center">Q&A 게시판</h4>
       <hr>
       <br><br><!-- 게시판 관리일경우 -->
-      <table class="table">
+      <table class="table" id="noticeList">
       <thead>
           <tr>
            <th><input type="checkbox"></th>
@@ -102,7 +102,8 @@
       <% for(NoticeVo n : list) { %>
       <tr class="noticeTitle">
        <td><input type="checkbox"></td>
-         <td><%=n.getnNo() %></td>
+         <input type="hidden" value="<%=n.getNoticeCode() %>">
+         <td class="rowNum"><%=n.getnNo() %></td>
          <td><%=n.getNoticeCategory() %></td>
          <td><%=n.getMnWriterID() %></td>
          <td><%=n.getNoticeTitle() %></td>
@@ -146,6 +147,19 @@
       	<button onclick="location.href='<%=request.getContextPath()%>/selectList.no?currentPage=<%= maxPage%>'">맨끝으로</button>
       </div>      
     </div>
+    
+    <script>
+    $(function(){
+    	$("#noticeList td").click(function(){
+    		var tdId = $(this).parent().children("input").val();
+    		var num = $(this).parent().children(".rowNum").text();
+    		
+    		console.log(num);
+    		
+    		location.href ="<%=request.getContextPath()%>/selectOne.no?num=" + num;
+    	});
+    });
+    </script>
     
     
 </body>

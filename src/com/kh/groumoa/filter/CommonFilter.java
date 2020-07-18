@@ -37,7 +37,6 @@ public class CommonFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		// TODO Auto-generated method stub
 		// place your code here
-		request.setCharacterEncoding("UTF-8");
 		
 		HttpServletRequest hRequest = (HttpServletRequest) request;
 		
