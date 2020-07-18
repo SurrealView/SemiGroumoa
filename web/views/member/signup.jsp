@@ -34,7 +34,7 @@
 	 		<form action="<%=request.getContextPath() %>/insert.me" method="post">
 	 			<label for="email">이메일(아이디)</label>
 	 			<input type="email" class="form-control" name="email" id="email" placeholder="이메일 주소 입력">
-	 			<button id="idCheck" onclick="idCheck();">중복확인</button>
+	 			<div id="idCheck">중복확인</div>
 	 			<br><br>
 	 			<label for="password">비밀번호 </label>
 	 			<input type="password" class="form-control" name="userPwd" id="password" placeholder="비밀번호 입력(최소 8자 이상)">
