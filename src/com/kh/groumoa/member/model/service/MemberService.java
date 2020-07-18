@@ -66,4 +66,14 @@ public class MemberService {
 		return result;
 	}
 
+	public int idCheck(String email) {
+		Connection con = getConnection();
+		
+		int result = new MemberDao().idCheck(con, email);
+		
+		close(con);
+		
+		return result;
+	}
+
 }
