@@ -4,76 +4,146 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css"
-	href="../../../resources/css/header_style.css">
 <title>Insert title here</title>
 <style>
+.header {
+	width: 100%;
+	height: 175px;
+	display: block;
+	background-color: white;
+}
 
 .logo_container {
-	width: 135px;
+	width: 400px;
 	height: auto;
 	float: left;
 }
 
+.logo_container img {
+	width: 130px;
+	height: 130px;
+	display: table-cell;
+	vertical-align: middle;
+	margin-top: 10px;
+	float: right;
+}
+
+#middle-td {
+	width: 50%;
+}
+
 .search-form {
 	text-align: center;
+	padding-left: 100px;
+	padding-right: 100px;
 }
 
 .search-form input[type=text] {
 	padding: 7px;
 	border: none;
-	width: 500px;
+	width: 400px;
+	height: 30px;
 	border-radius: 50px;
-	border: 2px solid blue; font-size : 16px;
+	border: 2px solid blue;
+	font-size: 16px;
 	font-family: sans-serif;
 	margin-top: 7px;
 	font-size: 16px;
+	border-radius: 50px;
 }
 
 .search-form button {
 	padding: 7px;
 	border-radius: 50px;
+	height: 55px;
 	border: none;
 	font-size: 16px;
 	font-family: sans-serif;
+	border: none;
+}
+
+#first-tr .sub-menu {
+	font-size: 12px;
+	text-align: right;
+}
+
+#second-tr .sub-menu {
+	text-align: center;
+}
+
+.sub-menu a {
+	text-decoration: none;
+	color: gray;
+}
+
+.div-bar {
+	background: lightgray;
+	border: 1px solid lightgray;
+}
+
+.nav-bar {
+	height: 40px;
+}
+
+.table-nav-bar {
+	width: 100%;
+	height: 50px;
+}
+
+.table-nav-bar #blank {
+	width: 250px;
+}
+
+.table-nav-bar .my-menu {
+	width: 150px;
+	text-align: center;
+}
+
+.my-menu a {
+	text-decoration: none;
+	color: gray;
 }
 </style>
 </head>
 <body>
-	<table class="header">
+	<div class="header-wrapper">
+		<table class="header">
+			<tr id="first-tr">
+				<td rowspan="2">
+					<div class="logo_container">
+						<img src="../../../resources/image/logo_groumoa2.png">
+					</div>
+				</td>
+				<td rowspan="2" id="middle-td">
+					<form class="search-form">
+						<input type="text" placeholder="search">
+						<button>search</button>
+					</form>
+				</td>
+				<td class="sub-menu" height="30" width="100"><a href="#">로그인</a></td>
+				<td class="sub-menu" height="30" width="100"><a href="#">회원가입</a></td>
+				<td class="sub-menu" height="30" width="100"><a href="#">서비스안내</a></td>
+				<td class="sub-menu" height="30" width="100"><a href="#">고객센터</a></td>
+			</tr>
+			<tr id="second-tr">
+				<td class="sub-menu"><a href="#">마이페이지</a></td>
+				<td class="sub-menu"><a href="#">모임개설</a></td>
+				<td class="sub-menu"><a href="#">모임관리</a></td>
+				<td class="sub-menu"><a href="#">알림</a></td>
+			</tr>
+		</table>
+	</div>
+	<hr noshade="noshade" class="div-bar">
+	<table class="table-nav-bar">
 		<tr>
-			<td rowspan="2">
-				<div class="logo_container">
-					<img src="../../../resources/image/logo_groumoa2.png">
-				</div>
-			</td>
-			<td rowspan="2">
-				<form class="search-form">
-					<input type="text" placeholder="search">
-					<button>search</button>
-				</form>
-			</td>
-			<td>로그인</td>
-			<td>회원가입</td>
-			<td>서비스안내</td>
-			<td>고객센터</td>
-		</tr>
-		<tr>
-			<td>마이페이지</td>
-			<td>모임개설</td>
-			<td>모임관리</td>
-			<td>알림</td>
+			<td id="blank"></td>
+			<td class="my-menu"><a href="#">추천 동호회</a></td>
+			<td class="my-menu"><a href="#">가입한 동호회</a></td>
+			<td class="my-menu"><a href="#">공지사항</a></td>
+			<td class="my-menu"><a href="#">QnA</a></td>
+			<td></td>
 		</tr>
 	</table>
-	<div class="header">
-		<div class="inner_header">
-			<!-- 			<ul class="navigation">
-				<li>추천동호회</li>
-				<li>내모임</li>
-				<li>공지사항</li>
-				<li>QnA</li>
-			</ul> -->
-		</div>
-	</div>
+	<hr noshade="noshade" class="div-bar">
 </body>
 </html>
