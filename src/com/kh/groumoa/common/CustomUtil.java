@@ -22,6 +22,7 @@ public class CustomUtil {
 	
 	
 	public CustomUtil() {		
+		prop = new Properties();
 	}
 	
 	public static CustomUtil inst() {

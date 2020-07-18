@@ -1,6 +1,7 @@
 package com.kh.groumoa.scheduler.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -37,7 +38,6 @@ public class InsertSchedulerServlet extends HttpServlet {
 		String schTitle = request.getParameter("schTitle");
 		String schDetail = request.getParameter("schDetail");
 		String schDate = request.getParameter("schDate");
-//		String dateWritten = request.getParameter("dateWritten"); SYSDATE 사용 예정
 //		String groupCode = request.getParameter("groupCode");
 //		int writerCode = Integer.parseInt(request.getParameter("writerCode"));
 //		char status = request.getParameter("status").charAt(0);
@@ -48,30 +48,32 @@ public class InsertSchedulerServlet extends HttpServlet {
 		 * MemberVO loginUser = (MemberVO)session.getAttribute("loginUser"); int
 		 * writerCode = loginUser.getMemberCode();
 		 */
-		System.out.println(schTitle);
-		System.out.println(schDetail);
-		System.out.println(schDate);
-		System.out.println(request.getContextPath());
+
 		// 스케줄러 객체에 값 입력
 		SchedulerVO schedule = new SchedulerVO();
 		/* schedule.setSchCode(schCode) */;
 		schedule.setSchTitle(schTitle);
 		schedule.setSchDetail(schDetail);
 		schedule.setSchDate(schDate);
-//		schedule.setSchDate(schDate);
 //		schedule.setWriterCode(writerCode);
-		
-		int result = new SchedulerService().insertSchedule(schedule);
 
+		int result = new SchedulerService().insertSchedule(schedule);
+		System.out.println(schedule);
+		
+		ArrayList<SchedulerVO> list = new SchedulerService().selectSchedule() ;
+		
 		String page = "";
 		if (result > 0) {
-			System.out.println(request.getContextPath());
-//			response.sendRedirect(request.getContextPath() + "/selectList.bo");
-			response.sendRedirect(request.getContextPath() + "/group/scheduler/groupCalendar.jsp");
+//			page = "/views/group/scheduler/groupCalendar.jsp";
+			request.setAttribute("schedule", schedule);
+			request.setAttribute("list", list);
+//			response.sendRedirect(request.getContextPath() + "/views/group/scheduler/groupCalendar.jsp");
+			response.sendRedirect(request.getContextPath() + "/views/group/scheduler/schedulePrintForm.jsp");
 		} else {
 			request.setAttribute("mag", "게시글 작성 실패");
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
+//		request.getRequestDispatcher(page).forward(request, response);
 
 	}
 
