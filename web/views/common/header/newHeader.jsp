@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="com.kh.groumoa.member.model.vo.MemberVO"%>
+<% MemberVO loginUser = (MemberVO) session.getAttribute("loginUser"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,7 +46,7 @@
 	width: 400px;
 	height: 30px;
 	border-radius: 50px;
-	border: 2px solid #blue;
+	border: 2px solid blue;
 	font-size: 16px;
 	font-family: sans-serif;
 	margin-top: 7px;
@@ -54,13 +55,13 @@
 }
 
 .search-form button {
-	padding: 7px;
-	border-radius: 50px;
-	height: 55px;
-	border: none;
-	font-size: 16px;
-	font-family: sans-serif;
-	border: none;
+   height: 40px;
+   border-radius: 50px;
+   border: none;
+   font-size: 16px;
+   font-family: sans-serif;
+   padding: 7px;
+   margin-left: -70px;
 }
 
 #first-tr .sub-menu {
