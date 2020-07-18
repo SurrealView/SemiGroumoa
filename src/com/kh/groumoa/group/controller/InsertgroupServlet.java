@@ -42,34 +42,33 @@ public class InsertgroupServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if(ServletFileUpload.isMultipartContent(request)) {
 			int maxSize = 1024 * 1024 * 10;
+	         
+	         String root = request.getSession().getServletContext().getRealPath("/");
+	         
+	         String savePath = root + "thumbnail_uploadFiles/";
+	         
+	         MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
+	         
+	         ArrayList<String> saveFiles = new ArrayList<>();
+	         ArrayList<String> originFiles = new ArrayList<>();
+	         
+	         Enumeration<String> files = multiRequest.getFileNames();
+	         
+	         while(files.hasMoreElements()) {
+	            String name = files.nextElement();
+	            
+	            saveFiles.add(multiRequest.getFilesystemName(name));
+	            originFiles.add(multiRequest.getOriginalFileName(name));
+	         }
 			
-			String root = request.getSession().getServletContext().getRealPath("/");
-			
-			String savePath = root + "thumbnail_uploadFiles/";
-			
-			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
-			
-			ArrayList<String> saveFiles = new ArrayList<>();
-			
-			ArrayList<String> originFiles = new ArrayList<>();
-			
-			Enumeration<String> files = multiRequest.getFileNames();
-			
-			while(files.hasMoreElements()) {
-				String name = files.nextElement();
-				
-				saveFiles.add(multiRequest.getFilesystemName(name));
-				originFiles.add(multiRequest.getOriginalFileName(name));
-			}
-			
-			String rnCode = request.getParameter("rnCode");
-			String name = request.getParameter("name");
-			String description = request.getParameter("description");
+			String rnCode = multiRequest.getParameter("rnCode");
+			String name = multiRequest.getParameter("name");
+			String description = multiRequest.getParameter("description");
 		/*	String [] iarr = request.getParameterValues("interest"); */
-			String interest = request.getParameter("interest");
-			String openYn = request.getParameter("openYn");
-			String nickNameyn = request.getParameter("nickNameyn");
-			String groupRule = request.getParameter("groupRule");		
+			String interest = multiRequest.getParameter("interest");
+			String openYn = multiRequest.getParameter("openYn");
+			String nickNameyn = multiRequest.getParameter("nickNameyn");
+			String groupRule = multiRequest.getParameter("groupRule");		
 			
 /*			String interest = "";
 			if(iarr != null) {
@@ -97,8 +96,6 @@ public class InsertgroupServlet extends HttpServlet {
 			group.setNickNameyn(nickNameyn);
 			group.setGroupRule(groupRule);
 			
-			System.out.println("group" + group);
-			
 			ArrayList<Attachment> fileList = new ArrayList<>();
 			for(int  i = originFiles.size() - 1; i >= 0; i--) {
 				Attachment at = new Attachment();
@@ -123,7 +120,7 @@ public class InsertgroupServlet extends HttpServlet {
 			
 			String page = "";
 			if(result > 0) {
-				response.sendRedirect(request.getContextPath() + "/update.gr");
+				response.sendRedirect(request.getContextPath() + "/views/group/groupUpdate.jsp");
 			} else {
 				for(int i = 0; i < saveFiles.size(); i++) {
 					File failedFile = new File(savePath + saveFiles.get(i));
@@ -136,6 +133,7 @@ public class InsertgroupServlet extends HttpServlet {
 				request.getRequestDispatcher(page).forward(request, response);	
 			}
 		}
+		
 	}
 
 	/**

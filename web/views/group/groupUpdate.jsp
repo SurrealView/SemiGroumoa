@@ -159,7 +159,7 @@
 		
 		<br><br>
      <div class="wrapper">
-     <form id="updateForm">
+     <form id="updateForm" action="<%= request.getContextPath() %>//update.gr" method="post" encType="multipart/form-data">
 	  <table border="1">
         <tr>
             <td colspan="12" height="50px" style="border-right:hidden; border-top:hidden;">동호회이름
@@ -220,8 +220,8 @@
         <tr>
             <td rowspan="2" height="450px" style="padding-left:60px;">동호회 프로필</td>
             <td colspan="8" height="200px" style="border-right:hidden;"><label style="float:left">썸네일 설정</label>
-            &nbsp;&nbsp;<input type="text" id="thumb" readonly style="float:left; margin-left:10px;" name="thumbNail" value="<%=group.getThumbNail() %>">
-            <input type="submit" value="파일" id="subBtn" style="float:left; margin-left:10px;"></td>
+            &nbsp;&nbsp;<img id="thumb" style="float:left; margin-left:10px;" name="thumbNail">
+             <input type="file" id="subBtn" name="thumbNail" onchange="loadImg(this, 1);"></td>
         </tr>
         <tr>
             <td colspan="8" height="250px" style="border-right:hidden;"><label style="float:left">동호회 소개</label>
@@ -254,7 +254,7 @@
         </table>
           <br>
           <br>
-            <input type="submit" id="deleteBtn" value="수정" onclick="update();">
+            <input type="submit" id="deleteBtn" value="수정">
             <input type="button" id="cancelBtn" value="취소">
         </form>
      </div>
@@ -267,11 +267,41 @@
     	            obj[i].checked = false;
     	        }
     	    }
-    	} 
-     
-     	function update() {
-     		("#updateForm").attr("action", "<%= request.getContextPath() %>/update.gr");
+    	}
+     	
+     	$(function(){
+     		$("#subBtn").hide();
+     		$("#thumb").click(function(){
+     			$("#subBtn").click();
+     		});
+     	});
+     	
+     	function loadImg(value, num) {
+     		if(value.files && value.files[0]) {
+     			var reader = new FileReader();
+     			
+     			reader.onload = function(e) {
+     				$("#thumb").attr("src", e.target.result);
+     			}
+     			reader.readAsDataURL(value.files[0]);
+     		}
      	}
+     	
+     	$(function(){
+   			var arr = '<%=group.getInterest() %>'.split(", ");      
+   			
+   			console.log(arr);
+   			
+   			$("input[name=interest]").each(function(){
+   				for(var i = 0; i < arr.length; i++) {
+   					if($(this).val() == arr[i]) {
+   						$(this).attr("checked", true);
+   					}
+   				}
+   			});
+   			
+   		});
+     	
      </script>
 </div>
 </body>

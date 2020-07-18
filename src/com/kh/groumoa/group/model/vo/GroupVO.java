@@ -13,14 +13,13 @@ public class GroupVO implements java.io.Serializable {
 	private Date openDate;
 	private String groupRule;
 	private String description;
-	private String thumbNail;
 	
 	
 	public GroupVO() {}
 
 
 	public GroupVO(String groupCode, String groupName, String rnCode, String interestCode, String nickNameyn,
-			String openYn, Date openDate, String groupRule, String description, String thumbNail) {
+			String openYn, Date openDate, String groupRule, String description) {
 		super();
 		this.groupCode = groupCode;
 		this.groupName = groupName;
@@ -31,7 +30,6 @@ public class GroupVO implements java.io.Serializable {
 		this.openDate = openDate;
 		this.groupRule = groupRule;
 		this.description = description;
-		this.thumbNail = thumbNail;
 	}
 
 
@@ -125,22 +123,11 @@ public class GroupVO implements java.io.Serializable {
 	}
 
 
-	public String getThumbNail() {
-		return thumbNail;
-	}
-
-
-	public void setThumbNail(String thumbNail) {
-		this.thumbNail = thumbNail;
-	}
-
-
 	@Override
 	public String toString() {
 		return "GroupVO [groupCode=" + groupCode + ", groupName=" + groupName + ", rnCode=" + rnCode + ", interestCode="
 				+ interestCode + ", nickNameyn=" + nickNameyn + ", openYn=" + openYn + ", openDate=" + openDate
-				+ ", groupRule=" + groupRule + ", description=" + description + ", thumbNail=" + thumbNail
-				+ ", introduce=" + "]";
+				+ ", groupRule=" + groupRule + ", description=" + description + "]";
 	}
 
 }

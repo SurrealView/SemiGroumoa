@@ -1,5 +1,6 @@
 package com.kh.groumoa.group.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -14,6 +15,7 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import com.kh.groumoa.common.MyFileRenamePolicy;
 import com.kh.groumoa.group.model.service.GroupService;
+import com.kh.groumoa.group.model.vo.Attachment;
 import com.kh.groumoa.group.model.vo.GroupVO;
 import com.oreilly.servlet.MultipartRequest;
 
@@ -36,60 +38,82 @@ public class UpdategroupServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		if(ServletFileUpload.isMultipartContent(request)) {
 			int maxSize = 1024 * 1024 * 10;
+	         
+	         String root = request.getSession().getServletContext().getRealPath("/");
+	         
+	         String savePath = root + "thumbnail_uploadFiles/";
+	         
+	         MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
+	         
+	         ArrayList<String> saveFiles = new ArrayList<>();
+	         ArrayList<String> originFiles = new ArrayList<>();
+	         
+	         Enumeration<String> files = multiRequest.getFileNames();
+	         
+	         while(files.hasMoreElements()) {
+	            String name = files.nextElement();
+	            
+	            saveFiles.add(multiRequest.getFilesystemName(name));
+	            originFiles.add(multiRequest.getOriginalFileName(name));
+	         }
 			
-			String root = request.getSession().getServletContext().getRealPath("/");
+			String rnCode = multiRequest.getParameter("rnCode");
+			String name = multiRequest.getParameter("name");
+			String description = multiRequest.getParameter("description");
+			String interest = multiRequest.getParameter("interest");
+			String openYn = multiRequest.getParameter("openYn");
+			String nickNameyn = multiRequest.getParameter("nickNameyn");
+			String groupRule = multiRequest.getParameter("groupRule");		
 			
-			String savePath = root + "thumbnail_uploadFiles/";
+			GroupVO group = new GroupVO();
+			group.setInterestCode(interest);
+			group.setRnCode(rnCode);
+			group.setGroupName(name);
+			group.setDescription(description);
+			group.setOpenYn(openYn);
+			group.setNickNameyn(nickNameyn);
+			group.setGroupRule(groupRule);
 			
-			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
-			
-			ArrayList<String> saveFiles = new ArrayList<>();
-			
-			ArrayList<String> originFiles = new ArrayList<>();
-			
-			Enumeration<String> files = multiRequest.getFileNames();
-			
-			while(files.hasMoreElements()) {
-				String name = files.nextElement();
+			ArrayList<Attachment> fileList = new ArrayList<>();
+			for(int  i = originFiles.size() - 1; i >= 0; i--) {
+				Attachment at = new Attachment();
 				
-				saveFiles.add(multiRequest.getFilesystemName(name));
-				originFiles.add(multiRequest.getOriginalFileName(name));
-			}
-		
-			String groupCode = request.getParameter("groupCode");
-			String thumbNail = request.getParameter("thumbNail");
-			String description = request.getParameter("description");
-			String [] arr = request.getParameterValues("openYn");
-			String [] irr = request.getParameterValues("nickNameyn");
-			String groupRule = request.getParameter("groupRule");
-			String openYn = "";
-			if(arr != null) {
-				for(int i = 0; i < arr.length; i++) {
-					groupRule += arr[i];
+				at.setFilePath(savePath);
+				at.setOriginName(originFiles.get(i));
+				at.setChangeName(saveFiles.get(i));
+				
+				if(i == originFiles.size() - 1) {
+					at.setFileLevel(0);
+				} else {
+					at.setFileLevel(1);
 				}
+				
+				fileList.add(at);
 			}
-			String nickNameyn = "";
-			if(irr != null) {
-				for(int i = 0; i < irr.length; i++) {
-					nickNameyn += irr[i];
+			
+			System.out.println("fileList" + fileList);
+				
+			int result = new GroupService().insertGroup(group, fileList);
+			System.out.println("servlet" + result);
+			
+			String page = "";
+			if(result > 0) {
+				response.sendRedirect(request.getContextPath() + "/views/group/groupUpdate.jsp");
+			} else {
+				for(int i = 0; i < saveFiles.size(); i++) {
+					File failedFile = new File(savePath + saveFiles.get(i));
+						
+					failedFile.delete();							
 				}
+				
+				page = "views/common/errorPage.jsp";
+				request.setAttribute("msg", "동호회 수정 실패!!");
+				request.getRequestDispatcher(page).forward(request, response);	
 			}
-			
-			GroupVO requestGroup = new GroupVO();
-			requestGroup.setGroupCode(groupCode);
-			requestGroup.setThumbNail(thumbNail);
-			requestGroup.setDescription(description);
-			requestGroup.setOpenYn(openYn);
-			requestGroup.setNickNameyn(nickNameyn);
-			requestGroup.setGroupRule(groupRule);
-			
-			int result = new GroupService().updateGroup(requestGroup);
-			
-			GroupVO selectOneGroup = new GroupService().selectOne(groupCode);
 		}
+		
 	}
 
 	/**
