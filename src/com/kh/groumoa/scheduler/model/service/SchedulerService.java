@@ -3,6 +3,7 @@ package com.kh.groumoa.scheduler.model.service;
 import static com.kh.groumoa.common.JDBCTemplate.*;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import com.kh.groumoa.scheduler.model.dao.SchedulerDao;
 import com.kh.groumoa.scheduler.model.vo.SchedulerVO;
@@ -10,7 +11,6 @@ import com.kh.groumoa.scheduler.model.vo.SchedulerVO;
 public class SchedulerService {
 
 	public int insertSchedule(SchedulerVO schedule) {
-		System.out.println("service in");
 		Connection con = getConnection();
 
 		int result = new SchedulerDao().insertSchedule(con, schedule);
@@ -21,10 +21,18 @@ public class SchedulerService {
 			rollback(con);
 		}
 		
-		System.out.println("service result : " + result);
 		close(con);
 		
 		return result;
+	}
+
+	public ArrayList<SchedulerVO> selectSchedule() {
+		Connection con = getConnection();
+		ArrayList<SchedulerVO> list = new SchedulerDao().selectSchedule(con);
+		
+		close(con);
+		
+		return list;
 	}
 
 }

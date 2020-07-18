@@ -21,6 +21,7 @@ public class CustomUtil {
 	private ResultSet rset = null;
 	
 	
+
 	public CustomUtil() {
 		prop = new Properties();
 	}
