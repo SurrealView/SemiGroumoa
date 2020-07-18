@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.kh.groumoa.group.model.vo.GroupVO"%>
+ <% GroupVO selectedGroup = (GroupVO) session.getAttribute("selectedGroup"); %>
 <!DOCTYPE html>
 <html>
 <head>

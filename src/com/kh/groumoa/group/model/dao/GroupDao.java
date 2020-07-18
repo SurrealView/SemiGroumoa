@@ -14,6 +14,7 @@ import java.util.Properties;
 
 import com.kh.groumoa.group.model.vo.Attachment;
 import com.kh.groumoa.group.model.vo.GroupVO;
+import com.kh.groumoa.member.model.vo.MemberVO;
 
 public class GroupDao {
 	private Properties prop = new Properties();
@@ -139,6 +140,46 @@ public class GroupDao {
 		}
 		
 		return result;
+	}
+
+	
+	//동호회 1개 조회(일반페이지)
+	public GroupVO selectOneGroup(Connection con, GroupVO requestGroup) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		GroupVO selectedGroup = null;
+		
+		String query = prop.getProperty("selectOneGroup");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, requestGroup.getGroupCode());
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				selectedGroup = new GroupVO();
+				selectedGroup.setGroupName(rset.getString("GROUP_NAME"));
+				selectedGroup.setRnCode(rset.getString("RN_CODE"));
+				selectedGroup.setInterestCode(rset.getString("INTEREST_CODE"));
+				selectedGroup.setOpenYn(rset.getString("OPEN_YN"));
+				selectedGroup.setNickNameyn(rset.getString("NICKNAME_YN"));
+				selectedGroup.setOpenDate(rset.getDate("OPEN_DATE"));
+				selectedGroup.setGroupRule(rset.getString("GROUP_RULE"));
+				selectedGroup.setDescription(rset.getString("DESCRIPTION"));	
+			} 
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		
+		
+		return selectedGroup;
 	}
 
 
