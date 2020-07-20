@@ -47,7 +47,7 @@
 			<div class="sub-menubar-each" id="sub4"><a href="boardManagement.jsp">게시판관리</a></div>
 			<div class="sub-menubar-each" id="sub5"><a href="#">모임해산</a></div>
 			<div class="sub-menubar-each" id="sub6"><a href="#">기본정보수정</a></div>
-			<div class="sub-menubar-each" id="sub7"><a href="feeList.jsp">결제내역</a></div>
+			<div class="sub-menubar-each" id="sub7"><a href="productBoughtList.jsp">결제내역</a></div>
 			<div class="sub-menubar-each" id="sub8"><a href="groupCalendar.jsp">일정관리</a></div>
 			<div class="sub-menubar-each" id="sub9"><a href="#">광고관리</a></div>
 		</div>

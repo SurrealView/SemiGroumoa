@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%-- <% GroupVO group = (GroupVO) session.getAttribute("group"); %> --%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,12 +59,17 @@
 	color: rgb(70, 107, 228);
 }
 
+#btn{
+	float:right;
+	margin-right: 25px;
+	background: white;
+	border: 1px solid black;
+}
+
 .wrapper {
 	margin: auto;
 	height: auto;
 	width: 1000px;
-	/* display: table-cell;
-       vertical-align: middle; */
 	display: block;
 	margin: 0px auto;
 }
@@ -72,10 +78,9 @@
 	width: 950px;
 	display: block;
 	margin: 0px auto;
-	border: none;
 }
 
-.table tr {
+#content1 tr {
 	border: 1px solid lightgray;
 }
 
@@ -93,15 +98,27 @@
 	
 }
 
+#content2{
+	width:950px;
+	display: block;
+	margin: 0px auto;
+}
+
 .group-field {
 	background: rgb(235, 235, 235);
 	text-align: center;
 	padding-top: auto;
 	padding-bottom: auto;
 }
+
+.group-board {
+	border: 1px solid lightgray;
+	height: 300px;
+}
 </style>
 </head>
 <body>
+	<%@include file="../common/header/newHeader.jsp" %>
 	<%@include file="subMenubar.jsp"%>
 	<div class="content">
 		<!-- 메뉴. 지워도 됨 -->
@@ -114,9 +131,14 @@
 			</div>
 		</div>
 		<!-- 메뉴 끝 -->
-		<br> <br>
+		
+		<br>
+			<input id="btn" type="button" value="가입하기">
+		<br>
+		<br>
+		
 		<div class="wrapper">
-			<table class="table" border="1">
+			<table class="table" id="content1">
 				<tr>
 					<td colspan="2" rowspan="4">
 						<div class="img-wrapper">
@@ -141,13 +163,21 @@
 
 				<tr>
 					<td class="group-field"></td>
-					<td><div id="group-title" class="group-desc">개설일이나 가입인원 같은거 들어가는
-							곳</div></td>
+					<td><div id="group-title" class="group-desc">개설일이나 가입인원
+							같은거 들어가는 곳</div></td>
 				</tr>
 			</table>
+			<table id="content2" style="margin-top: 25px">
+				<tr>
+					<td width="325px" class="group-board">대충 무언가 들어가는 곳1</td>
+					<td width="25px" class="blank"></td>
+					<td width="600px" class="group-board">대충 무언가 들어가는 곳2</td>
+				</tr>
+			</table>
+			<div style="margin-top: 25px" id="content3">
+			</div>
 		</div>
-
-
 	</div>
+	<%@include file="../common/footer/newFooter.jsp" %>
 </body>
 </html>
