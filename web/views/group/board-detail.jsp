@@ -75,29 +75,26 @@
 	}
 	.category, .title, .writer {
 		display:inline-block;
-		width:100px;
+		width:120px;
 	}
   </style>
 </head>
 <body>
 	<!-- 여기 헤더 추가할것 -->
-	<%@include file="../common/header/newHeader.jsp" %>
+	<%@include file="../common/header/header.jsp" %>
 	<%@include file="subMenubar.jsp" %>
 	<br>
 	<div class="content">
 	<p align="right" style="font-size:10px; padding-right: 25px; padding-top: 15px;">개인정보취급방침에 따라 최근 5년간의 내역이 제공됩니다.</p>
-		<div id="sub-title"><span style="font-size: 15px">게시판 관리</span></div>
+		<div id="sub-title"><span style="font-size: 15px">게시판 작성</span></div>
 		<!-- 뒤로가기 glyphicon 추가하기 -->
-		<div class="tab" id="tab">
-			<div class="item active" id="board"><a href="#">게시글 관리</a></div>
-			<div class="item" id="reply"><a href="#">댓글 관리</a></div>
-		</div>
-		<span id="temp">* 게시판을 조회 및 수정하실 수 있습니다.</span>
+		
 		<br><br>
 		
 		<div class="content-area">
 			<div class="form-area">
-				<form>
+			<!-- 완성 후 action태그 속성값 insert.bo로 변경하기 -->
+				<form action="#">
 					<label for="title">제목</label>&nbsp;&nbsp;
 					<input type="text" class="form-control title" id="title" style="width:350px" name="title" value="<%=b.getTitle() %>>">&nbsp;
 					<br><br>
@@ -111,16 +108,12 @@
 					<br><br>
 					<label for="attachment">첨부파일</label>&nbsp;<!-- 첨부파일 다운로드 로직 추가 -->
 					<input type="file" class="attachment" id="attachment" name="attachment">
-					<br><br>
-					<button class="btn btn-danger" onclick="">삭제하기</button>
-					<!-- 자기 자신의 게시글일 경우에만 보임 -->
-					<!--<button class="btn btn-primary" onclick="">수정하기</button>  -->
 				</form>
 			</div>
-		
 			
-		
-		
+			
+			
+			
 		</div>
 	</div>
 		<%@include file="../common/footer/footer.jsp" %>

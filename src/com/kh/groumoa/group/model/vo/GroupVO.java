@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class GroupVO implements java.io.Serializable {
 	
-	private String groupCode;
+	private int groupCode;
 	private String groupName;
 	private String rnCode;
 	private String interestCode;
@@ -19,7 +19,7 @@ public class GroupVO implements java.io.Serializable {
 	public GroupVO() {}
 
 
-	public GroupVO(String groupCode, String groupName, String rnCode, String interestCode, String nickNameyn,
+	public GroupVO(int groupCode, String groupName, String rnCode, String interestCode, String nickNameyn,
 			String openYn, Date openDate, String groupRule, String description, String status) {
 		super();
 		this.groupCode = groupCode;
@@ -35,12 +35,12 @@ public class GroupVO implements java.io.Serializable {
 	}
 
 
-	public String getGroupCode() {
+	public int getGroupCode() {
 		return groupCode;
 	}
 
 
-	public void setGroupCode(String groupCode) {
+	public void setGroupCode(int groupCode) {
 		this.groupCode = groupCode;
 	}
 

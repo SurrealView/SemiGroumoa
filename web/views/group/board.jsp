@@ -1,6 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.kh.groumoa.group.model.vo.BoardVO"%>
-<% BoardVO selectedBoard = (BoardVO) request.getAttribute("selectedBoard"); %>
+    pageEncoding="UTF-8" import="com.kh.groumoa.group.model.vo.BoardVO, java.util.ArrayList, com.kh.groumoa.common.*"%>
+<% ArrayList<BoardVO> list = (ArrayList<BoardVO>) request.getAttribute("list"); 
+PageInfo pi = (PageInfo) request.getAttribute("pi");
+int listCount = pi.getTotalCount();
+int currentPage = pi.getCurrentPage();
+int maxPage = pi.getMaxPage();
+int startPage = pi.getStartPage();
+int endPage = pi.getEndPage();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -79,7 +86,7 @@
 		margin-left:25px;
 	}
 	.pagination-div{
-		margin:0 330px	;
+		margin:0 230px;
 	}
 	.table tbody tr:hover{
 		cursor:pointer;
@@ -105,10 +112,9 @@
 		<br><br>
 		<div class="table-div">
 			<h2 align="center">게시판</h2>         
-   			<table class="table table-striped boardTable">
+   			<table class="table table-striped boardTable" id="listArea">
                   <thead>
                     <tr>
-                     
                       <th>글번호</th>
                       <th>분류</th>
                       <th>작성자</th>
@@ -118,44 +124,50 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                    
-                      <td><a href="boardManagement-detail.jsp">1</a></td>
-                      <td>공지</td>
-                      <td>김형진</td>
-                      <td>방가방가</td>
-                      <td>2020-07-05</td>
-                      <td>2</td>
-                    </tr>
-                    <tr>
-                    
-                        <td>1</td>
-                        <td>공지</td>
-                        <td>김형진</td>
-                        <td>방가방가</td>
-                        <td>2020-07-05</td>
-                        <td>2</td>
-                      </tr>
-                     
+                    <% for(BoardVO b : list) { %>
+					<tr>
+						<input type="hidden" value="<%=b.getPostCode() %>">
+						<td><%= b.getPostCode() %></td>
+						<td><%= b.getCategoryName() %></td>
+						<td><%= b.getMemberName() %></td>
+						<td><%= b.getTitle() %></td>
+						<td><%= b.getPostDate() %></td>
+						<td><%= b.getPcount() %></td>
+					</tr>
+				<% } %>
+				
                   </tbody>
                 </table>
                 </div>
                
                 <br>
+                <!-- 페이징 처리 -->
                 <div class="pagination-div">
                 <ul class="pagination">
-                	<li class="page-item"><a class="page-link" href="#"><<</a></li>
-  					<li class="page-item"><a class="page-link" href="#"><</a></li>
-  					<li class="page-item"><a class="page-link" href="#">1</a></li>
-  					<li class="page-item active"><a class="page-link" href="#">2</a></li>
-  					<li class="page-item"><a class="page-link" href="#">3</a></li>
-  					<li class="page-item"><a class="page-link" href="#">4</a></li>
-  					<li class="page-item"><a class="page-link" href="#">5</a></li>
-  					<li class="page-item"><a class="page-link" href="#">></a></li>
-  					<li class="page-item"><a class="page-link" href="#">>></a></li>
+                	<li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>/selectList.bo?currentPage=1"><<</a></li>
+                	<%if (currentPage <= 1) {%>
+  						<li class="page-item"><a class="page-link"><</a></li>
+  					<% } else {%>
+  						<li class="page-item"><a class="page-link" href="<%=request.getContextPath() %>/selectList.bo?currentPage=<%=currentPage - 1 %>"><</a></li>
+  					<%} %>
+  					<%for (int p = startPage; p <= endPage; p++) { 
+  						if(p == currentPage) {
+  					%>
+  						<li class="page-item"><a class="page-link active"><%=p %></a></li>
+  					<% } else { %>
+  						<li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>/selectList.bo?currentPage=<%=p%>"><%=p %></a></li>
+					<%
+						}
+					}
+					%>
+  					<%if (currentPage == maxPage) { %>
+  						<li class="page-item"><a class="page-link">></a></li>
+					<%} else { %>
+  						<li class="page-item"><a class="page-link" href="<%=request.getContextPath() %>/selectList.bo?currentPage=<%=currentPage + 1 %>">></a></li>
+					<% } %>
+  					<li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>/selectList.bo?currentPage=<%=maxPage%>">>></a></li>
 				</ul>
 				</div>
-				
 				<div class="writeBtn" style="float:left">
 					<button class="" onclick="location.href='boardWrite.jsp'";>작성하기</button>
 				</div>
@@ -172,6 +184,17 @@
 					
 				</div>
 		</div>
+		
+		<script>
+		$(function(){
+			$("#listArea td").click(function(){
+				var num = $(this).parent().children("input").val();
+				location.href="<%=request.getContextPath()%>/selectOne.bo?num=" + num;
+			});
+		});
+		</script>
+		
+		
 		<!-- footer 추가할것 -->
 		
 		

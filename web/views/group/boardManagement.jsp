@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.kh.groumoa.group.model.vo.BoardVO, java.util.ArrayList, com.kh.groumoa.common.*"%>
+<% ArrayList<BoardVO> list = (ArrayList<BoardVO>) request.getAttribute("list"); 
+PageInfo pi = (PageInfo) request.getAttribute("pi");
+int listCount = pi.getTotalCount();
+int currentPage = pi.getCurrentPage();
+int maxPage = pi.getMaxPage();
+int startPage = pi.getStartPage();
+int endPage = pi.getEndPage();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -97,7 +105,7 @@
 </style>
 </head>
 <body>
-	<!-- 헤더추가하기 -->
+	<%@include file="/views/common/header/newHeader.jsp" %>
 	<%@include file="subMenubar.jsp" %>
 	<div class="content">
 		<p align="right" style="font-size:10px; padding-right: 25px; padding-top: 15px;">개인정보취급방침에 따라 최근 5년간의 내역이 제공됩니다.</p>
@@ -111,7 +119,7 @@
 		<br><br><!-- 게시판 관리일경우 -->
 		<div class="table-div">
 			<h2 align="center">게시판</h2>         
-   			<table class="table table-striped boardTable">
+   			<table class="table table-striped boardTable" id="listArea">
                   <thead>
                     <tr>
                       <th><input type="checkbox"></th>
@@ -124,96 +132,19 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td><input type="checkbox"></td>
-                      <td><a href="boardManagement-detail.jsp">1</a></td>
-                      <td>공지</td>
-                      <td>김형진</td>
-                      <td>방가방가</td>
-                      <td>2020-07-05</td>
-                      <td>2</td>
-                    </tr>
-                    <tr>
-                      <td><input type="checkbox"></td>
-                        <td>1</td>
-                        <td>공지</td>
-                        <td>김형진</td>
-                        <td>방가방가</td>
-                        <td>2020-07-05</td>
-                        <td>2</td>
-                      </tr>
-                      <tr>
-                        <td><input type="checkbox"></td>
-                        <td>1</td>
-                        <td>공지</td>
-                        <td>김형진</td>
-                        <td>방가방가</td>
-                        <td>2020-07-05</td>
-                        <td>2</td>
-                      </tr>
-                      <tr>
-                        <td><input type="checkbox"></td>
-                        <td>1</td>
-                        <td>공지</td>
-                        <td>김형진</td>
-                        <td>방가방가</td>
-                        <td>2020-07-05</td>
-                        <td>2</td>
-                      </tr>
-                      <tr>
-                        <td><input type="checkbox"></td>
-                        <td>1</td>
-                        <td>공지</td>
-                        <td>김형진</td>
-                        <td>방가방가</td>
-                        <td>2020-07-05</td>
-                        <td>2</td>
-                      </tr>
-                      <tr>
-                        <td><input type="checkbox"></td>
-                        <td>1</td>
-                        <td>공지</td>
-                        <td>김형진</td>
-                        <td>방가방가</td>
-                        <td>2020-07-05</td>
-                        <td>2</td>
-                      </tr>
-                      <tr>
-                        <td><input type="checkbox"></td>
-                        <td>1</td>
-                        <td>공지</td>
-                        <td>김형진</td>
-                        <td>방가방가</td>
-                        <td>2020-07-05</td>
-                        <td>2</td>
-                      </tr>
-                      <tr>
-                        <td><input type="checkbox"></td>
-                        <td>1</td>
-                        <td>공지</td>
-                        <td>김형진</td>
-                        <td>방가방가</td>
-                        <td>2020-07-05</td>
-                        <td>2</td>
-                      </tr>
-                      <tr>
-                        <td><input type="checkbox"></td>
-                        <td>1</td>
-                        <td>공지</td>
-                        <td>김형진</td>
-                        <td>방가방가</td>
-                        <td>2020-07-05</td>
-                        <td>2</td>
-                      </tr>
-                      <tr>
-                        <td><input type="checkbox"></td>
-                        <td>1</td>
-                        <td>공지</td>
-                        <td>김형진</td>
-                        <td>방가방가</td>
-                        <td>2020-07-05</td>
-                        <td>2</td>
-                      </tr>
+                     <% for(BoardVO b : list) { %>
+					<tr>
+						<input type="hidden" value="<%=b.getPostCode() %>">
+						<td><input type="checkbox"></td>
+						<td><%= b.getPostCode() %></td>
+						<td><%= b.getCategoryName() %></td>
+						<td><%= b.getMemberName() %></td>
+						<td><%= b.getTitle() %></td>
+						<td><%= b.getPostDate() %></td>
+						<td><%= b.getPcount() %></td>
+					</tr>
+				<% } %>
+                    
                   </tbody>
                 </table>
                 </div>
@@ -243,104 +174,37 @@
                       <td>2020-07-05</td>
                       <td>2</td>
                     </tr>
-                    <tr>
-                      <td><input type="checkbox"></td>
-                        <td>1</td>
-                        <td>공지</td>
-                        <td>김형진</td>
-                        <td>방가방가</td>
-                        <td>2020-07-05</td>
-                        <td>2</td>
-                      </tr>
-                      <tr>
-                        <td><input type="checkbox"></td>
-                        <td>1</td>
-                        <td>공지</td>
-                        <td>김형진</td>
-                        <td>방가방가</td>
-                        <td>2020-07-05</td>
-                        <td>2</td>
-                      </tr>
-                      <tr>
-                        <td><input type="checkbox"></td>
-                        <td>1</td>
-                        <td>공지</td>
-                        <td>김형진</td>
-                        <td>방가방가</td>
-                        <td>2020-07-05</td>
-                        <td>2</td>
-                      </tr>
-                      <tr>
-                        <td><input type="checkbox"></td>
-                        <td>1</td>
-                        <td>공지</td>
-                        <td>김형진</td>
-                        <td>방가방가</td>
-                        <td>2020-07-05</td>
-                        <td>2</td>
-                      </tr>
-                      <tr>
-                        <td><input type="checkbox"></td>
-                        <td>1</td>
-                        <td>공지</td>
-                        <td>김형진</td>
-                        <td>방가방가</td>
-                        <td>2020-07-05</td>
-                        <td>2</td>
-                      </tr>
-                      <tr>
-                        <td><input type="checkbox"></td>
-                        <td>1</td>
-                        <td>공지</td>
-                        <td>김형진</td>
-                        <td>방가방가</td>
-                        <td>2020-07-05</td>
-                        <td>2</td>
-                      </tr>
-                      <tr>
-                        <td><input type="checkbox"></td>
-                        <td>1</td>
-                        <td>공지</td>
-                        <td>김형진</td>
-                        <td>방가방가</td>
-                        <td>2020-07-05</td>
-                        <td>2</td>
-                      </tr>
-                      <tr>
-                        <td><input type="checkbox"></td>
-                        <td>1</td>
-                        <td>공지</td>
-                        <td>김형진</td>
-                        <td>방가방가</td>
-                        <td>2020-07-05</td>
-                        <td>2</td>
-                      </tr>
-                      <tr>
-                        <td><input type="checkbox"></td>
-                        <td>1</td>
-                        <td>공지</td>
-                        <td>김형진</td>
-                        <td>방가방가</td>
-                        <td>2020-07-05</td>
-                        <td>2</td>
-                      </tr>
                   </tbody>
                 </table>
                 </div> -->
                 <!-- 댓글관리일 경우 끝 -->
                 
                 <br>
+               <!-- 페이징 처리 -->
                 <div class="pagination-div">
                 <ul class="pagination">
-                	<li class="page-item"><a class="page-link" href="#"><<</a></li>
-  					<li class="page-item"><a class="page-link" href="#"><</a></li>
-  					<li class="page-item"><a class="page-link" href="#">1</a></li>
-  					<li class="page-item active"><a class="page-link" href="#">2</a></li>
-  					<li class="page-item"><a class="page-link" href="#">3</a></li>
-  					<li class="page-item"><a class="page-link" href="#">4</a></li>
-  					<li class="page-item"><a class="page-link" href="#">5</a></li>
-  					<li class="page-item"><a class="page-link" href="#">></a></li>
-  					<li class="page-item"><a class="page-link" href="#">>></a></li>
+                	<li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>/selectList.bo?currentPage=1"><<</a></li>
+                	<%if (currentPage <= 1) {%>
+  						<li class="page-item"><a class="page-link"><</a></li>
+  					<% } else {%>
+  						<li class="page-item"><a class="page-link" href="<%=request.getContextPath() %>/selectList.bo?currentPage=<%=currentPage - 1 %>"><</a></li>
+  					<%} %>
+  					<%for (int p = startPage; p <= endPage; p++) { 
+  						if(p == currentPage) {
+  					%>
+  						<li class="page-item"><a class="page-link active"><%=p %></a></li>
+  					<% } else { %>
+  						<li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>/selectList.bo?currentPage=<%=p%>"><%=p %></a></li>
+					<%
+						}
+					}
+					%>
+  					<%if (currentPage == maxPage) { %>
+  						<li class="page-item"><a class="page-link">></a></li>
+					<%} else { %>
+  						<li class="page-item"><a class="page-link" href="<%=request.getContextPath() %>/selectList.bo?currentPage=<%=currentPage + 1 %>">></a></li>
+					<% } %>
+  					<li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>/selectList.bo?currentPage=<%=maxPage%>">>></a></li>
 				</ul>
 				</div>
 				<div class="deleteBtn" style="float:left;">
@@ -362,6 +226,16 @@
 					
 				</div>
 		</div>
+		
+		<script>
+		$(function(){
+			$("#listArea td").click(function(){
+				var num = $(this).parent().children("input").val();
+				location.href="<%=request.getContextPath()%>/selectOne.bo?num=" + num;
+			});
+		});
+		//코드 수정 필요.. 이대로 실행할 시 board-detail로 넘어가버림
+		</script>
 		<!-- footer 추가할것 -->
 		
 		

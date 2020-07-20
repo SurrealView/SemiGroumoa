@@ -99,9 +99,9 @@
 					<br><br>
 					<label for="category">분류</label>&nbsp;&nbsp;
 					<select class="form-control category" id="category" name="category"><!-- 분류 뭐뭐있는지 정하기 -->
-						<option value="C1">가입인사</option>
-						<option value="C2">공지</option>
-						<option value="C3">일반</option>
+						<option value="C01">가입인사</option>
+						<option value="C02">공지</option>
+						<option value="C03">일반</option>
 					</select>&nbsp;&nbsp;
 					<label for="writer">작성자</label>&nbsp;&nbsp;
 					<input type="text" class="form-control writer" value="<%=loginUser.getUserName() %>" readonly>&nbsp;&nbsp;

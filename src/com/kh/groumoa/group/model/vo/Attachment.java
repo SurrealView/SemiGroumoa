@@ -8,15 +8,15 @@ public class Attachment {
 	private String uploadDate;
 	private int fileLevel;
 	private String status;
-	private String groupCode;
-	private String noticeCode;
+	private int groupCode;
+	private int noticeCode;
 	private String qnaCode;
-	private String postCode;
+	private int postCode;
 	
 	public Attachment() {}
 	
 	public Attachment(String fid, String originName, String changeName, String filePath, String uploadDate,
-			int fileLevel, String status, String groupCode, String noticeCode, String qnaCode, String postCode) {
+			int fileLevel, String status, int groupCode, int noticeCode, String qnaCode, int postCode) {
 		super();
 		this.fid = fid;
 		this.originName = originName;
@@ -87,19 +87,19 @@ public class Attachment {
 		this.status = status;
 	}
 
-	public String getGroupCode() {
+	public int getGroupCode() {
 		return groupCode;
 	}
 
-	public void setGroupCode(String groupCode) {
+	public void setGroupCode(int groupCode) {
 		this.groupCode = groupCode;
 	}
 
-	public String getNoticeCode() {
+	public int getNoticeCode() {
 		return noticeCode;
 	}
 
-	public void setNoticeCode(String noticeCode) {
+	public void setNoticeCode(int noticeCode) {
 		this.noticeCode = noticeCode;
 	}
 
@@ -111,11 +111,11 @@ public class Attachment {
 		this.qnaCode = qnaCode;
 	}
 
-	public String getPostCode() {
+	public int getPostCode() {
 		return postCode;
 	}
 
-	public void setPostCode(String postCode) {
+	public void setPostCode(int postCode) {
 		this.postCode = postCode;
 	}
 
