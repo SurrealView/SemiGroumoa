@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.kh.groumoa.member.model.vo.*, com.kh.groumoa.common.*, java.util.*" %>
+    pageEncoding="UTF-8" import="com.kh.groumoa.member.model.vo.*, com.kh.groumoa.group.model.vo.*, com.kh.groumoa.common.*, java.util.*" %>
 <%
-	MemberVO member = (MemberVO) request.getAttribute("member");
+	ArrayList<MemberVO> list = (ArrayList<MemberVO>) request.getAttribute("list");
+	GroupMemberVO groupMember = (GroupMemberVO) request.getAttribute("groupMember");
 	PageInfo pi = (PageInfo) request.getAttribute("pi");
 	int currentPage = pi.getCurrentPage();
 	int maxPage = pi.getMaxPage();
@@ -165,13 +166,13 @@
                     </tr>
                   </thead>
                   <tbody>
-                  	<% for(Member m : list) { %>
+                  	<% for(MemberVO m : list) { %>
                     <tr>
                       <input type="hidden" value="<%=m.getMemberCode() %>">
                       <td><input type="checkbox"></td>
-                      <td><a href="pplManagement-detail.jsp"><%= i++ %></a></td>
-                      <td><%= m.getMemberCode() %></td>
-                      <td><%= ??.getGroupCode() %></td>
+                      <td><a href="pplManagement-detail.jsp"><%= m.getMemberCode() %></a></td>
+                      <td><%= m.getUserName() %></td>
+                      <td><%= groupMember.getGroupCode() %></td>
                       <td><%= m.getPhone() %></td>
                       <td><%= m.getEmail() %></td>
                       <td><%= m.getEnrollDate() %></td>
