@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.kh.groumoa.group.model.vo.BoardVO"%>
+<%BoardVO b = (BoardVO) request.getAttribute("board"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -93,37 +94,26 @@
 		<div class="content-area">
 			<div class="form-area">
 			<!-- 완성 후 action태그 속성값 insert.bo로 변경하기 -->
-				<form action="<%=request.getContextPath() %>/insert.bo" method="post">
+				<form action="#">
 					<label for="title">제목</label>&nbsp;&nbsp;
-					<input type="text" class="form-control title" id="title" style="width:350px" name="title">&nbsp;
+					<input type="text" class="form-control title" id="title" style="width:350px" name="title" value="<%=b.getTitle() %>>">&nbsp;
 					<br><br>
 					<label for="category">분류</label>&nbsp;&nbsp;
-					<select class="form-control category" id="category" name="category"><!-- 분류 뭐뭐있는지 정하기 -->
-						<option value="C01">가입인사</option>
-						<option value="C02">공지</option>
-						<option value="C03">일반</option>
-					</select>&nbsp;&nbsp;
+					<input type="text" class="form-control category" id="category" name="category" value="<%=b.getCategoryName()%>">&nbsp;&nbsp;
 					<label for="writer">작성자</label>&nbsp;&nbsp;
-					<input type="text" class="form-control writer" value="<%=loginUser.getUserName() %>" readonly>&nbsp;&nbsp;
+					<input type="text" class="form-control writer" value="<%=b.getMemberName() %>" readonly>&nbsp;&nbsp;
 					<label for="date-written">작성일</label>&nbsp;&nbsp;
-					<input type="date" id="currentDate" readonly><br><br>
-					<textarea class="form-control" cols="120" rows="20" style="resize:none;" name="content"></textarea>
+					<input type="date" id="currentDate" value="<%=b.getPostDate() %>" readonly><br><br>
+					<textarea class="form-control" cols="120" rows="20" style="resize:none;" name="content"><%=b.getDetail()%></textarea>
 					<br><br>
-					<label for="attachment">파일 첨부</label>&nbsp;<!-- 파일 첨부하는 로직 추가하기 -->
+					<label for="attachment">첨부파일</label>&nbsp;<!-- 첨부파일 다운로드 로직 추가 -->
 					<input type="file" class="attachment" id="attachment" name="attachment">
-					<br><br>
-					<input type="hidden" name="groupCode" value=""><!-- 그룹코드 받아오는 로직 추가하기 -->
-					<input type="hidden" name="writerCode" value=" name="<%=loginUser.getMemberCode() %>">
-					<button class="btn btn-primary" onclick="submit();">작성하기</button>
-					<button class="btn btn-dark" onclick="reset();">취소</button>
 				</form>
 			</div>
-			<script>
-  				document.getElementById('currentDate').value = new Date().toISOString().substring(0, 10);
-			</script>
 			
-		
-		
+			
+			
+			
 		</div>
 	</div>
 		<%@include file="../common/footer/footer.jsp" %>
