@@ -3,11 +3,11 @@
 <%
 	ArrayList<MemberVO> list = (ArrayList<MemberVO>) request.getAttribute("list");
 	GroupMemberVO groupMember = (GroupMemberVO) request.getAttribute("groupMember");
-	PageInfo pi = (PageInfo) request.getAttribute("pi");
+/*  	PageInfo pi = (PageInfo) request.getAttribute("pi");
 	int currentPage = pi.getCurrentPage();
 	int maxPage = pi.getMaxPage();
 	int startPage = pi.getStartPage();
-	int endPage = pi.getEndPage();	
+	int endPage = pi.getEndPage();	 */ 
 %>
 <!DOCTYPE html>
 <html>
@@ -153,6 +153,7 @@
 		<br><br>
 		<div class="table-div">
 			<h2 align="center">회원</h2>         
+   			<form id="kickoutForm" method="post">
    			<table class="table table-striped">
                   <thead>
                     <tr>
@@ -166,7 +167,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                  	<% for(MemberVO m : list) { %>
+                   	<% for(MemberVO m : list) { %>
                     <tr>
                       <input type="hidden" value="<%=m.getMemberCode() %>">
                       <td><input type="checkbox"></td>
@@ -177,7 +178,7 @@
                       <td><%= m.getEmail() %></td>
                       <td><%= m.getEnrollDate() %></td>
                     </tr>
-                    <% } %>
+                    <% } %> 
                   </tbody>
                 </table>
                 </div>
@@ -308,7 +309,7 @@
 				</ul>
 				</div>
  -->		
- 				<div class="pagination-div" align="center">
+<%--  				<div class="pagination-div" align="center">
 					<button onclick="location.href='<%=request.getContextPath()%>/groupPpl.bo?currentPage=1'"><<</button>
 					
 					<% if(currentPage <= 1) { %>
@@ -336,9 +337,10 @@
 				
 					<button onclick="location.href='<%=request.getContextPath()%>/groupPpl.bo?currentPage=<%=maxPage%>'">>></button>
 				</div>
-				
-				<button class="kickBtn">강퇴하기</button>
+ --%>				
+				<button class="kickBtn" onclick="kickout();">강퇴하기</button>
 				<button class="inviteBtn">초대하기</button>
+				</form>
                 <div class="searchbox" id="searchbox">
 					<form>
 						<select class="form-control">
@@ -352,5 +354,11 @@
 				</div>
 		</div>
 		<!-- footer 추가할것 -->
+		
+		<script>
+		function kickout(){
+			$("#kickoutForm").attr("action", "<%=request.getContextPath()%>/kickout.ko");
+		}
+		</script>
 </body>
 </html>
