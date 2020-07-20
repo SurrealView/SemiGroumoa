@@ -207,7 +207,7 @@ public class NoticeDao {
 		} finally {
 			inst().closeRset();
 			inst().closeStmt();
-		}
+		}		
 		
 		return no;
 	}

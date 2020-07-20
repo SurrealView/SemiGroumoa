@@ -71,7 +71,7 @@ private Properties prop = new Properties();
 				loginUser.setBirthDate(birthDateString);
 				//System.out.println(birthDateString);
 				//loginUser.setBirthDate(rset.getDate("BIRTH_DATE"));
-				
+				System.out.println(loginUser);
 			}
 			
 		} catch (SQLException e) {
