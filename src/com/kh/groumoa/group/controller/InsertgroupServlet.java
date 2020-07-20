@@ -64,11 +64,11 @@ public class InsertgroupServlet extends HttpServlet {
 			String rnCode = multiRequest.getParameter("rnCode");
 			String name = multiRequest.getParameter("name");
 			String description = multiRequest.getParameter("description");
-		/*	String [] iarr = request.getParameterValues("interest"); */
-			String interest = multiRequest.getParameter("interest");
+/*			String [] iarr = request.getParameterValues("interest");
+*/			String interest = multiRequest.getParameter("interest");
 			String openYn = multiRequest.getParameter("openYn");
 			String nickNameyn = multiRequest.getParameter("nickNameyn");
-			String groupRule = multiRequest.getParameter("groupRule");		
+			String groupRule = multiRequest.getParameter("groupRule");
 			
 /*			String interest = "";
 			if(iarr != null) {
@@ -76,17 +76,17 @@ public class InsertgroupServlet extends HttpServlet {
 					interest += iarr[i];
 				}
 			}
-			
-			System.out.println("interest" + interest);
 */			
-		/*	ArrayList<MemberInterestVO> requestMemberInterest = new ArrayList<MemberInterestVO>();
+/*			System.out.println("interest" + interest);
+*/		
+/*			ArrayList<MemberInterestVO> requestMemberInterest = new ArrayList<MemberInterestVO>();
 			for(int i = 0; i < iarr.length; i++) {
 				MemberInterestVO memberInterest = new MemberInterestVO();
 				memberInterest.setInterestCode(iarr[i]);
 				
 				requestMemberInterest.add(memberInterest);
-			}  */
-			
+			}  
+*/			
 			GroupVO group = new GroupVO();
 			group.setInterestCode(interest);
 			group.setRnCode(rnCode);
@@ -120,8 +120,13 @@ public class InsertgroupServlet extends HttpServlet {
 			
 			String page = "";
 			if(result > 0) {
-				response.sendRedirect(request.getContextPath() + "/views/group/groupUpdate.jsp");
-			} else {
+				page = "views/group/groupUpdate.jsp";
+				request.setAttribute("group", group);
+				request.setAttribute("fileList", fileList);
+				System.out.println(group);
+				System.out.println(fileList);
+/*				response.sendRedirect(request.getContextPath() + "/views/group/groupUpdate.jsp");
+*/			} else {
 				for(int i = 0; i < saveFiles.size(); i++) {
 					File failedFile = new File(savePath + saveFiles.get(i));
 						
@@ -130,8 +135,8 @@ public class InsertgroupServlet extends HttpServlet {
 				
 				page = "views/common/errorPage.jsp";
 				request.setAttribute("msg", "동호회 등록 실패!!");
-				request.getRequestDispatcher(page).forward(request, response);	
 			}
+			request.getRequestDispatcher(page).forward(request, response);	
 		}
 		
 	}

@@ -20,16 +20,16 @@ import com.kh.groumoa.group.model.vo.GroupVO;
 import com.oreilly.servlet.MultipartRequest;
 
 /**
- * Servlet implementation class UpdategroupServlet
+ * Servlet implementation class updateGroupServlet
  */
 @WebServlet("/update.gr")
-public class UpdategroupServlet extends HttpServlet {
+public class updateGroupServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UpdategroupServlet() {
+    public updateGroupServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -59,6 +59,7 @@ public class UpdategroupServlet extends HttpServlet {
 	            originFiles.add(multiRequest.getOriginalFileName(name));
 	         }
 			
+	        String groupCode = multiRequest.getParameter("groupCode");
 			String rnCode = multiRequest.getParameter("rnCode");
 			String name = multiRequest.getParameter("name");
 			String description = multiRequest.getParameter("description");
@@ -68,6 +69,7 @@ public class UpdategroupServlet extends HttpServlet {
 			String groupRule = multiRequest.getParameter("groupRule");		
 			
 			GroupVO group = new GroupVO();
+			group.setGroupCode(groupCode);
 			group.setInterestCode(interest);
 			group.setRnCode(rnCode);
 			group.setGroupName(name);
@@ -95,13 +97,19 @@ public class UpdategroupServlet extends HttpServlet {
 			
 			System.out.println("fileList" + fileList);
 				
-			int result = new GroupService().insertGroup(group, fileList);
+			int result = new GroupService().updateGroup(group, fileList);
 			System.out.println("servlet" + result);
 			
+			//GroupVO selectOneGroup = new GroupService().selectOne(groupCode);
+			System.out.println(group);
+			//System.out.println(selectOneGroup);
 			String page = "";
 			if(result > 0) {
-				response.sendRedirect(request.getContextPath() + "/views/group/groupUpdate.jsp");
-			} else {
+				page = "views/group/groupUpdate.jsp";
+				request.setAttribute("group", group);
+				request.setAttribute("fileList", fileList);
+/*				response.sendRedirect(request.getContextPath() + "/views/group/groupUpdate.jsp");
+*/			} else {
 				for(int i = 0; i < saveFiles.size(); i++) {
 					File failedFile = new File(savePath + saveFiles.get(i));
 						
@@ -110,8 +118,8 @@ public class UpdategroupServlet extends HttpServlet {
 				
 				page = "views/common/errorPage.jsp";
 				request.setAttribute("msg", "동호회 수정 실패!!");
-				request.getRequestDispatcher(page).forward(request, response);	
 			}
+			request.getRequestDispatcher(page).forward(request, response);	
 		}
 		
 	}

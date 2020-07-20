@@ -55,7 +55,7 @@ public class GroupDao {
 		} finally {
 			close(pstmt);
 		}
-		System.out.println("Dao" + result);
+		
 		return result;
 	}
 
@@ -99,7 +99,7 @@ public class GroupDao {
 		String query = prop.getProperty("insertAttachment");
 		
 		try {
-			GroupVO group = new GroupVO();
+			
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, attachment.getOriginName());
 			pstmt.setString(2, attachment.getChangeName());
@@ -117,7 +117,7 @@ public class GroupDao {
 		return result;
 	}
 	
-	public int updateGroup(Connection con, GroupVO requestGroup) {
+	public int updateThumbnailContent(Connection con, GroupVO group) {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
@@ -125,12 +125,12 @@ public class GroupDao {
 		
 		try {
 			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, requestGroup.getOpenYn());
-			pstmt.setString(2, requestGroup.getNickNameyn());
-			pstmt.setString(3, requestGroup.getGroupRule());
-			pstmt.setString(4, requestGroup.getDescription());
-			pstmt.setString(5, requestGroup.getGroupCode());
-			
+			pstmt.setString(1, group.getOpenYn());
+			pstmt.setString(2, group.getNickNameyn());
+			pstmt.setString(3, group.getGroupRule());
+			pstmt.setString(4, group.getDescription());
+			pstmt.setString(5, group.getGroupCode());
+
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
@@ -138,8 +138,73 @@ public class GroupDao {
 		} finally {
 			close(pstmt);
 		}
+		System.out.println("Dao" + result);
+		return result;
+	}
+
+
+	public int updateAttachment(Connection con, Attachment attachment) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("updateAttachment");
+		
+		try {
+			
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, attachment.getOriginName());
+			pstmt.setString(2, attachment.getChangeName());
+			pstmt.setString(3, attachment.getFilePath());
+			pstmt.setInt(4, attachment.getFileLevel());
+			pstmt.setString(5, attachment.getGroupCode());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
 		
 		return result;
+	}
+	
+	//동호회페이지 동호회 조회
+	public GroupVO selectGroup(Connection con, String groupCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		GroupVO group = null;
+		
+		String query = prop.getProperty("selectOne");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, groupCode);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				group = new GroupVO();
+				
+				group.setGroupCode(rset.getString("GROUP_CODE"));
+				group.setGroupName(rset.getString("GROUP_NAME"));
+				group.setRnCode(rset.getString("RN_CODE"));
+				group.setInterestCode(rset.getString("INTEREST_CODE"));
+				group.setOpenYn(rset.getString("OPEN_YN"));
+				group.setNickNameyn(rset.getString("NICKNAME_YN"));
+				group.setOpenDate(rset.getDate("OPEN_DATE"));
+				group.setGroupRule(rset.getString("GROUP_RULE"));
+				group.setDescription(rset.getString("DESCRIPTION"));
+
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(con);
+			close(pstmt);
+		}
+		
+		return group;
 	}
 
 	
@@ -181,6 +246,5 @@ public class GroupDao {
 		
 		return selectedGroup;
 	}
-
 
 }

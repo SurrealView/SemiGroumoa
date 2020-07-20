@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.kh.groumoa.group.model.vo.GroupVO" %>
-<% GroupVO group = (GroupVO) request.getAttribute("group"); %>
+    pageEncoding="UTF-8" import="com.kh.groumoa.group.model.vo.*, java.util.*" %>
+<%  GroupVO group = (GroupVO) request.getAttribute("group");
+	ArrayList<Attachment> fileList = (ArrayList<Attachment>) request.getAttribute("fileList");
+	Attachment thumbNail = fileList.get(0);
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -159,16 +162,45 @@
 		
 		<br><br>
      <div class="wrapper">
-     <form id="updateForm" action="<%= request.getContextPath() %>//update.gr" method="post" encType="multipart/form-data">
+     <form id="updateForm" action="<%=request.getContextPath() %>/update.gr" method="post" encType="multipart/form-data">
 	  <table border="1">
         <tr>
-            <td colspan="12" height="50px" style="border-right:hidden; border-top:hidden;">동호회이름
+            <td colspan="6" height="50px" style="border-right:hidden; border-top:hidden;">동호회이름
             &nbsp;<input type="text" style="width:350px" class="form-control" name="name" value="<%=group.getGroupName() %>" readonly>
             <input type="hidden" name="groupCode"></td>
+            <td colspan="6" height="50px" style="border-right:hidden; border-top:hidden;">개설일
+            &nbsp;<input type="text" style="width:350px" class="form-control" name="openDate" value="<%=group.getOpenDate() %>" readonly>
         </tr>
         <tr>
             <td colspan="12" height="50px" style="border-right:hidden;">동호회 활동 지역
-            &nbsp;<input type="text" style="width:350px" class="form-control" name="rnCode" value="<%=group.getRnCode() %>" readonly>
+            <select class="form-control" name="rnCode">
+	 				<option value="R0001">서울시 동작구</option>
+	 				<option value="R0002">서울시 강동구</option>
+	 				<option value="R0003">서울시 강서구</option>
+	 				<option value="R0004">서울시 강북구</option>
+	 				<option value="R0005">서울시 관악구</option>
+	 				<option value="R0006">서울시 광진구</option>
+	 				<option value="R0007">서울시 구로구</option>
+	 				<option value="R0008">서울시 금천구</option>
+	 				<option value="R0009">서울시 노원구</option>
+	 				<option value="R0010">서울시 동대문구</option>
+	 				<option value="R0011">서울시 도봉구</option>
+	 				<option value="R0012">서울시 동작구</option>
+	 				<option value="R0013">서울시 마포구</option>
+	 				<option value="R0014">서울시 서대문구</option>
+	 				<option value="R0015">서울시 성동구</option>
+	 				<option value="R0016">서울시 성북구</option>
+	 				<option value="R0017">서울시 서초구</option>
+	 				<option value="R0018">서울시 송파구</option>
+	 				<option value="R0019">서울시 영등포구</option>
+	 				<option value="R0020">서울시 용산구</option>
+	 				<option value="R0021">서울시 양천구</option>
+	 				<option value="R0022">서울시 은평구</option>
+	 				<option value="R0023">서울시 송로구</option>
+	 				<option value="R0024">서울시 중구</option>
+	 				<option value="R0025">서울시 중랑구</option>
+	 			</select>
+          <!-- &nbsp;<input type="text" style="width:350px" class="form-control" name="rnCode">  -->
             </td>
         </tr>
         <tr>
@@ -176,91 +208,96 @@
 	 			<br>
 	 			<br>
 	 			
-	 			<input type="checkbox" id="i1" name="interest" value="i1" onclick="doOpenCheck(this);">
-	 			<label for="i1" class="interest">문화/공연</label>
-	 			<input type="checkbox" id="i2" name="interest" value="i2" onclick="doOpenCheck(this);">
-	 			<label for="i2" class="interest">게임/오락</label>
-	 			<input type="checkbox" id="i3" name="interest" value="i3" onclick="doOpenCheck(this);">
-	 			<label for="i3" class="interest">아웃도어/여행</label>
-	 			<input type="checkbox" id="i4" name="interest" value="i4" onclick="doOpenCheck(this);">
-	 			<label for="i4" class="interest">운동/스포츠</label>
-	 			<input type="checkbox" id="i5" name="interest" value="i5" onclick="doOpenCheck(this);">
-	 			<label for="i5" class="interest">인문학/책/글</label>
-	 			<input type="checkbox" id="i6" name="interest" value="i6" onclick="doOpenCheck(this);">
-	 			<label for="i6" class="interest">업종/직무</label>
-	 			<input type="checkbox" id="i7" name="interest" value="i7" onclick="doOpenCheck(this);">
-	 			<label for="i7" class="interest">외국/언어</label>
-	 			<input type="checkbox" id="i8" name="interest" value="i8" onclick="doOpenCheck(this);">
-	 			<label for="i8" class="interest">음악/악기</label>
-	 			<input type="checkbox" id="i9" name="interest" value="i9" onclick="doOpenCheck(this);">
-	 			<label for="i9" class="interest">패션/뷰티</label>
-	 			<input type="checkbox" id="i10" name="interest" value="i10" onclick="doOpenCheck(this);">
-	 			<label for="i10" class="interest">공예/만들기</label>&nbsp;&nbsp;&nbsp;
-	 			<input type="checkbox" id="i11" name="interest" value="i11" onclick="doOpenCheck(this);">
-	 			<label for="i11" class="interest">댄스/무용</label>&nbsp;&nbsp;&nbsp;&nbsp;
-	 			<input type="checkbox" id="i12" name="interest" value="i12" onclick="doOpenCheck(this);">
-	 			<label for="i12" class="interest">사교/인맥</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	 			<input type="checkbox" id="i13" name="interest" value="i13" onclick="doOpenCheck(this);">
-	 			<label for="i13" class="interest">사진</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	 			<input type="checkbox" id="i14" name="interest" value="i14" onclick="doOpenCheck(this);">
-	 			<label for="i14" class="interest">차/오토바이</label><br>
-	 			<input type="checkbox" id="i15" name="interest" value="i15" onclick="doOpenCheck(this);">
-	 			<label for="i15" class="interest">요리/제조</label>
-	 			<input type="checkbox" id="i16" name="interest" value="i16" onclick="doOpenCheck(this);">
-	 			<label for="i16" class="interest">가족/결혼</label>
-	 			<input type="checkbox" id="i17" name="interest" value="i17" onclick="doOpenCheck(this);">
-	 			<label for="i17" class="interest">반려동물</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	 			<input type="checkbox" id="i18" name="interest" value="i18" onclick="doOpenCheck(this);">
-	 			<label for="i18" class="interest">봉사활동</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	 			<input type="checkbox" id="i19" name="interest" value="i19" onclick="doOpenCheck(this);">
-	 			<label for="i19" class="interest">자유주제</label>
+	 			<input type="checkbox" id="I01" name="interest" value="I01" onclick="doOpenCheck(this);">
+	 			<label for="I1" class="interest">문화/공연</label>
+	 			<input type="checkbox" id="I02" name="interest" value="I02" onclick="doOpenCheck(this);">
+	 			<label for="I2" class="interest">게임/오락</label>
+	 			<input type="checkbox" id="I03" name="interest" value="I03" onclick="doOpenCheck(this);">
+	 			<label for="I3" class="interest">아웃도어/여행</label>
+	 			<input type="checkbox" id="I04" name="interest" value="I04" onclick="doOpenCheck(this);">
+	 			<label for="I4" class="interest">운동/스포츠</label>
+	 			<input type="checkbox" id="I05" name="interest" value="I05" onclick="doOpenCheck(this);">
+	 			<label for="I5" class="interest">인문학/책/글</label>
+	 			<input type="checkbox" id="I06" name="interest" value="I06" onclick="doOpenCheck(this);">
+	 			<label for="I6" class="interest">업종/직무</label>
+	 			<input type="checkbox" id="I07" name="interest" value="I07" onclick="doOpenCheck(this);">
+	 			<label for="I7" class="interest">외국/언어</label>
+	 			<input type="checkbox" id="I08" name="interest" value="I08" onclick="doOpenCheck(this);">
+	 			<label for="I8" class="interest">음악/악기</label>
+	 			<input type="checkbox" id="I09" name="interest" value="I09" onclick="doOpenCheck(this);">
+	 			<label for="I9" class="interest">패션/뷰티</label>
+	 			<input type="checkbox" id="I10" name="interest" value="I10" onclick="doOpenCheck(this);">
+	 			<label for="I10" class="interest">공예/만들기</label>&nbsp;&nbsp;&nbsp;
+	 			<input type="checkbox" id="I11" name="interest" value="I11" onclick="doOpenCheck(this);">
+	 			<label for="I11" class="interest">댄스/무용</label>&nbsp;&nbsp;&nbsp;&nbsp;
+	 			<input type="checkbox" id="I12" name="interest" value="I12" onclick="doOpenCheck(this);">
+	 			<label for="I12" class="interest">사교/인맥</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 			<input type="checkbox" id="I13" name="interest" value="I13" onclick="doOpenCheck(this);">
+	 			<label for="I13" class="interest">사진</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 			<input type="checkbox" id="I14" name="interest" value="I14" onclick="doOpenCheck(this);">
+	 			<label for="I14" class="interest">차/오토바이</label><br>
+	 			<input type="checkbox" id="I15" name="interest" value="I15" onclick="doOpenCheck(this);">
+	 			<label for="I15" class="interest">요리/제조</label>
+	 			<input type="checkbox" id="I16" name="interest" value="I16" onclick="doOpenCheck(this);">
+	 			<label for="I16" class="interest">가족/결혼</label>
+	 			<input type="checkbox" id="I17" name="interest" value="I17" onclick="doOpenCheck(this);">
+	 			<label for="I17" class="interest">반려동물</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 			<input type="checkbox" id="I18" name="interest" value="I18" onclick="doOpenCheck(this);">
+	 			<label for="I18" class="interest">봉사활동</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 			<input type="checkbox" id="I19" name="interest" value="I19" onclick="doOpenCheck(this);">
+	 			<label for="I19" class="interest">자유주제</label>
 	 			
             </td>
         </tr>
         <tr>
+        
+        <!-- <td>파일첨부</td> -->
+                    <!-- <td colspan="4"><input type="text" class="file_path" placeholder="파일을 올려주세요" readonly style="width:400px" name="filePath"></td>
+                    <td colspan="3"><a class="upload" href="#" onclick="uploadFile();">파일선택</a></td>                
+                    <input type="file" id="notice_upload" name="notice_upload" style="display: none;"> -->
             <td rowspan="2" height="450px" style="padding-left:60px;">동호회 프로필</td>
             <td colspan="8" height="200px" style="border-right:hidden;"><label style="float:left">썸네일 설정</label>
-            &nbsp;&nbsp;<img id="thumb" style="float:left; margin-left:10px;" name="thumbNail">
+            &nbsp;&nbsp;<img id="thumbNail" style="float:left; margin-left:10px;" name="thumbNail"
+            				src="<%=request.getContextPath() %>/thumbnail_uploadFiles/<%=thumbNail.getChangeName() %>">
              <input type="file" id="subBtn" name="thumbNail" onchange="loadImg(this, 1);"></td>
-        </tr>
+<!--             <input type="file" id="subBtn" name="thumbNail" style="float:left; margin-left:10px;" onchange="loadImg(this, 1);"> -->
+         </tr>
         <tr>
             <td colspan="8" height="250px" style="border-right:hidden;"><label style="float:left">동호회 소개</label>
             &nbsp;&nbsp;<textarea id="groupIn" name="description" value="<%=group.getDescription() %>"></textarea></td>
         </tr>
         <tr>
-            <td colspan="2" height="100px" style="border-right:hidden;"></td>
+            <td colspan="2" style="border-right:hidden;"></td>
+           	<td colspan="2" height="100px" style="border-right:hidden;">
+            </td>
             <td colspan="2" style="border-right:hidden;">동호회 공개 여부<br>
-                <input type="radio" value="open" id="open" name="openYn" checked>
+                <input type="radio" value="Y" id="open" name="openYn" checked>
                 <label for="open">공개</label>
-                <input type="radio" value="secret" id="secret" name="openYn">
+                <input type="radio" value="N" id="secret" name="openYn">
                 <label for="secret">비공개</label>
             </td>
             <td colspan="2" style="border-right:hidden;">닉네임 사용 설정<br>
-                <input type="radio" value="open" id="open" name="nickNameyn" checked>
+                <input type="radio" value="Y" id="open" name="nickNameyn" checked>
                 <label for="open">공개</label>
-                <input type="radio" value="secret" id="secret" name="nickNameyn">
+                <input type="radio" value="N" id="secret" name="nickNameyn">
                 <label for="secret">비공개</label>
-            </td>
-            <td colspan="2" style="border-right:hidden;"></td>
-            <td colspan="2" style="border-right:hidden;"></td>
-           	<td colspan="2" height="100px" style="border-right:hidden;">
             </td>
             
         </tr>
         <tr>
             <td rowspan="12" colspan="20" style="border-right:hidden; border-bottom:hidden;"><label style="float:left;">우리 동호회 회칙 </label>
-            &nbsp;&nbsp;<textarea id="rule" name="groupRule"></textarea></td>
+            &nbsp;&nbsp;<textarea id="rule" name="groupRule" value="<%=group.getGroupRule() %>"></textarea></td>
         </tr>
         </table>
           <br>
           <br>
             <input type="submit" id="deleteBtn" value="수정">
-            <input type="button" id="cancelBtn" value="취소">
+            <input type="reset" id="cancelBtn" value="취소">
         </form>
      </div>
      
      <script>
-     	function doOpenCheck(chk){
+      	function doOpenCheck(chk){
     	    var obj = document.getElementsByName("interest");
     	    for(var i=0; i<obj.length; i++){
     	        if(obj[i] != chk){
@@ -286,23 +323,8 @@
      			reader.readAsDataURL(value.files[0]);
      		}
      	}
-     	
-     	$(function(){
-   			var arr = '<%=group.getInterest() %>'.split(", ");      
-   			
-   			console.log(arr);
-   			
-   			$("input[name=interest]").each(function(){
-   				for(var i = 0; i < arr.length; i++) {
-   					if($(this).val() == arr[i]) {
-   						$(this).attr("checked", true);
-   					}
-   				}
-   			});
-   			
-   		});
-     	
      </script>
+   
 </div>
 </body>
 </html>

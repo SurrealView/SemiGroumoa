@@ -32,6 +32,39 @@ public class GroupService {
 				result2 += new GroupDao().insertAttachment(con, fileList.get(i));
 			}
 			
+		}
+		
+		if(result1 > 0 && result2 == fileList.size()) {
+			commit(con);
+			result = 1;
+		} else {
+			rollback(con);
+		}
+		
+		close(con);
+		
+		return result;
+	}
+	
+	//동호회 기본정보 수정
+	public int updateGroup(GroupVO group, ArrayList<Attachment> fileList) {
+		Connection con = getConnection();
+		int result = 0;
+		int result1 = 0;
+		int result2 = 0;
+		
+		result1 = new GroupDao().updateThumbnailContent(con, group);
+		
+		if(result1 > 0) {
+			String groupCode = new GroupDao().selectCurrval(con);
+			
+			for(int i = 0; i < fileList.size(); i++) {
+				fileList.get(i).setGroupCode(groupCode);
+//				group.setGroupCode(groupCode);
+				
+				result2 += new GroupDao().updateAttachment(con, fileList.get(i));
+			}
+			
 			System.out.println(groupCode);
 		}
 		
@@ -48,40 +81,43 @@ public class GroupService {
 		return result;
 	}
 	
-	//동호회 기본정보 수정
-	public int updateGroup(GroupVO requestGroup) {
+	//동호회페이지 동호회 조회
+	public GroupVO selectOne(String groupCode) {
 		Connection con = getConnection();
+		int result = 0;
 		
-		int result = new GroupDao().updateGroup(con, requestGroup);
+		GroupVO selectedGroup = new GroupDao().selectGroup(con, groupCode);
 		
-		if(result > 0) {
+		if(selectedGroup != null) {
 			commit(con);
 		} else {
 			rollback(con);
 		}
 		
-		return result;
-	}
-	
-	//동호회 조회(관리자페이지)
-	public GroupVO selectOne(String groupCode) {
-		Connection con = getConnection();
-		
-		
-		
-		return null;
-	}
-	
-	//동호회 조회(일반페이지)
-	public GroupVO selectOneGroup(GroupVO requestGroup) {
-		Connection con = getConnection();
-		
-		GroupVO selectedGroup = new GroupDao().selectOneGroup(con, requestGroup);
-		
 		close(con);
 		
 		return selectedGroup;
 	}
-
+	
+/*	//동호회 
+	public GroupVO selectOne(String groupCode) {
+		Connection con = getConnection();
+		int result = 0;
+		
+		GroupVO group = new GroupDao().
+		
+		return result;
+	}*/
+	
+	//동호회 조회
+	public GroupVO selectOneGroup(GroupVO Group) {
+		Connection con = getConnection();
+		
+		GroupVO selectedGroup = new GroupDao().selectOneGroup(con, Group);
+		
+		close(con);
+		System.out.println(selectedGroup);
+		return selectedGroup;
+	}
 
 }
