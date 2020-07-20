@@ -131,9 +131,15 @@
 				<td class="sub-menu" height="30" width="100"><a href="#">고객센터</a></td>
 			</tr>
 			<tr id="second-tr">
+				<%if(loginUser != null) { %>
 				<td class="sub-menu"><a href="#">마이페이지</a></td>
 				<td class="sub-menu"><a href="#">모임개설</a></td>
 				<td class="sub-menu"><a href="#">모임관리</a></td>
+				<% } else {%>
+				<td class="sub-menu"><a href="/groumoa/views/member/login.jsp">마이페이지</a></td>
+				<td class="sub-menu"><a href="/groumoa/views/member/login.jsp">모임개설</a></td>
+				<td class="sub-menu"><a href="/groumoa/views/member/login.jsp">모임관리</a></td>
+				<% } %>
 				<td class="sub-menu"><a href="#">알림</a></td>
 			</tr>
 		</table>
@@ -143,7 +149,9 @@
 		<tr>
 			<td id="blank"></td>
 			<td class="my-menu"><a href="#">추천 동호회</a></td>
+			<%if(loginUser != null) { %>
 			<td class="my-menu"><a href="#">가입한 동호회</a></td>
+			<% } %>
 			<td class="my-menu"><a href="#">공지사항</a></td>
 			<td class="my-menu"><a href="#">QnA</a></td>
 			<td></td>
