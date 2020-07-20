@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import com.kh.groumoa.group.model.dao.GroupDao;
 import com.kh.groumoa.group.model.vo.Attachment;
 import com.kh.groumoa.group.model.vo.GroupVO;
+import com.kh.groumoa.member.model.vo.MemberVO;
 import com.kh.groumoa.member.model.vo.RegionVO;
 
 public class GroupService {
@@ -140,6 +141,16 @@ public class GroupService {
 		close(con);
 		System.out.println(selectedGroup);
 		return selectedGroup;
+	}
+
+	public ArrayList<GroupVO> selectMyGroupList(MemberVO loginUser) {
+		Connection con = getConnection();
+		
+		ArrayList<GroupVO> myGroupList = new GroupDao().selectMyGroupList(con, loginUser);
+		
+		close(con);
+		
+		return myGroupList;
 	}
 
 }
