@@ -1,6 +1,8 @@
 package com.kh.groumoa.group.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.groumoa.group.model.service.GroupService;
+import com.kh.groumoa.member.model.vo.MemberVO;
 
 /**
  * Servlet implementation class KickoutServlet
@@ -37,7 +40,7 @@ public class KickoutServlet extends HttpServlet {
 		
 		int result = new GroupService().deleteGroup(memberCode);
 		
-		ArrayList<Member> list = new GroupService().selectList();
+		ArrayList<MemberVO> list = new GroupService().selectList();
 		
 		String page = "";
 		if(result > 0) {
