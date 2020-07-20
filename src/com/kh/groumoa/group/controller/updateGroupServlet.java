@@ -59,7 +59,7 @@ public class updateGroupServlet extends HttpServlet {
 	            originFiles.add(multiRequest.getOriginalFileName(name));
 	         }
 			
-	        String groupCode = multiRequest.getParameter("groupCode");
+	        int groupCode = Integer.parseInt(multiRequest.getParameter("groupCode"));
 			String rnCode = multiRequest.getParameter("rnCode");
 			String name = multiRequest.getParameter("name");
 			String description = multiRequest.getParameter("description");

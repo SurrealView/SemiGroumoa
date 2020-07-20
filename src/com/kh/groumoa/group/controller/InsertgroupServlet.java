@@ -62,7 +62,6 @@ public class InsertgroupServlet extends HttpServlet {
 	            originFiles.add(multiRequest.getOriginalFileName(name));
 	         }
 			
-	        String groupCode = multiRequest.getParameter("groupCode");
 			String rnCode = multiRequest.getParameter("rnCode");
 			String name = multiRequest.getParameter("name");
 			String description = multiRequest.getParameter("description");
@@ -89,13 +88,10 @@ public class InsertgroupServlet extends HttpServlet {
 				memberInterest.setInterestCode(iarr[i]);
 				
 				requestMemberInterest.add(memberInterest);
-			}  
-*/			
-			System.out.println("grou[Code" + groupCode);
-			System.out.println(rnCode);
+			}  */
+		
 			
 			GroupVO group = new GroupVO();
-			group.setGroupCode(groupCode);
 			group.setInterestCode(interest);
 			group.setRnCode(rnCode);
 			group.setGroupName(name);
@@ -127,13 +123,15 @@ public class InsertgroupServlet extends HttpServlet {
 				fileList.add(at);
 			}
 			
-			System.out.println("fileList" + fileList);
+			/*System.out.println("fileList" + fileList);
+			
+			int result = new GroupService().insertGroup(group);*/
 				
 			int result = new GroupService().insertGroup(group, fileList);
 			System.out.println("servlet" + result);
 			
-			GroupVO selectGroup = new GroupService().selectOne(groupCode);
-			System.out.println(selectGroup);
+/*			GroupVO selectGroup = new GroupService().selectOne(groupCode);
+			System.out.println(selectGroup);*/
 			
 			RegionVO regionSearch = new GroupService().searchRegion(rnCode);
 			System.out.println(regionSearch);
@@ -146,7 +144,7 @@ public class InsertgroupServlet extends HttpServlet {
 				request.setAttribute("group", group);
 				request.setAttribute("fileList", fileList);
 				request.setAttribute("region", regionSearch);
-				request.setAttribute("selectGroup", selectGroup);
+/*				request.setAttribute("selectGroup", selectGroup);*/
 				System.out.println(group);
 				System.out.println(fileList);
 /*				response.sendRedirect(request.getContextPath() + "/views/group/groupUpdate.jsp");
@@ -162,7 +160,6 @@ public class InsertgroupServlet extends HttpServlet {
 			}
 			request.getRequestDispatcher(page).forward(request, response);	
 		}
-		
 	}
 
 	/**
