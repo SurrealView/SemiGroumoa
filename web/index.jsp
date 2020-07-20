@@ -33,7 +33,7 @@ body {
 		되는 운다. 남는 그들의 속잎나고, 뿐이다. 꽃이 귀는 이상이 소리다.이것은 소금이라 노래하며 그들은 이상 얼음에 이것이다.
 		인생의 인류의 소리다.이것은 인생에 이것이야말로 것이다. 따뜻한 앞이 이는 것은 힘차게 그림자는 행복스럽고 있으랴?</h4>
 	<%
-	String driver = "oracle.jdbc.driver.OracleDriver";
+	/* String driver = "oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:xe";
 	String user = "SEMI";
 	String password = "SEMI";
@@ -47,7 +47,7 @@ body {
 	} catch (SQLException e) {
 		e.printStackTrace();
 		System.out.println("오라클 연결 실패");
-	}
+	} */
 	%>
 </body>
 </html>

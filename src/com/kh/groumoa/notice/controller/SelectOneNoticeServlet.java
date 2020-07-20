@@ -50,6 +50,7 @@ public class SelectOneNoticeServlet extends HttpServlet {
 		if(no != null) {
 			page = "views/manager/notice/noticeDetail.jsp";
 			request.setAttribute("notice", no);
+			
 			if(fileList.size() > 0) {
 				request.setAttribute("fileList", fileList);
 			}

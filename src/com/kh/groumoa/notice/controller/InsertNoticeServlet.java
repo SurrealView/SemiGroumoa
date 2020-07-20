@@ -39,7 +39,6 @@ public class InsertNoticeServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//작성자 정보, 게시글 내용, 게시글 제목, 파일 경로 및 파일, 		
-		
 		if(ServletFileUpload.isMultipartContent(request)) {
 			int maxSize = 1024 * 1024 * 10;
 			

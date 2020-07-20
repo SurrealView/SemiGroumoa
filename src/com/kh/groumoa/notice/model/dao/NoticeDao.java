@@ -158,12 +158,11 @@ public class NoticeDao {
 		
 		try {
 			//insertAttachment=INSERT INTO TB_ATTACHMENT(FID, ORIGIN_NAME, CHANGE_NAME, FILE_PATH, UPLOAD_DATE, FILE_LEVEL, STATUS, NOTICE_CODE) VALUES(?, ?, ?, ?, SYSDATE, ?, 'Y', ?)
-			pstmt.setString(1, noAttach.getFid());
-			pstmt.setString(2, noAttach.getOriginName());
-			pstmt.setString(3, noAttach.getChangeName());
-			pstmt.setString(4, noAttach.getFilePath());
-			pstmt.setInt(5, noAttach.getFileLevel());
-			pstmt.setString(6, noAttach.getNid());
+			pstmt.setString(1, noAttach.getOriginName());
+			pstmt.setString(2, noAttach.getChangeName());
+			pstmt.setString(3, noAttach.getFilePath());
+			pstmt.setInt(4, noAttach.getFileLevel());
+			pstmt.setString(5, noAttach.getNid());
 			
 			result = inst().getResult();
 			
