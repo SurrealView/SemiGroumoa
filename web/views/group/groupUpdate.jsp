@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.kh.groumoa.group.model.vo.*, java.util.*" %>
+    pageEncoding="UTF-8" import="com.kh.groumoa.group.model.vo.*, com.kh.groumoa.member.model.vo.*, java.util.*" %>
 <%  GroupVO group = (GroupVO) request.getAttribute("group");
+	RegionVO region = (RegionVO) request.getAttribute("region");
+	GroupVO selectGroup = (GroupVO) request.getAttribute("selectGroup");
+	System.out.println(selectGroup);
 	ArrayList<Attachment> fileList = (ArrayList<Attachment>) request.getAttribute("fileList");
 	Attachment thumbNail = fileList.get(0);
 %>
@@ -167,13 +170,14 @@
         <tr>
             <td colspan="6" height="50px" style="border-right:hidden; border-top:hidden;">동호회이름
             &nbsp;<input type="text" style="width:350px" class="form-control" name="name" value="<%=group.getGroupName() %>" readonly>
-            <input type="hidden" name="groupCode"></td>
+            <input type="hidden" name="groupCode" value="<%=group.getGroupCode() %>"></td>
             <td colspan="6" height="50px" style="border-right:hidden; border-top:hidden;">개설일
             &nbsp;<input type="text" style="width:350px" class="form-control" name="openDate" value="<%=group.getOpenDate() %>" readonly>
         </tr>
         <tr>
             <td colspan="12" height="50px" style="border-right:hidden;">동호회 활동 지역
-            <select class="form-control" name="rnCode">
+            &nbsp;<input type="text" style="width:350px" class="form-control" name="rnCode" value="<%=region.getRegionName() %>" readonly>
+<!--             <select class="form-control" name="rnCode" readonly>
 	 				<option value="R0001">서울시 동작구</option>
 	 				<option value="R0002">서울시 강동구</option>
 	 				<option value="R0003">서울시 강서구</option>
@@ -199,7 +203,7 @@
 	 				<option value="R0023">서울시 송로구</option>
 	 				<option value="R0024">서울시 중구</option>
 	 				<option value="R0025">서울시 중랑구</option>
-	 			</select>
+	 			</select> -->
           <!-- &nbsp;<input type="text" style="width:350px" class="form-control" name="rnCode">  -->
             </td>
         </tr>
@@ -264,7 +268,7 @@
          </tr>
         <tr>
             <td colspan="8" height="250px" style="border-right:hidden;"><label style="float:left">동호회 소개</label>
-            &nbsp;&nbsp;<textarea id="groupIn" name="description" value="<%=group.getDescription() %>"></textarea></td>
+            &nbsp;&nbsp;<textarea id="groupIn" name="description" value="<%=selectGroup.getDescription() %>"></textarea></td>
         </tr>
         <tr>
             <td colspan="2" style="border-right:hidden;"></td>
@@ -286,7 +290,7 @@
         </tr>
         <tr>
             <td rowspan="12" colspan="20" style="border-right:hidden; border-bottom:hidden;"><label style="float:left;">우리 동호회 회칙 </label>
-            &nbsp;&nbsp;<textarea id="rule" name="groupRule" value="<%=group.getGroupRule() %>"></textarea></td>
+            &nbsp;&nbsp;<textarea id="rule" name="groupRule" value="<%=selectGroup.getGroupRule() %>"></textarea></td>
         </tr>
         </table>
           <br>
