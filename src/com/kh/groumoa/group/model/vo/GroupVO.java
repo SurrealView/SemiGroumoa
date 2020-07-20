@@ -13,13 +13,14 @@ public class GroupVO implements java.io.Serializable {
 	private Date openDate;
 	private String groupRule;
 	private String description;
+	private String status;
 	
 	
 	public GroupVO() {}
 
 
 	public GroupVO(String groupCode, String groupName, String rnCode, String interestCode, String nickNameyn,
-			String openYn, Date openDate, String groupRule, String description) {
+			String openYn, Date openDate, String groupRule, String description, String status) {
 		super();
 		this.groupCode = groupCode;
 		this.groupName = groupName;
@@ -30,6 +31,7 @@ public class GroupVO implements java.io.Serializable {
 		this.openDate = openDate;
 		this.groupRule = groupRule;
 		this.description = description;
+		this.status = status;
 	}
 
 
@@ -123,11 +125,22 @@ public class GroupVO implements java.io.Serializable {
 	}
 
 
+	public String getStatus() {
+		return status;
+	}
+
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+
 	@Override
 	public String toString() {
 		return "GroupVO [groupCode=" + groupCode + ", groupName=" + groupName + ", rnCode=" + rnCode + ", interestCode="
 				+ interestCode + ", nickNameyn=" + nickNameyn + ", openYn=" + openYn + ", openDate=" + openDate
-				+ ", groupRule=" + groupRule + ", description=" + description + "]";
+				+ ", groupRule=" + groupRule + ", description=" + description + ", status=" + status + "]";
 	}
+
 
 }

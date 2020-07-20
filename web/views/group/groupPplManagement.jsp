@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.kh.groumoa.member.model.vo.*, com.kh.groumoa.common.*, java.util.*" %>
+<%
+	MemberVO member = (MemberVO) request.getAttribute("member");
+	PageInfo pi = (PageInfo) request.getAttribute("pi");
+	int currentPage = pi.getCurrentPage();
+	int maxPage = pi.getMaxPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();	
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -157,96 +165,18 @@
                     </tr>
                   </thead>
                   <tbody>
+                  	<% for(GroupMember m : list) { %>   //GroupMember 랑 Member JOIN?
                     <tr>
+                      <input type="hidden" value="<%=mb.getGroupCode() %>">
                       <td><input type="checkbox"></td>
                       <td><a href="pplManagement-detail.jsp">1</a></td>
-                      <td>김승열</td>
-                      <td>모임장</td>
+                      <td><%= mb.getMemberCode() %></td>
+                      <td><%= mb.getGroupCode() %></td>
                       <td>010-1234-1234</td>
                       <td>yeori-kim@gmail.com</td>
                       <td>2020-07-01</td>
                     </tr>
-                    <tr>
-                      <td><input type="checkbox"></td>
-                        <td>2</td>
-                        <td>김형진</td>
-                        <td>총무</td>
-                        <td>010-1234-5678</td>
-                        <td>hyung@gmail.com</td>
-                        <td>2020-07-05</td>
-                      </tr>
-                      <tr>
-                        <td><input type="checkbox"></td>
-                        <td>3</td>
-                        <td>정상현</td>
-                        <td>회원</td>
-                        <td>010-1234-3333</td>
-                        <td>sang@gmail.com</td>
-                        <td>2020-07-05</td>
-                      </tr>
-                      <tr>
-                        <td><input type="checkbox"></td>
-                        <td>3</td>
-                        <td>정상현</td>
-                        <td>회원</td>
-                        <td>010-1234-3333</td>
-                        <td>sang@gmail.com</td>
-                        <td>2020-07-05</td>
-                      </tr>
-                      <tr>
-                        <td><input type="checkbox"></td>
-                        <td>3</td>
-                        <td>정상현</td>
-                        <td>회원</td>
-                        <td>010-1234-3333</td>
-                        <td>sang@gmail.com</td>
-                        <td>2020-07-05</td>
-                      </tr>
-                      <tr>
-                        <td><input type="checkbox"></td>
-                        <td>3</td>
-                        <td>정상현</td>
-                        <td>회원</td>
-                        <td>010-1234-3333</td>
-                        <td>sang@gmail.com</td>
-                        <td>2020-07-05</td>
-                      </tr>
-                     <tr>
-                        <td><input type="checkbox"></td>
-                        <td>3</td>
-                        <td>정상현</td>
-                        <td>회원</td>
-                        <td>010-1234-3333</td>
-                        <td>sang@gmail.com</td>
-                        <td>2020-07-05</td>
-                      </tr>
-                      <tr>
-                        <td><input type="checkbox"></td>
-                        <td>3</td>
-                        <td>정상현</td>
-                        <td>회원</td>
-                        <td>010-1234-3333</td>
-                        <td>sang@gmail.com</td>
-                        <td>2020-07-05</td>
-                      </tr>
-                     <tr>
-                        <td><input type="checkbox"></td>
-                        <td>3</td>
-                        <td>정상현</td>
-                        <td>회원</td>
-                        <td>010-1234-3333</td>
-                        <td>sang@gmail.com</td>
-                        <td>2020-07-05</td>
-                      </tr>
-                      <tr>
-                        <td><input type="checkbox"></td>
-                        <td>3</td>
-                        <td>정상현</td>
-                        <td>회원</td>
-                        <td>010-1234-3333</td>
-                        <td>sang@gmail.com</td>
-                        <td>2020-07-05</td>
-                      </tr>
+                    <% } %>
                   </tbody>
                 </table>
                 </div>
@@ -363,7 +293,7 @@
                 <!-- 회원일 경우 끝 -->
                 
                 <br>
-                <div class="pagination-div">
+<!--                 <div class="pagination-div">
                 <ul class="pagination">
                 	<li class="page-item"><a class="page-link" href="#"><<</a></li>
   					<li class="page-item"><a class="page-link" href="#"><</a></li>
@@ -376,7 +306,35 @@
   					<li class="page-item"><a class="page-link" href="#">>></a></li>
 				</ul>
 				</div>
-
+ -->		
+ 				<div class="pagination-div" align="center">
+					<button onclick="location.href='<%=request.getContextPath()%>/groupPpl.bo?currentPage=1'"><<</button>
+					
+					<% if(currentPage <= 1) { %>
+					<button disabled><</button>
+					<% } else { %>
+					<button onclick="location.href='<%=request.getContextPath()%>/groupPpl.bo?currentPage=<%=currentPage - 1%>'"><</button>
+					<% } %>
+					
+					<% for(int p = startPage; p <= endPage; p++) { 
+							if(p == currentPage) {
+					%>
+								<button disabled><%= p %></button>
+					<%      } else { %>
+								<button onclick="location.href='<%=request.getContextPath()%>/groupPpl.bo?currentPage=<%=p%>'"><%= p %></button>
+					<%  
+					        }
+						}
+					%>
+					
+					<% if(currentPage >= maxPage) { %>
+					<button disabled>></button>
+					<% } else { %>
+					<button onclick="location.href='<%=request.getContextPath()%>/groupPpl.bo?currentPage=<%=currentPage + 1%>'">></button>
+					<% } %>
+				
+					<button onclick="location.href='<%=request.getContextPath()%>/groupPpl.bo?currentPage=<%=maxPage%>'">>></button>
+				</div>
 				
 				<button class="kickBtn">강퇴하기</button>
 				<button class="inviteBtn">초대하기</button>
