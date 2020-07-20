@@ -42,7 +42,7 @@
 		<h2>모임관리</h2>
 		<div class="sub-menubar" id="sub-menubar">
 			<div class="sub-menubar-each" id="sub1"><a href="#">동호회페이지</a></div>
-			<div class="sub-menubar-each" id="sub2"><a href="#">회비내역</a></div>
+			<div class="sub-menubar-each" id="sub2"><a href="feeList.jsp">회비내역</a></div>
 			<div class="sub-menubar-each" id="sub3"><a href="#">모임인원</a></div>
 			<div class="sub-menubar-each" id="sub4"><a href="boardManagement.jsp">게시판관리</a></div>
 			<div class="sub-menubar-each" id="sub5"><a href="#">모임해산</a></div>
