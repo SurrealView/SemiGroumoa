@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.kh.groumoa.group.model.vo.BoardVO"%>
+<%BoardVO b = (BoardVO) request.getAttribute("board"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -80,7 +81,7 @@
 </head>
 <body>
 	<!-- 여기 헤더 추가할것 -->
-	<%@include file="../common/header/header_old.html" %>
+	<%@include file="../common/header/newHeader.jsp" %>
 	<%@include file="subMenubar.jsp" %>
 	<br>
 	<div class="content">
@@ -98,19 +99,18 @@
 			<div class="form-area">
 				<form>
 					<label for="title">제목</label>&nbsp;&nbsp;
-					<input type="text" class="form-control title" value="방가방가" id="title" style="width:350px">&nbsp;
+					<input type="text" class="form-control title" id="title" style="width:350px" name="title" value="<%=b.getTitle() %>>">&nbsp;
 					<br><br>
 					<label for="category">분류</label>&nbsp;&nbsp;
-					<select class="form-control category" id="category"><!-- 분류 뭐뭐있는지 정하기 -->
-						<option value="common">일반</option>
-						<option value="notice">공지</option>
-						<option value="greeting">가입인사</option>
-					</select>&nbsp;&nbsp;
+					<input type="text" class="form-control category" id="category" name="category" value="<%=b.getCategoryName()%>">&nbsp;&nbsp;
 					<label for="writer">작성자</label>&nbsp;&nbsp;
-					<input type="text" class="form-control writer" value="김형진" readonly>&nbsp;&nbsp;
+					<input type="text" class="form-control writer" value="<%=b.getMemberName() %>" readonly>&nbsp;&nbsp;
 					<label for="date-written">작성일</label>&nbsp;&nbsp;
-					<input type="date" readonly><br><br>
-					<textarea class="form-control" cols="120" rows="20" style="resize:none;"></textarea>
+					<input type="date" id="currentDate" value="<%=b.getPostDate() %>" readonly><br><br>
+					<textarea class="form-control" cols="120" rows="20" style="resize:none;" name="content"><%=b.getDetail()%></textarea>
+					<br><br>
+					<label for="attachment">첨부파일</label>&nbsp;<!-- 첨부파일 다운로드 로직 추가 -->
+					<input type="file" class="attachment" id="attachment" name="attachment">
 					<br><br>
 					<button class="btn btn-danger" onclick="">삭제하기</button>
 					<!-- 자기 자신의 게시글일 경우에만 보임 -->

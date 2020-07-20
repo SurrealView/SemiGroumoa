@@ -3,9 +3,9 @@ package com.kh.groumoa.group.model.vo;
 import java.sql.Date;
 
 public class BoardVO implements java.io.Serializable {
-	private String postCode;
+	private int postCode;
 	private String categoryCode;
-	private String groupCode;
+	private int groupCode;
 	private int writerCode;//만약 string으로 바뀐다면 수정
 	private String title;
 	private String detail;
@@ -23,13 +23,7 @@ public class BoardVO implements java.io.Serializable {
 	
 	
 
-	
-	
-
-
-
-
-	public BoardVO(String postCode, String categoryCode, String groupCode, int writerCode, String title, String detail,
+	public BoardVO(int postCode, String categoryCode, int groupCode, int writerCode, String title, String detail,
 			Date postDate, String status, String categoryName, String memberName, int pcount) {
 		super();
 		this.postCode = postCode;
@@ -44,12 +38,6 @@ public class BoardVO implements java.io.Serializable {
 		this.memberName = memberName;
 		this.pcount = pcount;
 	}
-
-
-
-
-
-
 
 
 
@@ -76,21 +64,30 @@ public class BoardVO implements java.io.Serializable {
 
 
 
+	public int getPostCode() {
+		return postCode;
+	}
 
-	public String getGroupCode() {
+
+
+	public void setPostCode(int postCode) {
+		this.postCode = postCode;
+	}
+
+
+
+	public int getGroupCode() {
 		return groupCode;
 	}
 
-	public void setGroupCode(String groupCode) {
+
+
+	public void setGroupCode(int groupCode) {
 		this.groupCode = groupCode;
 	}
 
-	public String getPostCode() {
-		return postCode;
-	}
-	public void setPostCode(String postCode) {
-		this.postCode = postCode;
-	}
+
+
 	public String getCategoryCode() {
 		return categoryCode;
 	}
@@ -151,12 +148,6 @@ public class BoardVO implements java.io.Serializable {
 
 
 
-
-
-
-
-
-
 	@Override
 	public String toString() {
 		return "BoardVO [postCode=" + postCode + ", categoryCode=" + categoryCode + ", groupCode=" + groupCode
@@ -165,7 +156,12 @@ public class BoardVO implements java.io.Serializable {
 				+ pcount + "]";
 	}
 
-	
+
+
+
+
+
+
 
 	
 	
