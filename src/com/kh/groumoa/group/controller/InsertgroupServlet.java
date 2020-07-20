@@ -79,14 +79,14 @@ public class InsertgroupServlet extends HttpServlet {
 */			
 			System.out.println("interest" + interest);
 		
-			ArrayList<MemberInterestVO> requestMemberInterest = new ArrayList<MemberInterestVO>();
+/*			ArrayList<MemberInterestVO> requestMemberInterest = new ArrayList<MemberInterestVO>();
 			for(int i = 0; i < iarr.length; i++) {
 				MemberInterestVO memberInterest = new MemberInterestVO();
 				memberInterest.setInterestCode(iarr[i]);
 				
 				requestMemberInterest.add(memberInterest);
 			}  
-			
+*/			
 			GroupVO group = new GroupVO();
 			group.setInterestCode(interest);
 			group.setRnCode(rnCode);
