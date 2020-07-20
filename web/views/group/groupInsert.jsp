@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	GroupVO group = (GroupVO) request.getAttribute("group");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -163,12 +166,14 @@
         <tr>
             <td colspan="6" height="50px" style="border-right:hidden; border-top:hidden;">동호회이름
             &nbsp;<input type="text" style="width:350px" class="form-control" name="name">
-            <input type="hidden" name="groupCode"></td>
+            <input type="hidden" name="groupCode" value="<%=group.getGroupCode() %>"></td>
             <td colspan="6" height="50px" style="border-right:hidden; border-top:hidden;">개설일
             &nbsp;<input type="text" style="width:350px" class="form-control" name="openDate" readonly>
         </tr>
         <tr>
             <td colspan="12" height="50px" style="border-right:hidden;">동호회 활동 지역
+            <input type="hidden" name="regionName">
+            <input type="hidden" name="regionSpecific">
             <select class="form-control" name="rnCode">
 	 				<option value="R0001">서울시 동작구</option>
 	 				<option value="R0002">서울시 강동구</option>

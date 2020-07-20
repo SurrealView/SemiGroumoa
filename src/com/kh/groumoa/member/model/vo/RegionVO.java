@@ -47,5 +47,4 @@ public class RegionVO implements java.io.Serializable {
 	}
 	
 	
-	
 }

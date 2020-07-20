@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import com.kh.groumoa.group.model.dao.GroupDao;
 import com.kh.groumoa.group.model.vo.Attachment;
 import com.kh.groumoa.group.model.vo.GroupVO;
+import com.kh.groumoa.member.model.vo.RegionVO;
 
 public class GroupService {
 	
@@ -45,6 +46,42 @@ public class GroupService {
 		
 		return result;
 	}
+	
+	//지역 조회
+	public RegionVO searchRegion(String rnCode) {
+		Connection con = getConnection();
+		
+		RegionVO region = new GroupDao().searchRegion(con, rnCode);
+		
+		if(region != null) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		close(con);		
+		
+		return region;
+	}
+	
+	//동호회 입력내용 조회
+	public GroupVO selectOne(String groupCode) {
+		Connection con = getConnection();
+		int result = 0;
+		
+		GroupVO selectedGroup = new GroupDao().selectGroup(con, groupCode);
+		System.out.println(selectedGroup);
+		if(selectedGroup != null) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		close(con);
+		
+		return selectedGroup;
+	}
+
 	
 	//동호회 기본정보 수정
 	public int updateGroup(GroupVO group, ArrayList<Attachment> fileList) {
@@ -82,22 +119,7 @@ public class GroupService {
 	}
 	
 	//동호회페이지 동호회 조회
-	public GroupVO selectOne(String groupCode) {
-		Connection con = getConnection();
-		int result = 0;
-		
-		GroupVO selectedGroup = new GroupDao().selectGroup(con, groupCode);
-		
-		if(selectedGroup != null) {
-			commit(con);
-		} else {
-			rollback(con);
-		}
-		
-		close(con);
-		
-		return selectedGroup;
-	}
+	
 	
 /*	//동호회 
 	public GroupVO selectOne(String groupCode) {
