@@ -74,7 +74,6 @@ public class InsertSchedulerServlet extends HttpServlet {
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
 //		request.getRequestDispatcher(page).forward(request, response);
-
 	}
 
 	/**

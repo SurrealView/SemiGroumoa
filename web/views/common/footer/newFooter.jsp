@@ -111,7 +111,8 @@
 		<div class="footer">
 			<div class="inner-footer">
 				<div class="logo">
-					<img src="../../../resources/image/logo_groumoa2.png"> <br>
+					<!-- <img src="../../../resources/image/logo_groumoa2.png"> -->
+					<img src="/groumoa/resources/image/logo_groumoa2.png"> <br>
 					<br>
 					<div class="copyright">
 						그루모아는 통신판매중개자이며 모임에 대한 당사자 및 주최자가 아닙니다.<br> 
