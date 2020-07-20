@@ -64,19 +64,19 @@ public class InsertgroupServlet extends HttpServlet {
 			String rnCode = multiRequest.getParameter("rnCode");
 			String name = multiRequest.getParameter("name");
 			String description = multiRequest.getParameter("description");
-			String [] iarr = request.getParameterValues("interest");
-/*			String interest = multiRequest.getParameter("interest");
-*/			String openYn = multiRequest.getParameter("openYn");
+/*			String [] iarr = request.getParameterValues("interest");
+*/			String interest = multiRequest.getParameter("interest");
+			String openYn = multiRequest.getParameter("openYn");
 			String nickNameyn = multiRequest.getParameter("nickNameyn");
 			String groupRule = multiRequest.getParameter("groupRule");
 			
-			String interest = "";
+/*			String interest = "";
 			if(iarr != null) {
 				for(int i = 0; i < iarr.length; i++) {
 					interest += iarr[i];
 				}
 			}
-			
+*/			
 			System.out.println("interest" + interest);
 		
 			ArrayList<MemberInterestVO> requestMemberInterest = new ArrayList<MemberInterestVO>();
