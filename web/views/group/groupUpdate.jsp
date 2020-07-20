@@ -3,6 +3,7 @@
 <%  GroupVO group = (GroupVO) request.getAttribute("group");
 	RegionVO region = (RegionVO) request.getAttribute("region");
 	GroupVO selectGroup = (GroupVO) request.getAttribute("selectGroup");
+	GroupVO insertGroup = (GroupVO) request.getAttribute("insertGroup");
 	System.out.println(selectGroup);
 	ArrayList<Attachment> fileList = (ArrayList<Attachment>) request.getAttribute("fileList");
 	Attachment thumbNail = fileList.get(0);
@@ -169,10 +170,10 @@
 	  <table border="1">
         <tr>
             <td colspan="6" height="50px" style="border-right:hidden; border-top:hidden;">동호회이름
-            &nbsp;<input type="text" style="width:350px" class="form-control" name="name" value="<%=group.getGroupName() %>" readonly>
-            <input type="hidden" name="groupCode" value="<%=group.getGroupCode() %>"></td>
+            &nbsp;<input type="text" style="width:350px" class="form-control" name="name" value="<%=selectGroup.getGroupName()%>" readonly>
+            <input type="hidden" name="groupCode" value="<%=selectGroup.getGroupCode() %>"></td>
             <td colspan="6" height="50px" style="border-right:hidden; border-top:hidden;">개설일
-            &nbsp;<input type="text" style="width:350px" class="form-control" name="openDate" value="<%=group.getOpenDate() %>" readonly>
+            &nbsp;<input type="text" style="width:350px" class="form-control" name="openDate" value="<%=selectGroup.getOpenDate() %>" readonly>
         </tr>
         <tr>
             <td colspan="12" height="50px" style="border-right:hidden;">동호회 활동 지역

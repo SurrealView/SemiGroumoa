@@ -60,10 +60,10 @@ public class GroupDao {
 		return result;
 	}
 
-	public String selectCurrval(Connection con) {
+	public int selectCurrval(Connection con) {
 		Statement stmt = null;
 		ResultSet rset = null;
-		String groupCode = "";
+		int groupCode = 0;
 		
 		String query = prop.getProperty("selectCurrval");
 		
@@ -72,15 +72,15 @@ public class GroupDao {
 			rset = stmt.executeQuery(query);
 			
 			if(rset.next()) {
-				int id = rset.getInt("currval");
+				groupCode = rset.getInt("currval");
 				
 //				groupCode = Integer.toString(id);
 				
-				if(id < 10) {
+/*				if(id < 10) {
 					groupCode = "G000"+ id;					
 				} else if(id >= 10) {
 					groupCode = "G00" + id;
-				}
+				}*/
 			}
 			
 		} catch (SQLException e) {
@@ -106,7 +106,7 @@ public class GroupDao {
 			pstmt.setString(2, attachment.getChangeName());
 			pstmt.setString(3, attachment.getFilePath());
 			pstmt.setInt(4, attachment.getFileLevel());
-			pstmt.setString(5, attachment.getGroupCode());
+			pstmt.setInt(5, attachment.getGroupCode());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -161,7 +161,7 @@ public class GroupDao {
 			pstmt.setString(2, group.getNickNameyn());
 			pstmt.setString(3, group.getGroupRule());
 			pstmt.setString(4, group.getDescription());
-			pstmt.setString(5, group.getGroupCode());
+			pstmt.setInt(5, group.getGroupCode());
 
 			result = pstmt.executeUpdate();
 			
@@ -190,7 +190,7 @@ public class GroupDao {
 			if(rset.next()) {
 				group = new GroupVO();
 				
-				group.setGroupCode(rset.getString("GROUP_CODE"));
+				group.setGroupCode(rset.getInt("GROUP_CODE"));
 				group.setGroupName(rset.getString("GROUP_NAME"));
 				group.setInterestCode(rset.getString("INTEREST_CODE"));
 				group.setOpenYn(rset.getString("OPEN_YN"));
@@ -225,7 +225,7 @@ public class GroupDao {
 			pstmt.setString(2, attachment.getChangeName());
 			pstmt.setString(3, attachment.getFilePath());
 			pstmt.setInt(4, attachment.getFileLevel());
-			pstmt.setString(5, attachment.getGroupCode());
+			pstmt.setInt(5, attachment.getGroupCode());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -252,7 +252,7 @@ public class GroupDao {
 		
 		try {
 			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, requestGroup.getGroupCode());
+			pstmt.setInt(1, requestGroup.getGroupCode());
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {

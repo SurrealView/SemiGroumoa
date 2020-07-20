@@ -1,8 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
-	GroupVO group = (GroupVO) request.getAttribute("group");
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -166,7 +163,7 @@
         <tr>
             <td colspan="6" height="50px" style="border-right:hidden; border-top:hidden;">동호회이름
             &nbsp;<input type="text" style="width:350px" class="form-control" name="name">
-            <input type="hidden" name="groupCode" value="<%=group.getGroupCode() %>"></td>
+            <input type="hidden" name="groupCode"></td>
             <td colspan="6" height="50px" style="border-right:hidden; border-top:hidden;">개설일
             &nbsp;<input type="text" style="width:350px" class="form-control" name="openDate" readonly>
         </tr>

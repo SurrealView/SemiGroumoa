@@ -24,7 +24,7 @@ public class GroupService {
 		result1 = new GroupDao().insertThumbnailContent(con, group);
 		
 		if(result1 > 0) {
-			String groupCode = new GroupDao().selectCurrval(con);
+			int groupCode = new GroupDao().selectCurrval(con);
 			
 			for(int i = 0; i < fileList.size(); i++) {
 				fileList.get(i).setGroupCode(groupCode);
@@ -93,7 +93,7 @@ public class GroupService {
 		result1 = new GroupDao().updateThumbnailContent(con, group);
 		
 		if(result1 > 0) {
-			String groupCode = new GroupDao().selectCurrval(con);
+			int groupCode = new GroupDao().selectCurrval(con);
 			
 			for(int i = 0; i < fileList.size(); i++) {
 				fileList.get(i).setGroupCode(groupCode);

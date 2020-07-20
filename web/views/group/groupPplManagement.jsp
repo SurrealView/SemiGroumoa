@@ -165,16 +165,16 @@
                     </tr>
                   </thead>
                   <tbody>
-                  	<% for(GroupMember m : list) { %>   //GroupMember 랑 Member JOIN?
+                  	<% for(Member m : list) { %>
                     <tr>
-                      <input type="hidden" value="<%=mb.getGroupCode() %>">
+                      <input type="hidden" value="<%=m.getMemberCode() %>">
                       <td><input type="checkbox"></td>
-                      <td><a href="pplManagement-detail.jsp">1</a></td>
-                      <td><%= mb.getMemberCode() %></td>
-                      <td><%= mb.getGroupCode() %></td>
-                      <td>010-1234-1234</td>
-                      <td>yeori-kim@gmail.com</td>
-                      <td>2020-07-01</td>
+                      <td><a href="pplManagement-detail.jsp"><%= i++ %></a></td>
+                      <td><%= m.getMemberCode() %></td>
+                      <td><%= ??.getGroupCode() %></td>
+                      <td><%= m.getPhone() %></td>
+                      <td><%= m.getEmail() %></td>
+                      <td><%= m.getEnrollDate() %></td>
                     </tr>
                     <% } %>
                   </tbody>
