@@ -150,7 +150,7 @@
 			<td id="blank"></td>
 			<td class="my-menu"><a href="#">추천 동호회</a></td>
 			<%if(loginUser != null) { %>
-			<td class="my-menu"><a href="#">가입한 동호회</a></td>
+			<td class="my-menu"><a href="/groumoa/views/group/myGroupList.jsp">가입한 동호회</a></td>
 			<% } %>
 			<td class="my-menu"><a href="#">공지사항</a></td>
 			<td class="my-menu"><a href="#">QnA</a></td>
