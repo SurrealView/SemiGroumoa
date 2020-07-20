@@ -47,7 +47,7 @@ private Properties prop = new Properties();
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, requestBoard.getCategoryCode());
-			pstmt.setString(2, requestBoard.getGroupCode());
+			pstmt.setInt(2, requestBoard.getGroupCode());
 			pstmt.setInt(3, requestBoard.getWriterCode());
 			pstmt.setString(4, requestBoard.getTitle());
 			pstmt.setString(5, requestBoard.getDetail());
@@ -72,7 +72,7 @@ private Properties prop = new Properties();
 		
 		try {
 			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, board.getGroupCode());
+			pstmt.setInt(1, board.getGroupCode());
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
@@ -112,7 +112,7 @@ private Properties prop = new Properties();
 			
 			while(rset.next()) {
 				BoardVO b = new BoardVO();
-				b.setPostCode(rset.getString("POST_CODE"));
+				b.setPostCode(rset.getInt("POST_CODE"));
 				b.setCategoryName(rset.getString("CATEGORY_NAME"));
 				b.setMemberName(rset.getString("MEMBER_NAME"));
 				b.setTitle(rset.getString("TITLE"));
@@ -168,7 +168,7 @@ private Properties prop = new Properties();
 			if(rset.next()) {
 				board = new BoardVO();
 				board.setCategoryName(rset.getString("CATEGORY_NAME"));
-				board.setPostCode(rset.getString("POST_CODE"));
+				board.setPostCode(rset.getInt("POST_CODE"));
 				board.setMemberName(rset.getString("MEMBER_NAME"));
 				board.setTitle(rset.getString("TITLE"));
 				board.setDetail(rset.getString("DETAIL"));

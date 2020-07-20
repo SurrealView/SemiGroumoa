@@ -38,8 +38,7 @@ public class BoardService {
 		int listCount = new BoardDao().getListCount(con, board);
 		
 		close(con);
-		
-		
+
 		return listCount;
 	}
 	

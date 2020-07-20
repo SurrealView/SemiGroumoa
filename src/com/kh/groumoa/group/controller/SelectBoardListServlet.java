@@ -43,7 +43,7 @@ public class SelectBoardListServlet extends HttpServlet {
 				currentPage = 1;
 				
 				//그룹코드 받아오기
-				String groupCode = request.getParameter("groupCode");
+				int groupCode = Integer.parseInt(request.getParameter("groupCode"));
 				
 				BoardVO board = new BoardVO();
 				board.setGroupCode(groupCode);
