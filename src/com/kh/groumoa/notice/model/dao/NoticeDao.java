@@ -188,10 +188,13 @@ public class NoticeDao {
 			
 			rset = pstmt.executeQuery();
 			
+			no = new NoticeVo();
+			
 			if(rset.next()) {
 				//N.NOTICE_CATEGORY, N.NOTICE_TITLE, 
 				//N.NOTICE_DETAIL, N.NOTICE_DATE, M.MANAGER_CODE, M.MANAGER_ID 
-				no.setnNo(noticeId);
+				String nno = noticeId.replace("N", "");
+				no.setnNo(nno);
 				no.setNoticeCode(noticeId);
 				no.setMnWriterCode(rset.getString("MANAGER_CODE"));
 				no.setMnWriterID(rset.getString("MANAGER_ID"));
@@ -261,6 +264,58 @@ public class NoticeDao {
 		}
 		
 		return hmap;
+	}
+
+	public int updateNotice(NoticeVo no) {
+		// TODO Auto-generated method stub
+		//updateNotice=UPDATE NOTICE SET NOTICE_CATEGORY = ?, NOTICE_TITLE = ?, NOTICE_DETAIL = ? WHERE NOTICE_CODE = ?		
+		inst().setProp("/sql/notice/notice.properties");
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		pstmt = inst().getPstmt("updateNotice");
+		
+		try {
+			pstmt.setString(1, no.getNoticeCategory());
+			pstmt.setString(2, no.getNoticeTitle());
+			pstmt.setString(3, no.getNoticeDetail());
+			pstmt.setString(4, no.getNoticeCode());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			inst().closePstmt();
+		}
+				
+		
+		return result;
+	}
+
+	public int updateAttachment(NoAttach noAttach) {
+		PreparedStatement pstmt = null;		
+		int result = 0;
+		inst().setProp("/sql/notice/notice.properties");
+		pstmt = inst().getPstmt("updateAttachment");
+		//FID, NID문제
+		try {			
+			//updateAttachment=UPDATE TB_ATTACHMENT SET ORIGIN_NAME = ?, FILE_LEVEL = ? WHERE FID = ? AND NOTICE_CODE = ?
+			pstmt.setString(1, noAttach.getOriginName());
+			pstmt.setInt(2, noAttach.getFileLevel());			
+			pstmt.setString(3, noAttach.getFid());
+			pstmt.setString(4, noAttach.getNid());
+			
+			result = inst().getResult();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			inst().closePstmt();
+		}
+				
+		return result;
 	}	
 
 }

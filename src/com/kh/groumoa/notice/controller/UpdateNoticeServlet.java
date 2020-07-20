@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,16 +21,16 @@ import com.kh.groumoa.notice.model.vo.NoticeVo;
 import com.oreilly.servlet.MultipartRequest;
 
 /**
- * Servlet implementation class InsertNoticeServlet
+ * Servlet implementation class UpdateNoticeServlet
  */
-@WebServlet("/insert.no")
-public class InsertNoticeServlet extends HttpServlet {
+@WebServlet("/update.no")
+public class UpdateNoticeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public InsertNoticeServlet() {
+    public UpdateNoticeServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,28 +39,40 @@ public class InsertNoticeServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//작성자 정보, 게시글 내용, 게시글 제목, 파일 경로 및 파일, 		
 		if(ServletFileUpload.isMultipartContent(request)) {
+			
 			int maxSize = 1024 * 1024 * 10;
 			
 			String root = request.getSession().getServletContext().getRealPath("/");
 			String savePath = root + "notice_uploadFiles/";
-			
-			String filestr = request.getParameter("notice_upload");
-			
-			//이 순간 파일이 생성.
+						
 			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
+			
+			String noticeId = multiRequest.getParameter("noticeId");
+			
+			HashMap<String, Object> hmap = new NoticeService().selectFileMap(noticeId);
+			//NoticeVo no = new NoticeService().selectOne(noticeId);
+			
+			NoticeVo no = (NoticeVo) hmap.get("notice");
+			ArrayList<NoAttach> oldFileList = (ArrayList<NoAttach>) hmap.get("attach");	
+
+			
+			int fileListIdx = 0;
 			
 			ArrayList<String> saveFiles = new ArrayList<>();
 			ArrayList<String> originFiles = new ArrayList<>();
+			ArrayList<File> newFiles = new ArrayList<File>();
 			
 			Enumeration<String> files = multiRequest.getFileNames();
 			
 			while(files.hasMoreElements()) {
 				String name = files.nextElement();
 				
-				saveFiles.add(multiRequest.getFilesystemName(name));
-				originFiles.add(multiRequest.getOriginalFileName(name));
+				saveFiles.add(multiRequest.getFilesystemName(name));				
+				
+				originFiles.add(multiRequest.getOriginalFileName(name));				
+				
+				newFiles.add(multiRequest.getFile(name));				
 			}
 			
 			String multiTitle = multiRequest.getParameter("noTitle");
@@ -69,14 +82,11 @@ public class InsertNoticeServlet extends HttpServlet {
 			String category = multiRequest.getParameter("kind");
 			
 			//String noticeWriter = ((Manager) (request.getSession().getAttribute("loginUswer"))).getManagerCode();
-			
-			NoticeVo no = new NoticeVo();
-			
+			no.setNoticeCategory(noticeId);
 			no.setNoticeTitle(multiTitle);
 			no.setNoticeDetail(multiContent);
 			//no.setMnWriterID(multiWriter);			
-			//no.setMnWriterID("M1");
-			no.setMnWriterCode("M1");
+			//no.setMnWriterID("M1");		
 			no.setNoticeCategory(category);
 			
 			ArrayList<NoAttach> fileList = new ArrayList<>();
@@ -84,7 +94,7 @@ public class InsertNoticeServlet extends HttpServlet {
 			for(int i = originFiles.size() - 1; i >= 0; i--) {
 				NoAttach at = new NoAttach();
 				
-				at.setFid("F" + i);
+				//at.setFid("F" + i);
 				at.setFilePath(savePath);
 				at.setOriginName(originFiles.get(i));
 				at.setChangeName(saveFiles.get(i));
@@ -103,9 +113,25 @@ public class InsertNoticeServlet extends HttpServlet {
 //			String email = (String)request.getParameter("noEmail");
 //			String content = (String)request.getParameter("noContent");
 			
-			int result = new NoticeService().insertNotice(no, fileList);
+			int result = new NoticeService().updateNotice(no, fileList, oldFileList);
 			
-			if(result > 0) {
+			if(result > 0) {								
+				for(int i = 0; i < oldFileList.size(); i++) {
+					if(i >= newFiles.size()) {
+						break;
+					}
+					String oldName = savePath + oldFileList.get(i).getChangeName();
+					File oldFile = new File(oldName);
+					oldFile.delete();
+					File overFile = new File(oldName);
+					newFiles.get(i).renameTo(overFile);
+				}
+				
+				for(int i = 0; i < saveFiles.size(); i++) {
+					File failedFile = new File(savePath + saveFiles.get(i));
+					
+					failedFile.delete();
+				}
 				response.sendRedirect(request.getContextPath() + "/selectList.no");
 			} else {
 				for(int i = 0; i < saveFiles.size(); i++) {

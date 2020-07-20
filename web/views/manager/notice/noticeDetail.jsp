@@ -5,6 +5,9 @@
 	ArrayList<NoAttach> list = (ArrayList<NoAttach>) request.getAttribute("fileList");
 	int idx = 0;
 	NoAttach attach = list.get(idx);
+	
+	String fileList = "";
+		
 %>
 <!DOCTYPE html>
 <html>
@@ -19,9 +22,9 @@
 	<%@ include file="/views/manager/menubar.jsp" %>
 	<div class="noticeSection">
         <div class="noticeInfo" align="center">
-            <table class="noticeArea">
+            <table class="noticeArea">s
                 <tr>
-                	<input type="hidden" name="noticeId" value="<%=notice.getNoticeCode() %>">
+                	<input type="hidden" name="noticeId" value="<%=notice.getNoticeCode() %>">                	
                     <td colspan="7"><strong>공지사항</strong></td>
                 </tr>
                 <tr>
@@ -49,13 +52,14 @@
                     <td><label>내용</label></td>
                     <!-- <td colspan="6"><textarea cols="62" rows="10" style="resize:none"></textarea></td> -->
                     <td colspan="6"><%=notice.getNoticeDetail() %><br>
-<%--                     <img src="<%=request.getContextPath() %>/notice_uploadFiles/<%=attach.getChangeName() %>"> --%>
+                    <img src="<%=request.getContextPath() %>/notice_uploadFiles/<%=attach.getChangeName() %>">
 <%--                     <img id="titleImg" src="<%=request.getContextPath() %>/thumbnail_uploadFiles/<%=titleImg.getChangeName() %>">	 --%>
                     </td>
                 </tr>
             </table>
             <button type="submit" class="noDetailBtn" id="gotoNoticeMenu">목록</button>
-            <button type="submit" class="noDetailBtn" id="adjust">수정하기</button>
+            <!-- <button type="submit" class="noDetailBtn" id="adjust">수정하기</button> -->
+            <button id="adjust" onclick="location.href='<%=request.getContextPath()%>/select.no?num=<%=notice.getnNo()%>'">수정하기</button>
         </div>      
                         <!-- <span>내용</span> -->                
     </div>

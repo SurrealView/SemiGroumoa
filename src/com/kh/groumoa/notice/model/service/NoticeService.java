@@ -105,7 +105,7 @@ public class NoticeService {
 		return hmap;
 	}
 
-	public int updateNotice(NoticeVo no, ArrayList<NoAttach> fileList) {
+	public int updateNotice(NoticeVo no, ArrayList<NoAttach> fileList, ArrayList<NoAttach> oldFileList) {
 		int result = 0;
 		
 		inst().setProp("/sql/driver.properties");
@@ -117,14 +117,20 @@ public class NoticeService {
 		result = nd.updateNotice(no);
 		
 		if(result > 0) {
-			String noId = nd.selectCurrId();
+			//String noId = nd.selectCurrId();
 			
 			result = 0;
 			
 			for(int i = 0; i < fileList.size(); i++) {
-				fileList.get(i).setNid(noId);
+				fileList.get(i).setNid(no.getNoticeCategory());
 				
-				result += nd.updateAttachment(fileList.get(i));
+				if(i < oldFileList.size()) {
+					fileList.get(i).setFid(oldFileList.get(i).getFid());
+					fileList.get(i).setNid(no.getNoticeCode());
+					result += nd.updateAttachment(fileList.get(i));
+				} else {
+					result += nd.insertAttachment(fileList.get(i));
+				}
 			}
 		}
 		
