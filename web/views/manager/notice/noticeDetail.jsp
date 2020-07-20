@@ -21,6 +21,7 @@
         <div class="noticeInfo" align="center">
             <table class="noticeArea">
                 <tr>
+                	<input type="hidden" name="noticeId" value="<%=notice.getNoticeCode() %>">
                     <td colspan="7"><strong>공지사항</strong></td>
                 </tr>
                 <tr>
@@ -47,7 +48,10 @@
                 <tr>
                     <td><label>내용</label></td>
                     <!-- <td colspan="6"><textarea cols="62" rows="10" style="resize:none"></textarea></td> -->
-                    <td colspan="6"><%=notice.getNoticeDetail() %><br><%=attach.getChangeName() %></td>
+                    <td colspan="6"><%=notice.getNoticeDetail() %><br>
+<%--                     <img src="<%=request.getContextPath() %>/notice_uploadFiles/<%=attach.getChangeName() %>"> --%>
+<%--                     <img id="titleImg" src="<%=request.getContextPath() %>/thumbnail_uploadFiles/<%=titleImg.getChangeName() %>">	 --%>
+                    </td>
                 </tr>
             </table>
             <button type="submit" class="noDetailBtn" id="gotoNoticeMenu">목록</button>
