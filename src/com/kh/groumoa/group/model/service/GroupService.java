@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import com.kh.groumoa.group.model.dao.GroupDao;
 import com.kh.groumoa.group.model.vo.Attachment;
 import com.kh.groumoa.group.model.vo.GroupVO;
+import com.kh.groumoa.member.model.vo.MemberVO;
 import com.kh.groumoa.member.model.vo.RegionVO;
 
 public class GroupService {
@@ -118,6 +119,33 @@ public class GroupService {
 		return result;
 	}
 	
+	//동호회 회원 추방
+	public int kickOut (int memberCode) {
+		Connection con = getConnection();
+		int result = 0;
+		
+		result = new GroupDao().kickOut(con, memberCode);
+		
+		if(result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		return result;
+	}
+	
+	//회원 조회
+	public ArrayList<MemberVO> selectList() {
+		Connection con = getConnection();
+		ArrayList<MemberVO> list = new GroupDao().selectList(con);
+		
+		close(con);
+		
+		return list;
+	}
+	
+	
 	//동호회페이지 동호회 조회
 	
 	
@@ -141,5 +169,6 @@ public class GroupService {
 		System.out.println(selectedGroup);
 		return selectedGroup;
 	}
+	
 
 }
