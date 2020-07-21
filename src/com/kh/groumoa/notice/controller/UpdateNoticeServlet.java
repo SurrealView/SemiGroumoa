@@ -112,7 +112,7 @@ public class UpdateNoticeServlet extends HttpServlet {
 //			String writer = (String)request.getParameter("noManager");
 //			String email = (String)request.getParameter("noEmail");
 //			String content = (String)request.getParameter("noContent");
-			
+			//
 			int result = new NoticeService().updateNotice(no, fileList, oldFileList);
 			
 			if(result > 0) {								

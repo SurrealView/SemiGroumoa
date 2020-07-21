@@ -292,7 +292,7 @@ public class NoticeDao {
 		
 		return result;
 	}
-
+	//
 	public int updateAttachment(NoAttach noAttach) {
 		PreparedStatement pstmt = null;		
 		int result = 0;

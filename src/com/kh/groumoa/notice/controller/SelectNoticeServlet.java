@@ -34,7 +34,7 @@ public class SelectNoticeServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String num = request.getParameter("num");
-		String noticeId = "N" + num;//request.getParameter("noticeId");
+		String noticeId = "N" + num;
 
 		NoticeVo notice = new NoticeService().selectOne(noticeId);
 		

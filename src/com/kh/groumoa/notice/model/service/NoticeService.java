@@ -104,7 +104,7 @@ public class NoticeService {
 		
 		return hmap;
 	}
-
+	//
 	public int updateNotice(NoticeVo no, ArrayList<NoAttach> fileList, ArrayList<NoAttach> oldFileList) {
 		int result = 0;
 		

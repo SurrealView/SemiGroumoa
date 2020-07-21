@@ -60,7 +60,6 @@
             <button type="submit" class="writeBtn">등록하기</button>
             </form>
         </div>      
-                        <!-- <span>내용</span> -->                
     </div>
 
     <script>
