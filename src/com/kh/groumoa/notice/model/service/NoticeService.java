@@ -105,4 +105,39 @@ public class NoticeService {
 		return hmap;
 	}
 
+	public int updateNotice(NoticeVo no, ArrayList<NoAttach> fileList) {
+		int result = 0;
+		
+		inst().setProp("/sql/driver.properties");
+		
+		Connection con = inst().getCon("url", "user", "password", "driver");
+		
+		NoticeDao nd = new NoticeDao();		
+		
+		result = nd.updateNotice(no);
+		
+		if(result > 0) {
+			String noId = nd.selectCurrId();
+			
+			result = 0;
+			
+			for(int i = 0; i < fileList.size(); i++) {
+				fileList.get(i).setNid(noId);
+				
+				result += nd.updateAttachment(fileList.get(i));
+			}
+		}
+		
+		if(result == fileList.size()) {
+			inst().commit();
+			result = 1;
+		} else {
+			inst().rollback();
+		}
+		
+		inst().closeCon();
+		
+		return result;
+	}
+
 }

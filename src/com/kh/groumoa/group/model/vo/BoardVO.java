@@ -3,20 +3,28 @@ package com.kh.groumoa.group.model.vo;
 import java.sql.Date;
 
 public class BoardVO implements java.io.Serializable {
-	private String postCode;
+	private int postCode;
 	private String categoryCode;
-	private String groupCode;
+	private int groupCode;
 	private int writerCode;//만약 string으로 바뀐다면 수정
 	private String title;
 	private String detail;
 	private Date postDate;
+	private String status;
+	
+	private String categoryName;
+	private String memberName;
+	private int pcount;
+	
 	public BoardVO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
-	public BoardVO(String postCode, String categoryCode, String groupCode, int writerCode, String title, String detail,
-			Date postDate) {
+	
+
+	public BoardVO(int postCode, String categoryCode, int groupCode, int writerCode, String title, String detail,
+			Date postDate, String status, String categoryName, String memberName, int pcount) {
 		super();
 		this.postCode = postCode;
 		this.categoryCode = categoryCode;
@@ -25,22 +33,61 @@ public class BoardVO implements java.io.Serializable {
 		this.title = title;
 		this.detail = detail;
 		this.postDate = postDate;
+		this.status = status;
+		this.categoryName = categoryName;
+		this.memberName = memberName;
+		this.pcount = pcount;
 	}
 
-	public String getGroupCode() {
+
+
+	public String getStatus() {
+		return status;
+	}
+
+
+
+
+
+
+
+
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+
+
+
+
+
+
+
+	public int getPostCode() {
+		return postCode;
+	}
+
+
+
+	public void setPostCode(int postCode) {
+		this.postCode = postCode;
+	}
+
+
+
+	public int getGroupCode() {
 		return groupCode;
 	}
 
-	public void setGroupCode(String groupCode) {
+
+
+	public void setGroupCode(int groupCode) {
 		this.groupCode = groupCode;
 	}
 
-	public String getPostCode() {
-		return postCode;
-	}
-	public void setPostCode(String postCode) {
-		this.postCode = postCode;
-	}
+
+
 	public String getCategoryCode() {
 		return categoryCode;
 	}
@@ -72,12 +119,51 @@ public class BoardVO implements java.io.Serializable {
 		this.postDate = postDate;
 	}
 
+	
+	
+	
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
+
+	public String getMemberName() {
+		return memberName;
+	}
+
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
+
+	public int getPcount() {
+		return pcount;
+	}
+
+	public void setPcount(int pcount) {
+		this.pcount = pcount;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "BoardVO [postCode=" + postCode + ", categoryCode=" + categoryCode + ", groupCode=" + groupCode
 				+ ", writerCode=" + writerCode + ", title=" + title + ", detail=" + detail + ", postDate=" + postDate
-				+ "]";
+				+ ", status=" + status + ", categoryName=" + categoryName + ", memberName=" + memberName + ", pcount="
+				+ pcount + "]";
 	}
+
+
+
+
+
+
+
+
+	
 	
 	
 }

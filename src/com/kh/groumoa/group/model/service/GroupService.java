@@ -171,4 +171,14 @@ public class GroupService {
 	}
 	
 
+	public ArrayList<GroupVO> selectMyGroupList(MemberVO loginUser) {
+		Connection con = getConnection();
+		
+		ArrayList<GroupVO> myGroupList = new GroupDao().selectMyGroupList(con, loginUser);
+		
+		close(con);
+		
+		return myGroupList;
+	}
+
 }
