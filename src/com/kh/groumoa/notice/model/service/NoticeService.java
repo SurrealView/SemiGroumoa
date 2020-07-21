@@ -146,4 +146,25 @@ public class NoticeService {
 		return result;
 	}
 
+	public int deleteNotice(String[] noticeId) {
+		inst().setProp("/sql/driver.properties");		
+		Connection con = inst().getCon("url", "user", "password", "driver");		
+		NoticeDao nd = new NoticeDao();
+		int result = 0;
+		
+		for(int i = 0; i < noticeId.length; i++) {
+			result += nd.deleteNotice(noticeId[i]);
+		}		
+		
+		if(result == noticeId.length) {
+			inst().commit();
+		} else {
+			inst().rollback();
+		}
+		
+		inst().closeCon();
+		
+		return result;
+	}
+
 }

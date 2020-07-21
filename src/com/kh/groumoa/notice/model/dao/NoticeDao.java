@@ -316,6 +316,27 @@ public class NoticeDao {
 		}
 				
 		return result;
+	}
+
+	public int deleteNotice(String noticeId) {
+		PreparedStatement pstmt = null;		
+		int result = 0;
+		inst().setProp("/sql/notice/notice.properties");
+		pstmt = inst().getPstmt("deleteNotice");
+		
+		//UPDATE TB_NOTICE SET NOTICE_STATUS = 'N' WHERE NOTICE_CODE = ? AND NOTICE_STATUS = 'Y'
+		try {
+			pstmt.setString(1, noticeId);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			inst().closePstmt();
+		}
+		
+		return result;
 	}	
 
 }

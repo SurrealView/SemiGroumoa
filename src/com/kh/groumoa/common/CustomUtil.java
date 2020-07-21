@@ -56,6 +56,7 @@ public class CustomUtil {
 		try {
 			Class.forName(prop.getProperty(driver));
 			con = DriverManager.getConnection(prop.getProperty(url), prop.getProperty(user), prop.getProperty(pwd));
+			con.setAutoCommit(false);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
