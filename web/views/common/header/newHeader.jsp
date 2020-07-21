@@ -115,8 +115,8 @@
 					</div>
 				</td>
 				<td rowspan="2" id="middle-td">
-					<form class="search-form">
-						<input type="text" placeholder="search">
+					<form class="search-form" action="<%=request.getContextPath()%>/search.gr" method="get">
+						<input type="text" placeholder="search" name="groupName">
 						<button>search</button>
 					</form>
 				</td>
