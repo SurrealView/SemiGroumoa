@@ -63,13 +63,4 @@ public class FeeVO {
 		return "FeeVO [groupCode=" + groupCode + ", memberCode=" + memberCode + ", feeDate=" + feeDate
 				+ ", feeCategory=" + feeCategory + ", detail=" + detail + "]";
 	}
-	
-	
-	
-	
-/*    GROUP_CODE NUMBER NOT NULL,
-    MEMBER_CODE NUMBER,
-    FEE_DATE DATE NOT NULL,
-    FEE_CATEGORY VARCHAR2(6) NOT NULL,
-    DETAIL VARCHAR2(75),*/
 }

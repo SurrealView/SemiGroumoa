@@ -104,6 +104,14 @@
 	margin: 0px auto;
 }
 
+#content3{
+	width: 950px;
+	height: 500px;
+	display: block;
+	margin: 0px auto;
+	border: 1px solid lightgray;
+	
+}
 .group-field {
 	background: rgb(235, 235, 235);
 	text-align: center;
@@ -174,8 +182,7 @@
 					<td width="600px" class="group-board">대충 무언가 들어가는 곳2</td>
 				</tr>
 			</table>
-			<div style="margin-top: 25px" id="content3">
-			</div>
+			<div id="content3" style="margin-top: 25px">대충 무언가 들어가는 곳3	</div>
 		</div>
 	</div>
 	<%@include file="../common/footer/newFooter.jsp" %>
