@@ -9,9 +9,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Properties;
 
+import com.kh.groumoa.common.PageInfo;
 import com.kh.groumoa.member.model.vo.MemberInterestVO;
 import com.kh.groumoa.member.model.vo.MemberVO;
 
@@ -177,6 +180,71 @@ private Properties prop = new Properties();
 			close(rset);
 		}
 		return result;
+	}
+	
+	public int getListCount(Connection con) {
+		Statement stmt = null;
+		int listCount = 0;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("listCount");
+		
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+			close(rset);
+		}
+		return listCount;
+	}	
+
+	public ArrayList<MemberVO> selectList(Connection con, PageInfo pi) {
+		ArrayList<MemberVO> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("selectList");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getLimit() + 1;
+			int endRow = startRow + pi.getLimit() - 1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<MemberVO>();
+			
+			while(rset.next()) {
+				MemberVO m = new MemberVO();
+				m.setMemberCode(rset.getInt("MEMBER_CODE"));
+				m.setEmail(rset.getString("EMAIL"));
+				m.setUserName(rset.getString("MEMBER_NAME"));
+				m.setEnrollDate(rset.getDate("ENROLL_DATE"));
+				m.setGroupLeaderyn(rset.getString("GROUP_LEADER_YN"));
+				
+				list.add(m);				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
 	}
 
 }

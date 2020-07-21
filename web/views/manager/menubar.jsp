@@ -69,7 +69,7 @@
  			<li class="pageMain" id="settings">
  				<a href="#settings" class="list"><img src="/groumoa/resources/image/menubar_address.png" width="10%">&nbsp;&nbsp;회원관리</a>
  				<div class="smenu">
- 					<a href="#">전체 사용자</a>
+ 					<a onclick="every();">전체 사용자</a>
  					<a href="#">관리자</a>
  					<a href="#">모임장</a>
  					<a href="#">일반회원</a>
@@ -98,4 +98,11 @@
  		</div>
  	</div>
 </div>
+<script>
+	function every() {
+		location.href="<%=request.getContextPath() %>/managerPpl.mn";
+	}
+</script>
+
+</body>
 </html> 
