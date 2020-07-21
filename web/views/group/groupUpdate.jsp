@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.kh.groumoa.group.model.vo.*, com.kh.groumoa.member.model.vo.*, java.util.*" %>
 <%  GroupVO group = (GroupVO) request.getAttribute("group");
-	RegionVO region = (RegionVO) request.getAttribute("region");
+	RegionVO region = (RegionVO) request.getAttribute("regionSearch");
 	GroupVO selectGroup = (GroupVO) request.getAttribute("selectGroup");
 	GroupVO insertGroup = (GroupVO) request.getAttribute("insertGroup");
 	System.out.println(selectGroup);

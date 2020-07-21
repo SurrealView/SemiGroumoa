@@ -42,7 +42,7 @@ public class KickoutServlet extends HttpServlet {
 		
 		int result = new GroupService().kickOut(memberCode);
 		
-		ArrayList<GroupMemberVO> list = new GroupService().selectList(groupCode);
+		ArrayList<MemberVO> list = new GroupService().selectList(groupCode);
 		
 		String page = "";
 		if(result > 0) {

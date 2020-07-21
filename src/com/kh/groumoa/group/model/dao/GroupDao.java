@@ -306,10 +306,10 @@ public class GroupDao {
 	}
 
 
-	public ArrayList<GroupMemberVO> selectList(Connection con, String groupCode) {
+	public ArrayList<MemberVO> selectList(Connection con, String groupCode) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		ArrayList<GroupMemberVO> list = new ArrayList<GroupMemberVO>();
+		ArrayList<MemberVO> list = new ArrayList();
 		
 		String query = prop.getProperty("groupMemberList");
 		
@@ -318,15 +318,19 @@ public class GroupDao {
 			pstmt.setString(1, groupCode);
 			
 			if(rset.next()) {
-				GroupMemberVO groupMember = new GroupMemberVO();
+				MemberVO member = new MemberVO();
 				
-				groupMember.setGroupCode(rset.getInt("GROUP_CODE"));
-				groupMember.setMemberCode(rset.getInt("MEMBER_CODE"));
-				groupMember.setGroupLeaderyn(rset.getString("GROUP_LEADERYN"));
+				member.setGroupCode(rset.getInt("GROUP_CODE"));
+				member.setMemberCode(rset.getInt("MEMBER_CODE"));
+				member.setGroupLeaderyn(rset.getString("GROUP_LEADERYN"));
+				member.setUserName(rset.getString("USER_NAME"));
+				member.setPhone(rset.getString("PHONE"));
+				member.setEmail(rset.getString("EMAIL"));
+				member.setEnrollDate(rset.getDate("ENROLL_DATE"));
 				
-				list.add(groupMember);
+				list.add(member);
 			}
-			
+			System.out.println(list);
 			rset = pstmt.executeQuery();
 			
 		} catch (SQLException e) {
