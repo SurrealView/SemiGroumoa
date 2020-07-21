@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.groumoa.group.model.service.GroupService;
+import com.kh.groumoa.group.model.vo.GroupMemberVO;
 import com.kh.groumoa.member.model.vo.MemberVO;
 
 /**
@@ -32,6 +33,7 @@ public class KickoutServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String Code = request.getParameter("memberCode");
+		String groupCode = request.getParameter("groupCode");
 		
 		int memberCode = 0;
 		if(Code != "" && Code != null) {
@@ -40,7 +42,7 @@ public class KickoutServlet extends HttpServlet {
 		
 		int result = new GroupService().kickOut(memberCode);
 		
-		ArrayList<MemberVO> list = new GroupService().selectList();
+		ArrayList<GroupMemberVO> list = new GroupService().selectList(groupCode);
 		
 		String page = "";
 		if(result > 0) {
