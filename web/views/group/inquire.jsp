@@ -18,8 +18,11 @@
 <style>
 #ask {
 	border-bottom: 1px solid black;
-	text-align: center;
-	width: 900px;
+	text-align: left;
+	width: 570px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 50px;
 }
 
 .wrap {
@@ -50,6 +53,9 @@
 	font-weight: bold;
 	cursor: pointer;
 }
+.qWrite {
+	margin-top: 50px;
+}
 </style>
 </head>
 <body>
@@ -63,6 +69,48 @@
 		</div>
 	</div>
 	<div id="ask">1:1 문의하기</div>
-	
+	<div class="qWrite">
+        <div class="qWriterInfo" align="center">
+        <form action="" method="post" encType="multipart/form-data">
+            <table id="QWriteArea">
+                <tr>
+                    <td><label>이름 </label></td>
+                    <td colspan="2"><input type="text" name="qManager"></td>
+                    <td><label>연락처 </label></td>
+                    <td><input type="tel" name="noTel"></td>
+                </tr>
+                <tr>
+                    <td><label>이메일 </label></td>
+                    <td colspan="6"><input type="email" name="qEmail"></td>
+                </tr>
+                <tr>
+                    <td><label>제목</label></td>                    
+                    <td colspan="5"><input type="text" placeholder="제목을입력해주세요" style="width:400px" name="qTitle"></td>
+                    <td colspan="1">
+                    <select name="kind">
+                        <option value="default">분류</option>
+                        <option value="normal">일반</option>
+                        <option value="error">오류</option>
+                        <option value="account">계정</option>
+                        <option value="fuction">기능</option>
+                    </select>
+                </td>
+                </tr>
+                <tr>
+                    <td><label>내용</label></td>
+                    <td colspan="6"><textarea cols="67" rows="20" style="resize:none" name="qContent"></textarea></td>
+                </tr>
+                <tr>
+                    <td>파일첨부</td>
+                    <td colspan="4"><input type="text" class="file_path" placeholder="파일을 올려주세요" readonly style="width:400px" name="filePath"></td>
+                    <td colspan="3"><a class="upload" href="#" onclick="uploadFile();">파일선택</a></td>                
+                    <input type="file" id="notice_upload" name="notice_upload" style="display: none;">
+                </tr>
+            </table>
+            <button type="submit" class="qWriteBtn">등록하기</button>
+            </form>
+        </div>      
+                                     
+    </div>
 </body>
 </html>

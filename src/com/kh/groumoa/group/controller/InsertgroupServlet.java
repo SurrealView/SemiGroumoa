@@ -62,6 +62,7 @@ public class InsertgroupServlet extends HttpServlet {
 	            originFiles.add(multiRequest.getOriginalFileName(name));
 	         }
 			
+	        int groupCode = Integer.parseInt(multiRequest.getParameter("groupCode"));
 			String rnCode = multiRequest.getParameter("rnCode");
 			String name = multiRequest.getParameter("name");
 			String description = multiRequest.getParameter("description");
@@ -92,6 +93,7 @@ public class InsertgroupServlet extends HttpServlet {
 		
 			
 			GroupVO group = new GroupVO();
+			group.setGroupCode(groupCode);
 			group.setInterestCode(interest);
 			group.setRnCode(rnCode);
 			group.setGroupName(name);

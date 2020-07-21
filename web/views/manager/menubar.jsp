@@ -37,11 +37,16 @@
 	opacity:1;
 }
 .pageMain:target .smenu {
-	max-height: 10em;
+	max-height: 15em;
 }
 .middle {
 	list-style:none;
 }
+.smenu a:hover {
+	background:#2f323a;
+	color:darkred;
+}
+
 
 </style>
 <body>
@@ -55,35 +60,36 @@
  	<div class="middle">
  		<div class="menu">
  			<li class="pageMain" id="messages">
- 				<a href="#messages" class="list"><i class="fas fa-ballot"></i>메인페이지</a>
- 				<div class="smenu">
+ 				<a href="#messages" class="list"><img src="/groumoa/resources/image/menubar_home.png" width="10%">&nbsp;&nbsp;메인페이지</a>
+<!--  				<div class="smenu">
  					<a href="#">공지</a>
  					<a href="#">공지2</a>
- 				</div>
+ 				</div> -->
  			</li>
  			<li class="pageMain" id="settings">
- 				<a href="#settings" class="list"><i class="fal fa-betamax"></i>회원관리</a>
+ 				<a href="#settings" class="list"><img src="/groumoa/resources/image/menubar_address.png" width="10%">&nbsp;&nbsp;회원관리</a>
  				<div class="smenu">
- 					<a href="#">회원2</a>
- 					<a href="#">결제내역</a>
+ 					<a href="#">전체 사용자</a>
+ 					<a href="#">관리자</a>
+ 					<a href="#">모임장</a>
+ 					<a href="#">일반회원</a>
  				</div>
  			</li>
  			<li class="pageMain" id="items">
- 				<a href="#items" class="list"><i class="fal fa-betamax"></i>동호회관리</a>
+ 				<a href="#items" class="list"><img src="/groumoa/resources/image/menubar_group.png" width="10%">&nbsp;&nbsp;동호회관리</a>
  				<div class="smenu">
- 					<a href="#">푸른뱃고동</a>
- 					<a href="#">축구팀</a>
+ 					<a href="#">전체 동호회</a>
  				</div>
  			</li>
  			<li class="pageMain" id="adver">
- 				<a href="#adver" class="list"><i class="fal fa-betamax"></i>결제내역</a>
+ 				<a href="#adver" class="list"><img src="/groumoa/resources/image/menubar_won.png" width="10%">&nbsp;&nbsp;결제내역</a>
  				<div class="smenu">
  					<a href="#">얼마나</a>
  					<a href="#">광고</a>
  				</div>
  			</li>
  			<li class="pageMain" id="ques">
- 				<a href="#ques" class="list"><i class="fal fa-betamax"></i>문의내역</a>
+ 				<a href="#ques" class="list"><img src="/groumoa/resources/image/menubar_question.png" width="10%">&nbsp;&nbsp;문의내역</a>
  				<div class="smenu">
  					<a href="#">자주하는질문</a>
  					<a href="#">1:1질문</a>
