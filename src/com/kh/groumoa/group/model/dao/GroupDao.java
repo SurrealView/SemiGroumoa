@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.groumoa.group.model.vo.Attachment;
+import com.kh.groumoa.group.model.vo.GroupMemberVO;
 import com.kh.groumoa.group.model.vo.GroupVO;
 import com.kh.groumoa.member.model.vo.MemberVO;
 import com.kh.groumoa.member.model.vo.RegionVO;
@@ -305,9 +306,38 @@ public class GroupDao {
 	}
 
 
-	public ArrayList<MemberVO> selectList(Connection con) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<GroupMemberVO> selectList(Connection con, String groupCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<GroupMemberVO> list = new ArrayList<GroupMemberVO>();
+		
+		String query = prop.getProperty("groupMemberList");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, groupCode);
+			
+			if(rset.next()) {
+				GroupMemberVO groupMember = new GroupMemberVO();
+				
+				groupMember.setGroupCode(rset.getInt("GROUP_CODE"));
+				groupMember.setMemberCode(rset.getInt("MEMBER_CODE"));
+				groupMember.setGroupLeaderyn(rset.getString("GROUP_LEADERYN"));
+				
+				list.add(groupMember);
+			}
+			
+			rset = pstmt.executeQuery();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		
+		return list;
 	}
 
 

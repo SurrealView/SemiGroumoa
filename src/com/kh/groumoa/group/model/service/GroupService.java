@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import com.kh.groumoa.group.model.dao.GroupDao;
 import com.kh.groumoa.group.model.vo.Attachment;
+import com.kh.groumoa.group.model.vo.GroupMemberVO;
 import com.kh.groumoa.group.model.vo.GroupVO;
 import com.kh.groumoa.member.model.vo.MemberVO;
 import com.kh.groumoa.member.model.vo.RegionVO;
@@ -136,9 +137,9 @@ public class GroupService {
 	}
 	
 	//회원 조회
-	public ArrayList<MemberVO> selectList() {
+	public ArrayList<GroupMemberVO> selectList(String groupCode) {
 		Connection con = getConnection();
-		ArrayList<MemberVO> list = new GroupDao().selectList(con);
+		ArrayList<GroupMemberVO> list = new GroupDao().selectList(con, groupCode);
 		
 		close(con);
 		
