@@ -56,7 +56,6 @@
 	
 
 		
-		
 		<%for(int i = 0; i < myGroupList.size(); i++) { %>
 			
 			<%if(i % 3 == 3) { %>
@@ -77,8 +76,8 @@
 			</div>
 			<div style="float: none; width: 100px; text-align:left;">
 				<br>분야: <%=myGroupList.get(i).getInterest() %>
-				<br>모임장: <%=myGroupList.get(i).getGroupLeaderName() %>
-				<br>모임지역: <%=myGroupList.get(i).getRegionName() %>
+				<br>모임장: <%=loginUser.getUserName() %>
+				<br>모임지역 : <%=myGroupList.get(i).getRegionName() %>
 			</div>
 		</div>
 			<% if(i % 3 == 1) { %>

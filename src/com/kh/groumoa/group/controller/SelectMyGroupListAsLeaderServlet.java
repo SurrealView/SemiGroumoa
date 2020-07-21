@@ -11,19 +11,21 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.groumoa.group.model.service.GroupService;
 import com.kh.groumoa.group.model.vo.GroupVO;
+import com.kh.groumoa.member.model.vo.InterestVO;
 import com.kh.groumoa.member.model.vo.MemberVO;
+import com.kh.groumoa.member.model.vo.RegionVO;
 
 /**
- * Servlet implementation class SelectMyGroupListServlet
+ * Servlet implementation class SelectMyGroupAsGroupLeader
  */
-@WebServlet("/selectMyList.gr")
-public class SelectMyGroupListServlet extends HttpServlet {
+@WebServlet("/selectListAsLeader.gr")
+public class SelectMyGroupListAsLeaderServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SelectMyGroupListServlet() {
+    public SelectMyGroupListAsLeaderServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,13 +36,13 @@ public class SelectMyGroupListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		MemberVO loginUser = (MemberVO) request.getSession().getAttribute("loginUser");
 		
-		ArrayList<GroupVO> myGroupList = new GroupService().selectMyGroupList(loginUser);
+		ArrayList<GroupVO> myGroupList = new GroupService().selectMyGroupListAsLeader(loginUser);
+
 		
-		//group leader yn db에서 받아올 방법 생각후 추가하기
 		String page = "";
 		
 		
-			page = "views/group/myGroupList.jsp";
+			page = "views/group/myGroupListAsGroupLeader.jsp";
 			request.setAttribute("myGroupList", myGroupList);
 		
 //			else {
@@ -48,7 +50,6 @@ public class SelectMyGroupListServlet extends HttpServlet {
 //			request.setAttribute("msg", "내 동호회 조회 실패");//새로운 로직 생각하기
 //		}
 		request.getRequestDispatcher(page).forward(request, response);
-		
 	}
 
 	/**

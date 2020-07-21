@@ -134,7 +134,7 @@
 				<%if(loginUser != null) { %>
 				<td class="sub-menu"><a href="#">마이페이지</a></td>
 				<td class="sub-menu"><a href="#">모임개설</a></td>
-				<td class="sub-menu"><a href="#">모임관리</a></td>
+				<td class="sub-menu"><a href="<%=request.getContextPath()%>/selectListAsLeader.gr">모임관리</a></td>
 				<% } else {%>
 				<td class="sub-menu"><a href="/groumoa/views/member/login.jsp">마이페이지</a></td>
 				<td class="sub-menu"><a href="/groumoa/views/member/login.jsp">모임개설</a></td>
@@ -150,7 +150,7 @@
 			<td id="blank"></td>
 			<td class="my-menu"><a href="#">추천 동호회</a></td>
 			<%if(loginUser != null) { %>
-			<td class="my-menu"><a href="/groumoa/views/group/myGroupList.jsp">가입한 동호회</a></td>
+			<td class="my-menu"><a href="<%=request.getContextPath()%>/selectMyList.gr">가입한 동호회</a></td>
 			<% } %>
 			<td class="my-menu"><a href="#">공지사항</a></td>
 			<td class="my-menu"><a href="#">QnA</a></td>

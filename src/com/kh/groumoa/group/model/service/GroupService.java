@@ -182,4 +182,14 @@ public class GroupService {
 		return myGroupList;
 	}
 
+	public ArrayList<GroupVO> selectMyGroupListAsLeader(MemberVO loginUser) {
+		Connection con = getConnection();
+		
+		ArrayList<GroupVO> myGroupListAsLeader = new GroupDao().selectMyGroupListAsLeader(con, loginUser);
+		
+		close(con);
+		
+		return myGroupListAsLeader;
+	}
+
 }

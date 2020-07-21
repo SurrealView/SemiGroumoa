@@ -101,6 +101,19 @@
 	cursor: pointer;
 }
 
+#division {
+	width:950px;
+}
+
+#insertBtn {
+	width: 40px;
+	height: 30px;
+	border-radius: 5px;
+	background: white;
+	border: 1px solid lightgray;
+	margin-left: 25px;
+}
+
 .deleteBtn {
 	border-radius: 30px;
 	float: left;
@@ -124,9 +137,11 @@
 			style="font-size: 10px; padding-right: 25px; padding-top: 15px;">개인정보취급방침에
 			따라 최근 5년간의 내역이 제공됩니다.</p>
 		<div id="sub-title">
-			<span style="font-size: 15px">회비 내역</span>
+			<span style="font-size: 20px">회비 내역</span>
 		</div>
-
+		<br>
+		<hr id="division">
+		<input id="insertBtn" type="button" value="쓰기">
 		<!-- <span id="temp">* 게시판을 조회 및 수정하실 수 있습니다.</span> <br> -->
 		<!-- 위 코드는 모임장일때만 작동하도록 함 -->
 		<br>
@@ -213,7 +228,7 @@
 						<td>열승열</td>
 						<td>2020-07-05</td>
 					</tr>
-					
+
 				</tbody>
 			</table>
 		</div>
