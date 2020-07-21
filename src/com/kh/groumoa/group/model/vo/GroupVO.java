@@ -15,6 +15,7 @@ public class GroupVO implements java.io.Serializable {
 	private String description;
 	private String status;
 	
+	private String groupLeaderYn;//내 동호회페이지 받아오기 위한 변수
 	
 	public GroupVO() {}
 
