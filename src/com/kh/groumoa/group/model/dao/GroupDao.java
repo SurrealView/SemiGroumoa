@@ -281,6 +281,35 @@ public class GroupDao {
 		return selectedGroup;
 	}
 
+	//동호회 회원 추방
+	public int kickOut(Connection con, int memberCode) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("kickOut");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, memberCode);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
+
+
+	public ArrayList<MemberVO> selectList(Connection con) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 	public ArrayList<GroupVO> selectMyGroupList(Connection con, MemberVO loginUser) {
 		

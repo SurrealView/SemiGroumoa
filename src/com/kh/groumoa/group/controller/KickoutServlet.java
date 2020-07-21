@@ -38,7 +38,7 @@ public class KickoutServlet extends HttpServlet {
 			memberCode = Integer.parseInt(Code);
 		}
 		
-		int result = new GroupService().deleteGroup(memberCode);
+		int result = new GroupService().kickOut(memberCode);
 		
 		ArrayList<MemberVO> list = new GroupService().selectList();
 		
