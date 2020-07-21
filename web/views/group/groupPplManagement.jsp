@@ -2,7 +2,6 @@
     pageEncoding="UTF-8" import="com.kh.groumoa.member.model.vo.*, com.kh.groumoa.group.model.vo.*, com.kh.groumoa.common.*, java.util.*" %>
 <%
 	ArrayList<MemberVO> list = (ArrayList<MemberVO>) request.getAttribute("list");
-	GroupMemberVO groupMember = (GroupMemberVO) request.getAttribute("groupMember");
 /*  	PageInfo pi = (PageInfo) request.getAttribute("pi");
 	int currentPage = pi.getCurrentPage();
 	int maxPage = pi.getMaxPage();
@@ -157,7 +156,7 @@
    			<table class="table table-striped">
                   <thead>
                     <tr>
-                      <th><input type="checkbox"></th>
+                      <th>선택</th>
                       <th>번호</th>
                       <th>이름</th>
                       <th>직책</th>
@@ -169,11 +168,11 @@
                   <tbody>
                    	<% for(MemberVO m : list) { %>
                     <tr>
-                      <input type="hidden" value="<%=m.getMemberCode() %>">
+                      <input type="hidden" name="check">
                       <td><input type="checkbox"></td>
-                      <td><a href="pplManagement-detail.jsp"><%= m.getMemberCode() %></a></td>
+                      <td><a href="pplManagement-detail.jsp"><%=m.getMemberCode() %></a></td>
                       <td><%= m.getUserName() %></td>
-                      <td><%= groupMember.getGroupCode() %></td>
+                      <td><%= m.getGroupCode() %></td>
                       <td><%= m.getPhone() %></td>
                       <td><%= m.getEmail() %></td>
                       <td><%= m.getEnrollDate() %></td>
@@ -358,6 +357,33 @@
 		<script>
 		function kickout(){
 			$("#kickoutForm").attr("action", "<%=request.getContextPath()%>/kickout.ko");
+		}
+		
+		function kickout() {
+			var kick = document.getElementsByName("check");
+			
+			console.log(hobby);
+			
+			var checkItem = "";
+			
+			for(var i in check) {
+				if(checck[i].checked) {
+					checkItem += check[i].value;
+				}
+			}
+			
+			var result = window.confirm("정말 강퇴하시겠습니까?");
+			
+			console.log(result);
+			
+			var gang ="";
+			
+			if(result) { 
+   				gang = $("#kickoutForm").attr("action", "<%=request.getContextPath()%>/kickout.ko");
+			} else {
+				gang = null;
+			}
+			
 		}
 		</script>
 </body>

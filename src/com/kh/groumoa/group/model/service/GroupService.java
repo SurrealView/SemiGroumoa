@@ -27,10 +27,10 @@ public class GroupService {
 		
 		if(result1 > 0) {
 			int groupCode = new GroupDao().selectCurrval(con);
-			
+			System.out.println(groupCode);
 			for(int i = 0; i < fileList.size(); i++) {
 				fileList.get(i).setGroupCode(groupCode);
-//				group.setGroupCode(groupCode);
+				group.setGroupCode(groupCode);
 				
 				result2 += new GroupDao().insertAttachment(con, fileList.get(i));
 			}
@@ -132,14 +132,14 @@ public class GroupService {
 		} else {
 			rollback(con);
 		}
-		
+		System.out.println(result);
 		return result;
 	}
 	
 	//회원 조회
-	public ArrayList<GroupMemberVO> selectList(String groupCode) {
+	public ArrayList<MemberVO> selectList(String groupCode) {
 		Connection con = getConnection();
-		ArrayList<GroupMemberVO> list = new GroupDao().selectList(con, groupCode);
+		ArrayList<MemberVO> list = new GroupDao().selectList(con, groupCode);
 		
 		close(con);
 		
@@ -171,7 +171,7 @@ public class GroupService {
 		return selectedGroup;
 	}
 	
-
+	
 	public ArrayList<GroupVO> selectMyGroupList(MemberVO loginUser) {
 		Connection con = getConnection();
 		
