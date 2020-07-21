@@ -364,7 +364,10 @@ public class GroupDao {
 				g.setNickNameyn(rset.getString("NICKNAME_YN"));
 				g.setOpenDate(rset.getDate("OPEN_DATE"));
 				g.setGroupRule(rset.getString("GROUP_RULE"));
-				g.setDescription(rset.getString("DESCRIPTION"));	
+				g.setDescription(rset.getString("DESCRIPTION"));
+				g.setInterest(rset.getString("INTEREST"));
+				g.setRegionName(rset.getString("REGION_NAME"));
+				g.setGroupLeaderName(rset.getString("GROUP_LEADER_NAME"));
 				
 				myGroupList.add(g);
 			}

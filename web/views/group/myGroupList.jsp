@@ -76,9 +76,9 @@
 				<b><%=myGroupList.get(i).getGroupName() %></b> <br>
 			</div>
 			<div style="float: none; width: 100px; text-align:left;">
-				<br>분야: 
-				<br>모임장:
-				<br>소개:낚시꾼
+				<br>분야: <%=myGroupList.get(i).getInterest() %>
+				<br>모임장: <%=myGroupList.get(i).getGroupLeaderName() %>
+				<br>모임지역: <%=myGroupList.get(i).getRegionName() %>
 			</div>
 		</div>
 			<% if(i % 3 == 1) { %>

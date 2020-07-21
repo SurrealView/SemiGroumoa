@@ -15,18 +15,25 @@ public class GroupVO implements java.io.Serializable {
 	private String description;
 	private String status;
 	
-	private String groupLeaderYn;//내 동호회페이지 받아오기 위한 변수
+	//내 동호회페이지 받아오기 위한 변수
+	private String groupLeaderYn;
 	private String regionName;
 	private String interest;
+	private String groupLeaderName;
 	
 	public GroupVO() {}
 
 	
 
 
+	
+
+
+
+
 	public GroupVO(int groupCode, String groupName, String rnCode, String interestCode, String nickNameyn,
 			String openYn, Date openDate, String groupRule, String description, String status, String groupLeaderYn,
-			String regionName, String interest) {
+			String regionName, String interest, String groupLeaderName) {
 		super();
 		this.groupCode = groupCode;
 		this.groupName = groupName;
@@ -41,7 +48,37 @@ public class GroupVO implements java.io.Serializable {
 		this.groupLeaderYn = groupLeaderYn;
 		this.regionName = regionName;
 		this.interest = interest;
+		this.groupLeaderName = groupLeaderName;
 	}
+
+
+
+
+
+
+
+
+
+	public String getGroupLeaderName() {
+		return groupLeaderName;
+	}
+
+
+
+
+
+
+
+
+
+	public void setGroupLeaderName(String groupLeaderName) {
+		this.groupLeaderName = groupLeaderName;
+	}
+
+
+
+
+
 
 
 
@@ -190,13 +227,21 @@ public class GroupVO implements java.io.Serializable {
 
 
 
+
+
+
+
+
 	@Override
 	public String toString() {
 		return "GroupVO [groupCode=" + groupCode + ", groupName=" + groupName + ", rnCode=" + rnCode + ", interestCode="
 				+ interestCode + ", nickNameyn=" + nickNameyn + ", openYn=" + openYn + ", openDate=" + openDate
 				+ ", groupRule=" + groupRule + ", description=" + description + ", status=" + status
-				+ ", groupLeaderYn=" + groupLeaderYn + ", regionName=" + regionName + ", interest=" + interest + "]";
+				+ ", groupLeaderYn=" + groupLeaderYn + ", regionName=" + regionName + ", interest=" + interest
+				+ ", groupLeaderName=" + groupLeaderName + "]";
 	}
+
+
 
 
 
