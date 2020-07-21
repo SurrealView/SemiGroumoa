@@ -6,7 +6,7 @@ import java.util.Date;
 
 import com.oreilly.servlet.multipart.FileRenamePolicy;
 
-public class MyFileRenamePolicy implements FileRenamePolicy{
+public class MyFileRenamePolicy implements FileRenamePolicy {
 	@Override
 	public File rename(File oldFile) {
 		long currentTime = System.currentTimeMillis();
