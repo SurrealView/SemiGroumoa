@@ -46,7 +46,7 @@
 	width: 400px;
 	height: 30px;
 	border-radius: 50px;
-	border: 2px solid blue;
+	border: 2px solid #0275d8;
 	font-size: 16px;
 	font-family: sans-serif;
 	margin-top: 7px;
@@ -110,7 +110,8 @@
 			<tr id="first-tr">
 				<td rowspan="2">
 					<div class="logo_container">
-						<img src="../../../resources/image/logo_groumoa2.png">
+						<!-- <img src="../../../resources/image/logo_groumoa2.png"> -->
+						<img src="/groumoa/resources/image/logo_groumoa2.png">
 					</div>
 				</td>
 				<td rowspan="2" id="middle-td">

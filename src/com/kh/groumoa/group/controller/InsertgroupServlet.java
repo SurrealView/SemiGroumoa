@@ -19,6 +19,7 @@ import com.kh.groumoa.group.model.service.GroupService;
 import com.kh.groumoa.group.model.vo.Attachment;
 import com.kh.groumoa.group.model.vo.GroupVO;
 import com.kh.groumoa.member.model.vo.MemberInterestVO;
+import com.kh.groumoa.member.model.vo.RegionVO;
 import com.oreilly.servlet.MultipartRequest;
 
 /**
@@ -61,14 +62,17 @@ public class InsertgroupServlet extends HttpServlet {
 	            originFiles.add(multiRequest.getOriginalFileName(name));
 	         }
 			
+	        String groupCode = multiRequest.getParameter("groupCode");
 			String rnCode = multiRequest.getParameter("rnCode");
 			String name = multiRequest.getParameter("name");
 			String description = multiRequest.getParameter("description");
-		/*	String [] iarr = request.getParameterValues("interest"); */
-			String interest = multiRequest.getParameter("interest");
+/*			String [] iarr = request.getParameterValues("interest");
+*/			String interest = multiRequest.getParameter("interest");
 			String openYn = multiRequest.getParameter("openYn");
 			String nickNameyn = multiRequest.getParameter("nickNameyn");
-			String groupRule = multiRequest.getParameter("groupRule");		
+			String groupRule = multiRequest.getParameter("groupRule");
+			String regionName = multiRequest.getParameter("regionName");
+			String regionSpecific = multiRequest.getParameter("regionSpecific");
 			
 /*			String interest = "";
 			if(iarr != null) {
@@ -76,18 +80,22 @@ public class InsertgroupServlet extends HttpServlet {
 					interest += iarr[i];
 				}
 			}
-			
-			System.out.println("interest" + interest);
 */			
-		/*	ArrayList<MemberInterestVO> requestMemberInterest = new ArrayList<MemberInterestVO>();
+/*			System.out.println("interest" + interest);
+*/		
+/*			ArrayList<MemberInterestVO> requestMemberInterest = new ArrayList<MemberInterestVO>();
 			for(int i = 0; i < iarr.length; i++) {
 				MemberInterestVO memberInterest = new MemberInterestVO();
 				memberInterest.setInterestCode(iarr[i]);
 				
 				requestMemberInterest.add(memberInterest);
-			}  */
+			}  
+*/			
+			System.out.println("grou[Code" + groupCode);
+			System.out.println(rnCode);
 			
 			GroupVO group = new GroupVO();
+			group.setGroupCode(groupCode);
 			group.setInterestCode(interest);
 			group.setRnCode(rnCode);
 			group.setGroupName(name);
@@ -95,6 +103,12 @@ public class InsertgroupServlet extends HttpServlet {
 			group.setOpenYn(openYn);
 			group.setNickNameyn(nickNameyn);
 			group.setGroupRule(groupRule);
+			
+			RegionVO region = new RegionVO();
+			region.setRnCode(rnCode);
+			region.setRegionName(regionName);
+			region.setRegionSpecific(regionSpecific);
+			
 			
 			ArrayList<Attachment> fileList = new ArrayList<>();
 			for(int  i = originFiles.size() - 1; i >= 0; i--) {
@@ -118,10 +132,25 @@ public class InsertgroupServlet extends HttpServlet {
 			int result = new GroupService().insertGroup(group, fileList);
 			System.out.println("servlet" + result);
 			
+			GroupVO selectGroup = new GroupService().selectOne(groupCode);
+			System.out.println(selectGroup);
+			
+			RegionVO regionSearch = new GroupService().searchRegion(rnCode);
+			System.out.println(regionSearch);
+			
+			
+			
 			String page = "";
 			if(result > 0) {
-				response.sendRedirect(request.getContextPath() + "/views/group/groupUpdate.jsp");
-			} else {
+				page = "views/group/groupUpdate.jsp";
+				request.setAttribute("group", group);
+				request.setAttribute("fileList", fileList);
+				request.setAttribute("region", regionSearch);
+				request.setAttribute("selectGroup", selectGroup);
+				System.out.println(group);
+				System.out.println(fileList);
+/*				response.sendRedirect(request.getContextPath() + "/views/group/groupUpdate.jsp");
+*/			} else {
 				for(int i = 0; i < saveFiles.size(); i++) {
 					File failedFile = new File(savePath + saveFiles.get(i));
 						
@@ -130,8 +159,8 @@ public class InsertgroupServlet extends HttpServlet {
 				
 				page = "views/common/errorPage.jsp";
 				request.setAttribute("msg", "동호회 등록 실패!!");
-				request.getRequestDispatcher(page).forward(request, response);	
 			}
+			request.getRequestDispatcher(page).forward(request, response);	
 		}
 		
 	}
