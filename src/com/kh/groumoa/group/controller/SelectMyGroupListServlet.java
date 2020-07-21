@@ -36,8 +36,18 @@ public class SelectMyGroupListServlet extends HttpServlet {
 		
 		ArrayList<GroupVO> myGroupList = new GroupService().selectMyGroupList(loginUser);
 		
-		//리디렉션 로직 작성하기해야됨 //group leader yn db에서 받아올 방법 생각후 추가하기
+		//group leader yn db에서 받아올 방법 생각후 추가하기
+		String page = "";
 		
+		
+			page = "views/group/myGroupList.jsp";
+			request.setAttribute("myGroupList", myGroupList);
+		
+//			else {
+//			page = "views/common/errorPage.jsp";
+//			request.setAttribute("msg", "내 동호회 조회 실패");//새로운 로직 생각하기
+//		}
+		request.getRequestDispatcher(page).forward(request, response);
 		
 	}
 

@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="java.util.*, com.kh.groumoa.group.model.vo.GroupVO"%>
+<%ArrayList<GroupVO> myGroupList = (ArrayList<GroupVO>) request.getAttribute("myGroupList"); 
+	int myGroupListSize = myGroupList.size();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,12 +34,17 @@
         height: 200px;
         display: inline-block;
         text-align: center;
+        border:1px solid black;
     }
     .mygroup {
         text-align: center;
         margin-left: auto;
         margin-right: auto;
         margin-top: 50px;
+    }
+    .image{
+    	width:300px;
+    	height: 200px;
     }
     </style>
 </head>
@@ -45,95 +53,38 @@
 	<h2 align="center">내 동호회 리스트</h2>
 	<hr noshade="noshade" size="1px" color="black">
 
-	<div class="mygroup">
 	
-		<div id="item">
-			<!-- <img src="image/Ellipse 17.png"> -->
-			<div style="float: left; border-bottom: 1px solid black; width: 200px; text-align: center;">
-				<button style="float:right;">페이지 방문</button>
-				<b>푸른 뱃고동</b> <br>
-			</div>
-			<div style="float: none; width: 100px; text-align:left;">
-				<br>낚시동호회 
-				<br>모임장:김승열 
-				<br>소개:낚시왕
-			</div>
-		</div>
+
 		
-		<div id="item">
-			<!-- <img src="image/Ellipse 18.png"> -->
-			<div
-				style="float: left; border-bottom: 1px solid black; width: 200px; text-align: center;">
-				<button style="float:right;">페이지 방문</button>
-				<b>범호 축구단</b> <br>
-			</div>
-			<div style="float: none; width: 100px; text-align:left;">
-				<br>축구동호회 
-				<br>모임장:현상정 
-				<br>소개:축구왕
-			</div>
-		</div>
 		
+		<%for(int i = 0; i < myGroupList.size(); i++) { %>
+			
+			<%if(i % 3 == 3) { %>
+				<div class="mygroup">
+			<% } %>
 		<div id="item">
-			<!-- <img src="image/Ellipse 19.png"> -->
+			
+			<div class="image">
+				<!-- <img src="image/Ellipse 19.png"> -->
+			</div>
 			
 			<div style="float: left; border-bottom: 1px solid black; width: 200px; text-align: center;">
-				<button style="float:right;">페이지 방문</button>
-				<b>운칠기삼</b> <br>
+			<form action="#" method="post">
+				<input type="hidden" value="<%=myGroupList.get(i).getGroupCode() %>">
+				<button style="float:right;" onclick="submit();">페이지 방문</button>
+			</form>
+				<b><%=myGroupList.get(i).getGroupName() %></b> <br>
 			</div>
 			<div style="float: none; width: 100px; text-align:left;">
-				<br>낚시동호회 
-				<br>모임장:김승열 
+				<br>분야: 
+				<br>모임장:
 				<br>소개:낚시꾼
 			</div>
 		</div>
-		
-	</div>
-	
-	<div class="mygroup">
-	
-		<div id="item">
-			<!-- <img src="image/Ellipse 17.png"> -->
-			<div
-				style="float: left; border-bottom: 1px solid black; width: 200px; text-align: center;">
-				<button style="float:right;">페이지 방문</button>
-				<b>푸른 뱃고동</b> <br>
-			</div>
-			<div style="float: none; width: 100px; text-align:left;">
-				<br>낚시동호회 
-				<br>모임장:김승열 
-				<br>소개:낚시왕
-			</div>
-		</div>
-		
-		<div id="item">
-			<!-- <img src="image/Ellipse 18.png"> -->
-			<div
-				style="float: left; border-bottom: 1px solid black; width: 200px; text-align: center;">
-				<button style="float:right;">페이지 방문</button>
-				<b>범호 축구단</b> <br>
-			</div>
-			<div style="float: none; width: 100px; text-align:left;">
-				<br>축구동호회 
-				<br>모임장:현상정 
-				<br>소개:축구왕
-			</div>
-		</div>
-		
-		<div id="item">
-			<!-- <img src="image/Ellipse 19.png"> -->
+			<% if(i % 3 == 1) { %>
 			
-			<div style="float: left; border-bottom: 1px solid black; width: 200px; text-align: center;">
-				<button style="float:right;">페이지 방문</button>
-				<b>운칠기삼</b> <br>
-			</div>
-			<div style="float: none; width: 100px; text-align:left;">
-				<br>낚시동호회 
-				<br>모임장:김승열 
-				<br>소개:낚시꾼
-			</div>
-		</div>
-		
 	</div>
+		<% } %>
+		<%} %>
 </body>
 </html>
