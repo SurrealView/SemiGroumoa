@@ -134,7 +134,7 @@
 				<%if(loginUser != null) { %>
 				<td class="sub-menu"><a href="#">마이페이지</a></td>
 				<td class="sub-menu"><a href="#">모임개설</a></td>
-				<td class="sub-menu"><a href="#">모임관리</a></td>
+				<td class="sub-menu"><a href="<%=request.getContextPath()%>/selectListAsLeader.gr">모임관리</a></td>
 				<% } else {%>
 				<td class="sub-menu"><a href="/groumoa/views/member/login.jsp">마이페이지</a></td>
 				<td class="sub-menu"><a href="/groumoa/views/member/login.jsp">모임개설</a></td>
