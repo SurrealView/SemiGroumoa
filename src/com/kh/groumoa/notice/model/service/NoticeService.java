@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.kh.groumoa.common.PageInfo;
+import com.kh.groumoa.common.model.vo.AttachmentVo;
 import com.kh.groumoa.notice.model.dao.NoticeDao;
-import com.kh.groumoa.notice.model.vo.NoAttach;
 import com.kh.groumoa.notice.model.vo.NoticeVo;
 
 public class NoticeService {
@@ -41,7 +41,7 @@ public class NoticeService {
 		return list;
 	}
 
-	public int insertNotice(NoticeVo no, ArrayList<NoAttach> fileList) {
+	public int insertNotice(NoticeVo no, ArrayList<AttachmentVo> fileList) {
 		int result = 0;
 		
 		inst().setProp("/sql/driver.properties");
@@ -58,7 +58,8 @@ public class NoticeService {
 			result = 0;
 			
 			for(int i = 0; i < fileList.size(); i++) {
-				fileList.get(i).setNid(noId);
+				//fileList.get(i).setNid(noId);
+				fileList.get(i).setNoticeCode(noId);
 				
 				result += nd.insertAttachment(fileList.get(i));
 			}
@@ -105,7 +106,7 @@ public class NoticeService {
 		return hmap;
 	}
 	//
-	public int updateNotice(NoticeVo no, ArrayList<NoAttach> fileList, ArrayList<NoAttach> oldFileList) {
+	public int updateNotice(NoticeVo no, ArrayList<AttachmentVo> fileList, ArrayList<AttachmentVo> oldFileList) {
 		int result = 0;
 		
 		inst().setProp("/sql/driver.properties");
@@ -122,11 +123,11 @@ public class NoticeService {
 			result = 0;
 			
 			for(int i = 0; i < fileList.size(); i++) {
-				fileList.get(i).setNid(no.getNoticeCategory());
+				fileList.get(i).setNoticeCode(no.getNoticeCategory());
 				
 				if(i < oldFileList.size()) {
 					fileList.get(i).setFid(oldFileList.get(i).getFid());
-					fileList.get(i).setNid(no.getNoticeCode());
+					fileList.get(i).setNoticeCode(no.getNoticeCode());
 					result += nd.updateAttachment(fileList.get(i));
 				} else {
 					result += nd.insertAttachment(fileList.get(i));
@@ -137,6 +138,27 @@ public class NoticeService {
 		if(result == fileList.size()) {
 			inst().commit();
 			result = 1;
+		} else {
+			inst().rollback();
+		}
+		
+		inst().closeCon();
+		
+		return result;
+	}
+
+	public int deleteNotice(String[] noticeId) {
+		inst().setProp("/sql/driver.properties");		
+		Connection con = inst().getCon("url", "user", "password", "driver");		
+		NoticeDao nd = new NoticeDao();
+		int result = 0;
+		
+		for(int i = 0; i < noticeId.length; i++) {
+			result += nd.deleteNotice(noticeId[i]);
+		}		
+		
+		if(result == noticeId.length) {
+			inst().commit();
 		} else {
 			inst().rollback();
 		}

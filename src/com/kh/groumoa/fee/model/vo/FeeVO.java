@@ -6,6 +6,7 @@ public class FeeVO {
 	private String feeDate;
 	private String feeCategory;
 	private String detail;
+	//-- 단일 TB_FEE에 있는 변수들.
 	
 	public FeeVO() { }
 

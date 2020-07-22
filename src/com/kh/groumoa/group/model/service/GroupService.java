@@ -210,6 +210,18 @@ public class GroupService {
 		close(con);
 		
 		return listCount;
+  
+  }
+	
+  public ArrayList<GroupVO> searchGroupList(GroupVO group) {
+		Connection con = getConnection();
+		
+		ArrayList<GroupVO> searchedGroupList = new GroupDao().searchGroupList(con, group);
+		
+		close(con);
+		
+		return searchedGroupList;
+
 	}
 
 }

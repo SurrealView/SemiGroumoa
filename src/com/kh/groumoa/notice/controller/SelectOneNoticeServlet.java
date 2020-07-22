@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.groumoa.common.model.vo.AttachmentVo;
 import com.kh.groumoa.notice.model.service.NoticeService;
-import com.kh.groumoa.notice.model.vo.NoAttach;
 import com.kh.groumoa.notice.model.vo.NoticeVo;
 
 /**
@@ -43,7 +43,7 @@ public class SelectOneNoticeServlet extends HttpServlet {
 		//NoticeVo no = new NoticeService().selectOne(noticeId);
 		
 		NoticeVo no = (NoticeVo) hmap.get("notice");
-		ArrayList<NoAttach> fileList = (ArrayList<NoAttach>) hmap.get("attach");						
+		ArrayList<AttachmentVo> fileList = (ArrayList<AttachmentVo>) hmap.get("attach");						
 		
 		String page = "";
 		

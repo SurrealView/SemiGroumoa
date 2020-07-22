@@ -431,7 +431,6 @@ public class GroupDao {
 		return myGroupListAsLeader;
 	}
 
-
 	public ArrayList<MemberVO> groupMemberList(Connection con, PageInfo pi, int groupCode) {
 		ArrayList<MemberVO> list = null;
 		PreparedStatement pstmt = null;
@@ -498,6 +497,49 @@ public class GroupDao {
 		}
 
 		return listCount;
+    
+  }
+
+	public ArrayList<GroupVO> searchGroupList(Connection con, GroupVO group) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<GroupVO> searchedGroupList = new ArrayList<GroupVO>();
+		
+		String query = prop.getProperty("searchGroupList");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, group.getGroupName());
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				GroupVO g = new GroupVO();
+				g.setGroupCode(rset.getInt("GROUP_CODE"));
+				g.setGroupName(rset.getString("GROUP_NAME"));
+				g.setRnCode(rset.getString("RN_CODE"));
+				g.setInterestCode(rset.getString("INTEREST_CODE"));
+				g.setOpenYn(rset.getString("OPEN_YN"));
+				g.setNickNameyn(rset.getString("NICKNAME_YN"));
+				g.setOpenDate(rset.getDate("OPEN_DATE"));
+				g.setGroupRule(rset.getString("GROUP_RULE"));
+				g.setDescription(rset.getString("DESCRIPTION"));
+				g.setGroupLeaderYn(rset.getString("GROUP_LEADER_YN"));
+				g.setRegionName(rset.getString("REGION_NAME"));
+				g.setInterest(rset.getString("INTEREST"));
+				searchedGroupList.add(g);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return searchedGroupList;
+
 	}
 
 

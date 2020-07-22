@@ -104,7 +104,8 @@
 </script>
 <style>
 #outer {
-	border: 1px solid black;
+	border: 1px solid lightgray;
+	border-radius: 10px;
 	width: 1000px;
 	height: 900px;
 	display: block;
@@ -130,7 +131,8 @@
 </style>
 </head>
 <body>
-	<!-- 헤더 추가 필요 -->
+
+	<%@include file="/views/common/header/newHeader.jsp" %>
 	<%@include file="../subMenubar.jsp"%>
 	<div id="outer">
 		<!-- 이 밖을 1000px로 감싼다. -->
@@ -140,6 +142,7 @@
 			<div id='calendar'></div>
 		</div>
 	</div>
+	<%@include file="/views/common/footer/newFooter.jsp" %>
 	<script>
 		/* 		$(function() {
 		 calendar.changeView('timeGrid', {
