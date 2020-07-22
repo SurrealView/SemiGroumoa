@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.groumoa.member.model.vo.MemberInterestVO;
@@ -177,6 +178,41 @@ private Properties prop = new Properties();
 			close(rset);
 		}
 		return result;
+	}
+
+	public ArrayList<MemberInterestVO> selectMemberInterests(Connection con, MemberVO loginUser) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<MemberInterestVO> loginUserInterests = new ArrayList<MemberInterestVO>();
+		
+		String query = prop.getProperty("selectMemberInterests");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, loginUser.getMemberCode());
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				MemberInterestVO mi = new MemberInterestVO();
+				
+				mi.setInterestCode(rset.getString("INTEREST_CODE"));
+				
+				loginUserInterests.add(mi);
+				
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		
+		
+		
+		return loginUserInterests;
 	}
 
 }

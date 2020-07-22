@@ -148,8 +148,8 @@
 	<table class="table-nav-bar">
 		<tr>
 			<td id="blank"></td>
-			<td class="my-menu"><a href="#">추천 동호회</a></td>
 			<%if(loginUser != null) { %>
+			<td class="my-menu"><a href="<%=request.getContextPath()%>/selectRecommendedList.gr">추천 동호회</a></td>
 			<td class="my-menu"><a href="<%=request.getContextPath()%>/selectMyList.gr">가입한 동호회</a></td>
 			<% } %>
 			<td class="my-menu"><a href="#">공지사항</a></td>

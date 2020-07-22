@@ -16,6 +16,7 @@ import java.util.Properties;
 import com.kh.groumoa.group.model.vo.Attachment;
 import com.kh.groumoa.group.model.vo.GroupMemberVO;
 import com.kh.groumoa.group.model.vo.GroupVO;
+import com.kh.groumoa.member.model.vo.MemberInterestVO;
 import com.kh.groumoa.member.model.vo.MemberVO;
 import com.kh.groumoa.member.model.vo.RegionVO;
 
@@ -316,6 +317,7 @@ public class GroupDao {
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, groupCode);
+			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
 				GroupMemberVO groupMember = new GroupMemberVO();
@@ -327,7 +329,6 @@ public class GroupDao {
 				list.add(groupMember);
 			}
 			
-			rset = pstmt.executeQuery();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -408,7 +409,7 @@ public class GroupDao {
 				g.setOpenDate(rset.getDate("OPEN_DATE"));
 				g.setGroupRule(rset.getString("GROUP_RULE"));
 				g.setDescription(rset.getString("DESCRIPTION"));
-				g.setGroupLeaderYn(rset.getString("GROUP_LEADER_YN"));
+				g.setGroupLeaderName(rset.getString("MEMBER_NAME"));
 				g.setRegionName(rset.getString("REGION_NAME"));
 				g.setInterest(rset.getString("INTEREST"));
 				myGroupListAsLeader.add(g);
@@ -451,9 +452,10 @@ public class GroupDao {
 				g.setOpenDate(rset.getDate("OPEN_DATE"));
 				g.setGroupRule(rset.getString("GROUP_RULE"));
 				g.setDescription(rset.getString("DESCRIPTION"));
-				g.setGroupLeaderYn(rset.getString("GROUP_LEADER_YN"));
 				g.setRegionName(rset.getString("REGION_NAME"));
 				g.setInterest(rset.getString("INTEREST"));
+				g.setGroupLeaderName(rset.getString("GROUP_LEADER_NAME"));
+				g.setGroupLeaderCode(rset.getInt("GROUP_LEADER_CODE"));
 				searchedGroupList.add(g);
 			}
 			
@@ -466,6 +468,50 @@ public class GroupDao {
 		}
 
 		return searchedGroupList;
+	}
+
+
+	public GroupVO selectRecommendedGroupList(Connection con, MemberInterestVO memberInterestVO) {//
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		GroupVO recommendedGroup = null;
+		String query = prop.getProperty("selectRecommendedGroup");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, memberInterestVO.getInterestCode());
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				recommendedGroup = new GroupVO();
+				recommendedGroup.setGroupCode(rset.getInt("GROUP_CODE"));
+				recommendedGroup.setGroupName(rset.getString("GROUP_NAME"));
+				recommendedGroup.setRnCode(rset.getString("RN_CODE"));
+				recommendedGroup.setInterestCode(rset.getString("INTEREST_CODE"));
+				recommendedGroup.setOpenYn(rset.getString("OPEN_YN"));
+				recommendedGroup.setNickNameyn(rset.getString("NICKNAME_YN"));
+				recommendedGroup.setOpenDate(rset.getDate("OPEN_DATE"));
+				recommendedGroup.setGroupRule(rset.getString("GROUP_RULE"));
+				recommendedGroup.setDescription(rset.getString("DESCRIPTION"));
+				recommendedGroup.setRegionName(rset.getString("REGION_NAME"));
+				recommendedGroup.setInterest(rset.getString("INTEREST"));
+				recommendedGroup.setGroupLeaderName(rset.getString("GROUP_LEADER_NAME"));
+				recommendedGroup.setGroupLeaderCode(rset.getInt("GROUP_LEADER_CODE"));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		
+		
+		
+		return recommendedGroup;
 	}
 
 

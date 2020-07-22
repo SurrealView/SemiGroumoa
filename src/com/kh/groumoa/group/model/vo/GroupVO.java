@@ -14,6 +14,7 @@ public class GroupVO implements java.io.Serializable {
 	private String groupRule;
 	private String description;
 	private String status;
+	private int groupLeaderCode;
 	
 	//내 동호회페이지 받아오기 위한 변수
 	private String groupLeaderYn;
@@ -31,9 +32,19 @@ public class GroupVO implements java.io.Serializable {
 
 
 
+	
+
+
+
+
+
+
+
+
+
 	public GroupVO(int groupCode, String groupName, String rnCode, String interestCode, String nickNameyn,
-			String openYn, Date openDate, String groupRule, String description, String status, String groupLeaderYn,
-			String regionName, String interest, String groupLeaderName) {
+			String openYn, Date openDate, String groupRule, String description, String status, int groupLeaderCode,
+			String groupLeaderYn, String regionName, String interest, String groupLeaderName) {
 		super();
 		this.groupCode = groupCode;
 		this.groupName = groupName;
@@ -45,11 +56,66 @@ public class GroupVO implements java.io.Serializable {
 		this.groupRule = groupRule;
 		this.description = description;
 		this.status = status;
+		this.groupLeaderCode = groupLeaderCode;
 		this.groupLeaderYn = groupLeaderYn;
 		this.regionName = regionName;
 		this.interest = interest;
 		this.groupLeaderName = groupLeaderName;
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	public int getGroupLeaderCode() {
+		return groupLeaderCode;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	public void setGroupLeaderCode(int groupLeaderCode) {
+		this.groupLeaderCode = groupLeaderCode;
+	}
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -232,14 +298,32 @@ public class GroupVO implements java.io.Serializable {
 
 
 
+
+
+
+
+
+
+
+
+
+
 	@Override
 	public String toString() {
 		return "GroupVO [groupCode=" + groupCode + ", groupName=" + groupName + ", rnCode=" + rnCode + ", interestCode="
 				+ interestCode + ", nickNameyn=" + nickNameyn + ", openYn=" + openYn + ", openDate=" + openDate
 				+ ", groupRule=" + groupRule + ", description=" + description + ", status=" + status
-				+ ", groupLeaderYn=" + groupLeaderYn + ", regionName=" + regionName + ", interest=" + interest
-				+ ", groupLeaderName=" + groupLeaderName + "]";
+				+ ", groupLeaderCode=" + groupLeaderCode + ", groupLeaderYn=" + groupLeaderYn + ", regionName="
+				+ regionName + ", interest=" + interest + ", groupLeaderName=" + groupLeaderName + "]";
 	}
+
+
+
+
+
+
+
+
 
 
 

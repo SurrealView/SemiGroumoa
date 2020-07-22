@@ -11,6 +11,8 @@ import com.kh.groumoa.group.model.dao.GroupDao;
 import com.kh.groumoa.group.model.vo.Attachment;
 import com.kh.groumoa.group.model.vo.GroupMemberVO;
 import com.kh.groumoa.group.model.vo.GroupVO;
+import com.kh.groumoa.member.model.dao.MemberDao;
+import com.kh.groumoa.member.model.vo.MemberInterestVO;
 import com.kh.groumoa.member.model.vo.MemberVO;
 import com.kh.groumoa.member.model.vo.RegionVO;
 
@@ -200,6 +202,27 @@ public class GroupService {
 		close(con);
 		
 		return searchedGroupList;
+	}
+
+	public ArrayList<GroupVO> selectRecommendedGroupList(MemberVO loginUser) {
+		Connection con = getConnection();
+		
+		ArrayList<MemberInterestVO> loginUserInterests = new MemberDao().selectMemberInterests(con, loginUser); 
+		
+		ArrayList<GroupVO> recommendedGroupList = new ArrayList<GroupVO>();
+		
+		for(int i = 0; i < loginUserInterests.size(); i++) {
+
+			
+			GroupVO recommendedGroup = new GroupDao().selectRecommendedGroupList(con, loginUserInterests.get(i));
+			
+			recommendedGroupList.add(recommendedGroup);
+		}
+		
+		
+		close(con);
+		
+		return recommendedGroupList;
 	}
 
 }
