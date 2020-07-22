@@ -207,19 +207,16 @@
             		console.log(i);
                     var idx = i;   
                     for(var j = 0; j < tr.length; j++){
-
                         if(j == i){
                             continue;
                         }
                         $(tr[j]).hide();
                     }
-
                     if($(tr[idx]).is(":visible")){
                         $(tr[idx]).hide();
                     } else{
                         $(tr[idx]).show();
-                    }                    
-                    
+                    }                                        
                 })
             })
 
