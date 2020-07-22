@@ -6,6 +6,8 @@ public class ReportVo {
 	String reportCode;
 	int reporter;
 	int reported;
+	String reporterID;
+	String reportedID;
 	String reportCategory;
 	Date reportDate;
 	String reportTitle;
@@ -91,6 +93,22 @@ public class ReportVo {
 
 	public void setIsDealt(String isDealt) {
 		this.isDealt = isDealt;
+	}
+	
+	public String getReporterID() {
+		return reporterID;
+	}
+
+	public void setReporterID(String reporterID) {
+		this.reporterID = reporterID;
+	}
+
+	public String getReportedID() {
+		return reportedID;
+	}
+
+	public void setReportedID(String reportedID) {
+		this.reportedID = reportedID;
 	}
 
 	@Override

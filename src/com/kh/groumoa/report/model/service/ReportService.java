@@ -5,6 +5,7 @@ import static com.kh.groumoa.common.CustomUtil.inst;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.kh.groumoa.common.PageInfo;
 import com.kh.groumoa.common.model.vo.AttachmentVo;
 import com.kh.groumoa.report.model.dao.ReportDao;
 import com.kh.groumoa.report.model.vo.ReportVo;
@@ -40,5 +41,34 @@ public class ReportService {
 		
 		return result;
 	}
+
+	public int getListCount() {
+		int result = 0;
+		
+		inst().setProp("/sql/driver.properties");		
+		Connection con = inst().getCon("url", "user", "password", "driver");
+		
+		ReportDao rd = new ReportDao();
+		
+		result = rd.getCount();
+		
+		inst().closeCon();
+		
+		return result;
+	}
+
+	public ArrayList<ReportVo> selectList(PageInfo pi) {
+		ArrayList<ReportVo> reList = null;
+		inst().setProp("/sql/driver.properties");		
+		Connection con = inst().getCon("url", "user", "password", "driver");
+		
+		ReportDao rd = new ReportDao();
+		
+		reList = rd.selectList(pi);
+		
+		inst().closeCon();
+		
+		return reList;
+	}	
 
 }

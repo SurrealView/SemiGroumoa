@@ -75,5 +75,14 @@ public class MemberService {
 		
 		return result;
 	}
-
+	
+	public int getMemberCode(String email) {
+		Connection con = getConnection();
+		
+		int result = new MemberDao().getMemberCode(con, email);
+		
+		close(con);
+		
+		return result;
+	}
 }

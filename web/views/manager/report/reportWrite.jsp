@@ -78,8 +78,8 @@
                 <tr>
                     <td><label>신고자ID</label></td>
                     <!-- <td colspan="2"><input type="text" name="reporter" value="신고자" readonly></td> -->
-                    <% if(loginUser == null) { %>
-                    <td colspan="2"><%=loginUser.getEmail() %></td>
+                    <% if(loginUser != null) { %>
+                    <td colspan="2"><%=loginUser.getMemberCode() %> <%=loginUser.getEmail() %><input type="hidden" name="reporter" value="<%=loginUser.getMemberCode() %>"></td>
                     <!-- //<input type="text" name="reporter" value="신고자" readonly> -->
                     <% } else { %>
                     <td colspan="2"></td>
@@ -94,8 +94,10 @@
                     <td colspan="5"><input type="text" placeholder="제목을입력해주세요" style="width:400px" name="reTitle"></td>
                     <td colspan="1">
                     <select name="kind">
-                        <option value="default">분류</option>
-                        <option value="report">공지</option>
+                        <option value="RECA1">광고</option>
+                        <option value="RECA2">음란성</option>
+                        <option value="RECA3">욕설</option>
+                        <option value="RECA4">기타</option>
                     </select>
                 </td>
                 </tr>

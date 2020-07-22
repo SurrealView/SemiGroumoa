@@ -15,6 +15,7 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import com.kh.groumoa.common.MyFileRenamePolicy;
 import com.kh.groumoa.common.model.vo.AttachmentVo;
+import com.kh.groumoa.member.model.service.MemberService;
 import com.kh.groumoa.report.model.service.ReportService;
 import com.kh.groumoa.report.model.vo.ReportVo;
 import com.oreilly.servlet.MultipartRequest;
@@ -61,8 +62,10 @@ public class InsertReportServlet extends HttpServlet {
 			String multiTitle = multiRequest.getParameter("reTitle");
 			String multiContent = multiRequest.getParameter("reContent");
 			//String multiWriter = multiRequest.getParameter("noManager");
-			int reporter = Integer.parseInt(multiRequest.getParameter("reporter"));
-			int reported = Integer.parseInt(multiRequest.getParameter("reported"));
+			String reStr = multiRequest.getParameter("reporter");
+			int reporter = Integer.parseInt(reStr);
+			//int reported = Integer.parseInt(multiRequest.getParameter("reported"));
+			int reported = new MemberService().getMemberCode(multiRequest.getParameter("reported"));
 			String category = multiRequest.getParameter("kind");
 			
 			ReportVo re = new ReportVo();

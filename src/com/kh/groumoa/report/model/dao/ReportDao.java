@@ -6,14 +6,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
+import com.kh.groumoa.common.PageInfo;
 import com.kh.groumoa.common.model.vo.AttachmentVo;
 import com.kh.groumoa.report.model.vo.ReportVo;
 
 public class ReportDao {
 
 	public int insertReport(ReportVo re) {
-		inst().setProp("/sql/notice/notice.properties");
+		inst().setProp("/sql/report/report.properties");
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
@@ -42,7 +44,7 @@ public class ReportDao {
 	public String getResultId() {
 		Statement stmt = null;
 		ResultSet rset = null;
-		inst().setProp("/sql/notice/notice.properties");
+		inst().setProp("/sql/report/report.properties");
 		
 		stmt = inst().getStmt();
 		
@@ -50,7 +52,10 @@ public class ReportDao {
 				
 		String reId = "";
 		try {
-			reId = "RE" + rset.getInt(1);
+			if(rset.next()) {
+				reId = "RE" + rset.getInt(1);
+			}
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -65,7 +70,7 @@ public class ReportDao {
 	public int insertAttach(AttachmentVo attachmentVo) {
 		PreparedStatement pstmt = null;		
 		int result = 0;
-		inst().setProp("/sql/notice/notice.properties");
+		inst().setProp("/sql/report/report.properties");
 		pstmt = inst().getPstmt("insertAttachment");
 		
 		try {
@@ -86,6 +91,46 @@ public class ReportDao {
 		
 		
 		return result;
+	}
+
+	public int getCount() {
+		int listCount = 0;
+		Statement stmt = null;
+		ResultSet rset = null;
+		
+		inst().setProp("/sql/report/report.properties");
+		
+		stmt = inst().getStmt();
+		
+		
+		rset = inst().getResultSet("listCount");		
+		
+		try {
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			inst().closeRset();
+			inst().closeStmt();
+		}
+		
+		return listCount;
+	}
+
+	public ArrayList<ReportVo> selectList(PageInfo pi) {
+		PreparedStatement pstmt = null;		
+		ResultSet rset = null;
+		ArrayList<ReportVo> reList = null;
+		
+		inst().setProp("/sql/report/report.properties");
+		pstmt = inst().getPstmt("selectList");
+		
+		
+		
+		return reList;
 	}
 
 }
