@@ -30,7 +30,7 @@ public class selectOneGroupServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String groupCode = request.getParameter("groupCode");//
+		int groupCode = Integer.parseInt(request.getParameter("groupCode"));//
 		
 		GroupVO requestGroup = new GroupVO();
 		requestGroup.setGroupCode(groupCode);

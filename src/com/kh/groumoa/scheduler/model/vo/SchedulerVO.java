@@ -9,7 +9,7 @@ public class SchedulerVO {
 	private String schDetail;
 	private String schDate;
 	private Date dateWritten;
-	private String groupCode;
+	private int groupCode;
 	private int writerCode;
 	private char status;
 	
@@ -18,7 +18,7 @@ public class SchedulerVO {
 	}
 
 	public SchedulerVO(String schCode, String schTitle, String schDetail, String schDate, Date dateWritten,
-			String groupCode, int writerCode, char status) {
+			int groupCode, int writerCode, char status) {
 		super();
 		this.schCode = schCode;
 		this.schTitle = schTitle;
@@ -70,11 +70,11 @@ public class SchedulerVO {
 		this.dateWritten = dateWritten;
 	}
 
-	public String getGroupCode() {
+	public int getGroupCode() {
 		return groupCode;
 	}
 
-	public void setGroupCode(String groupCode) {
+	public void setGroupCode(int groupCode) {
 		this.groupCode = groupCode;
 	}
 
