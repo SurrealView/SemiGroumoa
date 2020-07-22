@@ -327,7 +327,7 @@ private Properties prop = new Properties();
 		try {
 			pstmt = con.prepareStatement(query);
 			
-			
+			깃깃깃
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
