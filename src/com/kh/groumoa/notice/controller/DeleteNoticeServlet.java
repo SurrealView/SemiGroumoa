@@ -1,28 +1,25 @@
-package com.kh.groumoa.group.controller;
+package com.kh.groumoa.notice.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.groumoa.group.model.service.GroupService;
-import com.kh.groumoa.group.model.vo.GroupVO;
+import com.kh.groumoa.notice.model.service.NoticeService;
 
 /**
- * Servlet implementation class SearchGroupServlet
+ * Servlet implementation class DeleteNoticeServlet
  */
-@WebServlet("/search.gr")
-public class SearchGroupServlet extends HttpServlet {
+@WebServlet("/delete.no")
+public class DeleteNoticeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchGroupServlet() {
+    public DeleteNoticeServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,29 +28,23 @@ public class SearchGroupServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String groupName = request.getParameter("groupName");
+		String[] list = request.getParameterValues("ckNotice");
+				
+		int result = 0;
 		
-		GroupVO group = new GroupVO();
+		/*if(list == null || list.length == 0) {
+			noEvent = true;
+		}*/
 		
-		group.setGroupName(groupName);
+		result = new NoticeService().deleteNotice(list);		
+					//request.getContextPath() + "/selectList.no"
+		String page= request.getContextPath() + "/selectList.no";
 		
-		
-		ArrayList<GroupVO> searchedGroupList = new GroupService().searchGroupList(group);
-		
-		String page = "";
-		
-		
-		page = "views/group/GroupSearchResult.jsp";
-		request.setAttribute("searchedGroupList", searchedGroupList);
-	
-//		else {
-//		page = "views/common/errorPage.jsp";
-//		request.setAttribute("msg", "내 동호회 조회 실패");//새로운 로직 생각하기
-//	}
-	request.getRequestDispatcher(page).forward(request, response);
-	
-	
-	
+		if(result == list.length) {
+			response.sendRedirect(page);
+		} else {
+			
+		}
 	}
 
 	/**
