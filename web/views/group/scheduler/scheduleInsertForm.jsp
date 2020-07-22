@@ -7,9 +7,10 @@
 <title>Insert title here</title>
 <style>
 #outer {
-	border: 1px solid black;
+	border: 1px solid lightgray;
+	border-radius: 10px;
 	width: 1000px;
-	height: 600px;
+	height: 700px;
 	display: block;
 	margin: 0px auto;
 }
@@ -42,11 +43,11 @@
 	width: 600px;
 	background: orange;
 	border-radius: 10px;
-	vertical-align: middle;
+	
 }
 
 #title-tr h2 {
-	
+	padding-top: 10px;
 }
 
 .writeBtn, .cancelBtn {
@@ -71,7 +72,7 @@
 </style>
 </head>
 <body>
-	<!-- 헤더 추가 필요 -->
+	<%@include file="/views/common/header/newHeader.jsp" %>
 	<%@include file="../subMenubar.jsp"%>
 	<%-- <% if(loginUser != null) { %> 여기서는 유저가 모임장인지 아닌지 판단할 코드 작성할것 --%>
 	<div id="outer">
@@ -111,5 +112,6 @@
 		request.setAttribute("msg", "잘못된 경로로 접근하셨습니다.");
 		request.getRequestDispatcher("../common/errorPage.jsp").forward(request, response);
 	} %> --%>
+	<%@include file="/views/common/footer/newFooter.jsp" %>
 </body>
 </html>
