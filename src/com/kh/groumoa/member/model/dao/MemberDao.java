@@ -203,6 +203,7 @@ private Properties prop = new Properties();
 			close(stmt);
 			close(rset);
 		}
+		
 		return listCount;
 	}	
 
@@ -212,6 +213,51 @@ private Properties prop = new Properties();
 		ResultSet rset = null;
 		
 		String query = prop.getProperty("selectList");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getLimit() + 1;
+			int endRow = startRow + pi.getLimit() - 1;
+			
+			System.out.println("start" + startRow);
+			System.out.println("end" + endRow);
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<MemberVO>();
+			
+			while(rset.next()) {
+				MemberVO m = new MemberVO();
+				m.setMemberCode(rset.getInt("MEMBER_CODE"));
+				m.setEmail(rset.getString("EMAIL"));
+				m.setUserName(rset.getString("MEMBER_NAME"));
+				m.setEnrollDate(rset.getDate("ENROLL_DATE"));
+				m.setGroupLeaderyn(rset.getString("GROUP_LEADER_YN"));
+				m.setPostCode(rset.getInt("POST"));
+				System.out.println(m);
+				list.add(m);				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		System.out.println(list);
+		return list;
+	}
+
+	public ArrayList<MemberVO> selectLeader(Connection con, PageInfo pi) {
+		ArrayList<MemberVO> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("selectLeader");
 		
 		try {
 			pstmt = con.prepareStatement(query);
@@ -243,8 +289,53 @@ private Properties prop = new Properties();
 			close(rset);
 			close(pstmt);
 		}
-		
+		System.out.println(list);
 		return list;
+	}
+
+	public int getLeaderCount(Connection con) {
+		Statement stmt = null;
+		int listCount = 0;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("leaderCount");
+		
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+			close(rset);
+		}
+		return listCount;
+	}
+
+	public MemberVO selectMember(Connection con, int num) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		MemberVO member = null;
+		
+		String query = prop.getProperty("selectMember");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	
+		
+		
+		return null;
 	}
 
 }

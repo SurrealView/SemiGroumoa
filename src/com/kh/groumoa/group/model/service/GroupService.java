@@ -7,6 +7,7 @@ import static com.kh.groumoa.common.JDBCTemplate.rollback;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.kh.groumoa.common.PageInfo;
 import com.kh.groumoa.group.model.dao.GroupDao;
 import com.kh.groumoa.group.model.vo.Attachment;
 import com.kh.groumoa.group.model.vo.GroupMemberVO;
@@ -67,7 +68,7 @@ public class GroupService {
 	}
 	
 	//동호회 입력내용 조회
-	public GroupVO selectOne(String groupCode) {
+	public GroupVO selectOne(int groupCode) {
 		Connection con = getConnection();
 		int result = 0;
 		
@@ -190,6 +191,25 @@ public class GroupService {
 		close(con);
 		
 		return myGroupListAsLeader;
+	}
+
+	public ArrayList<MemberVO> groupMemberList(PageInfo pi, int GroupCode) {
+		Connection con = getConnection();
+		
+		ArrayList<MemberVO> list = new GroupDao().groupMemberList(con, pi, groupCode);
+		
+		close(con);		
+		
+		return list;
+	}
+
+	public int memberListCount() {
+		Connection con = getConnection();
+		int listCount = new GroupDao().memberListCount(con);
+		
+		close(con);
+		
+		return listCount;
 	}
 
 }
