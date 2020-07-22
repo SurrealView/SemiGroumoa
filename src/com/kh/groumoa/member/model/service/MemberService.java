@@ -76,8 +76,8 @@ public class MemberService {
 		
 		return result;
 	}
-	
-	public int getListCount() {
+  
+  public int getListCount() {
 		Connection con = getConnection();
 		int listCount = new MemberDao().getListCount(con);
 		
@@ -96,4 +96,13 @@ public class MemberService {
 		return list;
 	}
 
+	public int getMemberCode(String email) {
+		Connection con = getConnection();
+		
+		int result = new MemberDao().getMemberCode(con, email);
+		
+		close(con);
+		
+		return result;
+	}
 }
