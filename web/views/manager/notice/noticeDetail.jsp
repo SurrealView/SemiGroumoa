@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.kh.groumoa.notice.model.vo.*, java.util.*"%>
+    pageEncoding="UTF-8" import="com.kh.groumoa.common.model.vo.*, com.kh.groumoa.notice.model.vo.*, java.util.*"%>
 <%
 	NoticeVo notice = (NoticeVo) request.getAttribute("notice");
-	ArrayList<NoAttach> list = (ArrayList<NoAttach>) request.getAttribute("fileList");
+	ArrayList<AttachmentVo> list = (ArrayList<AttachmentVo>) request.getAttribute("fileList");
 	int idx = 0;
-	NoAttach attach = list.get(idx);
+	AttachmentVo attach = list.get(idx);
 	
 	String fileList = "";
 		
