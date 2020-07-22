@@ -57,7 +57,7 @@ public class SelectBoardListServlet extends HttpServlet {
 				limit = 10;
 				
 				//전체 목록 갯수를 조회
-				int listCount = new BoardService().getListCount(board);
+				int listCount = new MemberService().getListCount(board);
 				System.out.println("list count : " + listCount);
 				
 				//총 페이지 수 계산

@@ -142,6 +142,7 @@
 		
 		<br>
 			<input id="btn" type="button" value="가입하기">
+			<input type="hidden" onclick="listCheck();">
 		<br>
 		<br>
 		
@@ -186,5 +187,11 @@
 		</div>
 	</div>
 	<%@include file="../common/footer/newFooter.jsp" %>
+	
+	<script>
+		function listCheck() {
+			location.href="<%=request.getContextPath() %>/groupMember.go";
+		}
+	</script>
 </body>
 </html>

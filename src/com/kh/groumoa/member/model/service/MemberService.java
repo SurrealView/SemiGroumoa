@@ -105,4 +105,35 @@ public class MemberService {
 		
 		return result;
 	}
+	
+	public ArrayList<MemberVO> selectLeader(PageInfo pi) {
+		Connection con = getConnection();
+		
+		ArrayList<MemberVO> list = new MemberDao().selectLeader(con, pi);
+		
+		close(con);		
+		
+		return list;
+	}
+
+	public int getLeaderCount() {
+		Connection con = getConnection();
+		int listCount = new MemberDao().getLeaderCount(con);
+		
+		close(con);
+		
+		return listCount;
+	}
+
+	public MemberVO selectMember(int num) {
+		Connection con = getConnection();
+		MemberVO member = null;
+		
+		member = new MemberDao().selectMember(con, num);
+		
+		close(con);
+		
+		return member;
+	}
+	
 }
