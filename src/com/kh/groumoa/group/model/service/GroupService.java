@@ -204,19 +204,18 @@ public class GroupService {
 		return searchedGroupList;
 	}
 
-	public ArrayList<GroupVO> selectRecommendedGroupList(MemberVO loginUser) {
+	public ArrayList<ArrayList<GroupVO>> selectRecommendedGroupList(MemberVO loginUser) {
 		Connection con = getConnection();
 		
 		ArrayList<MemberInterestVO> loginUserInterests = new MemberDao().selectMemberInterests(con, loginUser); 
 		
-		ArrayList<GroupVO> recommendedGroupList = new ArrayList<GroupVO>();
+		ArrayList<ArrayList<GroupVO>> recommendedGroupList = new ArrayList<ArrayList<GroupVO>>();
 		
 		for(int i = 0; i < loginUserInterests.size(); i++) {
 
 			
-			GroupVO recommendedGroup = new GroupDao().selectRecommendedGroupList(con, loginUserInterests.get(i));
-			
-			recommendedGroupList.add(recommendedGroup);
+			ArrayList<GroupVO> recommendedGroups = new GroupDao().selectRecommendedGroupList(con, loginUserInterests.get(i));
+			recommendedGroupList.add(recommendedGroups);
 		}
 		
 		

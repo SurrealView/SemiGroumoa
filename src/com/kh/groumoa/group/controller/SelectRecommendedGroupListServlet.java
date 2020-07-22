@@ -34,20 +34,20 @@ public class SelectRecommendedGroupListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		MemberVO loginUser = (MemberVO) request.getSession().getAttribute("loginUser");
 		
-			ArrayList<GroupVO> recommendedGroupList = new GroupService().selectRecommendedGroupList(loginUser);
+			ArrayList<ArrayList<GroupVO>> recommendedGroupList = new GroupService().selectRecommendedGroupList(loginUser);
 
 		
 			String page = "";
 		
 		
 			page = "views/group/recommendedGroupList.jsp";
-			//request.setAttribute("recommendedGroupList", recommendedGroupList);
+			request.setAttribute("recommendedGroupList", recommendedGroupList);
 		System.out.println(recommendedGroupList);
 //			else {
 //			page = "views/common/errorPage.jsp";
 //			request.setAttribute("msg", "내 동호회 조회 실패");//새로운 로직 생각하기
 //		}
-		//request.getRequestDispatcher(page).forward(request, response);
+		request.getRequestDispatcher(page).forward(request, response);
 	}
 
 	/**

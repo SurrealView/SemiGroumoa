@@ -195,6 +195,7 @@ private Properties prop = new Properties();
 			while(rset.next()) {
 				MemberInterestVO mi = new MemberInterestVO();
 				
+				mi.setMemberCode(rset.getInt("MEMBER_CODE"));
 				mi.setInterestCode(rset.getString("INTEREST_CODE"));
 				
 				loginUserInterests.add(mi);

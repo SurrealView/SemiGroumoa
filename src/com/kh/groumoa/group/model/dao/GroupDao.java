@@ -471,11 +471,11 @@ public class GroupDao {
 	}
 
 
-	public GroupVO selectRecommendedGroupList(Connection con, MemberInterestVO memberInterestVO) {//
+	public ArrayList<GroupVO> selectRecommendedGroupList(Connection con, MemberInterestVO memberInterestVO) {//
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		GroupVO recommendedGroup = null;
+		ArrayList<GroupVO> recommendedGroups = new ArrayList<GroupVO>();;
 		String query = prop.getProperty("selectRecommendedGroup");
 		
 		try {
@@ -484,11 +484,11 @@ public class GroupDao {
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
-				recommendedGroup = new GroupVO();
+				GroupVO recommendedGroup = new GroupVO();
 				recommendedGroup.setGroupCode(rset.getInt("GROUP_CODE"));
 				recommendedGroup.setGroupName(rset.getString("GROUP_NAME"));
-				recommendedGroup.setRnCode(rset.getString("RN_CODE"));
-				recommendedGroup.setInterestCode(rset.getString("INTEREST_CODE"));
+			
+				recommendedGroup.setInterestCode(rset.getString("GROUP_INTEREST_CODE"));
 				recommendedGroup.setOpenYn(rset.getString("OPEN_YN"));
 				recommendedGroup.setNickNameyn(rset.getString("NICKNAME_YN"));
 				recommendedGroup.setOpenDate(rset.getDate("OPEN_DATE"));
@@ -498,6 +498,10 @@ public class GroupDao {
 				recommendedGroup.setInterest(rset.getString("INTEREST"));
 				recommendedGroup.setGroupLeaderName(rset.getString("GROUP_LEADER_NAME"));
 				recommendedGroup.setGroupLeaderCode(rset.getInt("GROUP_LEADER_CODE"));
+				
+				recommendedGroups.add(recommendedGroup);
+				System.out.println("test: " + recommendedGroup);
+
 			}
 			
 		} catch (SQLException e) {
@@ -511,7 +515,7 @@ public class GroupDao {
 		
 		
 		
-		return recommendedGroup;
+		return recommendedGroups;
 	}
 
 
