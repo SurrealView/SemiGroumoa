@@ -33,7 +33,7 @@ public class selectOneGroupServlet extends HttpServlet {
 		requestGroup.setGroupCode(groupCode);
 		
 		GroupVO selectedGroup = new GroupService().selectOneGroup(requestGroup);
-
+		
 		
 		
 		if(selectedGroup != null) {

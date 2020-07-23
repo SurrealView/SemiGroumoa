@@ -124,7 +124,7 @@
 						</tr>
 						<tr>
 							<td>소개</td>
-							<td><div><%=myGroupList.get(i).getRegionName()%></div></td>
+							<td><div><%=myGroupList.get(i).getDescription()%></div></td>
 						</tr>
 
 					</table>
@@ -133,12 +133,6 @@
 						
 					%>
 
-					<%-- 				<br>분야:
-				<%=myGroupList.get(i).getInterest()%>
-				<br>모임장:
-				<%=myGroupList.get(i).getGroupLeaderName()%>
-				<br>모임지역:
-				<%=myGroupList.get(i).getRegionName()%> --%>
 				</div>
 			</div>
 			<%
