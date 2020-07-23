@@ -7,12 +7,24 @@ public class GroupMemberVO implements java.io.Serializable {
 	
 	public GroupMemberVO() {}
 
+
 	public GroupMemberVO(int memberCode, int groupCode, String groupLeaderyn) {
 		super();
 		this.memberCode = memberCode;
 		this.groupCode = groupCode;
 		this.groupLeaderyn = groupLeaderyn;
 	}
+
+
+	public String getGroupLeaderyn() {
+		return groupLeaderyn;
+	}
+
+
+	public void setGroupLeaderyn(String groupLeaderyn) {
+		this.groupLeaderyn = groupLeaderyn;
+	}
+
 
 	public int getMemberCode() {
 		return memberCode;
@@ -30,18 +42,12 @@ public class GroupMemberVO implements java.io.Serializable {
 		this.groupCode = groupCode;
 	}
 
-	public String getGroupLeaderyn() {
-		return groupLeaderyn;
-	}
-
-	public void setGroupLeaderyn(String groupLeaderyn) {
-		this.groupLeaderyn = groupLeaderyn;
-	}
 
 	@Override
 	public String toString() {
-		return "GroupMember [memberCode=" + memberCode + ", groupCode=" + groupCode + ", groupLeaderyn=" + groupLeaderyn
-				+ "]";
+		return "GroupMemberVO [memberCode=" + memberCode + ", groupCode=" + groupCode + ", groupLeaderyn="
+				+ groupLeaderyn + "]";
 	}
+
 
 }

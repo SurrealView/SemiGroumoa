@@ -1,6 +1,7 @@
-package com.kh.groumoa.member.controller;
+package com.kh.groumoa.group.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,20 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.groumoa.member.model.service.MemberService;
+import com.kh.groumoa.group.model.service.GroupService;
+import com.kh.groumoa.group.model.vo.GroupVO;
 import com.kh.groumoa.member.model.vo.MemberVO;
 
 /**
- * Servlet implementation class ManagerDetailServlet
+ * Servlet implementation class SelectRecommendedGroupListServlet
  */
-@WebServlet("/detail.mn")
-public class ManagerDetailServlet extends HttpServlet {
+@WebServlet("/selectRecommendedList.gr")
+public class SelectRecommendedGroupListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ManagerDetailServlet() {
+    public SelectRecommendedGroupListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,19 +32,21 @@ public class ManagerDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int num = Integer.parseInt(request.getParameter("num"));
+		MemberVO loginUser = (MemberVO) request.getSession().getAttribute("loginUser");
 		
-		MemberVO member = new MemberService().selectMember(num);
+			ArrayList<ArrayList<GroupVO>> recommendedGroupList = new GroupService().selectRecommendedGroupList(loginUser);
+
 		
-		String page = "";
-		if(member != null) {
-			page = "views/manager/m_managerGroupDetail";
-			request.setAttribute("member", member);
-		} else {
-			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "회원 상세 조회 실패!");
-		}
+			String page = "";
 		
+		
+			page = "views/group/recommendedGroupList.jsp";
+			request.setAttribute("recommendedGroupList", recommendedGroupList);
+		System.out.println(recommendedGroupList);
+//			else {
+//			page = "views/common/errorPage.jsp";
+//			request.setAttribute("msg", "내 동호회 조회 실패");//새로운 로직 생각하기
+//		}
 		request.getRequestDispatcher(page).forward(request, response);
 	}
 
