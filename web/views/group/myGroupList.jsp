@@ -75,7 +75,7 @@
 		<script>
 			(function() {
 				var wrap = document.getElementById("total-wrap");
-				var height = 100 + (<%=myGroupListSize%>* 128) + 200;
+				var height = 300 + (<%=myGroupListSize%>* 128) + 200;
 				wrap.style.height = height + "px";
 			})();
 		</script>
@@ -153,6 +153,7 @@
 			}
 		%>
 	</div>
+	<div style="height: 300px"></div>
 	<%@include file="/views/common/footer/newFooter.jsp"%>
 </body>
 </html>
