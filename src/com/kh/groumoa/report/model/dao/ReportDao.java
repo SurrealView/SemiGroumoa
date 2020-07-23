@@ -2,6 +2,7 @@ package com.kh.groumoa.report.model.dao;
 
 import static com.kh.groumoa.common.CustomUtil.inst;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -128,7 +129,39 @@ public class ReportDao {
 		inst().setProp("/sql/report/report.properties");
 		pstmt = inst().getPstmt("selectList");
 		
+		int startIdx = pi.getStartPage();
+		int endIdx = pi.getEndPage();
 		
+		try {
+			pstmt.setInt(1, startIdx);
+			pstmt.setInt(2, endIdx);
+			rset = pstmt.executeQuery();
+			
+			reList = new ArrayList<ReportVo>();
+			
+			while(rset.next()) {
+				ReportVo re = new ReportVo();
+				re.setReportCode(rset.getString("REPORT_CODE"));
+				re.setRno(re.getReportCode());				
+				re.setReporter(rset.getInt("REPORTER"));
+				re.setReported(rset.getInt("REPORTED"));
+				re.setReporterID(rset.getString("EMAIL1"));
+				re.setReportedID(rset.getString("EMAIL2"));
+				re.setReportCategory(rset.getString("REPORT_CATEGORY"));
+				re.setReportDate(rset.getDate("REPORT_DATE"));
+				re.setReportTitle(rset.getString("REPORT_TITLE"));
+				re.setReportDetail(rset.getString("REPORT_DETAIL"));
+				re.setIsDealt(rset.getString("ISDEALT"));
+				
+				reList.add(re);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			inst().closeRset();
+			inst().closePstmt();
+		}
 		
 		return reList;
 	}

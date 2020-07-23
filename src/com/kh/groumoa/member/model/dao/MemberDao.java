@@ -365,7 +365,7 @@ public class MemberDao {
 				member.setGroupName(rset.getString("GROUP_NAME"));
 				member.setPenaltyCode(rset.getInt("PENALTY_CODE"));
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

@@ -85,7 +85,7 @@ public class ManagerpplServlet extends HttpServlet {
 			request.setAttribute("msg", "회원 조회 실패!");
 		}
 		request.getRequestDispatcher(page).forward(request, response);
-	}
+	}  
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

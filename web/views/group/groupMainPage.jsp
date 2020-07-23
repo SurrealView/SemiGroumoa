@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%-- <% GroupVO group = (GroupVO) session.getAttribute("group"); %> --%>
+<%
+	GroupVO group = (GroupVO) session.getAttribute("selectedGroup");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -59,8 +61,8 @@
 	color: rgb(70, 107, 228);
 }
 
-#btn{
-	float:right;
+#btn {
+	float: right;
 	margin-right: 25px;
 	background: white;
 	border: 1px solid black;
@@ -98,20 +100,20 @@
 	
 }
 
-#content2{
-	width:950px;
+#content2 {
+	width: 950px;
 	display: block;
 	margin: 0px auto;
 }
 
-#content3{
+#content3 {
 	width: 950px;
 	height: 500px;
 	display: block;
 	margin: 0px auto;
 	border: 1px solid lightgray;
-	
 }
+
 .group-field {
 	background: rgb(235, 235, 235);
 	text-align: center;
@@ -126,7 +128,7 @@
 </style>
 </head>
 <body>
-	<%@include file="../common/header/newHeader.jsp" %>
+	<%@include file="../common/header/newHeader.jsp"%>
 	<%@include file="subMenubar.jsp"%>
 	<div class="content">
 		<!-- 메뉴. 지워도 됨 -->
@@ -139,13 +141,10 @@
 			</div>
 		</div>
 		<!-- 메뉴 끝 -->
-		
-		<br>
-			<input id="btn" type="button" value="가입하기">
-			<input type="hidden" onclick="listCheck();">
-		<br>
-		<br>
-		
+
+		<br> <input id="btn" type="button" value="가입하기"> <input
+			type="hidden" onclick="listCheck();"> <br> <br>
+
 		<div class="wrapper">
 			<table class="table" id="content1">
 				<tr>
@@ -155,42 +154,39 @@
 						</div>
 					</td>
 					<td width="15%" class="group-field">동호회명</td>
-					<td width="85%"><div id="group-title" class="group-desc">그룹
-							이름 들어가는 곳</div></td>
+					<td width="85%"><div id="group-title" class="group-desc"><%=group.getGroupName()%></div></td>
 				</tr>
 				<tr>
 					<td class="group-field">활동지</td>
-					<td><div id="group-title" class="group-desc">활동 지역 들어가는
-							곳</div></td>
+					<td><div id="group-title" class="group-desc"><%=group.getRegionName()%></div></td>
 				</tr>
 
 				<tr>
 					<td class="group-field">분야</td>
-					<td><div id="group-title" class="group-desc">활동 분야 들어가는
-							곳</div></td>
+					<td><div id="group-title" class="group-desc"><%=group.getInterest()%></div></td>
 				</tr>
 
 				<tr>
-					<td class="group-field"></td>
-					<td><div id="group-title" class="group-desc">개설일이나 가입인원
-							같은거 들어가는 곳</div></td>
+					<td class="group-field">개설일</td>
+					<td><div id="group-title" class="group-desc"><%=group.getOpenDate()%></div></td>
 				</tr>
 			</table>
 			<table id="content2" style="margin-top: 25px">
 				<tr>
-					<td width="325px" class="group-board">대충 무언가 들어가는 곳1</td>
+					<td width="325px" class="group-board">일정?</td>
 					<td width="25px" class="blank"></td>
-					<td width="600px" class="group-board">대충 무언가 들어가는 곳2</td>
+					<td width="600px" class="group-board">회비?</td>
 				</tr>
 			</table>
-			<div id="content3" style="margin-top: 25px">대충 무언가 들어가는 곳3	</div>
+			<div id="content3" style="margin-top: 25px">게시판?</div>
 		</div>
 	</div>
-	<%@include file="../common/footer/newFooter.jsp" %>
-	
+	<%@include file="../common/footer/newFooter.jsp"%>
+
 	<script>
 		function listCheck() {
-			location.href="<%=request.getContextPath() %>/groupMember.go";
+			location.href="'<%=request.getContextPath()%>
+		/groupMember.go'";
 		}
 	</script>
 </body>

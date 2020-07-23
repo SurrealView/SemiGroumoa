@@ -17,6 +17,7 @@ import com.kh.groumoa.common.PageInfo;
 import com.kh.groumoa.group.model.vo.Attachment;
 import com.kh.groumoa.group.model.vo.GroupMemberVO;
 import com.kh.groumoa.group.model.vo.GroupVO;
+import com.kh.groumoa.member.model.vo.InterestVO;
 import com.kh.groumoa.member.model.vo.MemberInterestVO;
 import com.kh.groumoa.member.model.vo.MemberVO;
 import com.kh.groumoa.member.model.vo.RegionVO;
@@ -146,11 +147,40 @@ public class GroupDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			close(con);
 			close(rset);
 		}
 		
 		return region;
+	}
+	
+
+	public InterestVO searchInterest(Connection con, String interestCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		InterestVO interest = null;
+		
+		String query = prop.getProperty("searchInterest");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, interestCode);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				interest = new InterestVO();
+				interest.setInterestCode(rset.getString("INTEREST_CODE"));
+				interest.setInterest(rset.getString("INTEREST"));
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+		}
+		
+		return interest;
 	}
 	
 	public int updateThumbnailContent(Connection con, GroupVO group) {
@@ -583,7 +613,6 @@ public class GroupDao {
 		return listCount;
     
   }
-
 
 	public ArrayList<GroupVO> groupList(Connection con, PageInfo pi) {
 		ArrayList<GroupVO> list = null;
