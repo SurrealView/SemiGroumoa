@@ -99,9 +99,9 @@
 					<br><br>
 					<label for="category">분류</label>&nbsp;&nbsp;
 					<select class="form-control category" id="category" name="category"><!-- 분류 뭐뭐있는지 정하기 -->
-						<option value="C01">가입인사</option>
-						<option value="C02">공지</option>
-						<option value="C03">일반</option>
+						<option value="C1">가입인사</option>
+						<option value="C2">공지</option>
+						<option value="C3">일반</option>
 					</select>&nbsp;&nbsp;
 					<label for="writer">작성자</label>&nbsp;&nbsp;
 					<input type="text" class="form-control writer" name="writer" value="<%=loginUser.getUserName() %>" readonly>&nbsp;&nbsp;
@@ -112,7 +112,7 @@
 					<label for="attachment">파일 첨부</label>&nbsp;<!-- 파일 첨부하는 로직 추가하기 -->
 					<input type="file" class="attachment" id="attachment" name="attachment">
 					<br><br>
-					<input type="hidden" name="groupCode" value=""><!-- 그룹코드 받아오는 로직 추가하기 -->
+					<input type="hidden" name="groupCode" value="<%=selectedGroup.getGroupCode()%>"><!-- 그룹코드 받아오는 로직 추가하기 -->
 					<input type="hidden" name="writerCode" value="<%=loginUser.getMemberCode() %>">
 					<button class="btn btn-primary" onclick="submit();">작성하기</button>
 					<button class="btn btn-dark" onclick="reset();">취소</button>

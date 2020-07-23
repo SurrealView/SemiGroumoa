@@ -40,7 +40,7 @@ public class selectOneGroupServlet extends HttpServlet {
 
 		if(selectedGroup != null) {
 			request.getSession().setAttribute("selectedGroup", selectedGroup);
-			response.sendRedirect("index.jsp");//동호회메인페이지로 경로 변경 필요
+			response.sendRedirect("/views/group/subMenubar_myGroup.jsp");//동호회메인페이지로 경로 변경 필요
 		} else {
 			request.setAttribute("msg", "그룹 페이지 보이기 실패!");
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
