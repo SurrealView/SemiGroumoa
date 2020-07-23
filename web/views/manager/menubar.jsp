@@ -71,14 +71,14 @@
  				<div class="smenu">
  					<a onclick="every();">전체 사용자</a>
  					<a onclick="leader();">관리자</a>
- 					<a href="#">모임장</a>
- 					<a href="#">일반회원</a>
+ 					<a onclick="groupLeader();">모임장</a>
+ 					<a onclick="member();">일반회원</a>
  				</div>
  			</li>
  			<li class="pageMain" id="items">
  				<a href="#items" class="list"><img src="/groumoa/resources/image/menubar_group.png" width="10%">&nbsp;&nbsp;동호회관리</a>
  				<div class="smenu">
- 					<a href="#">전체 동호회</a>
+ 					<a onclick="everyGroup();">전체 동호회</a>
  				</div>
  			</li>
  			<li class="pageMain" id="adver">
@@ -106,6 +106,15 @@
 	function leader() {
 		location.href="<%=request.getContextPath() %>/managerLeader.mn";
 	}
+	
+	function groupLeader(){}
+	
+	function member(){}
+	
+	function everyGroup(){
+		location.href="<%=request.getContextPath() %>/groupList.gp";
+	}
+	
 </script>
 
 </body>

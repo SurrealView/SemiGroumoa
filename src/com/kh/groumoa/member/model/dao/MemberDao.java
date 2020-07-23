@@ -260,7 +260,6 @@ public class MemberDao {
 				m.setEmail(rset.getString("EMAIL"));
 				m.setUserName(rset.getString("MEMBER_NAME"));
 				m.setEnrollDate(rset.getDate("ENROLL_DATE"));
-				m.setGroupLeaderyn(rset.getString("GROUP_LEADER_YN"));
 				m.setPostCode(rset.getInt("POST"));
 				System.out.println(m);
 				list.add(m);
@@ -341,20 +340,40 @@ public class MemberDao {
 		return listCount;
 	}
 
-	public MemberVO selectMember(Connection con, int num) {
+	public MemberVO selectMember(Connection con, int nno) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		MemberVO member = null;
-
+		
 		String query = prop.getProperty("selectMember");
 
 		try {
 			pstmt = con.prepareStatement(query);
-
+			//SQL 수정.... 필요
+			pstmt.setInt(1, nno);
+			
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				member = new MemberVO();
+				
+				member.setUserName(rset.getString("MEMBER_NAME"));
+				member.setEmail(rset.getString("EMAIL"));
+				member.setUserPwd(rset.getString("MEMBER_PWD"));
+				member.setEnrollDate(rset.getDate("ENROLL_DATE"));
+				member.setPostCode(rset.getInt("POST_CODE"));
+				member.setGroupCode(rset.getInt("GROUP_CODE"));
+				member.setGroupName(rset.getString("GROUP_NAME"));
+				member.setPenaltyCode(rset.getInt("PENALTY_CODE"));
+			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
 		}
-		return null;
+		
+		return member;
 	}
 
 	public int getMemberCode(Connection con, String email) {

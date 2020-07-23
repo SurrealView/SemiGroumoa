@@ -1,4 +1,4 @@
-package com.kh.groumoa.member.controller;
+package com.kh.groumoa.group.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,20 +10,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.groumoa.common.PageInfo;
+import com.kh.groumoa.group.model.service.GroupService;
+import com.kh.groumoa.group.model.vo.GroupVO;
 import com.kh.groumoa.member.model.service.MemberService;
 import com.kh.groumoa.member.model.vo.MemberVO;
 
 /**
- * Servlet implementation class ManagerpplServlet
+ * Servlet implementation class AllGroupListServlet
  */
-@WebServlet("/managerPpl.mn")
-public class ManagerpplServlet extends HttpServlet {
+@WebServlet("/groupList.gp")
+public class AllGroupListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ManagerpplServlet() {
+    public AllGroupListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,7 +34,7 @@ public class ManagerpplServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		int currentPage; //현제 페이지를 표시할 변수
 		int limit;		 //한 페이지에 게시글이 몇 개 보여질 것인지 표시
 		int maxPage;	 //전체 페이지에서 가장 마지막 페이지
@@ -50,7 +52,7 @@ public class ManagerpplServlet extends HttpServlet {
 		limit = 10;
 		
 		//전체 목록 갯수를 조회
-		int listCount = new MemberService().getListCount();
+		int listCount = new GroupService().groupListCount();
 		
 		//총 페이지 수 계산
 		//예를 들면 목록 갯수가 123개 이면
@@ -71,13 +73,13 @@ public class ManagerpplServlet extends HttpServlet {
 		
 		PageInfo pi = new PageInfo(limit, currentPage, maxPage, startPage, endPage, listCount);
 		System.out.println(pi);
-		ArrayList<MemberVO> list = new MemberService().selectList(pi);
+		ArrayList<GroupVO> list = new GroupService().groupList(pi);
 		
 		System.out.println("리스트 : " + list);
 		
 		String page = "";
 		if(list != null) {
-			page = "views/manager/m_managerppl.jsp";
+			page = "views/manager/m_managerGroup.jsp";
 			request.setAttribute("list", list);
 			request.setAttribute("pi", pi);
 		} else {

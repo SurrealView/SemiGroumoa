@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import com.kh.groumoa.common.PageInfo;
 import com.kh.groumoa.group.model.dao.BoardDao;
 import com.kh.groumoa.group.model.vo.BoardVO;
+import com.kh.groumoa.group.model.vo.GroupVO;
 import com.kh.groumoa.member.model.dao.MemberDao;
 import com.kh.groumoa.member.model.vo.MemberInterestVO;
 import com.kh.groumoa.member.model.vo.MemberVO;
@@ -82,14 +83,14 @@ public class MemberService {
 		return result;
 	}
 
-	public MemberVO selectMember(int num) {
+	public MemberVO selectMember(int nno) {
 		Connection con = getConnection();
 		MemberVO member = null;
-
-		member = new MemberDao().selectMember(con, num);
+		
+		member = new MemberDao().selectMember(con, nno);
 
 		close(con);
-
+		
 		return member;
 	}
 
@@ -131,5 +132,4 @@ public class MemberService {
 
 		return result;
 	}
-
 }
