@@ -46,6 +46,19 @@ public class SelectReportListServlet extends HttpServlet {
 		PageInfo pi = inst().getPageInfo(currentPage, limit, listCount);
 		
 		ArrayList<ReportVo> reList = rs.selectList(pi);
+		
+		String page = "";
+		
+		if(reList != null) {
+			page = "views/manager/report/reportList.jsp";
+			request.setAttribute("list", reList);
+			request.setAttribute("pi", pi);
+		} else {
+			page = "views/common/errorPage.jsp";
+			request.setAttribute("msg", "게시판 조회 실패!");
+		}
+		
+		request.getRequestDispatcher(page).forward(request, response);
 	}
 
 	/**

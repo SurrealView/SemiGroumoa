@@ -123,11 +123,12 @@ public class NoticeService {
 			result = 0;
 			
 			for(int i = 0; i < fileList.size(); i++) {
-				fileList.get(i).setNoticeCode(no.getNoticeCategory());
+				//fileList.get(i).setNoticeCode(no.getNoticeCategory());
+				fileList.get(i).setNoticeCode(no.getNoticeCode());
 				
 				if(i < oldFileList.size()) {
 					fileList.get(i).setFid(oldFileList.get(i).getFid());
-					fileList.get(i).setNoticeCode(no.getNoticeCode());
+					//fileList.get(i).setNoticeCode(no.getNoticeCode());
 					result += nd.updateAttachment(fileList.get(i));
 				} else {
 					result += nd.insertAttachment(fileList.get(i));
