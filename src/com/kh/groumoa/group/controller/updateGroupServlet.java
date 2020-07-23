@@ -100,9 +100,6 @@ public class updateGroupServlet extends HttpServlet {
 			int result = new GroupService().updateGroup(group, fileList);
 			System.out.println("servlet" + result);
 			
-			//GroupVO selectOneGroup = new GroupService().selectOne(groupCode);
-			System.out.println(group);
-			//System.out.println(selectOneGroup);
 			String page = "";
 			if(result > 0) {
 				page = "views/group/groupUpdate.jsp";

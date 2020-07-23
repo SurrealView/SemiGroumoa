@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.kh.groumoa.common.model.vo.*, com.kh.groumoa.notice.model.vo.*, java.util.*"%>
+    pageEncoding="UTF-8" import="com.kh.groumoa.notice.model.vo.*, java.util.*, java.util.*, com.kh.groumoa.common.model.vo.*"%>
 <%
 	NoticeVo notice = (NoticeVo) request.getAttribute("notice");
 	ArrayList<AttachmentVo> list = (ArrayList<AttachmentVo>) request.getAttribute("fileList");

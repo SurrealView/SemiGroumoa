@@ -13,9 +13,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.kh.groumoa.common.PageInfo;
 import com.kh.groumoa.group.model.vo.Attachment;
 import com.kh.groumoa.group.model.vo.GroupMemberVO;
 import com.kh.groumoa.group.model.vo.GroupVO;
+import com.kh.groumoa.member.model.vo.MemberInterestVO;
 import com.kh.groumoa.member.model.vo.MemberVO;
 import com.kh.groumoa.member.model.vo.RegionVO;
 
@@ -306,32 +308,28 @@ public class GroupDao {
 	}
 
 
-	public ArrayList<MemberVO> selectList(Connection con, String groupCode) {
+	public ArrayList<GroupMemberVO> selectList(Connection con, String groupCode) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		ArrayList<MemberVO> list = new ArrayList();
+		ArrayList<GroupMemberVO> list = new ArrayList<GroupMemberVO>();
 		
 		String query = prop.getProperty("groupMemberList");
 		
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, groupCode);
+			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
-				MemberVO member = new MemberVO();
+				GroupMemberVO groupMember = new GroupMemberVO();
 				
-				member.setGroupCode(rset.getInt("GROUP_CODE"));
-				member.setMemberCode(rset.getInt("MEMBER_CODE"));
-				member.setGroupLeaderyn(rset.getString("GROUP_LEADERYN"));
-				member.setUserName(rset.getString("USER_NAME"));
-				member.setPhone(rset.getString("PHONE"));
-				member.setEmail(rset.getString("EMAIL"));
-				member.setEnrollDate(rset.getDate("ENROLL_DATE"));
+				groupMember.setGroupCode(rset.getInt("GROUP_CODE"));
+				groupMember.setMemberCode(rset.getInt("MEMBER_CODE"));
+				groupMember.setGroupLeaderyn(rset.getString("GROUP_LEADERYN"));
 				
-				list.add(member);
+				list.add(groupMember);
 			}
-			System.out.println(list);
-			rset = pstmt.executeQuery();
+			
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -412,7 +410,7 @@ public class GroupDao {
 				g.setOpenDate(rset.getDate("OPEN_DATE"));
 				g.setGroupRule(rset.getString("GROUP_RULE"));
 				g.setDescription(rset.getString("DESCRIPTION"));
-				g.setGroupLeaderYn(rset.getString("GROUP_LEADER_YN"));
+				g.setGroupLeaderName(rset.getString("MEMBER_NAME"));
 				g.setRegionName(rset.getString("REGION_NAME"));
 				g.setInterest(rset.getString("INTEREST"));
 				myGroupListAsLeader.add(g);
@@ -455,9 +453,10 @@ public class GroupDao {
 				g.setOpenDate(rset.getDate("OPEN_DATE"));
 				g.setGroupRule(rset.getString("GROUP_RULE"));
 				g.setDescription(rset.getString("DESCRIPTION"));
-				g.setGroupLeaderYn(rset.getString("GROUP_LEADER_YN"));
 				g.setRegionName(rset.getString("REGION_NAME"));
 				g.setInterest(rset.getString("INTEREST"));
+				g.setGroupLeaderName(rset.getString("GROUP_LEADER_NAME"));
+				g.setGroupLeaderCode(rset.getInt("GROUP_LEADER_CODE"));
 				searchedGroupList.add(g);
 			}
 			
@@ -473,4 +472,115 @@ public class GroupDao {
 	}
 
 
+	public ArrayList<GroupVO> selectRecommendedGroupList(Connection con, MemberInterestVO memberInterestVO) {//
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<GroupVO> recommendedGroups = new ArrayList<GroupVO>();;
+		String query = prop.getProperty("selectRecommendedGroup");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, memberInterestVO.getInterestCode());
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				GroupVO recommendedGroup = new GroupVO();
+				recommendedGroup.setGroupCode(rset.getInt("GROUP_CODE"));
+				recommendedGroup.setGroupName(rset.getString("GROUP_NAME"));
+			
+				recommendedGroup.setInterestCode(rset.getString("GROUP_INTEREST_CODE"));
+				recommendedGroup.setOpenYn(rset.getString("OPEN_YN"));
+				recommendedGroup.setNickNameyn(rset.getString("NICKNAME_YN"));
+				recommendedGroup.setOpenDate(rset.getDate("OPEN_DATE"));
+				recommendedGroup.setGroupRule(rset.getString("GROUP_RULE"));
+				recommendedGroup.setDescription(rset.getString("DESCRIPTION"));
+				recommendedGroup.setRegionName(rset.getString("REGION_NAME"));
+				recommendedGroup.setInterest(rset.getString("INTEREST"));
+				recommendedGroup.setGroupLeaderName(rset.getString("GROUP_LEADER_NAME"));
+				recommendedGroup.setGroupLeaderCode(rset.getInt("GROUP_LEADER_CODE"));
+				
+				recommendedGroups.add(recommendedGroup);
+				System.out.println("test: " + recommendedGroup);
+
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return recommendedGroups;
+	}
+
+  	public ArrayList<MemberVO> groupMemberList(Connection con, PageInfo pi, int groupCode) {
+		ArrayList<MemberVO> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("groupMemberList");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getLimit() + 1;
+			int endRow = startRow + pi.getLimit() - 1;
+			
+/*			pstmt.setInt(1, groupCode);     추가해야합니다...
+*/			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<MemberVO>();
+			
+			while(rset.next()) {
+				MemberVO m = new MemberVO();
+				m.setUserName(rset.getString("MEMBER_NAME"));
+				m.setGroupLeaderyn(rset.getString("GROUP_LEADER_YN"));
+				m.setEmail(rset.getString("EMAIL"));
+				
+				list.add(m);
+			}
+			
+			rset = pstmt.executeQuery();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(con);
+		}
+		
+		return list;
+	}
+
+
+	public int memberListCount(Connection con) {
+		Statement stmt = null;
+		int listCount = 0;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("groupMemberCount");
+		
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+			close(rset);
+		}
+
+		return listCount;
+    
+  }
 }

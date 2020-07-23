@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.kh.groumoa.common.PageInfo;
 import com.kh.groumoa.group.model.service.BoardService;
 import com.kh.groumoa.group.model.vo.BoardVO;
+import com.kh.groumoa.member.model.service.MemberService;
 
 
 /**

@@ -70,7 +70,7 @@
  				<a href="#settings" class="list"><img src="/groumoa/resources/image/menubar_address.png" width="10%">&nbsp;&nbsp;회원관리</a>
  				<div class="smenu">
  					<a onclick="every();">전체 사용자</a>
- 					<a href="#">관리자</a>
+ 					<a onclick="leader();">관리자</a>
  					<a href="#">모임장</a>
  					<a href="#">일반회원</a>
  				</div>
@@ -101,6 +101,10 @@
 <script>
 	function every() {
 		location.href="<%=request.getContextPath() %>/managerPpl.mn";
+	}
+	
+	function leader() {
+		location.href="<%=request.getContextPath() %>/managerLeader.mn";
 	}
 </script>
 

@@ -23,6 +23,9 @@ public class MemberVO implements java.io.Serializable {
 	//GroupMember 회원 번호 추가
 	private int num;
 	
+	//Member 글 작성 횟수
+	private int postCode;
+	
 	public MemberVO() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -30,7 +33,7 @@ public class MemberVO implements java.io.Serializable {
 
 	public MemberVO(int memberCode, String email, String userName, String userPwd, String gender, String rnCode,
 			String address, String phone, String birthDate, Date enrollDate, String status, int groupCode,
-			String groupLeaderyn, int num) {
+			String groupLeaderyn, int num, int postCode) {
 		super();
 		this.memberCode = memberCode;
 		this.email = email;
@@ -46,6 +49,7 @@ public class MemberVO implements java.io.Serializable {
 		this.groupCode = groupCode;
 		this.groupLeaderyn = groupLeaderyn;
 		this.num = num;
+		this.postCode = postCode;
 	}
 
 	public int getMemberCode() {
@@ -160,12 +164,20 @@ public class MemberVO implements java.io.Serializable {
 		this.num = num;
 	}
 
+	public int getPostCode() {
+		return postCode;
+	}
+
+	public void setPostCode(int postCode) {
+		this.postCode = postCode;
+	}
+
 	@Override
 	public String toString() {
 		return "MemberVO [memberCode=" + memberCode + ", email=" + email + ", userName=" + userName + ", userPwd="
 				+ userPwd + ", gender=" + gender + ", rnCode=" + rnCode + ", address=" + address + ", phone=" + phone
 				+ ", birthDate=" + birthDate + ", enrollDate=" + enrollDate + ", status=" + status + ", groupCode="
-				+ groupCode + ", groupLeaderyn=" + groupLeaderyn + ", num=" + num + "]";
+				+ groupCode + ", groupLeaderyn=" + groupLeaderyn + ", num=" + num + ", postCode=" + postCode + "]";
 	}
-	
+
 }

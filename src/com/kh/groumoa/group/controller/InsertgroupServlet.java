@@ -61,10 +61,10 @@ public class InsertgroupServlet extends HttpServlet {
 	            saveFiles.add(multiRequest.getFilesystemName(name));
 	            originFiles.add(multiRequest.getOriginalFileName(name));
 	         }
-			
-	        int groupCode = Integer.parseInt(multiRequest.getParameter("groupCode"));
+			/*
+	        int groupCode = Integer.parseInt(multiRequest.getParameter("groupCode"));*/
 			String rnCode = multiRequest.getParameter("rnCode");
-			String name = multiRequest.getParameter("name");
+			String name = multiRequest.getParameter("groupName");
 			String description = multiRequest.getParameter("description");
 /*			String [] iarr = request.getParameterValues("interest");
 */			String interest = multiRequest.getParameter("interest");
@@ -92,15 +92,15 @@ public class InsertgroupServlet extends HttpServlet {
 			}  */
 		
 			
-			GroupVO group = new GroupVO();
-			group.setGroupCode(groupCode);
-			group.setInterestCode(interest);
-			group.setRnCode(rnCode);
+			GroupVO group = new GroupVO();/*
+			group.setGroupCode(groupCode);*/
 			group.setGroupName(name);
-			group.setDescription(description);
-			group.setOpenYn(openYn);
+			group.setRnCode(rnCode);
+			group.setInterestCode(interest);
 			group.setNickNameyn(nickNameyn);
+			group.setOpenYn(openYn);
 			group.setGroupRule(groupRule);
+			group.setDescription(description);
 			
 			RegionVO region = new RegionVO();
 			region.setRnCode(rnCode);
@@ -125,9 +125,7 @@ public class InsertgroupServlet extends HttpServlet {
 				fileList.add(at);
 			}
 			
-			/*System.out.println("fileList" + fileList);
-			
-			int result = new GroupService().insertGroup(group);*/
+			System.out.println("fileList" + fileList);
 				
 			int result = new GroupService().insertGroup(group, fileList);
 			System.out.println("servlet" + result);
@@ -138,15 +136,13 @@ public class InsertgroupServlet extends HttpServlet {
 			RegionVO regionSearch = new GroupService().searchRegion(rnCode);
 			System.out.println(regionSearch);
 			
-			
-			
 			String page = "";
 			if(result > 0) {
 				page = "views/group/groupUpdate.jsp";
 				request.setAttribute("group", group);
 				request.setAttribute("fileList", fileList);
-				request.setAttribute("region", regionSearch);
-/*				request.setAttribute("selectGroup", selectGroup);*/
+				request.setAttribute("regionSearch", regionSearch);
+  /*			request.setAttribute("selectGroup", selectGroup);*/
 				System.out.println(group);
 				System.out.println(fileList);
 /*				response.sendRedirect(request.getContextPath() + "/views/group/groupUpdate.jsp");
