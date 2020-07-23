@@ -8,9 +8,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.kh.groumoa.common.PageInfo;
 import com.kh.groumoa.common.model.vo.AttachmentVo;
+import com.kh.groumoa.notice.model.vo.NoticeVo;
 import com.kh.groumoa.report.model.vo.ReportVo;
 
 public class ReportDao {
@@ -129,12 +131,12 @@ public class ReportDao {
 		inst().setProp("/sql/report/report.properties");
 		pstmt = inst().getPstmt("selectList");
 		
-		int startIdx = pi.getStartPage();
-		int endIdx = pi.getEndPage();
+		int startRow = (pi.getCurrentPage() - 1) * pi.getLimit() + 1;
+		int endRow = startRow + pi.getLimit() - 1;
 		
 		try {
-			pstmt.setInt(1, startIdx);
-			pstmt.setInt(2, endIdx);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
 			rset = pstmt.executeQuery();
 			
 			reList = new ArrayList<ReportVo>();
@@ -164,6 +166,137 @@ public class ReportDao {
 		}
 		
 		return reList;
+	}
+
+	public HashMap<String, Object> selectFileMap(String reId) {
+		PreparedStatement pstmt = null;		
+		ResultSet rset = null;
+		HashMap<String, Object> hmap = null;		
+		inst().setProp("/sql/report/report.properties");
+		pstmt = inst().getPstmt("selectFileOne");		
+		ArrayList<AttachmentVo> list = null;
+		ReportVo re = null;
+		
+		
+		try {
+			pstmt.setString(1, reId);
+			
+			rset = inst().getResultSet();
+			
+			while(rset.next()) {
+				if(re == null) {
+					//신고자코드, 피신고자코드
+					//신고자, 피신고자 ID
+					//게시물 코드, 게시물번호
+					//게시물 작성일자, 컨텐츠 내용
+					//제목, 카테고리										
+					
+				}
+				
+				AttachmentVo na = new AttachmentVo();
+
+				na.setFid(rset.getString("FID"));
+				na.setOriginName(rset.getString("ORIGIN_NAME"));
+				na.setChangeName(rset.getString("CHANGE_NAME"));
+				na.setFilePath(rset.getString("FILE_PATH"));
+				na.setUploadDate(rset.getDate("UPLOAD_DATE"));
+				na.setFileLevel(rset.getInt("FILE_LEVEL"));
+				na.setReportCode(reId);				
+				
+				list.add(na);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+
+	public ReportVo selectOneReport(String reId) {
+		PreparedStatement pstmt = null;		
+		ResultSet rset = null;
+		inst().setProp("/sql/report/report.properties");
+		pstmt = inst().getPstmt("selectReportOne");		
+		ReportVo re = null;
+		
+		try {
+			pstmt.setString(1, reId);
+			
+			rset = inst().getResultSet();
+			
+			if(rset.next()) {
+				re = new ReportVo();
+				
+				re.setRno(reId);
+				re.setReportCode(reId);
+				re.setReporter(rset.getInt("REPORTER"));
+				re.setReported(rset.getInt("REPORTED"));
+				re.setReportCategory(rset.getString("REPORT_CATEGORY"));
+				re.setReportDate(rset.getDate("REPORT_DATE"));
+				re.setReportTitle(rset.getString("REPORT_TITLE"));
+				re.setReportDetail(rset.getString("REPORT_DETAIL"));
+				re.setReporterID(rset.getString("EMAIL1"));
+				re.setReportedID(rset.getString("EMAIL2"));
+				
+				/*REPORT_CODE	VARCHAR2(10 BYTE)
+				REPORTER	NUMBER
+				REPORTED	NUMBER
+				REPORT_CATEGORY	VARCHAR2(30 BYTE)
+				REPORT_DATE	DATE
+				REPORT_TITLE	VARCHAR2(60 BYTE)
+				REPORT_DETAIL	VARCHAR2(3000 BYTE)
+				ISDEALT	CHAR(1 BYTE)*/
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			inst().closeRset();
+			inst().closePstmt();
+		}
+		
+		return re;
+	}
+
+	public ArrayList<AttachmentVo> selectFileList(String reId) {
+		PreparedStatement pstmt = null;		
+		ResultSet rset = null;		
+		inst().setProp("/sql/report/report.properties");
+		pstmt = inst().getPstmt("selectFileOne");		
+		ArrayList<AttachmentVo> list = null;
+		
+		
+		try {
+			pstmt.setString(1, reId);
+			
+			rset = inst().getResultSet();
+			
+			while(rset.next()) {				
+				AttachmentVo na = new AttachmentVo();
+
+				na.setFid(rset.getString("FID"));
+				na.setOriginName(rset.getString("ORIGIN_NAME"));
+				na.setChangeName(rset.getString("CHANGE_NAME"));
+				na.setFilePath(rset.getString("FILE_PATH"));
+				na.setUploadDate(rset.getDate("UPLOAD_DATE"));
+				na.setFileLevel(rset.getInt("FILE_LEVEL"));
+				na.setReportCode(reId);				
+				
+				list.add(na);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			inst().closeRset();
+			inst().closePstmt();
+		}
+		
+		return list;
 	}
 
 }

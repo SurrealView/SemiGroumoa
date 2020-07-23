@@ -15,11 +15,59 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<style>
+.content{
+   	  position:relative;
+   	  left:110px;
+   	  top:60px;
+      width:1000px;
+      height:800px;
+      margin:0 auto;
+      border: 1px solid #e2d8d8;
+      background:white;
+   }
+   
+   .form-control{
+      width:100px;
+      height:35px;
+      
+   }  
+   
+   .table tbody tr:hover{
+      cursor:pointer;
+   }
+      
+   .writeContentBtn{
+      border-radius:30px;
+      margin-left: 90px;
+      margin-top:-45px;
+   }
+   
+   .table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 10px;
+    /* width:950px; */
+    border-collapse: collapse;
+    text-align:center;
+   }
+   
+   .reportTitle, .reportTitle td {
+		padding:10px;
+	}
+	
+	.reportTitle {
+		border-bottom:1px solid black;
+	}
+		
+</style>
+
+
 </head>
 <body>
 	<%@ include file="/views/manager/menubar.jsp" %>
-	<div class="content">      
-      <span id="temp">* 질문에 대한 조회 및 답변을 작성하실 수 있습니다.</span>
+	<div class="content">		  
       <br>
       <h2 id="name" align="center">신고 게시판</h4>
       <hr>
@@ -28,7 +76,6 @@
       <table class="table" id="reportList">
       <thead>
           <tr>
-           <th><input type="checkbox"></th>
            <th>글번호</th>
            <th>분류</th>
            <th>작성자</th>
@@ -49,11 +96,11 @@
          <td class="list"><%=re.getReportTitle() %></td>
          <td class="list"><%=re.getReportDate() %></td>
          </tr>
-      <% } %>           
+      <% } %>
       </tbody>
       </table>
       <div class="userBtnArea">
-      	<button onclick="location.href='<%=request.getContextPath()%>/views/manager/notice/noticeWrite.jsp'">글쓰기</button>
+      	<button onclick="writeReport();">글쓰기</button>
       </div>
       <div class="pageArea" align="center">   	
       	<button onclick="location.href='<%=request.getContextPath()%>/selectList.re?currentPage=1'">처음으로</button>      	
@@ -92,11 +139,13 @@
     		var num = $(this).parent().children("#rowNum").text();
     		
     		console.log(num);
-    		
-    		location.href ="<%=request.getContextPath()%>/selectOne.no?num=" + num;
+    		location.href ="<%=request.getContextPath()%>/selectOne.re?num=" + num;
     	});	
     	  	
     });   
+    function writeReport(){
+    	$("#reportListForm").attr("action", "<%=request.getContextPath()%>/views/manager/report/reportWrite.jsp");
+    }
     </script>
 </body>
 </html>
