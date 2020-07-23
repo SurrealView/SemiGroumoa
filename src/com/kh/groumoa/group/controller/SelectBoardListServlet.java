@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.kh.groumoa.common.PageInfo;
 import com.kh.groumoa.group.model.service.BoardService;
 import com.kh.groumoa.group.model.vo.BoardVO;
+import com.kh.groumoa.member.model.service.MemberService;
 
 
 /**
@@ -57,7 +58,7 @@ public class SelectBoardListServlet extends HttpServlet {
 				limit = 10;
 				
 				//전체 목록 갯수를 조회
-				int listCount = new MemberService().getListCount(board);
+				int listCount = new BoardService().getListCount(board);
 				System.out.println("list count : " + listCount);
 				
 				//총 페이지 수 계산

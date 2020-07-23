@@ -13,6 +13,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.kh.groumoa.common.PageInfo;
 import com.kh.groumoa.group.model.vo.Attachment;
 import com.kh.groumoa.group.model.vo.GroupMemberVO;
 import com.kh.groumoa.group.model.vo.GroupVO;
@@ -284,8 +285,7 @@ public class GroupDao {
 	}
 
 	//동호회 회원 추방
-	public int 
-    Out(Connection con, int memberCode) {
+	public int kickOut(Connection con, int memberCode) {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
