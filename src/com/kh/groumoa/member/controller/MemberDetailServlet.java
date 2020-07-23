@@ -1,30 +1,27 @@
-package com.kh.groumoa.report.controller;
+package com.kh.groumoa.member.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import static com.kh.groumoa.common.CustomUtil.inst;
 
-import com.kh.groumoa.common.PageInfo;
-import com.kh.groumoa.report.model.service.ReportService;
-import com.kh.groumoa.report.model.vo.ReportVo;
+import com.kh.groumoa.member.model.service.MemberService;
+import com.kh.groumoa.member.model.vo.MemberVO;
 
 /**
- * Servlet implementation class SelectReportListServlet
+ * Servlet implementation class ManagerDetailServlet
  */
-@WebServlet("/selectList.re")
-public class SelectReportListServlet extends HttpServlet {
+@WebServlet("/detail.mn")
+public class MemberDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SelectReportListServlet() {
+    public MemberDetailServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,29 +30,22 @@ public class SelectReportListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int currentPage;
-		int limit;
+		String num = request.getParameter("num");
 		
-		ReportService rs = new ReportService();
+		int nno = 0;
+		if(num != "" && num != null) {
+			nno = Integer.parseInt(num);
+		}
 		
-		currentPage = 1;
-		limit = 10;
-		
-		int listCount = rs.getListCount();
-		
-		PageInfo pi = inst().getPageInfo(currentPage, limit, listCount);
-		
-		ArrayList<ReportVo> reList = rs.selectList(pi);
+		MemberVO member = new MemberService().selectMember(nno);
 		
 		String page = "";
-		
-		if(reList != null) {
-			page = "views/manager/report/reportList.jsp";
-			request.setAttribute("list", reList);
-			request.setAttribute("pi", pi);
+		if(member != null) {
+			page = "views/manager/m_managerInfo.jsp";
+			request.setAttribute("member", member);
 		} else {
 			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "게시판 조회 실패!");
+			request.setAttribute("msg", "회원 상세 조회 실패!");
 		}
 		
 		request.getRequestDispatcher(page).forward(request, response);

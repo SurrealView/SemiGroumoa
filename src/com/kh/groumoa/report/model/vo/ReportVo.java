@@ -13,6 +13,7 @@ public class ReportVo {
 	String reportTitle;
 	String reportDetail;
 	String isDealt;
+	int rno;
 	
 	public ReportVo() {
 		
@@ -29,6 +30,16 @@ public class ReportVo {
 		this.reportTitle = reportTitle;
 		this.reportDetail = reportDetail;
 		this.isDealt = isDealt;
+	}
+	
+	
+
+	public int getRno() {
+		return rno;
+	}
+
+	public void setRno(String reportCode) {
+		rno = Integer.parseInt(reportCode.replace("RE", ""));
 	}
 
 	public String getReportCode() {

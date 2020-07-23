@@ -273,4 +273,23 @@ public class GroupService {
   
   }
 
+	public ArrayList<GroupVO> groupList(PageInfo pi) {
+		Connection con = getConnection();
+		
+		ArrayList<GroupVO> list = new GroupDao().groupList(con, pi);
+		
+		close(con);
+		
+		return list;
+	}
+
+	public int groupListCount() {
+		Connection con = getConnection();
+		int listCount = new GroupDao().groupListCount(con);
+
+		close(con);
+
+		return listCount;
+	}
+
 }

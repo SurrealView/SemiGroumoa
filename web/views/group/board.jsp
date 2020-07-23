@@ -169,7 +169,7 @@ int endPage = pi.getEndPage();
 				</ul>
 				</div>
 				<div class="writeBtn" style="float:left">
-					<button class="" onclick="location.href='boardWrite.jsp'";>작성하기</button>
+					<button class="" onclick="location.href='<%=request.getContextPath() %>/views/group/boardWrite.jsp'";>작성하기</button>
 				</div>
                 <div class="searchbox" id="searchbox">
 					<form>
