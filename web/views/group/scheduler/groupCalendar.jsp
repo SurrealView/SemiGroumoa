@@ -78,13 +78,15 @@
 			        content : '<p>' + event.start + '</p><p>' + event.end + '<p>' + event.description + '</p>'
 			    })
 			}, */
-			events : [ {
+			events : [ 
+				{
 				id : '0000001',
 				title : '모임회',
 				start : '2020-07-22',
 				end : '2019-07-22',
 				description : 'event no.1'
-			} ],
+			} 
+				],
 			dateClick : function(info) {
 				alert('Clicked on: ' + info.dateStr);
 				alert('Coordinates: ' + info.jsEvent.pageX + ','
