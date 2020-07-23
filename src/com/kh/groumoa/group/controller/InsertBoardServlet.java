@@ -32,12 +32,13 @@ public class InsertBoardServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String title = request.getParameter("title");
 		String categoryCode = request.getParameter("category");
-		int groupCode = Integer.parseInt(request.getParameter("groupCode"));
-		int writerCode = Integer.parseInt(request.getParameter("writer"));
-		String detail = request.getParameter("detail");
+		int groupCode = Integer.parseInt( (String) request.getSession().getAttribute("selectedGroup"));
+		//int groupCode = 2; //임시
+		int writerCode = Integer.parseInt(request.getParameter("writerCode"));
+		String detail = request.getParameter("content");
 		
 		
-		String requestAttachment = request.getParameter("attachment");//로직 추가해야됨
+		//String requestAttachment = request.getParameter("attachment");//로직 추가해야됨
 		
 		BoardVO requestBoard = new BoardVO();
 		requestBoard.setTitle(title);
