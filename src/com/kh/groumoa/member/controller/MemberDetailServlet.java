@@ -15,13 +15,13 @@ import com.kh.groumoa.member.model.vo.MemberVO;
  * Servlet implementation class ManagerDetailServlet
  */
 @WebServlet("/detail.mn")
-public class ManagerDetailServlet extends HttpServlet {
+public class MemberDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ManagerDetailServlet() {
+    public MemberDetailServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,13 +30,18 @@ public class ManagerDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int num = Integer.parseInt(request.getParameter("num"));
+		String num = request.getParameter("num");
 		
-		MemberVO member = new MemberService().selectMember(num);
+		int nno = 0;
+		if(num != "" && num != null) {
+			nno = Integer.parseInt(num);
+		}
+		
+		MemberVO member = new MemberService().selectMember(nno);
 		
 		String page = "";
 		if(member != null) {
-			page = "views/manager/m_managerGroupDetail";
+			page = "views/manager/m_managerInfo.jsp";
 			request.setAttribute("member", member);
 		} else {
 			page = "views/common/errorPage.jsp";
