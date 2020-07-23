@@ -39,7 +39,7 @@
 </head>
 <body>
 	<div class="sub-menubar" id="sub-menubar-wrap">
-		<h2>모임관리</h2>
+		<h2>모임 메뉴</h2>
 		<div class="sub-menubar" id="sub-menubar">
 			<div class="sub-menubar-each" id="sub1"><a href="#">동호회페이지</a></div>
 			<div class="sub-menubar-each" id="sub2"><a href="#">최근일정</a></div>

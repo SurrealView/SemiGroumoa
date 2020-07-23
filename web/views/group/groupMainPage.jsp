@@ -154,21 +154,21 @@
 						</div>
 					</td>
 					<td width="15%" class="group-field">동호회명</td>
-					<td width="85%"><div id="group-title" class="group-desc"><%= group.getGroupName() %></div></td>
+					<td width="85%"><div id="group-title" class="group-desc"><%=group.getGroupName()%></div></td>
 				</tr>
 				<tr>
 					<td class="group-field">활동지</td>
-					<td><div id="group-title" class="group-desc"><%= group.getRegionName() %></div></td>
+					<td><div id="group-title" class="group-desc"><%=group.getRegionName()%></div></td>
 				</tr>
 
 				<tr>
 					<td class="group-field">분야</td>
-					<td><div id="group-title" class="group-desc"><%= group.getInterest() %></div></td>
+					<td><div id="group-title" class="group-desc"><%=group.getInterest()%></div></td>
 				</tr>
 
 				<tr>
 					<td class="group-field">개설일</td>
-					<td><div id="group-title" class="group-desc"><%= group.getOpenDate() %></div></td>
+					<td><div id="group-title" class="group-desc"><%=group.getOpenDate()%></div></td>
 				</tr>
 			</table>
 			<table id="content2" style="margin-top: 25px">
@@ -185,8 +185,8 @@
 
 	<script>
 		function listCheck() {
-			location.href="<%=request.getContextPath()%>
-		/groupMember.go";
+			location.href="'<%=request.getContextPath()%>
+		/groupMember.go'";
 		}
 	</script>
 </body>
