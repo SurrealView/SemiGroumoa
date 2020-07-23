@@ -69,7 +69,7 @@
 			</div>
 			
 			<div style="float: left; border-bottom: 1px solid black; width: 200px; text-align: center;">
-			<form action="#" method="post">
+			<form action="<%=request.getContextPath() %>/selectList.bo" method="post">
 				<input type="hidden" value="<%=searchedGroupList.get(i).getGroupCode() %>">
 				<button style="float:right;" onclick="submit();">페이지 방문</button>
 			</form>

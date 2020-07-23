@@ -80,8 +80,8 @@
 </head>
 <body>
 	<!-- 여기 헤더 추가할것 -->
-	<%@include file="../common/header/header.jsp" %>
-	<%@include file="subMenubar.jsp" %>
+	<%@include file="../common/header/newHeader.jsp" %>
+	<%@include file="subMenubar_myGroup.jsp" %>
 	<br>
 	<div class="content">
 	<p align="right" style="font-size:10px; padding-right: 25px; padding-top: 15px;">개인정보취급방침에 따라 최근 5년간의 내역이 제공됩니다.</p>
@@ -104,7 +104,7 @@
 						<option value="C03">일반</option>
 					</select>&nbsp;&nbsp;
 					<label for="writer">작성자</label>&nbsp;&nbsp;
-					<input type="text" class="form-control writer" value="<%=loginUser.getUserName() %>" readonly>&nbsp;&nbsp;
+					<input type="text" class="form-control writer" name="writer" value="<%=loginUser.getUserName() %>" readonly>&nbsp;&nbsp;
 					<label for="date-written">작성일</label>&nbsp;&nbsp;
 					<input type="date" id="currentDate" readonly><br><br>
 					<textarea class="form-control" cols="120" rows="20" style="resize:none;" name="content"></textarea>
@@ -113,7 +113,7 @@
 					<input type="file" class="attachment" id="attachment" name="attachment">
 					<br><br>
 					<input type="hidden" name="groupCode" value=""><!-- 그룹코드 받아오는 로직 추가하기 -->
-					<input type="hidden" name="writerCode" value=" name="<%=loginUser.getMemberCode() %>">
+					<input type="hidden" name="writerCode" value="<%=loginUser.getMemberCode() %>">
 					<button class="btn btn-primary" onclick="submit();">작성하기</button>
 					<button class="btn btn-dark" onclick="reset();">취소</button>
 				</form>
