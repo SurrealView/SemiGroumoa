@@ -45,7 +45,7 @@ public class SelectBoardListServlet extends HttpServlet {
 				
 				//그룹코드 받아오기
 				int groupCode = Integer.parseInt(request.getParameter("groupCode"));
-				
+
 				BoardVO board = new BoardVO();
 				board.setGroupCode(groupCode);
 				
@@ -84,7 +84,7 @@ public class SelectBoardListServlet extends HttpServlet {
 				
 				String page = "";
 				if(list != null) {
-					page = "views/board/boardList.jsp";
+					page = "views/group/board.jsp";
 					request.setAttribute("list", list);
 					request.setAttribute("pi", pi);
 				} else {

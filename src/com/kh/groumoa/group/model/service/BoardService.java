@@ -18,7 +18,7 @@ public class BoardService {
 		int result = 0;
 		
 		
-		int insertBoard = new BoardDao().insertBoard(con, requestBoard);
+		result = new BoardDao().insertBoard(con, requestBoard);
 		
 		
 		

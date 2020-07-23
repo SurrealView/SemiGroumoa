@@ -260,7 +260,6 @@ public class MemberDao {
 				m.setEmail(rset.getString("EMAIL"));
 				m.setUserName(rset.getString("MEMBER_NAME"));
 				m.setEnrollDate(rset.getDate("ENROLL_DATE"));
-				m.setGroupLeaderyn(rset.getString("GROUP_LEADER_YN"));
 				m.setPostCode(rset.getInt("POST"));
 				System.out.println(m);
 				list.add(m);
@@ -350,6 +349,9 @@ public class MemberDao {
 
 		try {
 			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, num);
+			
+			rset = pstmt.executeQuery();
 
 		} catch (SQLException e) {
 			e.printStackTrace();

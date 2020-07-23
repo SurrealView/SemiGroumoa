@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
 <!DOCTYPE html>
 <html>
 <head>
@@ -75,7 +76,7 @@
             <table id="QWriteArea">
                 <tr>
                     <td><label>이름 </label></td>
-                    <td colspan="2"><input type="text" name="qManager"></td>
+                    <td colspan="2"><input type="text" name="qManager" value="<%=%>"></td>
                     <td><label>연락처 </label></td>
                     <td><input type="tel" name="noTel"></td>
                 </tr>

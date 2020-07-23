@@ -155,4 +155,3 @@
 	</div>
 	<%@include file="/views/common/footer/newFooter.jsp"%>
 </body>
-</html>
