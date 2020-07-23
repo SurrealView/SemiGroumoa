@@ -21,26 +21,24 @@ public class selectOneGroupServlet extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public selectOneGroupServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+    public selectOneGroupServlet() { }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int groupCode = Integer.parseInt(request.getParameter("groupCode"));//
+		int groupCode = Integer.parseInt(request.getParameter("groupCode"));
 		
 		GroupVO requestGroup = new GroupVO();
 		requestGroup.setGroupCode(groupCode);
 		
 		GroupVO selectedGroup = new GroupService().selectOneGroup(requestGroup);
-		
 
+		
+		
 		if(selectedGroup != null) {
 			request.getSession().setAttribute("selectedGroup", selectedGroup);
-			response.sendRedirect("index.jsp");//동호회메인페이지로 경로 변경 필요
+			response.sendRedirect("views/group/groupMainPage.jsp");//동호회메인페이지로 경로 변경 필요
 		} else {
 			request.setAttribute("msg", "그룹 페이지 보이기 실패!");
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);

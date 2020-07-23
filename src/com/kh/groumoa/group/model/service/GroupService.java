@@ -169,6 +169,12 @@ public class GroupService {
 		
 		GroupVO selectedGroup = new GroupDao().selectOneGroup(con, Group);
 		
+		//지역명 가져오기
+		RegionVO region = new GroupDao().searchRegion(con, selectedGroup.getRnCode());
+		selectedGroup.setRegionName(region.getRegionName() + " " + region.getRegionSpecific());
+		
+		
+		
 		close(con);
 		System.out.println(selectedGroup);
 		return selectedGroup;
