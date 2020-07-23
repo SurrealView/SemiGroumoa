@@ -9,12 +9,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import com.kh.groumoa.common.PageInfo;
 import com.kh.groumoa.member.model.vo.MemberInterestVO;
 import com.kh.groumoa.member.model.vo.MemberVO;
 
@@ -40,6 +38,185 @@ private Properties prop = new Properties();
 	}
 	
 	public MemberVO loginCheck(Connection con, MemberVO requestMember) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		MemberVO loginUser = null;
+		
+		String query = prop.getProperty("loginSelect");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, requestMember.getEmail());
+			pstmt.setString(2, requestMember.getUserPwd());
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				loginUser = new MemberVO();
+				
+				loginUser.setMemberCode(rset.getInt("MEMBER_CODE"));
+				loginUser.setEmail(rset.getString("EMAIL"));
+				loginUser.setUserPwd(rset.getString("MEMBER_PWD"));
+				loginUser.setUserName(rset.getString("MEMBER_NAME"));
+				loginUser.setGender(rset.getString("GENDER"));
+				loginUser.setRnCode(rset.getString("RN_CODE"));
+				loginUser.setAddress(rset.getString("ADDRESS"));
+				loginUser.setPhone(rset.getString("PHONE"));
+				loginUser.setEnrollDate(rset.getDate("ENROLL_DATE"));
+				loginUser.setStatus(rset.getString("STATUS"));
+				
+				java.sql.Date birthDate = rset.getDate("BIRTH_DATE");
+				
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+				String birthDateString = sdf.format(birthDate);
+				
+				loginUser.setBirthDate(birthDateString);
+				//System.out.println(birthDateString);
+				//loginUser.setBirthDate(rset.getDate("BIRTH_DATE"));
+				System.out.println(loginUser);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		
+		
+		
+		return loginUser;
+	}
+
+	public MemberVO insertMember(Connection con, MemberVO requestMember) {
+		PreparedStatement pstmt = null;
+		MemberVO responseMember = null;
+		int result = 0;
+		
+		String query = prop.getProperty("insertMember");
+			
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, requestMember.getEmail());
+			pstmt.setString(2, requestMember.getUserPwd());
+			pstmt.setString(3, requestMember.getUserName());
+			pstmt.setString(4, requestMember.getGender());
+			pstmt.setString(5, requestMember.getRnCode());
+			pstmt.setString(6, requestMember.getAddress());
+			pstmt.setString(7, requestMember.getPhone());
+			pstmt.setString(8, requestMember.getBirthDate());
+
+			result = pstmt.executeUpdate();
+			
+			if(result > 0) {
+				responseMember = loginCheck(con, requestMember);
+			}
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		System.out.println(responseMember);
+		
+		return responseMember;
+		
+	}
+	
+	public int insertMemberInterest(Connection con, MemberVO requestMember, MemberInterestVO requestMemberInterest) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("insertMemberInterest");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+
+			pstmt.setInt(1, requestMember.getMemberCode());
+			pstmt.setString(2, requestMemberInterest.getInterestCode());
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
+	
+	public int idCheck(Connection con, String email) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("idCheck");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, email);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt(1);
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+		}
+		return result;
+	}
+
+	public ArrayList<MemberInterestVO> selectMemberInterests(Connection con, MemberVO loginUser) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<MemberInterestVO> loginUserInterests = new ArrayList<MemberInterestVO>();
+		
+		String query = prop.getProperty("selectMemberInterests");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, loginUser.getMemberCode());
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				MemberInterestVO mi = new MemberInterestVO();
+				
+				mi.setMemberCode(rset.getInt("MEMBER_CODE"));
+				mi.setInterestCode(rset.getString("INTEREST_CODE"));
+				
+				loginUserInterests.add(mi);
+				
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		
+		
+		
+		return loginUserInterests;
+	}
+
+  public MemberVO loginCheck(Connection con, MemberVO requestMember) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		MemberVO loginUser = null;
@@ -362,5 +539,7 @@ private Properties prop = new Properties();
 		return result;
 
 	}
-
+  
 }
+
+

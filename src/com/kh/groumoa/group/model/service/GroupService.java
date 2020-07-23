@@ -7,11 +7,12 @@ import static com.kh.groumoa.common.JDBCTemplate.rollback;
 import java.sql.Connection;
 import java.util.ArrayList;
 
-import com.kh.groumoa.common.PageInfo;
 import com.kh.groumoa.group.model.dao.GroupDao;
 import com.kh.groumoa.group.model.vo.Attachment;
 import com.kh.groumoa.group.model.vo.GroupMemberVO;
 import com.kh.groumoa.group.model.vo.GroupVO;
+import com.kh.groumoa.member.model.dao.MemberDao;
+import com.kh.groumoa.member.model.vo.MemberInterestVO;
 import com.kh.groumoa.member.model.vo.MemberVO;
 import com.kh.groumoa.member.model.vo.RegionVO;
 
@@ -28,10 +29,10 @@ public class GroupService {
 		
 		if(result1 > 0) {
 			int groupCode = new GroupDao().selectCurrval(con);
-			System.out.println(groupCode);
+			
 			for(int i = 0; i < fileList.size(); i++) {
 				fileList.get(i).setGroupCode(groupCode);
-				group.setGroupCode(groupCode);
+//				group.setGroupCode(groupCode);
 				
 				result2 += new GroupDao().insertAttachment(con, fileList.get(i));
 			}
@@ -68,7 +69,7 @@ public class GroupService {
 	}
 	
 	//동호회 입력내용 조회
-	public GroupVO selectOne(int groupCode) {
+	public GroupVO selectOne(String groupCode) {
 		Connection con = getConnection();
 		int result = 0;
 		
@@ -133,14 +134,14 @@ public class GroupService {
 		} else {
 			rollback(con);
 		}
-		System.out.println(result);
+		
 		return result;
 	}
 	
 	//회원 조회
-	public ArrayList<MemberVO> selectList(String groupCode) {
+	public ArrayList<GroupMemberVO> selectList(String groupCode) {
 		Connection con = getConnection();
-		ArrayList<MemberVO> list = new GroupDao().selectList(con, groupCode);
+		ArrayList<GroupMemberVO> list = new GroupDao().selectList(con, groupCode);
 		
 		close(con);
 		
@@ -172,7 +173,7 @@ public class GroupService {
 		return selectedGroup;
 	}
 	
-	
+
 	public ArrayList<GroupVO> selectMyGroupList(MemberVO loginUser) {
 		Connection con = getConnection();
 		
@@ -193,7 +194,37 @@ public class GroupService {
 		return myGroupListAsLeader;
 	}
 
-	public ArrayList<MemberVO> groupMemberList(PageInfo pi, int GroupCode) {
+	public ArrayList<GroupVO> searchGroupList(GroupVO group) {
+		Connection con = getConnection();
+		
+		ArrayList<GroupVO> searchedGroupList = new GroupDao().searchGroupList(con, group);
+		
+		close(con);
+		
+		return searchedGroupList;
+	}
+
+	public ArrayList<ArrayList<GroupVO>> selectRecommendedGroupList(MemberVO loginUser) {
+		Connection con = getConnection();
+		
+		ArrayList<MemberInterestVO> loginUserInterests = new MemberDao().selectMemberInterests(con, loginUser); 
+		
+		ArrayList<ArrayList<GroupVO>> recommendedGroupList = new ArrayList<ArrayList<GroupVO>>();
+		
+		for(int i = 0; i < loginUserInterests.size(); i++) {
+
+			
+			ArrayList<GroupVO> recommendedGroups = new GroupDao().selectRecommendedGroupList(con, loginUserInterests.get(i));
+			recommendedGroupList.add(recommendedGroups);
+		}
+		
+		
+		close(con);
+		
+		return recommendedGroupList;
+	}
+  
+  	public ArrayList<MemberVO> groupMemberList(PageInfo pi, int GroupCode) {
 		Connection con = getConnection();
 		
 		ArrayList<MemberVO> list = new GroupDao().groupMemberList(con, pi, groupCode);
@@ -212,16 +243,5 @@ public class GroupService {
 		return listCount;
   
   }
-	
-  public ArrayList<GroupVO> searchGroupList(GroupVO group) {
-		Connection con = getConnection();
-		
-		ArrayList<GroupVO> searchedGroupList = new GroupDao().searchGroupList(con, group);
-		
-		close(con);
-		
-		return searchedGroupList;
-
-	}
 
 }
