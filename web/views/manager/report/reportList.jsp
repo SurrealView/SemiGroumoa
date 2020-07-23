@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.kh.groumoa.notice.model.vo.NoticeVo, com.kh.groumoa.common.PageInfo, java.util.*, com.kh.groumoa.member.model.vo.MemberVO"%>
+    pageEncoding="UTF-8" import="com.kh.groumoa.report.model.vo.ReportVo, com.kh.groumoa.common.PageInfo, java.util.*, com.kh.groumoa.member.model.vo.MemberVO"%>
  <% 
-   ArrayList<NoticeVo> list = (ArrayList<NoticeVo>)request.getAttribute("list");
+   ArrayList<ReportVo> list = (ArrayList<ReportVo>)request.getAttribute("list");
    PageInfo pi = (PageInfo) request.getAttribute("pi");
    int listCount = pi.getTotalCount();
    int currentPage = pi.getCurrentPage();
@@ -32,28 +32,28 @@
            <th>글번호</th>
            <th>분류</th>
            <th>작성자</th>
+           <th>피신고자</th>
            <th>제목</th>
            <th>작성일</th>
-           <th>조회수</th>
           </tr>                    
       </thead>
       <tbody>
-      <% for(NoticeVo n : list) { %>
+      <% for(ReportVo re : list) { %>
       <tr class="reportTitle">
-       <td><input type="checkbox" name="ckNotice" value="<%=n.getNoticeCode()%>"></td>
-         <input type="hidden" value="<%=n.getNoticeCode() %>">
-         <td class="list" id="rowNum"><%=n.getnNo() %></td>
-         <td class="list"><%=n.getNoticeCategory() %></td>
-         <td class="list"><%=n.getMnWriterID() %></td>
-         <td class="list"><%=n.getNoticeTitle() %></td>
-         <td class="list"><%=n.getNoticeDate() %></td>
+         <%-- <input type="checkbox" name="ckNotice" value="<%=n.getNoticeCode()%>"></td> --%>
+         <input type="hidden" value="<%=re.getReportCode() %>">
+         <td class="list" id="rowNum"><%=re.getRno() %></td>
+         <td class="list"><%=re.getReportCategory() %></td>
+         <td class="list"><%=re.getReporterID() %></td>
+         <td class="list"><%=re.getReportedID() %></td>
+         <td class="list"><%=re.getReportTitle() %></td>
+         <td class="list"><%=re.getReportDate() %></td>
          </tr>
       <% } %>           
       </tbody>
       </table>
       <div class="userBtnArea">
       	<button onclick="location.href='<%=request.getContextPath()%>/views/manager/notice/noticeWrite.jsp'">글쓰기</button>
-      	<button onclick="deleteNotice();">삭제하기</button>
       </div>
       <div class="pageArea" align="center">   	
       	<button onclick="location.href='<%=request.getContextPath()%>/selectList.re?currentPage=1'">처음으로</button>      	
@@ -96,10 +96,7 @@
     		location.href ="<%=request.getContextPath()%>/selectOne.no?num=" + num;
     	});	
     	  	
-    });
-    function deleteNotice(){
-    	$("#reportListForm").attr("action", "<%=request.getContextPath()%>/delete.re");
-    }
+    });   
     </script>
 </body>
 </html>
