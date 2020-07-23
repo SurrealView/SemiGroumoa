@@ -223,5 +223,25 @@ public class GroupService {
 		
 		return recommendedGroupList;
 	}
+  
+  	public ArrayList<MemberVO> groupMemberList(PageInfo pi, int GroupCode) {
+		Connection con = getConnection();
+		
+		ArrayList<MemberVO> list = new GroupDao().groupMemberList(con, pi, groupCode);
+		
+		close(con);		
+		
+		return list;
+	}
+
+	public int memberListCount() {
+		Connection con = getConnection();
+		int listCount = new GroupDao().memberListCount(con);
+		
+		close(con);
+		
+		return listCount;
+  
+  }
 
 }

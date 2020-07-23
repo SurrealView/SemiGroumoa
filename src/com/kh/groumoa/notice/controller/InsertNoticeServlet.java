@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import com.kh.groumoa.common.MyFileRenamePolicy;
+import com.kh.groumoa.common.model.vo.AttachmentVo;
 import com.kh.groumoa.notice.model.service.NoticeService;
-import com.kh.groumoa.notice.model.vo.NoAttach;
 import com.kh.groumoa.notice.model.vo.NoticeVo;
 import com.oreilly.servlet.MultipartRequest;
 
@@ -79,10 +79,10 @@ public class InsertNoticeServlet extends HttpServlet {
 			no.setMnWriterCode("M1");
 			no.setNoticeCategory(category);
 			
-			ArrayList<NoAttach> fileList = new ArrayList<>();
+			ArrayList<AttachmentVo> fileList = new ArrayList<>();
 			
 			for(int i = originFiles.size() - 1; i >= 0; i--) {
-				NoAttach at = new NoAttach();
+				AttachmentVo at = new AttachmentVo();
 				
 				at.setFid("F" + i);
 				at.setFilePath(savePath);

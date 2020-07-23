@@ -86,6 +86,7 @@
       <h2 id="name" align="center">Q&A 게시판</h4>
       <hr>
       <br><br><!-- 게시판 관리일경우 -->
+      <form id="noticeListForm" method="post">
       <table class="table" id="noticeList">
       <thead>
           <tr>
@@ -101,13 +102,13 @@
       <tbody>
       <% for(NoticeVo n : list) { %>
       <tr class="noticeTitle">
-       <td><input type="checkbox"></td>
+       <td><input type="checkbox" name="ckNotice" value="<%=n.getNoticeCode()%>"></td>
          <input type="hidden" value="<%=n.getNoticeCode() %>">
-         <td class="rowNum"><%=n.getnNo() %></td>
-         <td><%=n.getNoticeCategory() %></td>
-         <td><%=n.getMnWriterID() %></td>
-         <td><%=n.getNoticeTitle() %></td>
-         <td><%=n.getNoticeDate() %></td>
+         <td class="list" id="rowNum"><%=n.getnNo() %></td>
+         <td class="list"><%=n.getNoticeCategory() %></td>
+         <td class="list"><%=n.getMnWriterID() %></td>
+         <td class="list"><%=n.getNoticeTitle() %></td>
+         <td class="list"><%=n.getNoticeDate() %></td>
          </tr>
       <% } %>      
       <!-- <tr class="noticeTitle">
@@ -121,8 +122,11 @@
       </tr> -->       
       </tbody>
       </table>
-      <div class="pageArea">
-      	
+      <div class="userBtnArea">
+      	<button onclick="location.href='<%=request.getContextPath()%>/views/manager/notice/noticeWrite.jsp'">글쓰기</button>
+      	<button onclick="deleteNotice();">삭제하기</button>
+      </div>
+      <div class="pageArea" align="center">   	
       	<button onclick="location.href='<%=request.getContextPath()%>/selectList.no?currentPage=1'">처음으로</button>      	
       	<% if(currentPage >= 1) { %>
       	<button disabled>←</button>
@@ -145,20 +149,28 @@
       	<button onclick="location.href='<%=request.getContextPath()%>/selectList.no?currentPage=<%= currentPage + 1%>'">→</button>
       	<% } %>      	
       	<button onclick="location.href='<%=request.getContextPath()%>/selectList.no?currentPage=<%= maxPage%>'">맨끝으로</button>
-      </div>      
+      </div>
+      
+      </form>      
+            
     </div>
     
     <script>
-    $(function(){
-    	$("#noticeList td").click(function(){
+    $(function(){    	
+    	$("#noticeList .list").click(function(){
+	    	
     		var tdId = $(this).parent().children("input").val();
-    		var num = $(this).parent().children(".rowNum").text();
+    		var num = $(this).parent().children("#rowNum").text();
     		
     		console.log(num);
     		
     		location.href ="<%=request.getContextPath()%>/selectOne.no?num=" + num;
-    	});
+    	});	
+    	  	
     });
+    function deleteNotice(){
+    	$("#noticeListForm").attr("action", "<%=request.getContextPath()%>/delete.no");
+    }
     </script>
     
     

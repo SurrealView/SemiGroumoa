@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.kh.groumoa.common.PageInfo;
-import com.kh.groumoa.notice.model.vo.NoAttach;
+import com.kh.groumoa.common.model.vo.AttachmentVo;
 import com.kh.groumoa.notice.model.vo.NoticeVo;
 
 public class NoticeDao {
@@ -150,7 +150,7 @@ public class NoticeDao {
 		return nId;
 	}
 
-	public int insertAttachment(NoAttach noAttach) {
+	public int insertAttachment(AttachmentVo noAttach) {
 		PreparedStatement pstmt = null;		
 		int result = 0;
 		inst().setProp("/sql/notice/notice.properties");
@@ -162,7 +162,7 @@ public class NoticeDao {
 			pstmt.setString(2, noAttach.getChangeName());
 			pstmt.setString(3, noAttach.getFilePath());
 			pstmt.setInt(4, noAttach.getFileLevel());
-			pstmt.setString(5, noAttach.getNid());
+			pstmt.setString(5, noAttach.getNoticeCode());
 			
 			result = inst().getResult();
 			
@@ -210,7 +210,7 @@ public class NoticeDao {
 		} finally {
 			inst().closeRset();
 			inst().closeStmt();
-		}		
+		}
 		
 		return no;
 	}
@@ -218,7 +218,7 @@ public class NoticeDao {
 	public HashMap<String, Object> selectFileMap(String noticeId) {
 		inst().setProp("/sql/notice/notice.properties");
 		HashMap<String, Object> hmap = null;
-		ArrayList<NoAttach> list = null;
+		ArrayList<AttachmentVo> list = null;
 		ResultSet rset = null;
 		PreparedStatement pstmt = null;
 		NoticeVo no = null;
@@ -242,7 +242,7 @@ public class NoticeDao {
 					no.setNoticeCategory(rset.getString("NOTICE_CATEGORY"));
 				}
 				
-				NoAttach na = new NoAttach();
+				AttachmentVo na = new AttachmentVo();
 
 				na.setFid(rset.getString("FID"));
 				na.setOriginName(rset.getString("ORIGIN_NAME"));
@@ -293,7 +293,7 @@ public class NoticeDao {
 		return result;
 	}
 	//
-	public int updateAttachment(NoAttach noAttach) {
+	public int updateAttachment(AttachmentVo noAttach) {
 		PreparedStatement pstmt = null;		
 		int result = 0;
 		inst().setProp("/sql/notice/notice.properties");
@@ -304,7 +304,7 @@ public class NoticeDao {
 			pstmt.setString(1, noAttach.getOriginName());
 			pstmt.setInt(2, noAttach.getFileLevel());			
 			pstmt.setString(3, noAttach.getFid());
-			pstmt.setString(4, noAttach.getNid());
+			pstmt.setString(4, noAttach.getNoticeCode());
 			
 			result = inst().getResult();
 			
@@ -315,6 +315,27 @@ public class NoticeDao {
 			inst().closePstmt();
 		}
 				
+		return result;
+	}
+
+	public int deleteNotice(String noticeId) {
+		PreparedStatement pstmt = null;		
+		int result = 0;
+		inst().setProp("/sql/notice/notice.properties");
+		pstmt = inst().getPstmt("deleteNotice");
+		
+		//UPDATE TB_NOTICE SET NOTICE_STATUS = 'N' WHERE NOTICE_CODE = ? AND NOTICE_STATUS = 'Y'
+		try {
+			pstmt.setString(1, noticeId);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			inst().closePstmt();
+		}
+		
 		return result;
 	}	
 

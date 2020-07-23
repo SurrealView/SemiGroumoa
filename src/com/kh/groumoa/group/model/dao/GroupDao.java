@@ -284,7 +284,8 @@ public class GroupDao {
 	}
 
 	//동호회 회원 추방
-	public int kickOut(Connection con, int memberCode) {
+	public int 
+    Out(Connection con, int memberCode) {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
@@ -511,12 +512,75 @@ public class GroupDao {
 			close(rset);
 			close(pstmt);
 		}
-
-		
-		
-		
 		return recommendedGroups;
 	}
 
+  	public ArrayList<MemberVO> groupMemberList(Connection con, PageInfo pi, int groupCode) {
+		ArrayList<MemberVO> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("groupMemberList");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getLimit() + 1;
+			int endRow = startRow + pi.getLimit() - 1;
+			
+/*			pstmt.setInt(1, groupCode);     추가해야합니다...
+*/			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<MemberVO>();
+			
+			while(rset.next()) {
+				MemberVO m = new MemberVO();
+				m.setUserName(rset.getString("MEMBER_NAME"));
+				m.setGroupLeaderyn(rset.getString("GROUP_LEADER_YN"));
+				m.setEmail(rset.getString("EMAIL"));
+				
+				list.add(m);
+			}
+			
+			rset = pstmt.executeQuery();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(con);
+		}
+		
+		return list;
+	}
 
+
+	public int memberListCount(Connection con) {
+		Statement stmt = null;
+		int listCount = 0;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("groupMemberCount");
+		
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+			close(rset);
+		}
+
+		return listCount;
+    
+  }
 }

@@ -25,24 +25,7 @@ public class GroupVO implements java.io.Serializable {
 	public GroupVO() {}
 
 	
-
-
-	
-
-
-
-
-	
-
-
-
-
-
-
-
-
-
-	public GroupVO(int groupCode, String groupName, String rnCode, String interestCode, String nickNameyn,
+  public GroupVO(int groupCode, String groupName, String rnCode, String interestCode, String nickNameyn,
 			String openYn, Date openDate, String groupRule, String description, String status, int groupLeaderCode,
 			String groupLeaderYn, String regionName, String interest, String groupLeaderName) {
 		super();
@@ -68,35 +51,9 @@ public class GroupVO implements java.io.Serializable {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 	public int getGroupLeaderCode() {
 		return groupLeaderCode;
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -111,20 +68,6 @@ public class GroupVO implements java.io.Serializable {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	public String getGroupLeaderName() {
 		return groupLeaderName;
 	}
@@ -133,18 +76,9 @@ public class GroupVO implements java.io.Serializable {
 
 
 
-
-
-
-
 	public void setGroupLeaderName(String groupLeaderName) {
 		this.groupLeaderName = groupLeaderName;
 	}
-
-
-
-
-
 
 
 
@@ -294,20 +228,6 @@ public class GroupVO implements java.io.Serializable {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	@Override
 	public String toString() {
 		return "GroupVO [groupCode=" + groupCode + ", groupName=" + groupName + ", rnCode=" + rnCode + ", interestCode="
@@ -317,17 +237,6 @@ public class GroupVO implements java.io.Serializable {
 				+ regionName + ", interest=" + interest + ", groupLeaderName=" + groupLeaderName + "]";
 	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+  
 }
+

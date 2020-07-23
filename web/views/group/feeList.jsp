@@ -129,7 +129,7 @@
 </style>
 </head>
 <body>
-	<%@include file="../common/header/header.jsp"%>
+	<%@include file="../common/header/newHeader.jsp"%>
 	<%@include file="subMenubar.jsp"%>
 
 	<div class="content">
