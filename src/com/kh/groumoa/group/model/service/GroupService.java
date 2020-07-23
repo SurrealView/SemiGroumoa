@@ -7,6 +7,7 @@ import static com.kh.groumoa.common.JDBCTemplate.rollback;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.kh.groumoa.common.PageInfo;
 import com.kh.groumoa.group.model.dao.GroupDao;
 import com.kh.groumoa.group.model.vo.Attachment;
 import com.kh.groumoa.group.model.vo.GroupMemberVO;

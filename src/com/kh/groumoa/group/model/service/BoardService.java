@@ -33,6 +33,8 @@ public class BoardService {
 		return result;
 	}
 
+
+
 	public int getListCount(BoardVO board) {
 		Connection con = getConnection();
 		int listCount = new BoardDao().getListCount(con, board);
