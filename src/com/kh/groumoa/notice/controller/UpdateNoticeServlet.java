@@ -51,7 +51,6 @@ public class UpdateNoticeServlet extends HttpServlet {
 			String noticeId = multiRequest.getParameter("noticeId");
 			
 			HashMap<String, Object> hmap = new NoticeService().selectFileMap(noticeId);
-			//NoticeVo no = new NoticeService().selectOne(noticeId);
 			
 			NoticeVo no = (NoticeVo) hmap.get("notice");
 			ArrayList<AttachmentVo> oldFileList = (ArrayList<AttachmentVo>) hmap.get("attach");	
@@ -86,7 +85,7 @@ public class UpdateNoticeServlet extends HttpServlet {
 			no.setNoticeTitle(multiTitle);
 			no.setNoticeDetail(multiContent);
 			//no.setMnWriterID(multiWriter);			
-			//no.setMnWriterID("M1");		
+			no.setMnWriterID("M1");		
 			no.setNoticeCategory(category);
 			
 			ArrayList<AttachmentVo> fileList = new ArrayList<>();
@@ -116,22 +115,13 @@ public class UpdateNoticeServlet extends HttpServlet {
 			int result = new NoticeService().updateNotice(no, fileList, oldFileList);
 			
 			if(result > 0) {								
-				for(int i = 0; i < oldFileList.size(); i++) {
-					if(i >= newFiles.size()) {
-						break;
-					}
+				for(int i = 0; i < oldFileList.size(); i++) {					
 					String oldName = savePath + oldFileList.get(i).getChangeName();
 					File oldFile = new File(oldName);
 					oldFile.delete();
-					File overFile = new File(oldName);
-					newFiles.get(i).renameTo(overFile);
-				}
-				
-				for(int i = 0; i < saveFiles.size(); i++) {
-					File failedFile = new File(savePath + saveFiles.get(i));
-					
-					failedFile.delete();
-				}
+//					File overFile = new File(oldName);
+//					newFiles.get(i).renameTo(overFile);
+				}								
 				response.sendRedirect(request.getContextPath() + "/selectList.no");
 			} else {
 				for(int i = 0; i < saveFiles.size(); i++) {

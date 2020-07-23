@@ -123,7 +123,7 @@
       </tbody>
       </table>
       <div class="userBtnArea">
-      	<button onclick="location.href='<%=request.getContextPath()%>/views/manager/notice/noticeWrite.jsp'">글쓰기</button>
+      	<button onclick="writeNotice();">글쓰기</button>
       	<button onclick="deleteNotice();">삭제하기</button>
       </div>
       <div class="pageArea" align="center">   	
@@ -170,6 +170,10 @@
     });
     function deleteNotice(){
     	$("#noticeListForm").attr("action", "<%=request.getContextPath()%>/delete.no");
+    }
+    
+    function writeNotice(){
+    	$("#noticeListForm").attr("action", "<%=request.getContextPath()%>/views/manager/notice/noticeWrite.jsp");
     }
     </script>
     

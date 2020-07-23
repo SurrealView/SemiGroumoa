@@ -301,10 +301,13 @@ public class NoticeDao {
 		//FID, NID문제
 		try {			
 			//updateAttachment=UPDATE TB_ATTACHMENT SET ORIGIN_NAME = ?, FILE_LEVEL = ? WHERE FID = ? AND NOTICE_CODE = ?
+			//updateAttachment=UPDATE TB_ATTACHMENT SET ORIGIN_NAME = ?, CHANGE_NAME = ?, FILE_LEVEL = ? WHERE FID = ? AND NOTICE_CODE = ?
+			//2020072316124973324
 			pstmt.setString(1, noAttach.getOriginName());
-			pstmt.setInt(2, noAttach.getFileLevel());			
-			pstmt.setString(3, noAttach.getFid());
-			pstmt.setString(4, noAttach.getNoticeCode());
+			pstmt.setString(2, noAttach.getChangeName());
+			pstmt.setInt(3, noAttach.getFileLevel());			
+			pstmt.setString(4, noAttach.getFid());
+			pstmt.setString(5, noAttach.getNoticeCode());
 			
 			result = inst().getResult();
 			
