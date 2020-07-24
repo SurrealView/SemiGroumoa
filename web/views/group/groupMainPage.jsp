@@ -185,8 +185,7 @@
 
 	<script>
 		function listCheck() {
-			location.href="'<%=request.getContextPath()%>
-		/groupMember.go'";
+			location.href="'<%=request.getContextPath()%>/groupMember.go'";
 		}
 	</script>
 </body>
