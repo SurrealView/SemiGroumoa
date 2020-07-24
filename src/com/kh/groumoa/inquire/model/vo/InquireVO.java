@@ -3,112 +3,110 @@ package com.kh.groumoa.inquire.model.vo;
 import java.sql.Date;
 
 public class InquireVO implements java.io.Serializable{
-	
-	/*QNA_CODE
-	QUESTIONER_CODE
-	QNA_CATE_CODE
-	QNA_TITLE
-	QNA_DETAIL
-	QNA_DATE
-	QNA_REPLY
-	REPLIER_CODE*/
-	
-	private String qnaCode;
-	private String questionerCode;
-	private String qnaCateCode;
-	private String qnaTitle;
-	private String qnaDetail;
-	private Date qnaDate;
-	private String qnaReply;
-	private String replierCode;
+	private int postCode;
+	private String categoryCode;
+	private int groupCode;
+	private int writerCode;
+	private String title;
+	private String detail;
+	private Date postDate;
+	private String status;
+	private String categoryName;
+	private String memberName;
+	private int pcount;
 	
 	public InquireVO() {}
-
-	public InquireVO(String qnaCode, String questionerCode, String qnaCateCode, String qnaTitle, String qnaDetail,
-			Date qnaDate, String qnaReply, String replierCode) {
+	
+	public InquireVO(int postCode, String categoryCode, int groupCode, int writerCode, String title, String detail,
+			Date postDate, String status, String categoryName, String memberName, int pcount) {
 		super();
-		this.qnaCode = qnaCode;
-		this.questionerCode = questionerCode;
-		this.qnaCateCode = qnaCateCode;
-		this.qnaTitle = qnaTitle;
-		this.qnaDetail = qnaDetail;
-		this.qnaDate = qnaDate;
-		this.qnaReply = qnaReply;
-		this.replierCode = replierCode;
+		this.postCode = postCode;
+		this.categoryCode = categoryCode;
+		this.groupCode = groupCode;
+		this.writerCode = writerCode;
+		this.title = title;
+		this.detail = detail;
+		this.postDate = postDate;
+		this.status = status;
+		this.categoryName = categoryName;
+		this.memberName = memberName;
+		this.pcount = pcount;
 	}
-
-	public String getQnaCode() {
-		return qnaCode;
+	public int getPostCode() {
+		return postCode;
 	}
-
-	public void setQnaCode(String qnaCode) {
-		this.qnaCode = qnaCode;
+	public void setPostCode(int postCode) {
+		this.postCode = postCode;
 	}
-
-	public String getQuestionerCode() {
-		return questionerCode;
+	public String getCategoryCode() {
+		return categoryCode;
 	}
-
-	public void setQuestionerCode(String questionerCode) {
-		this.questionerCode = questionerCode;
+	public void setCategoryCode(String categoryCode) {
+		this.categoryCode = categoryCode;
 	}
-
-	public String getQnaCateCode() {
-		return qnaCateCode;
+	public int getGroupCode() {
+		return groupCode;
 	}
-
-	public void setQnaCateCode(String qnaCateCode) {
-		this.qnaCateCode = qnaCateCode;
+	public void setGroupCode(int groupCode) {
+		this.groupCode = groupCode;
 	}
-
-	public String getQnaTitle() {
-		return qnaTitle;
+	public int getWriterCode() {
+		return writerCode;
 	}
-
-	public void setQnaTitle(String qnaTitle) {
-		this.qnaTitle = qnaTitle;
+	public void setWriterCode(int writerCode) {
+		this.writerCode = writerCode;
 	}
-
-	public String getQnaDetail() {
-		return qnaDetail;
+	public String getTitle() {
+		return title;
 	}
-
-	public void setQnaDetail(String qnaDetail) {
-		this.qnaDetail = qnaDetail;
+	public void setTitle(String title) {
+		this.title = title;
 	}
-
-	public Date getQnaDate() {
-		return qnaDate;
+	public String getDetail() {
+		return detail;
 	}
-
-	public void setQnaDate(Date qnaDate) {
-		this.qnaDate = qnaDate;
+	public void setDetail(String detail) {
+		this.detail = detail;
 	}
-
-	public String getQnaReply() {
-		return qnaReply;
+	public Date getPostDate() {
+		return postDate;
 	}
-
-	public void setQnaReply(String qnaReply) {
-		this.qnaReply = qnaReply;
+	public void setPostDate(Date postDate) {
+		this.postDate = postDate;
 	}
-
-	public String getReplierCode() {
-		return replierCode;
+	public String getStatus() {
+		return status;
 	}
-
-	public void setReplierCode(String replierCode) {
-		this.replierCode = replierCode;
+	public void setStatus(String status) {
+		this.status = status;
 	}
-
+	public String getCategoryName() {
+		return categoryName;
+	}
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
+	public String getMemberName() {
+		return memberName;
+	}
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
+	public int getPcount() {
+		return pcount;
+	}
+	public void setPcount(int pcount) {
+		this.pcount = pcount;
+	}
 	@Override
 	public String toString() {
-		return "InquireVO [qnaCode=" + qnaCode + ", questionerCode=" + questionerCode + ", qnaCateCode=" + qnaCateCode
-				+ ", qnaTitle=" + qnaTitle + ", qnaDetail=" + qnaDetail + ", qnaDate=" + qnaDate + ", qnaReply="
-				+ qnaReply + ", replierCode=" + replierCode + "]";
+		return "InquireVO [postCode=" + postCode + ", categoryCode=" + categoryCode + ", groupCode=" + groupCode
+				+ ", writerCode=" + writerCode + ", title=" + title + ", detail=" + detail + ", postDate=" + postDate
+				+ ", status=" + status + ", categoryName=" + categoryName + ", memberName=" + memberName + ", pcount="
+				+ pcount + "]";
 	}
-	
 
+	
 }
 
 
