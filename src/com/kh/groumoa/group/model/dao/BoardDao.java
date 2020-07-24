@@ -103,12 +103,13 @@ private Properties prop = new Properties();
 			int startRow = (pi.getCurrentPage() - 1) * pi.getLimit() + 1;
 			int endRow = startRow + pi.getLimit() - 1;
 			
-			pstmt.setInt(1, startRow);
-			pstmt.setInt(2, endRow);
+			pstmt.setInt(1, board.getGroupCode());//여기 그룹코드 넣기
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
 			
 			rset = pstmt.executeQuery();
 			
-			list = new ArrayList<>();
+			list = new ArrayList<BoardVO>();
 			
 			while(rset.next()) {
 				BoardVO b = new BoardVO();
@@ -117,12 +118,16 @@ private Properties prop = new Properties();
 				b.setMemberName(rset.getString("MEMBER_NAME"));
 				b.setTitle(rset.getString("TITLE"));
 				b.setPostDate(rset.getDate("POST_DATE"));
+				b.setPcount(rset.getInt("PCOUNT"));
 				list.add(b);
-			}
+			} 
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
 		}
 		
 		

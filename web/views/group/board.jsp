@@ -141,12 +141,43 @@ int endPage = pi.getEndPage();
                 </div>
                
                 <br>
-                <!-- 페이징 처리 -->
-                <div class="pagination-div">
+               <!-- 페이징 처리 버튼 -->
+		<div class="pagingArea" align="center">
+			<button onclick="location.href='<%=request.getContextPath()%>/selectList.bo?currentPage=1'"><<</button>
+			
+			<% if(currentPage <= 1) {%>
+			<button disabled><</button>
+			<%} else { %>
+			<button onclick="location.href='<%=request.getContextPath() %>/selectList.bo?currentPage=<%=currentPage - 1 %>'"><</button>
+			<% } %>
+			
+			<% for(int p = startPage; p <= endPage; p++) {
+				if(p == currentPage) {
+			%>
+				<button disabled><%=p %></button>
+			<%   } else { %>
+					<button onclick="location.href='<%=request.getContextPath()%>/selectList.bo?currentPage=<%=p%>'"><%=p %></button>
+			<%
+				}
+			}
+			%>
+			
+			<% if(currentPage >= maxPage) { %>
+			<button disabled>></button>
+			<%} else { %>
+			<button onclick="location.href='<%=request.getContextPath() %>/selectList.bo?currentPage=<%=currentPage + 1 %>'">></button>
+			<% } %>
+			
+			<button onclick="location.href='<%=request.getContextPath()%>/selectList.bo?currentPage=<%=maxPage%>'">>></button>
+		</div>
+		
+                
+               <%-- <!-- 페이징 처리 -->
+                   <div class="pagination-div">
                 <ul class="pagination">
-                	<li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>/selectList.bo?currentPage=1"><<</a></li>
+                	<li class="page-item"><a class="page-link" href="<%=request.getContextPath()/selectList.bo?currentPage=1"><<</a></li>
                 	<%if (currentPage <= 1) {%>
-  						<li class="page-item"><a class="page-link"><</a></li>
+  						<li class="page-item"><</li>
   					<% } else {%>
   						<li class="page-item"><a class="page-link" href="<%=request.getContextPath() %>/selectList.bo?currentPage=<%=currentPage - 1 %>"><</a></li>
   					<%} %>
@@ -160,14 +191,15 @@ int endPage = pi.getEndPage();
 						}
 					}
 					%>
-  					<%if (currentPage == maxPage) { %>
+  					<%if (currentPage >= maxPage) { %>
   						<li class="page-item"><a class="page-link">></a></li>
 					<%} else { %>
   						<li class="page-item"><a class="page-link" href="<%=request.getContextPath() %>/selectList.bo?currentPage=<%=currentPage + 1 %>">></a></li>
 					<% } %>
   					<li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>/selectList.bo?currentPage=<%=maxPage%>">>></a></li>
 				</ul>
-				</div>
+				</div>--%>
+				<br>
 				<div class="writeBtn" style="float:left">
 					<button class="" onclick="location.href='<%=request.getContextPath() %>/views/group/boardWrite.jsp'";>작성하기</button>
 				</div>
@@ -189,6 +221,7 @@ int endPage = pi.getEndPage();
 		$(function(){
 			$("#listArea td").click(function(){
 				var num = $(this).parent().children("input").val();
+				console.log(num);
 				location.href="<%=request.getContextPath()%>/selectOne.bo?num=" + num;
 			});
 		});

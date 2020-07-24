@@ -234,7 +234,7 @@ public class GroupService {
   	public ArrayList<MemberVO> groupMemberList(PageInfo pi, int GroupCode) {
 		Connection con = getConnection();
 		
-		ArrayList<MemberVO> list = new GroupDao().groupMemberList(con, pi, groupCode);
+		ArrayList<MemberVO> list = new GroupDao().groupMemberList(con, pi, GroupCode);
 		
 		close(con);		
 		

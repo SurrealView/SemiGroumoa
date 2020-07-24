@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.kh.groumoa.group.model.vo.GroupVO"%>
-<% GroupVO selectedGroup = (GroupVO) session.getAttribute("selectedGroup"); %>
+<% GroupVO selectedGroup = (GroupVO) session.getAttribute("selectedGroup"); 
+   session.setAttribute("selectedGroup", selectedGroup);
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,7 +46,7 @@
 			<div class="sub-menubar-each" id="sub1"><a href="#">동호회페이지</a></div>
 			<div class="sub-menubar-each" id="sub2"><a href="#">최근일정</a></div>
 			<div class="sub-menubar-each" id="sub3"><a href="#">회비내역</a></div>
-			<div class="sub-menubar-each" id="sub4"><a href="#">게시판</a></div>
+			<div class="sub-menubar-each" id="sub4"><a href="<%=request.getContextPath()%>/selectList.bo">게시판</a></div>
 			<div class="sub-menubar-each" id="sub5"><a href="#">모임인원</a></div>
 		</div>
 	</div>

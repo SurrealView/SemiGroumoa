@@ -129,7 +129,7 @@
 </head>
 <body>
 	<%@include file="../common/header/newHeader.jsp"%>
-	<%@include file="subMenubar_myGroup.jsp"%>
+	<%@include file="subMenubar.jsp"%>
 	<div class="content">
 		<!-- 메뉴. 지워도 됨 -->
 		<div class="tab" id="tab">

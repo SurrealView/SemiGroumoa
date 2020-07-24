@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.groumoa.group.model.service.BoardService;
 import com.kh.groumoa.group.model.vo.BoardVO;
+import com.kh.groumoa.group.model.vo.GroupVO;
 
 /**
  * Servlet implementation class InsertBoardServlet
@@ -32,7 +33,7 @@ public class InsertBoardServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String title = request.getParameter("title");
 		String categoryCode = request.getParameter("category");
-		int groupCode = Integer.parseInt( (String) request.getSession().getAttribute("selectedGroup"));
+		int groupCode = Integer.parseInt(request.getParameter("groupCode"));
 		//int groupCode = 2; //임시
 		int writerCode = Integer.parseInt(request.getParameter("writerCode"));
 		String detail = request.getParameter("content");
@@ -49,17 +50,17 @@ public class InsertBoardServlet extends HttpServlet {
 		
 		int result = new BoardService().insertBoard(requestBoard);
 		
-//		String page = "";
-//		if(result > 0) {
-//			page = "/views/common/successPage.jsp";
-//			//response.sendRedirect(page);
-//			request.setAttribute("successCode", "insertMember");//successPage에 insertBoard에 해당하는 속성값 만들기
-//			request.getRequestDispatcher(page).forward(request, response);
-//		} else {
-//			page = "views/common/errorPage.jsp";
-//			request.setAttribute("msg", "게시판 작성 실패!");
-//			request.getRequestDispatcher(page).forward(request, response);
-//		}
+		String page = "";
+		if(result > 0) {
+			page = "/views/common/successPage.jsp";
+			//response.sendRedirect(page);
+			request.setAttribute("successCode", "insertBoard");//successPage에 insertBoard에 해당하는 속성값 만들기
+			request.getRequestDispatcher(page).forward(request, response);
+		} else {
+			page = "views/common/errorPage.jsp";
+			request.setAttribute("msg", "게시판 작성 실패!");
+			request.getRequestDispatcher(page).forward(request, response);
+	}
 		
 		
 		

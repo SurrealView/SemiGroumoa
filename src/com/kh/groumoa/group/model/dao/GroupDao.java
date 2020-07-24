@@ -261,6 +261,7 @@ public class GroupDao {
 			
 			while(rset.next()) {
 				selectedGroup = new GroupVO();
+				selectedGroup.setGroupCode(requestGroup.getGroupCode());
 				selectedGroup.setGroupName(rset.getString("GROUP_NAME"));
 				selectedGroup.setRnCode(rset.getString("RN_CODE"));
 				selectedGroup.setInterestCode(rset.getString("INTEREST_CODE"));
