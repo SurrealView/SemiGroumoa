@@ -283,12 +283,22 @@ public class GroupService {
 		return list;
 	}
 
+	public String groupLeaderList(GroupVO groupVO) {
+		Connection con = getConnection();
+		
+		String name = new GroupDao().groupLeaderList(con, groupVO);
+		
+		close(con);
+		
+		return name;
+	}
+
 	public int groupListCount() {
 		Connection con = getConnection();
 		int listCount = new GroupDao().groupListCount(con);
-
+		
 		close(con);
-
+		
 		return listCount;
 	}
 
