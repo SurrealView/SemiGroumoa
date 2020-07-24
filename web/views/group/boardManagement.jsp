@@ -136,12 +136,12 @@ int endPage = pi.getEndPage();
 					<tr>
 						<input type="hidden" value="<%=b.getPostCode() %>">
 						<td><input type="checkbox"></td>
-						<td><%= b.getPostCode() %></td>
-						<td><%= b.getCategoryName() %></td>
-						<td><%= b.getMemberName() %></td>
-						<td><%= b.getTitle() %></td>
-						<td><%= b.getPostDate() %></td>
-						<td><%= b.getPcount() %></td>
+						<td class="postItem"><%= b.getPostCode() %></td>
+						<td class="postItem"><%= b.getCategoryName() %></td>
+						<td class="postItem"><%= b.getMemberName() %></td>
+						<td class="postItem"><%= b.getTitle() %></td>
+						<td class="postItem"><%= b.getPostDate() %></td>
+						<td class="postItem"><%= b.getPcount() %></td>
 					</tr>
 				<% } %>
                     
@@ -180,7 +180,9 @@ int endPage = pi.getEndPage();
                 <!-- 댓글관리일 경우 끝 -->
                 
                 <br>
-               <!-- 페이징 처리 -->
+                
+                
+               <%--<!-- 페이징 처리 -->
                 <div class="pagination-div">
                 <ul class="pagination">
                 	<li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>/selectList.bo?currentPage=1"><<</a></li>
@@ -206,7 +208,39 @@ int endPage = pi.getEndPage();
 					<% } %>
   					<li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>/selectList.bo?currentPage=<%=maxPage%>">>></a></li>
 				</ul>
-				</div>
+				</div>--%>
+				
+				 <!-- 페이징 처리 버튼 -->
+		<div class="pagingArea" align="center">
+			<button onclick="location.href='<%=request.getContextPath()%>/selectList.bo?currentPage=1'"><<</button>
+			
+			<% if(currentPage <= 1) {%>
+			<button disabled><</button>
+			<%} else { %>
+			<button onclick="location.href='<%=request.getContextPath() %>/selectList.bo?currentPage=<%=currentPage - 1 %>'"><</button>
+			<% } %>
+			
+			<% for(int p = startPage; p <= endPage; p++) {
+				if(p == currentPage) {
+			%>
+				<button disabled><%=p %></button>
+			<%   } else { %>
+					<button onclick="location.href='<%=request.getContextPath()%>/selectList.bo?currentPage=<%=p%>'"><%=p %></button>
+			<%
+				}
+			}
+			%>
+			
+			<% if(currentPage >= maxPage) { %>
+			<button disabled>></button>
+			<%} else { %>
+			<button onclick="location.href='<%=request.getContextPath() %>/selectList.bo?currentPage=<%=currentPage + 1 %>'">></button>
+			<% } %>
+			
+			<button onclick="location.href='<%=request.getContextPath()%>/selectList.bo?currentPage=<%=maxPage%>'">>></button>
+		</div>
+		
+				
 				<div class="deleteBtn" style="float:left;">
 					<button class="">삭제</button>
 				</div>
@@ -229,9 +263,9 @@ int endPage = pi.getEndPage();
 		
 		<script>
 		$(function(){
-			$("#listArea td").click(function(){
+			$("#listArea .postItem").click(function(){
 				var num = $(this).parent().children("input").val();
-				location.href="<%=request.getContextPath()%>/selectOne.bo?num=" + num;
+				location.href="<%=request.getContextPath()%>/selectOneAsLeader.bo?num=" + num;
 			});
 		});
 		//코드 수정 필요.. 이대로 실행할 시 board-detail로 넘어가버림
