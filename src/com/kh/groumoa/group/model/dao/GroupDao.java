@@ -607,13 +607,14 @@ public class GroupDao {
 			
 			while(rset.next()) {
 				GroupVO g = new GroupVO();
-				g.setGroupCode(rset.getInt("GROUP_CODE"));
+				g.setGroupName(rset.getString("GROUP_NAME"));
+				g.setMemberName(rset.getString("MEMBER_NAME"));
+				g.setGroupLeaderCode(rset.getInt("GROUP_LEADER_CODE"));
 				g.setOpenDate(rset.getDate("OPEN_DATE"));
 				g.setInterest(rset.getString("INTEREST"));
-				g.setGroupLeaderName(rset.getString("GROUP_LEADER_NAME"));
-				g.setMemberCount(rset.getInt("MEMBER_COUNT"));
-				g.setPostCount(rset.getInt("POST_COUNT"));
-				
+				g.setMemberCount(rset.getInt("POST"));
+				g.setPostCount(rset.getInt("POST"));
+
 				list.add(g);
 			}
 			
@@ -624,7 +625,7 @@ public class GroupDao {
 			close(pstmt);
 			close(con);
 		}
-		
+		System.out.println(list);
 		return list;
 	}
 
@@ -652,5 +653,30 @@ public class GroupDao {
 		}
 
 		return listCount;
+	}
+
+	public String groupLeaderList(Connection con, GroupVO groupVO) {
+		String name = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("groupLeader");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			pstmt.setInt(1, groupVO.getGroupLeaderCode());
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				name = rset.getString("MEMBER_NAME");				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return name;
 	}
 }

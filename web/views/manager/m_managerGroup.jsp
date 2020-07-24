@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.kh.groumoa.group.model.vo.*, java.util.*, com.kh.groumoa.common.*" %>
+<% ArrayList<GroupVO> list = (ArrayList<GroupVO>) request.getAttribute("list"); 
+PageInfo pi = (PageInfo) request.getAttribute("pi");
+int listCount = pi.getTotalCount();
+int currentPage = pi.getCurrentPage();
+int maxPage = pi.getMaxPage();
+int startPage = pi.getStartPage();
+int endPage = pi.getEndPage();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -85,7 +93,6 @@
 </style>
 </head>
 <body>
-  <form>
 <!--	<div class="everylist" id="jeje"><label id="title">전체 사용자</label>
 		<div class="round" id="round" style="border-radius: 50%; height: 200px; width: 200px; background-color: gray; position: absolute; top: 80px; left: 50px;"></div>
 		<div class="listup" id="list">
@@ -116,19 +123,74 @@
     	   </tr>
   		  </thead>
     	<tbody>
+     	   <% for(GroupVO g : list) { %>
      	   <tr>
-       		 <td><input type="checkbox"></td>
-        	 <td>푸른뱃고등</td>
-             <td>김승열</td>
-             <td>2020/07/01</td>
-             <td>아웃도어/여행</td>
-             <td>10/30</td>
-             <td>10</td>
+       		 <td><input type="checkbox" name="code" onclick="but(this)" value="<%= g.getGroupCode() %>"></td>
+        	 <td><%= g.getGroupName() %></td>
+             <td><%= g.getMemberName() %></td>
+             <td><%= g.getOpenDate() %></td>
+             <td><%= g.getInterest() %></td>
+		     <td><%= g.getMemberCount() %></td>
+		     <td><%= g.getPostCount() %></td>
              <td><input type="checkbox"></td>
           </tr>
+          <% } %>
         </tbody>
       </table>
-           </div>
- </form>
+          <div class="pagingArea" align="center">
+			<button onclick="location.href='<%=request.getContextPath()%>/managerPpl.mn?currentPage=1'"><<</button>
+			
+			<% if(currentPage <= 1) { %>
+			<button disabled><</button>
+			<% } else { %>
+			<button onclick="location.href='<%=request.getContextPath()%>/managerPpl.mn?currentPage=<%=currentPage - 1%>'"><</button>
+			<% } %>
+			
+			<% for(int p = startPage; p <= endPage; p++) { 
+					if(p == currentPage) {
+			%>
+						<button disabled><%= p %></button>
+			<%      } else { %>
+						<button onclick="location.href='<%=request.getContextPath()%>/managerPpl.mn?currentPage=<%=p%>'"><%= p %></button>
+			<%  
+			        }
+				}
+			%>
+			
+			<% if(currentPage >= maxPage) { %>
+			<button disabled>></button>
+			<% } else { %>
+			<button onclick="location.href='<%=request.getContextPath()%>/managerPpl.mn?currentPage=<%=currentPage + 1%>'">></button>
+			<% } %>
+		
+			<button onclick="location.href='<%=request.getContextPath()%>/managerPpl.mn?currentPage=<%=maxPage%>'">>></button>
+			<br>
+			<div id="Btn">
+				<button id="detailBtn">정보확인</button>&nbsp;
+				<button id="backBtn">이전페이지</button>
+			</div>
+			
+		</div>     
+ </div>			
+
+	<script>				
+		function but(t) {
+			td = t.parentNode;
+			td.style.backgroundColor = (t.checked) ? "darkgray" : "white";
+			tr = t.parentNode.parentNode;
+			tr.style.backgroundColor = (t.checked) ? "darkgray" : "white";
+		}
+		
+		$(function(){
+			$("#detailBtn").click(function(){
+//				var num = $("#listArea").parent().children().eq(0).val();
+				var num = $("input:checkbox[name='code']:checked").val();
+				console.log(num);
+				location.href="<%=request.getContextPath()%>/detail.mn?num=" + num;
+			});
+		});
+		
+
+	</script>
 </body>
 </html>

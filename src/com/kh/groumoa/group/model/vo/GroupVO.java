@@ -25,13 +25,14 @@ public class GroupVO implements java.io.Serializable {
 	//관리자 페이지 동호회 리스트
 	private int memberCount;
 	private int postCount;
+	private String memberName;
 	
 	public GroupVO() {}
 
 	public GroupVO(int groupCode, String groupName, String rnCode, String interestCode, String nickNameyn,
 			String openYn, Date openDate, String groupRule, String description, String status, int groupLeaderCode,
 			String groupLeaderYn, String regionName, String interest, String groupLeaderName, int memberCount,
-			int postCount) {
+			int postCount, String memberName) {
 		super();
 		this.groupCode = groupCode;
 		this.groupName = groupName;
@@ -50,6 +51,7 @@ public class GroupVO implements java.io.Serializable {
 		this.groupLeaderName = groupLeaderName;
 		this.memberCount = memberCount;
 		this.postCount = postCount;
+		this.memberName = memberName;
 	}
 
 	public int getGroupCode() {
@@ -188,6 +190,14 @@ public class GroupVO implements java.io.Serializable {
 		this.postCount = postCount;
 	}
 
+	public String getMemberName() {
+		return memberName;
+	}
+
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
+
 	@Override
 	public String toString() {
 		return "GroupVO [groupCode=" + groupCode + ", groupName=" + groupName + ", rnCode=" + rnCode + ", interestCode="
@@ -195,7 +205,7 @@ public class GroupVO implements java.io.Serializable {
 				+ ", groupRule=" + groupRule + ", description=" + description + ", status=" + status
 				+ ", groupLeaderCode=" + groupLeaderCode + ", groupLeaderYn=" + groupLeaderYn + ", regionName="
 				+ regionName + ", interest=" + interest + ", groupLeaderName=" + groupLeaderName + ", memberCount="
-				+ memberCount + ", postCount=" + postCount + "]";
+				+ memberCount + ", postCount=" + postCount + ", memberName=" + memberName + "]";
 	}
 
 }

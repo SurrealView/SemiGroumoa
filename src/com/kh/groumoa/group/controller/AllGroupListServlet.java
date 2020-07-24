@@ -75,6 +75,11 @@ public class AllGroupListServlet extends HttpServlet {
 		System.out.println(pi);
 		ArrayList<GroupVO> list = new GroupService().groupList(pi);
 		
+		for(int i = 0; i<list.size(); i++) {
+			String name = new GroupService().groupLeaderList(list.get(i));
+				list.get(i).setMemberName(name);
+		}
+
 		System.out.println("리스트 : " + list);
 		
 		String page = "";
