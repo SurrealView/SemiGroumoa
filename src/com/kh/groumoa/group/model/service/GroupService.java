@@ -36,8 +36,9 @@ public class GroupService {
 				fileList.get(i).setGroupCode(groupCode);
 //				group.setGroupCode(groupCode);
 				
-				result2 += new GroupDao().insertAttachment(con, fileList.get(i));
+				result2 += new GroupDao().insertAttachment(con, fileList.get(i));//수정필요
 			}
+			System.out.println("test result2 : " + result2);
 			
 		}
 		
@@ -49,6 +50,7 @@ public class GroupService {
 		}
 		
 		close(con);
+		System.out.println("test result : " + result);
 		
 		return result;
 	}

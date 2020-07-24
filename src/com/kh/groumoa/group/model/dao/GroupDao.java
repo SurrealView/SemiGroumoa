@@ -47,13 +47,14 @@ public class GroupDao {
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, group.getGroupName());
-			pstmt.setString(2, group.getRnCode());
-			pstmt.setString(3, group.getInterestCode());
-			pstmt.setString(4, group.getOpenYn());
-			pstmt.setString(5, group.getNickNameyn());
-			pstmt.setString(6, group.getGroupRule());
-			pstmt.setString(7, group.getDescription());
-			
+			pstmt.setInt(2, group.getGroupLeaderCode());
+			pstmt.setString(3, group.getRnCode());
+			pstmt.setString(4, group.getInterestCode());
+			pstmt.setString(5, group.getOpenYn());
+			pstmt.setString(6, group.getNickNameyn());
+			pstmt.setString(7, group.getGroupRule());
+			pstmt.setString(8, group.getDescription());
+	
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
