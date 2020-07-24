@@ -25,6 +25,10 @@
 				successMessage = "회원 수정에 성공하셨습니다.";
 				movePath = "<%=request.getContextPath()%>/views/member/memberUpdateForm.jsp";
 				break;
+				
+			case "insertBoard" :
+				successMessage = "게시판 작성에 성공하셨습니다.";
+				movePath = "<%=request.getContextPath()%>/selectList.bo";
 			}
 			
 			alert(successMessage);

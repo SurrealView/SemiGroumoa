@@ -81,8 +81,8 @@
 </head>
 <body>
 	<!-- 여기 헤더 추가할것 -->
-	<%@include file="../common/header/header.jsp" %>
-	<%@include file="subMenubar.jsp" %>
+	<%@include file="../common/header/newHeader.jsp" %>
+	<%@include file="subMenubar_myGroup.jsp" %>
 	<br>
 	<div class="content">
 	<p align="right" style="font-size:10px; padding-right: 25px; padding-top: 15px;">개인정보취급방침에 따라 최근 5년간의 내역이 제공됩니다.</p>
@@ -96,15 +96,15 @@
 			<!-- 완성 후 action태그 속성값 insert.bo로 변경하기 -->
 				<form action="#">
 					<label for="title">제목</label>&nbsp;&nbsp;
-					<input type="text" class="form-control title" id="title" style="width:350px" name="title" value="<%=b.getTitle() %>>">&nbsp;
+					<input type="text" class="form-control title" id="title" style="width:350px" name="title" value="<%=b.getTitle() %>" readonly>&nbsp;
 					<br><br>
 					<label for="category">분류</label>&nbsp;&nbsp;
-					<input type="text" class="form-control category" id="category" name="category" value="<%=b.getCategoryName()%>">&nbsp;&nbsp;
+					<input type="text" class="form-control category" id="category" name="category" value="<%=b.getCategoryName()%>" readonly>&nbsp;&nbsp;
 					<label for="writer">작성자</label>&nbsp;&nbsp;
 					<input type="text" class="form-control writer" value="<%=b.getMemberName() %>" readonly>&nbsp;&nbsp;
 					<label for="date-written">작성일</label>&nbsp;&nbsp;
 					<input type="date" id="currentDate" value="<%=b.getPostDate() %>" readonly><br><br>
-					<textarea class="form-control" cols="120" rows="20" style="resize:none;" name="content"><%=b.getDetail()%></textarea>
+					<textarea class="form-control" cols="120" rows="20" style="resize:none;" name="content" readonly><%=b.getDetail()%></textarea>
 					<br><br>
 					<label for="attachment">첨부파일</label>&nbsp;<!-- 첨부파일 다운로드 로직 추가 -->
 					<input type="file" class="attachment" id="attachment" name="attachment">
@@ -116,6 +116,6 @@
 			
 		</div>
 	</div>
-		<%@include file="../common/footer/footer.jsp" %>
+		<%@include file="../common/footer/newFooter.jsp" %>
 </body>
 </html>

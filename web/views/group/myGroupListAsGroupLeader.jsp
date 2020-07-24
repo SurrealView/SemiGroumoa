@@ -102,9 +102,9 @@
 
 				<div
 					style="float: left; border-bottom: 1px solid black; width: 350px; text-align: center;">
-					<form action="selectOne.gr" method="post">
-						<input type="hidden" name="groupCode"
-							value="<%=myGroupList.get(i).getGroupCode()%>">
+					<form action="selectOneAsLeader.gr" method="post">
+						<input type="hidden"
+							value="<%=myGroupList.get(i).getGroupCode()%>" name="groupCode">
 						<%
 							session.setAttribute("groupCode", myGroupList.get(i).getGroupCode());
 						%>

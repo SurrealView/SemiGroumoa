@@ -69,8 +69,11 @@
 			</div>
 			
 			<div style="float: left; border-bottom: 1px solid black; width: 200px; text-align: center;">
-			<form action="<%=request.getContextPath() %>/selectList.bo" method="post">
-				<input type="hidden" value="<%=searchedGroupList.get(i).getGroupCode() %>">
+			<form action="<%=request.getContextPath() %>/selectOne.gr" method="post">
+				<input type="hidden" name="groupCode" value="<%=searchedGroupList.get(i).getGroupCode() %>">
+				<%
+							session.setAttribute("groupCode", searchedGroupList.get(i).getGroupCode());
+				%>
 				<button style="float:right;" onclick="submit();">페이지 방문</button>
 			</form>
 				<b><%=searchedGroupList.get(i).getGroupName() %></b> <br>
