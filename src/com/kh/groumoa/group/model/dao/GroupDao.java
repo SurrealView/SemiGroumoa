@@ -17,6 +17,7 @@ import com.kh.groumoa.common.PageInfo;
 import com.kh.groumoa.group.model.vo.Attachment;
 import com.kh.groumoa.group.model.vo.GroupMemberVO;
 import com.kh.groumoa.group.model.vo.GroupVO;
+import com.kh.groumoa.member.model.vo.InterestVO;
 import com.kh.groumoa.member.model.vo.MemberInterestVO;
 import com.kh.groumoa.member.model.vo.MemberVO;
 import com.kh.groumoa.member.model.vo.RegionVO;
@@ -146,11 +147,40 @@ public class GroupDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			close(con);
 			close(rset);
 		}
 		
 		return region;
+	}
+	
+
+	public InterestVO searchInterest(Connection con, String interestCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		InterestVO interest = null;
+		
+		String query = prop.getProperty("searchInterest");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, interestCode);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				interest = new InterestVO();
+				interest.setInterestCode(rset.getString("INTEREST_CODE"));
+				interest.setInterest(rset.getString("INTEREST"));
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+		}
+		
+		return interest;
 	}
 	
 	public int updateThumbnailContent(Connection con, GroupVO group) {
@@ -584,4 +614,73 @@ public class GroupDao {
 		return listCount;
     
   }
+
+	public ArrayList<GroupVO> groupList(Connection con, PageInfo pi) {
+		ArrayList<GroupVO> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("groupList");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getLimit() + 1;
+			int endRow = startRow + pi.getLimit() - 1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<GroupVO>();
+			
+			while(rset.next()) {
+				GroupVO g = new GroupVO();
+				g.setGroupCode(rset.getInt("GROUP_CODE"));
+				g.setOpenDate(rset.getDate("OPEN_DATE"));
+				g.setInterest(rset.getString("INTEREST"));
+				g.setGroupLeaderName(rset.getString("GROUP_LEADER_NAME"));
+				g.setMemberCount(rset.getInt("MEMBER_COUNT"));
+				g.setPostCount(rset.getInt("POST_COUNT"));
+				
+				list.add(g);
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(con);
+		}
+		
+		return list;
+	}
+
+
+	public int groupListCount(Connection con) {
+		Statement stmt = null;
+		int listCount = 0;
+		ResultSet rset = null;
+
+		String query = prop.getProperty("groupListCount");
+
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+
+			if (rset.next()) {
+				listCount = rset.getInt(1);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+			close(rset);
+		}
+
+		return listCount;
+	}
 }

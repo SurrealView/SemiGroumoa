@@ -13,6 +13,7 @@ import com.kh.groumoa.group.model.vo.Attachment;
 import com.kh.groumoa.group.model.vo.GroupMemberVO;
 import com.kh.groumoa.group.model.vo.GroupVO;
 import com.kh.groumoa.member.model.dao.MemberDao;
+import com.kh.groumoa.member.model.vo.InterestVO;
 import com.kh.groumoa.member.model.vo.MemberInterestVO;
 import com.kh.groumoa.member.model.vo.MemberVO;
 import com.kh.groumoa.member.model.vo.RegionVO;
@@ -67,6 +68,23 @@ public class GroupService {
 		close(con);		
 		
 		return region;
+	}
+	
+	//활동 분야 조회
+	public InterestVO searchInterest(String interestCode) {
+		Connection con = getConnection();
+		
+		InterestVO interest = new GroupDao().searchInterest(con, interestCode);
+		
+		if(interest != null) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		close(con);		
+		
+		return interest;
 	}
 	
 	//동호회 입력내용 조회
@@ -173,10 +191,14 @@ public class GroupService {
 		RegionVO region = new GroupDao().searchRegion(con, selectedGroup.getRnCode());
 		selectedGroup.setRegionName(region.getRegionName() + " " + region.getRegionSpecific());
 		
+		//활동분야 가져오기
+		System.out.println(selectedGroup.getInterestCode());
+		InterestVO interest = new GroupDao().searchInterest(con, selectedGroup.getInterestCode());
 		
+		System.out.println(interest);
+		selectedGroup.setInterest(interest.getInterest());
 		
 		close(con);
-		System.out.println(selectedGroup);
 		return selectedGroup;
 	}
 	
@@ -250,5 +272,24 @@ public class GroupService {
 		return listCount;
   
   }
+
+	public ArrayList<GroupVO> groupList(PageInfo pi) {
+		Connection con = getConnection();
+		
+		ArrayList<GroupVO> list = new GroupDao().groupList(con, pi);
+		
+		close(con);
+		
+		return list;
+	}
+
+	public int groupListCount() {
+		Connection con = getConnection();
+		int listCount = new GroupDao().groupListCount(con);
+
+		close(con);
+
+		return listCount;
+	}
 
 }

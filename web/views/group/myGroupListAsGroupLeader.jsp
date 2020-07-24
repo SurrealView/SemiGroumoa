@@ -76,9 +76,9 @@
 		<script>
 			(function() {
 				var wrap = document.getElementById("total-wrap");
-				var height = 700 + (
+				var height = 300 + (
 		<%=myGroupListSize%>
-			* 128);
+			* 128) + 200;
 				wrap.style.height = height + "px";
 			})();
 		</script>
@@ -126,25 +126,24 @@
 						</tr>
 						<tr>
 							<td>소개</td>
-							<td><div><%=myGroupList.get(i).getRegionName()%></div></td>
+							<td><div><%=myGroupList.get(i).getDescription()%></div></td>
 						</tr>
 
 					</table>
-
-
-					<%-- 				<br>분야:
-				<%=myGroupList.get(i).getInterest()%>
-				<br>모임장:
-				<%=myGroupList.get(i).getGroupLeaderName()%>
-				<br>모임지역:
-				<%=myGroupList.get(i).getRegionName()%> --%>
 				</div>
 			</div>
 			<%
 				if (i % 3 == 2) {
 			%>
-
+			
+			<div style="height: 175px"></div>
+			<hr
+				style="width: 1050px; background: lightgray; border: 1px solid lightgray"
+				noshade="noshade">
+			<div style="height: 25px"></div>
+			
 		</div>
+
 
 		<%
 			}
@@ -153,6 +152,7 @@
 			}
 		%>
 	</div>
+	<div style="height: 300px"></div>
 	<%@include file="/views/common/footer/newFooter.jsp"%>
 </body>
 </html>

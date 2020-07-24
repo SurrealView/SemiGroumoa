@@ -113,6 +113,11 @@ body{
 	text-decoration: none;
 	color: gray;
 }
+
+.sub-icons{
+	height: 50px;
+	width: 50px;
+}
 </style>
 </head>
 <body>
@@ -164,13 +169,16 @@ body{
 				<%
 					} else {
 				%>
-				<td class="sub-menu"><a href="/groumoa/views/member/login.jsp">마이페이지</a></td>
-				<td class="sub-menu"><a href="/groumoa/views/member/login.jsp">모임개설</a></td>
-				<td class="sub-menu"><a href="/groumoa/views/member/login.jsp">모임관리</a></td>
+				<td class="sub-menu"><a href="/groumoa/views/member/login.jsp"><img
+							class="sub-icons" src="/groumoa/resources/image/personal1.png"><br>마이페이지</a></td>
+				<td class="sub-menu"><a href="/groumoa/views/member/login.jsp"><img
+							class="sub-icons" src="/groumoa/resources/image/groupadd1.png"><br>모임개설</a></td>
+				<td class="sub-menu"><a href="/groumoa/views/member/login.jsp"><img
+							class="sub-icons" src="/groumoa/resources/image/groupmanage.png"><br>모임관리</a></td>
 				<%
 					}
 				%>
-				<td class="sub-menu"><a href="#">알림</a></td>
+				<!-- <td class="sub-menu"><a href="#">알림</a></td> -->
 			</tr>
 		</table>
 	</div>
