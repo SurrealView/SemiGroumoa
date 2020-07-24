@@ -99,18 +99,18 @@
 			<div class="form-area">
 				<form>
 					<label for="title">제목</label>&nbsp;&nbsp;
-					<input type="text" class="form-control title" id="title" style="width:350px" name="title" value="<%=b.getTitle() %>>">&nbsp;
+					<input type="text" class="form-control title" id="title" style="width:350px" name="title" value="<%=b.getTitle() %>" readonly>&nbsp;
 					<br><br>
 					<label for="category">분류</label>&nbsp;&nbsp;
-					<input type="text" class="form-control category" id="category" name="category" value="<%=b.getCategoryName()%>">&nbsp;&nbsp;
+					<input type="text" class="form-control category" id="category" name="category" value="<%=b.getCategoryName()%>" readonly>&nbsp;&nbsp;
 					<label for="writer">작성자</label>&nbsp;&nbsp;
 					<input type="text" class="form-control writer" value="<%=b.getMemberName() %>" readonly>&nbsp;&nbsp;
 					<label for="date-written">작성일</label>&nbsp;&nbsp;
 					<input type="date" id="currentDate" value="<%=b.getPostDate() %>" readonly><br><br>
-					<textarea class="form-control" cols="120" rows="20" style="resize:none;" name="content"><%=b.getDetail()%></textarea>
+					<textarea class="form-control" cols="120" rows="20" style="resize:none;" name="content" readonly><%=b.getDetail()%></textarea>
 					<br><br>
 					<label for="attachment">첨부파일</label>&nbsp;<!-- 첨부파일 다운로드 로직 추가 -->
-					<input type="file" class="attachment" id="attachment" name="attachment">
+					<input type="file" class="attachment" id="attachment" name="attachment" readonly>
 					<br><br>
 					<button class="btn btn-danger" onclick="">삭제하기</button>
 					<!-- 자기 자신의 게시글일 경우에만 보임 -->
@@ -123,6 +123,6 @@
 		
 		</div>
 	</div>
-		<%@include file="../common/footer/footer.jsp" %>
+		<%@include file="../common/footer/newFooter.jsp" %>
 </body>
 </html>
