@@ -28,7 +28,7 @@ public class GroupService {
 		int result2 = 0;
 		
 		result1 = new GroupDao().insertThumbnailContent(con, group);
-		System.out.println("test result1 : " + result1);
+		
 		if(result1 > 0) {
 			int groupCode = new GroupDao().selectCurrval(con);
 			
@@ -38,7 +38,7 @@ public class GroupService {
 				
 				result2 += new GroupDao().insertAttachment(con, fileList.get(i));//수정필요
 			}
-			System.out.println(result2);
+			System.out.println("test result2 : " + result2);
 			
 		}
 		

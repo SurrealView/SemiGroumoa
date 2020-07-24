@@ -54,7 +54,7 @@ public class GroupDao {
 			pstmt.setString(6, group.getNickNameyn());
 			pstmt.setString(7, group.getGroupRule());
 			pstmt.setString(8, group.getDescription());
-			System.out.println("testGroup : " + group);
+	
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
