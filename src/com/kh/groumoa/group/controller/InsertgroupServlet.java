@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
-import java.util.GregorianCalendar;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,7 +17,7 @@ import com.kh.groumoa.common.MyFileRenamePolicy;
 import com.kh.groumoa.group.model.service.GroupService;
 import com.kh.groumoa.group.model.vo.Attachment;
 import com.kh.groumoa.group.model.vo.GroupVO;
-import com.kh.groumoa.member.model.vo.MemberInterestVO;
+import com.kh.groumoa.member.model.vo.MemberVO;
 import com.kh.groumoa.member.model.vo.RegionVO;
 import com.oreilly.servlet.MultipartRequest;
 
@@ -43,8 +42,10 @@ public class InsertgroupServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if(ServletFileUpload.isMultipartContent(request)) {
 			int maxSize = 1024 * 1024 * 10;
-	         
-	         String root = request.getSession().getServletContext().getRealPath("/");
+	        MemberVO loginUser = (MemberVO) request.getSession().getAttribute("loginUser");
+	        int groupLeaderCode = loginUser.getMemberCode();
+	        
+	        String root = request.getSession().getServletContext().getRealPath("/");
 	         
 	         String savePath = root + "thumbnail_uploadFiles/";
 	         
@@ -95,6 +96,7 @@ public class InsertgroupServlet extends HttpServlet {
 			GroupVO group = new GroupVO();/*
 			group.setGroupCode(groupCode);*/
 			group.setGroupName(name);
+			group.setGroupLeaderCode(groupLeaderCode);
 			group.setRnCode(rnCode);
 			group.setInterestCode(interest);
 			group.setNickNameyn(nickNameyn);
