@@ -7,7 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.groumoa.group.model.service.BoardService;
 import com.kh.groumoa.group.model.vo.BoardVO;
+import com.kh.groumoa.inquire.model.service.InquireService;
 import com.kh.groumoa.inquire.model.vo.InquireVO;
 
 /**
@@ -16,27 +18,38 @@ import com.kh.groumoa.inquire.model.vo.InquireVO;
 @WebServlet(name = "InsertQaServlet", urlPatterns = { "/insert.qa" })
 public class InsertQnaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public InsertQnaServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public InsertQnaServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String qnaTitle = request.getParameter("qnaTitle");
-		String qnaCateCode = request.getParameter("qnaCateCode");
-		String questionerCode = request.getParameter("questionerCode");
-		
-		
-		
-	
+		String title = request.getParameter("title");
+		String categoryCode = request.getParameter("category");
+		int groupCode = Integer.parseInt(request.getParameter("groupCode"));
+		int writerCode = Integer.parseInt(request.getParameter("writer"));
+		String detail = request.getParameter("detail");
+
+		String requestAttachment = request.getParameter("attachment");//로직 추가해야됨
+
+		InquireVO requestInquire = new InquireVO();
+		requestInquire.setTitle(title);
+		requestInquire.setCategoryCode(categoryCode);
+		requestInquire.setGroupCode(groupCode);
+		requestInquire.setWriterCode(writerCode);
+		requestInquire.setDetail(detail);
+
+		int result = new InquireService().insertInquire(requestInquire);
+
 	}
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

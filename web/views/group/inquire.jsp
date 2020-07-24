@@ -76,7 +76,7 @@
             <table id="QWriteArea">
                 <tr>
                     <td><label>이름 </label></td>
-                    <td colspan="2"><input type="text" name="qManager" value="<%=%>"></td>
+                    <td colspan="2"><input type="text" name="qManager"></td>
                     <td><label>연락처 </label></td>
                     <td><input type="tel" name="noTel"></td>
                 </tr>
@@ -110,8 +110,7 @@
             </table>
             <button type="submit" class="qWriteBtn">등록하기</button>
             </form>
-        </div>      
-                                     
+        </div>   
     </div>
 </body>
 </html>
