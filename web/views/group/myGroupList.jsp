@@ -75,7 +75,9 @@
 		<script>
 			(function() {
 				var wrap = document.getElementById("total-wrap");
-				var height = 300 + (<%=myGroupListSize%>* 128) + 200;
+				var height = 300 + (
+		<%=myGroupListSize%>
+			* 128) + 200;
 				wrap.style.height = height + "px";
 			})();
 		</script>
@@ -87,7 +89,7 @@
 		<%
 			if (i % 3 == 0) {
 		%>
-		
+
 		<div class="mygroup">
 			<%
 				}
@@ -128,11 +130,6 @@
 						</tr>
 
 					</table>
-
-					<%
-						
-					%>
-
 				</div>
 			</div>
 			<%
