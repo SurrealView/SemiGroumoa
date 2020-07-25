@@ -28,7 +28,7 @@ public class selectOneGroupServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int groupCode = Integer.parseInt(request.getParameter("groupCode"));
-		
+		//System.out.println("test groupCode : " + groupCode);
 		GroupVO requestGroup = new GroupVO();
 		requestGroup.setGroupCode(groupCode);
 		
