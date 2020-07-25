@@ -8,6 +8,22 @@
     <title>Document</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link href="../../../resources/css/notice/notice_write.css" rel="stylesheet">
+    <style>
+    #writeBoard{
+    	border:1px solid black;
+    }
+    /* .cite{
+    	width:200px;
+    	height:100px;
+    	border:1px solid black;
+    } */
+    [contenteditable] {
+  	outline: 0px solid transparent;
+  	font-size:14px;
+  	font-style:normal;
+  	text-overflow: scroll;
+	}
+    </style>
 </head>
 <body>
 	<%@ include file="/views/manager/menubar.jsp" %>
@@ -58,12 +74,14 @@
     <script>
         function uploadFile(){
             //alert("경고!");
+            var node = document.getElementById('boardArea');
+            
             $("#notice_upload").click();
 
             $("#notice_upload").change(function(){
-                $(".file_path").val($("#notice_upload").val());
+                $(".file_path").val($("#notice_upload").val().replace("/C:\\fakepath\\/", ""));
             });
-        }
+        }       
 
         $(function() {
             $(".file_path").val($("#notice_upload").val());
@@ -71,6 +89,11 @@
 /*             var txtArea = $("textArea");            
             var selectPos = txtArea.prop("selectionStart"); */
         })
+        
+        function focusOnBoard(){
+        	var board = $("#writeBoard").children("cite").focus();        	
+        	/* console.log($("#writeBoard").children("cite").html()); */
+        }
     </script>
 </body>
 </html>

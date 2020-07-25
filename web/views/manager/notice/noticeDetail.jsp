@@ -22,7 +22,7 @@
 	<%@ include file="/views/manager/menubar.jsp" %>
 	<div class="noticeSection">
         <div class="noticeInfo" align="center">
-            <table class="noticeArea">s
+            <table class="noticeArea">
                 <tr>
                 	<input type="hidden" name="noticeId" value="<%=notice.getNoticeCode() %>">                	
                     <td colspan="7"><strong>공지사항</strong></td>
@@ -33,20 +33,25 @@
 					<td colspan="6"><%=notice.getMnWriterID() %></td>
                 </tr>
                 <tr>
-                    <td><label>연락처 </label></td>
-                    <td colspan="2"><input type="tel"></td>
+                    <!-- <td><label>연락처 </label></td>
+                    <td colspan="2"><input type="tel"></td> -->
 <!--                     <td colspan="2"><input type="tel"></td> -->
                     <td><label>이메일 </label></td>
-<%--                     <td colspan="2"><%=notice.getMnWriterID() %></td> --%>
-                    <td colspan="2"><input type="email"></td>
+                    <td colspan="5"><%=notice.getMnWriterID() %></td>
 		                          <!--  줄맞추기 용. -->
                     <td></td>
                 </tr>
                 <tr>
                     <td><label>제목</label></td>                    
-                    <td colspan="5"><input type="text" placeholder="제목을입력해주세요" style="width:400px"></td>
-                    <%-- <td colspan="5"><%=notice.getNoticeTitle() %></td> --%>
-                    <td><input type="text" style="width:80px"></td>
+                    <!-- <td colspan="5"><input type="text" placeholder="제목을입력해주세요" style="width:400px"></td> -->
+<%--                     <td colspan="5"><input type="text" value="<%=notice.getNoticeTitle() %>" style="width:400px"></td> --%>
+                    <td colspan="5"><pre style="width:400px"><%=notice.getNoticeTitle() %></pre></td>
+                    <td>
+                    <!-- <select name="kind">
+                        <option value="default">분류</option>
+                        <option value="notice">공지</option>
+                    </select> -->
+                    </td>                    
                 </tr>
                 <tr>
                     <td><label>내용</label></td>
