@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-
+	pageEncoding="UTF-8" import="com.kh.groumoa.scheduler.model.vo.SchedulerVO, java.util.ArrayList"%>
+<%
+	ArrayList<SchedulerVO> list = (ArrayList<SchedulerVO>) request.getAttribute("list"); 
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -79,13 +81,15 @@
 			    })
 			}, */
 			events : [ 
+				<%for(int i = 0; i < list.size(); i++) {%>
 				{
-				id : '0000001',
-				title : '모임회',
-				start : '2020-07-25',
-				end : '2019-07-25',
-				description : 'event no.1'
+				id : <%= list.get(i).getSchCode() %>,
+				title : <%= list.get(i).getSchTitle() %>,
+				start : <%= list.get(i).getSchDate() %>,
+				end : <%= list.get(i).getSchDate() %>,
+				description : <%= list.get(i).getSchDetail() %>
 			} 
+				<% } %>
 				],
 			dateClick : function(info) {
 				alert('Clicked on: ' + info.dateStr);
@@ -137,6 +141,7 @@
 	<%@include file="../subMenubar.jsp"%>
 	<div id="outer">
 		<!-- 이 밖을 1000px로 감싼다. -->
+		<form action="" method="post"></form>
 		<div id="cal-wrap">
 			<h1 id='cal-title'>일정</h1>
 			<hr noshade="noshade">
