@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.kh.groumoa.notice.model.vo.*, java.util.*, java.util.*, com.kh.groumoa.common.model.vo.*"%>
+    pageEncoding="UTF-8" import="com.kh.groumoa.common.model.vo.*, com.kh.groumoa.notice.model.vo.*, java.util.*"%>
 <%
 	NoticeVo notice = (NoticeVo) request.getAttribute("notice");
 	ArrayList<AttachmentVo> list = (ArrayList<AttachmentVo>) request.getAttribute("fileList");
@@ -51,7 +51,7 @@
                 <tr>
                     <td><label>내용</label></td>
                     <!-- <dtd colspan="6"><textarea cols="62" rows="10" style="resize:none"></textarea></td> -->
-                    <td colspan="6"><%=notice.getNoticeDetail() %><br>
+                    <td colspan="6"><pre><%=notice.getNoticeDetail() %></pre><br>
                     <%-- <img src="<%=request.getContextPath() %>/notice_uploadFiles/<%=attach.getChangeName() %>"> --%>
                     <img src="<%=request.getContextPath() %>/notice_uploadFiles/<%=attach.getChangeName() %>">
 <%--                     <img id="titleImg" src="<%=request.getContextPath() %>/thumbnail_uploadFiles/<%=titleImg.getChangeName() %>">	 --%>

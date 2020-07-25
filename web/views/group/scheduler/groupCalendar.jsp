@@ -14,13 +14,13 @@
 <link href='../../../resources/fullcalendar/packages/list/main.min.css'
 	rel='stylesheet' />
 <!-- 테마 적용을 위한 부트스트랩 v4.0 -->
-<link
+<!-- <link
 	href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'
-	rel='stylesheet' />
-<link href='https://use.fontawesome.com/releases/v5.0.6/css/all.css'
-	rel='stylesheet'>
-<link href='../../../resources/fullcalendar/packages/bootstrap/main.css'
-	rel='stylesheet' />
+	rel='stylesheet' /> -->
+<!-- <link href='https://use.fontawesome.com/releases/v5.0.6/css/all.css'
+	rel='stylesheet'> -->
+<!-- <link href='../../../resources/fullcalendar/packages/bootstrap/main.css'
+	rel='stylesheet' /> -->
 <!-- bootstrap link end -->
 
 
@@ -82,8 +82,8 @@
 				{
 				id : '0000001',
 				title : '모임회',
-				start : '2020-07-22',
-				end : '2019-07-22',
+				start : '2020-07-25',
+				end : '2019-07-25',
 				description : 'event no.1'
 			} 
 				],
@@ -94,8 +94,7 @@
 				alert('Current view: ' + info.view.type);
 			},
 			eventClick : function(info) {
-				alert('이벤트클릭');
-				alert('이벤트 아이디 : ' + calendar.getEventById(id));
+				alert('2020-07-25 오루 2시에 강남역 10번 출구로');
 				// 클릭시 해당 일자 배경색 바꿈
 				// info.dayEl.style.backgroundColor = 'magenta';
 			}
