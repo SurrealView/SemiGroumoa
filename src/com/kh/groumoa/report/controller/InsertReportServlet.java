@@ -93,7 +93,7 @@ public class InsertReportServlet extends HttpServlet {
 			
 			int result = new ReportService().insertReport(re, attachList);
 			
-			String page="";
+			String page= request.getContextPath() + "/selectList.re";
 			if(result > 0) {
 				response.sendRedirect(page);
 			} else {
