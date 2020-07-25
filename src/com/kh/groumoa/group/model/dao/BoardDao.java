@@ -15,6 +15,7 @@ import java.util.Properties;
 
 import com.kh.groumoa.common.PageInfo;
 import com.kh.groumoa.group.model.vo.BoardVO;
+import com.kh.groumoa.group.model.vo.GroupVO;
 
 
 public class BoardDao {
@@ -191,6 +192,221 @@ private Properties prop = new Properties();
 		}
 		
 		return board;
+	}
+
+	public int getSearchByWriterResultListCount(Connection con, String search, int groupCode) {//수정필요
+		PreparedStatement pstmt = null;
+		int listCount = 0;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("searchByWriterResultListCount");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, groupCode);
+			pstmt.setString(2, search);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return listCount;
+	}
+
+	public ArrayList<BoardVO> selectSearchByWriterResultList(Connection con, PageInfo pi, int groupCode, String search) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<BoardVO> list = null;
+		
+		String query = prop.getProperty("selectSearchByWriterResultList");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			int startRow = (pi.getCurrentPage() - 1) * pi.getLimit() + 1;
+			int endRow = startRow + pi.getLimit() - 1;
+			
+			pstmt.setInt(1, groupCode);//여기 그룹코드 넣기
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			pstmt.setString(4, search);
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<BoardVO>();
+			
+			while(rset.next()) {
+				BoardVO b = new BoardVO();
+				b.setPostCode(rset.getInt("POST_CODE"));
+				b.setCategoryName(rset.getString("CATEGORY_NAME"));
+				b.setMemberName(rset.getString("MEMBER_NAME"));
+				b.setTitle(rset.getString("TITLE"));
+				b.setPostDate(rset.getDate("POST_DATE"));
+				b.setPcount(rset.getInt("PCOUNT"));
+				list.add(b);
+			} 
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		
+		
+		return list;
+	}
+
+	public int getSearchByTitleResultListCount(Connection con, String search, int groupCode) {
+		PreparedStatement pstmt = null;
+		int listCount = 0;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("searchByTitleResultListCount");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, groupCode);
+			pstmt.setString(2, search);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return listCount;
+	}
+
+	public ArrayList<BoardVO> selectSearchByTitleResultList(Connection con, PageInfo pi, int groupCode, String search) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<BoardVO> list = null;
+		
+		String query = prop.getProperty("selectSearchByTitleResultList");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			int startRow = (pi.getCurrentPage() - 1) * pi.getLimit() + 1;
+			int endRow = startRow + pi.getLimit() - 1;
+			
+			pstmt.setInt(1, groupCode);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			pstmt.setString(4, search);
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<BoardVO>();
+			
+			while(rset.next()) {
+				BoardVO b = new BoardVO();
+				b.setPostCode(rset.getInt("POST_CODE"));
+				b.setCategoryName(rset.getString("CATEGORY_NAME"));
+				b.setMemberName(rset.getString("MEMBER_NAME"));
+				b.setTitle(rset.getString("TITLE"));
+				b.setPostDate(rset.getDate("POST_DATE"));
+				b.setPcount(rset.getInt("PCOUNT"));
+				list.add(b);
+			} 
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		
+		
+		return list;
+	}
+
+	public int getSearchByContentResultListCount(Connection con, String search, int groupCode) {
+		PreparedStatement pstmt = null;
+		int listCount = 0;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("searchByContentResultListCount");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, groupCode);
+			pstmt.setString(2, search);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return listCount;
+	}
+
+	public ArrayList<BoardVO> selectSearchByContentResultList(Connection con, PageInfo pi, int groupCode,
+			String search) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<BoardVO> list = null;
+		
+		String query = prop.getProperty("selectSearchByContentResultList");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			int startRow = (pi.getCurrentPage() - 1) * pi.getLimit() + 1;
+			int endRow = startRow + pi.getLimit() - 1;
+			
+			pstmt.setInt(1, groupCode);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			pstmt.setString(4, search);
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<BoardVO>();
+			
+			while(rset.next()) {
+				BoardVO b = new BoardVO();
+				b.setPostCode(rset.getInt("POST_CODE"));
+				b.setCategoryName(rset.getString("CATEGORY_NAME"));
+				b.setMemberName(rset.getString("MEMBER_NAME"));
+				b.setTitle(rset.getString("TITLE"));
+				b.setPostDate(rset.getDate("POST_DATE"));
+				b.setPcount(rset.getInt("PCOUNT"));
+				list.add(b);
+			} 
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		
+		
+		return list;
 	}
 
 }

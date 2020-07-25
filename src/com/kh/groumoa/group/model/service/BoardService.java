@@ -6,9 +6,11 @@ import java.util.ArrayList;
 import com.kh.groumoa.common.PageInfo;
 import com.kh.groumoa.group.model.dao.BoardDao;
 import com.kh.groumoa.group.model.vo.BoardVO;
+import com.kh.groumoa.group.model.vo.GroupVO;
 
 
 import static com.kh.groumoa.common.JDBCTemplate.*;
+
 
 
 public class BoardService {
@@ -77,6 +79,80 @@ public class BoardService {
 		close(con);
 		
 		return board;
+	}
+
+
+
+	public int getSearchByWriterResultListCount(String search, int groupCode) {
+		
+		Connection con = getConnection();
+		int listCount = new BoardDao().getSearchByWriterResultListCount(con, search, groupCode);
+		
+		close(con);
+
+		return listCount;
+	}
+
+
+
+	public ArrayList<BoardVO> selectSearchByWriterResultList(PageInfo pi, int groupCode, String search) {
+		Connection con = getConnection();
+		
+		ArrayList<BoardVO> list = new BoardDao().selectSearchByWriterResultList(con, pi, groupCode, search);
+		
+		close(con);
+		
+		return list;
+	}
+
+
+
+	public int getSearchByTitleResultListCount(String search, int groupCode) {
+		
+		Connection con = getConnection();
+		
+		int listCount = new BoardDao().getSearchByTitleResultListCount(con, search, groupCode);
+		
+		close(con);
+
+		return listCount;
+	}
+
+
+
+	public ArrayList<BoardVO> selectSearchByTitleResultList(PageInfo pi, int groupCode, String search) {
+		
+		Connection con = getConnection();
+		
+		ArrayList<BoardVO> list = new BoardDao().selectSearchByTitleResultList(con, pi, groupCode, search);
+		
+		close(con);
+		
+		return list;
+	}
+
+
+
+	public int getSearchByContentResultListCount(String search, int groupCode) {
+		Connection con = getConnection();
+		
+		int listCount = new BoardDao().getSearchByContentResultListCount(con, search, groupCode);
+		
+		close(con);
+
+		return listCount;
+	}
+
+
+
+	public ArrayList<BoardVO> selectSearchByContentResultList(PageInfo pi, int groupCode, String search) {
+		Connection con = getConnection();
+		
+		ArrayList<BoardVO> list = new BoardDao().selectSearchByContentResultList(con, pi, groupCode, search);
+		
+		close(con);
+		
+		return list;
 	}
 
 }

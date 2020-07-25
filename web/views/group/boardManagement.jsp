@@ -247,16 +247,18 @@ int endPage = pi.getEndPage();
 				<div class="writeBtn" style="float:left">
 					<button class="">작성하기</button>
 				</div>
+				<br>
                 <div class="searchbox" id="searchbox">
-					<form>
-						<select class="form-control">
-	  						<option>제목</option>
+					<form method="get" class="searchForm">
+						<select class="form-control" id="searchBy">
 	  						<option>작성자</option>
+	  						<option>제목</option>
 	  						<option>내용</option>
 						</select>
-						<input type="text" placeholder="게시글 검색" style="height:35px;">
-						 <button type="submit"><i class="fa fa-search" style="height:25px"></i></button>
+						<input type="text" placeholder="게시글 검색" style="height:35px;" name="search">
+						<input type="hidden" value="Y" name="leaderYn">
 					</form>
+						 <button><i class="fa fa-search" style="height:25px" onclick="search();"></i></button>
 					
 				</div>
 		</div>
@@ -268,7 +270,34 @@ int endPage = pi.getEndPage();
 				location.href="<%=request.getContextPath()%>/selectOneAsLeader.bo?num=" + num;
 			});
 		});
-		//코드 수정 필요.. 이대로 실행할 시 board-detail로 넘어가버림
+		
+		
+		//검색조건 변수로 받아오기
+		
+			var selectedSearchOption;
+		$(function(){
+				$("#searchBy").change(function(){
+					selectedSearchOption = 
+				$(this).children("option:selected").val();
+				
+		   		 });
+				
+		});
+		
+		function search() {
+			console.log(selectedSearchOption);
+			if(selectedSearchOption == "작성자" ) {
+				$(".searchForm").attr("action", "<%=request.getContextPath() %>/searchByWriter.bo");
+				$(".searchForm").submit();
+			} else if(selectedSearchOption == "제목") {
+				 $(".searchForm").attr("action", "<%=request.getContextPath() %>/searchByTitle.bo");
+				 $(".searchForm").submit();
+			} else {
+				$(".searchForm").attr("action", "<%=request.getContextPath() %>/searchByContent.bo");
+				$(".searchForm").submit();
+			}
+		}
+		
 		</script>
 		<!-- footer 추가할것 -->
 		
