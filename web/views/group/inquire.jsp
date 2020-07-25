@@ -72,7 +72,7 @@
 	<div id="ask">1:1 문의하기</div>
 	<div class="qWrite">
         <div class="qWriterInfo" align="center">
-        <form action="" method="post" encType="multipart/form-data">
+        <form>
             <table id="QWriteArea">
                 <tr>
                     <td><label>이름 </label></td>
