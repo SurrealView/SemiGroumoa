@@ -133,6 +133,44 @@ public class MemberService {
 		return result;
 	}
 
+	public MemberVO searchId(MemberVO requestMember) {
+		Connection con = getConnection();
+		
+		MemberVO responseMember = new MemberDao().searchId(con, requestMember);
+		
+		close(con);
+		
+		return responseMember;
+	}
+
+	public MemberVO searchPwd(MemberVO requestMember) {
+		Connection con = getConnection();
+		
+		MemberVO responseMember = new MemberDao().searchPwd(con, requestMember);
+		
+		close(con);
+		
+		return responseMember;
+	}
+
+	public int updateMemberPwd(String email, String newPwd) {
+		
+		Connection con = getConnection();
+		
+		int result = new MemberDao().updateMemberPwd(con, email, newPwd);
+		
+		if(result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		close(con);
+		
+		
+		return result;
+  }		
+
 	public int getGroupLeaderCount() {
 		Connection con = getConnection();
 		int result = new MemberDao().getGroupLeaderCount(con);

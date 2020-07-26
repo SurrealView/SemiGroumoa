@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.kh.groumoa.group.model.vo.BoardVO"%>
+    pageEncoding="UTF-8" import="com.kh.groumoa.group.model.vo.BoardVO, com.kh.groumoa.group.model.vo.ReplyVO, java.util.*" %>
 <%BoardVO b = (BoardVO) request.getAttribute("board"); %>
+<%ArrayList<ReplyVO> replyList = (ArrayList<ReplyVO>) request.getAttribute("replyList"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -66,7 +67,7 @@
 	}
 	.content-area{
 		width:950px;
-		height:800px;
+		height:720px;
 		/*border:1px solid black;*/
 		margin:0 auto;
 	}
@@ -110,12 +111,84 @@
 					<input type="file" class="attachment" id="attachment" name="attachment">
 				</form>
 			</div>
-			
-			
-			
-			
 		</div>
+		
+		<div class="reply-area" style="margin-top: 0;">
+			<div class="reply-write-area">
+				<table align="center">
+					<tr>
+						<td>댓글작성</td>
+						<td><textarea rows="3" cols="80" id="replyContent"  style="resize:none"></textarea></td>
+						<td><button id="addReply">댓글 등록</button></td>
+					</tr>
+				</table>
+			</div>
+			<div id="reply-select-area">
+					<table id="replySelectTable" border="1" align="center"><tbody>
+					<%for(int i = 0; i < replyList.size(); i++){ %>
+						<tr>
+							<td style="width:100px"><%=replyList.get(i).getWriterName()%></td>
+							<td style="width:400px"><%=replyList.get(i).getDetail() %></td>
+							<td style="width:200px"><%=replyList.get(i).getReplyDate() %></td>
+						</tr>
+					<% } %>
+					</tbody></table>
+			</div>
+		</div>
+		
 	</div>
+	<script>
+		$(function(){
+			//onload로 댓글 불러오기
+			
+			//클릭시 댓글 추가한거 보이기
+			$("#addReply").click(function(){
+				var writerCode = <%=loginUser.getMemberCode()%>;
+				var writer = "<%= loginUser.getUserName()%>";
+				var postCode = <%= b.getPostCode() %>;
+				var content = $("#replyContent").val();
+				
+				console.log(writer);
+				console.log(postCode);
+				console.log(content);
+				
+				$.ajax({
+					url: "/groumoa/insertReply.bo",
+					data: {writerCode: writerCode, content: content, postCode: postCode},
+					type: "post",
+					success: function(data) {
+						
+						var $replySelectTable = $("#replySelectTable tbody");
+						$replySelectTable.html('');
+						
+						for(var key in data) {
+							var $tr = $("<tr>");
+							var $writerTd = $("<td>").text(data[key].writerName).css("width", "100px");
+							var $contentTd = $("<td>").text(data[key].detail).css("width", "400px");
+							var $dateTd = $("<td>").text(data[key].replyDate).css("width", "200px");
+							
+							$tr.append($writerTd);
+							$tr.append($contentTd);
+							$tr.append($dateTd);
+							
+							$replySelectTable.prepend($tr);
+							
+						}
+						
+						
+					},
+					error: function() {
+						console.log("실패");
+					}
+					
+				});
+				
+			});
+			
+		});
+	</script>
+	
+	
 		<%@include file="../common/footer/newFooter.jsp" %>
 </body>
 </html>
