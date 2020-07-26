@@ -353,6 +353,7 @@ public class MemberDao {
 			pstmt.setInt(1, nno);
 			
 			rset = pstmt.executeQuery();
+			
 			if(rset.next()) {
 				member = new MemberVO();
 				
@@ -360,12 +361,13 @@ public class MemberDao {
 				member.setEmail(rset.getString("EMAIL"));
 				member.setUserPwd(rset.getString("MEMBER_PWD"));
 				member.setEnrollDate(rset.getDate("ENROLL_DATE"));
-				member.setPostCode(rset.getInt("POST_CODE"));
-				member.setGroupCode(rset.getInt("GROUP_CODE"));
+				member.setPostCode(rset.getInt("POST"));
 				member.setGroupName(rset.getString("GROUP_NAME"));
-				member.setPenaltyCode(rset.getInt("PENALTY_CODE"));
+				member.setGroupCode(rset.getInt("GROUP_CODE"));
+				member.setGroupLeaderCode(rset.getInt("LEADER_CODE"));
+				member.setPenaltyCode(rset.getInt("PENALTY"));
 			}
-
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -401,6 +403,144 @@ public class MemberDao {
 		}
 		return result;
 
+	}
+
+	public int getGroupLeaderCount(Connection con) {
+		Statement stmt = null;
+		int listCount = 0;
+		ResultSet rset = null;
+
+		String query = prop.getProperty("listGroupLeaderCount");
+
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+
+			if (rset.next()) {
+				listCount = rset.getInt(1);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+			close(rset);
+		}
+
+		return listCount;
+	}
+
+	public ArrayList<MemberVO> selectGroupLeaderList(Connection con, PageInfo pi) {
+		ArrayList<MemberVO> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String query = prop.getProperty("selectGroupLeader");
+
+		try {
+			pstmt = con.prepareStatement(query);
+
+			int startRow = (pi.getCurrentPage() - 1) * pi.getLimit() + 1;
+			int endRow = startRow + pi.getLimit() - 1;
+
+			System.out.println("start" + startRow);
+			System.out.println("end" + endRow);
+
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+
+			rset = pstmt.executeQuery();
+
+			list = new ArrayList<MemberVO>();
+
+			while (rset.next()) {
+				MemberVO m = new MemberVO();
+				m.setGroupLeaderCode(rset.getInt("GROUP_LEADER_CODE"));
+				m.setEmail(rset.getString("EMAIL"));
+				m.setUserName(rset.getString("MEMBER_NAME"));
+				m.setEnrollDate(rset.getDate("ENROLL_DATE"));
+				m.setPostCode(rset.getInt("POST"));
+				System.out.println(m);
+				list.add(m);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		System.out.println(list);
+		return list;
+	}
+
+	public int selectGroupMemberList(Connection con) {
+		Statement stmt = null;
+		int listCount = 0;
+		ResultSet rset = null;
+
+		String query = prop.getProperty("listGroupMemberCount");
+
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+
+			if (rset.next()) {
+				listCount = rset.getInt(1);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+			close(rset);
+		}
+
+		return listCount;
+	}
+
+	public ArrayList<MemberVO> selectGroupMemberList(Connection con, PageInfo pi) {
+		ArrayList<MemberVO> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String query = prop.getProperty("selectGroupMemberList");
+
+		try {
+			pstmt = con.prepareStatement(query);
+
+			int startRow = (pi.getCurrentPage() - 1) * pi.getLimit() + 1;
+			int endRow = startRow + pi.getLimit() - 1;
+
+			System.out.println("start" + startRow);
+			System.out.println("end" + endRow);
+
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+
+			rset = pstmt.executeQuery();
+
+			list = new ArrayList<MemberVO>();
+
+			while (rset.next()) {
+				MemberVO m = new MemberVO();
+				m.setGroupCode(rset.getInt("GROUP_CODE"));
+				m.setMemberCode(rset.getInt("MEMBER_CODE"));
+				m.setEmail(rset.getString("EMAIL"));
+				m.setUserName(rset.getString("MEMBER_NAME"));
+				m.setEnrollDate(rset.getDate("ENROLL_DATE"));
+				m.setPostCode(rset.getInt("POST"));
+				list.add(m);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		System.out.println(list);
+		return list;
 	}
 
 }

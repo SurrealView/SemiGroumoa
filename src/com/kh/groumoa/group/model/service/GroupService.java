@@ -34,9 +34,9 @@ public class GroupService {
 			
 			for(int i = 0; i < fileList.size(); i++) {
 				fileList.get(i).setGroupCode(groupCode);
-//				group.setGroupCode(groupCode);
+				group.setGroupCode(groupCode);
 				
-				result2 += new GroupDao().insertAttachment(con, fileList.get(i));//수정필요
+				result2 += new GroupDao().insertAttachment(con, fileList.get(i));
 			}
 			System.out.println("test result2 : " + result2);
 			
@@ -60,7 +60,7 @@ public class GroupService {
 		Connection con = getConnection();
 		
 		RegionVO region = new GroupDao().searchRegion(con, rnCode);
-		
+		System.out.println("rn서비스" + rnCode);
 		if(region != null) {
 			commit(con);
 		} else {
@@ -90,7 +90,7 @@ public class GroupService {
 	}
 	
 	//동호회 입력내용 조회
-	public GroupVO selectOne(String groupCode) {
+	public GroupVO selectOne(int groupCode) {
 		Connection con = getConnection();
 		int result = 0;
 		
@@ -118,16 +118,16 @@ public class GroupService {
 		result1 = new GroupDao().updateThumbnailContent(con, group);
 		
 		if(result1 > 0) {
-			int groupCode = new GroupDao().selectCurrval(con);
+//			int groupCode = new GroupDao().selectCurrval(con);
 			
 			for(int i = 0; i < fileList.size(); i++) {
-				fileList.get(i).setGroupCode(groupCode);
+				fileList.get(i).setGroupCode(group.getGroupCode());
 //				group.setGroupCode(groupCode);
 				
 				result2 += new GroupDao().updateAttachment(con, fileList.get(i));
 			}
 			
-			System.out.println(groupCode);
+//			System.out.println(groupCode);
 		}
 		
 		if(result1 > 0 && result2 == fileList.size()) {
