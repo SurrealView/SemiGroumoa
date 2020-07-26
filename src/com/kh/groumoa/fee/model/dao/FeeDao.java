@@ -74,7 +74,7 @@ public class FeeDao {
 			pstmt.setInt(2, startRow);
 			pstmt.setInt(3, endRow);
 
-			System.out.println("startRow : "+startRow);
+			System.out.println("startRow : " + startRow);
 			System.out.println("endRow : " + endRow);
 			
 			rset = pstmt.executeQuery();
@@ -88,7 +88,7 @@ public class FeeDao {
 				f.setFeeCategory(rset.getString("FEE_CATEGORY"));
 				f.setDetail(rset.getString("DETAIL"));
 				f.setFee(rset.getString("FEE"));
-				f.setFeeDate(rset.getString("FEE_DATE"));
+				f.setFeeDate(rset.getString("FEE_DATE").substring(0, 10));
 				list.add(f);
 			}
 
@@ -101,6 +101,34 @@ public class FeeDao {
 		}
 
 		return list;
+	}
+
+	public int insertFee(Connection con, FeeVO fee) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+
+		String query = prop.getProperty("insertFee");
+
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, fee.getGroupCode());
+			pstmt.setInt(2, fee.getMemberCode());
+			pstmt.setString(3, fee.getFeeCategory());
+			pstmt.setString(4, fee.getFee());
+			pstmt.setString(5, fee.getDetail());
+			pstmt.setString(6, fee.getFeeDate());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+
+		return result;
 	}
 
 }

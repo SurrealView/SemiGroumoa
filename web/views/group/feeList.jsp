@@ -158,9 +158,9 @@
 		</div>
 		<br>
 		<hr id="division">
-		<input id="insertBtn" type="button" value="쓰기">
-		<!-- <span id="temp">* 게시판을 조회 및 수정하실 수 있습니다.</span> <br> -->
+		<button id="insertBtn" onclick="location.href='<%=request.getContextPath()%>/views/group/feeInsertForm.jsp'">쓰기</button>
 		<!-- 위 코드는 모임장일때만 작동하도록 함 -->
+		<br>
 		<br>
 		<!-- 게시판 관리일경우 -->
 		<div class="table-div">
@@ -231,6 +231,6 @@
 			</ul>
 		</div> --%>
 	</div>
-	<%@include file="../common/footer/footer.jsp"%>
+	<%@include file="../common/footer/newFooter.jsp"%>
 </body>
 </html>

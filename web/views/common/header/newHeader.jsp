@@ -22,7 +22,7 @@ body{
 	width: 100%;
 	height: 175px;
 	display: block;
-	background-color: white; 
+ 	background-color: white;
 }
 
 .logo_container {
@@ -32,8 +32,8 @@ body{
 }
 
 .logo_container img {
-	width: 130px;
 	height: 130px;
+	width: auto;
 	display: table-cell;
 	vertical-align: middle;
 	margin-top: 10px;
@@ -128,14 +128,15 @@ body{
 					<div class="logo_container">
 						<!-- <img src="../../../resources/image/logo_groumoa2.png"> -->
 						<a href="<%=request.getContextPath()%>"><img
-							src="/groumoa/resources/image/logo_groumoa2.png"></a>
+							src="/groumoa/resources/image/logo_groumoa3.png"></a>
 					</div>
 				</td>
 				<td rowspan="2" id="middle-td">
 					<form class="search-form"
 						action="<%=request.getContextPath()%>/search.gr" method="get">
-						<input type="text" placeholder="search" name="groupName">
-						<button>search</button>
+						<input type="text" placeholder="동호회 이름을 입력해주세요" name="groupName">
+						<button style="width:60px"><img
+							src="/groumoa/resources/image/search.png" style="width:20px; height:20px"></button>
 					</form>
 				</td>
 				<%

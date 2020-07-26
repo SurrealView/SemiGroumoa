@@ -57,10 +57,12 @@ public class InsertSchedulerServlet extends HttpServlet {
 		schedule.setSchDate(schDate);
 //		schedule.setWriterCode(writerCode);
 
+		int groupCode = 3;
+		
 		int result = new SchedulerService().insertSchedule(schedule);
 		System.out.println(schedule);
 		
-		ArrayList<SchedulerVO> list = new SchedulerService().selectSchedule() ;
+		ArrayList<SchedulerVO> list = new SchedulerService().selectScheduleList(groupCode) ;
 		
 		String page = "";
 		if (result > 0) {

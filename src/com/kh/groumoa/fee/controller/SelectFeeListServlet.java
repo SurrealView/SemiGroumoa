@@ -54,7 +54,7 @@ public class SelectFeeListServlet extends HttpServlet {
 		}
 		
 		//한 페이지에 보여질 목록 갯수
-		limit = 10;
+		limit = 15;
 		
 		//전체 목록 갯수를 조회
 		int listCount = new FeeService().getListCount(fee);
