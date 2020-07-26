@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.kh.groumoa.member.model.vo.MemberVO, java.util.*, com.kh.groumoa.common.*"%>
-<% ArrayList<MemberVO> list = (ArrayList<MemberVO>) request.getAttribute("list"); 
+    pageEncoding="UTF-8" import="com.kh.groumoa.member.model.vo.*, java.util.*, com.kh.groumoa.common.*"%>
+<% ArrayList<ManagerVO> list = (ArrayList<ManagerVO>) request.getAttribute("list"); 
 PageInfo pi = (PageInfo) request.getAttribute("pi");
 int listCount = pi.getTotalCount();
 int currentPage = pi.getCurrentPage();
@@ -68,13 +68,13 @@ int endPage = pi.getEndPage();
     	   </tr>
     	   </thead>
            <tbody>
-    	   <% for(MemberVO m : list) { %>
+    	   <% for(ManagerVO m : list) { %>
      	   <tr>
-       		 <td><input type="checkbox" name="code" onclick="but(this)" value="<%= m.getMemberCode() %>"></td>
-        	 <td><%= m.getUserName() %></td>
-             <td><%= m.getEmail() %></td>
-             <td><%= m.getEnrollDate() %></td>
-		     <td><%= m.getPostCode() %></td>
+       		 <td><input type="checkbox" name="code" onclick="but(this)" value="<%= m.getManagerCode() %>"></td>
+        	 <td><%= m.getManagerName() %></td>
+             <td><%= m.getManagerId() %></td>
+             <td><%= m.getManagerPwd() %></td>
+		     <td><%= m.getNoticeCode() %></td>
              <td><input type="checkbox"></td>
           </tr>
           <% } %>
@@ -83,12 +83,12 @@ int endPage = pi.getEndPage();
         
        
        <div class="pagingArea" align="center">
-			<button onclick="location.href='<%=request.getContextPath()%>/managerPpl.mn?currentPage=1'"><<</button>
+			<button onclick="location.href='<%=request.getContextPath()%>/managerLeader.mn?currentPage=1'"><<</button>
 			
 			<% if(currentPage <= 1) { %>
 			<button disabled><</button>
 			<% } else { %>
-			<button onclick="location.href='<%=request.getContextPath()%>/managerPpl.mn?currentPage=<%=currentPage - 1%>'"><</button>
+			<button onclick="location.href='<%=request.getContextPath()%>/managerLeader.mn?currentPage=<%=currentPage - 1%>'"><</button>
 			<% } %>
 			
 			<% for(int p = startPage; p <= endPage; p++) { 
@@ -96,7 +96,7 @@ int endPage = pi.getEndPage();
 			%>
 						<button disabled><%= p %></button>
 			<%      } else { %>
-						<button onclick="location.href='<%=request.getContextPath()%>/managerPpl.mn?currentPage=<%=p%>'"><%= p %></button>
+						<button onclick="location.href='<%=request.getContextPath()%>/managerLeader.mn?currentPage=<%=p%>'"><%= p %></button>
 			<%  
 			        }
 				}
@@ -105,10 +105,10 @@ int endPage = pi.getEndPage();
 			<% if(currentPage >= maxPage) { %>
 			<button disabled>></button>
 			<% } else { %>
-			<button onclick="location.href='<%=request.getContextPath()%>/managerPpl.mn?currentPage=<%=currentPage + 1%>'">></button>
+			<button onclick="location.href='<%=request.getContextPath()%>/managerLeader.mn?currentPage=<%=currentPage + 1%>'">></button>
 			<% } %>
 		
-			<button onclick="location.href='<%=request.getContextPath()%>/managerPpl.mn?currentPage=<%=maxPage%>'">>></button>
+			<button onclick="location.href='<%=request.getContextPath()%>/managerLeader.mn?currentPage=<%=maxPage%>'">>></button>
 			<br>
 			<div id="Btn">
 				<button id="detailBtn">정보확인</button>&nbsp;

@@ -344,5 +344,6 @@
         })
     </script> --%>
 </div>
+	<%@include file="../common/footer/newFooter.jsp" %>
 </body>
 </html>

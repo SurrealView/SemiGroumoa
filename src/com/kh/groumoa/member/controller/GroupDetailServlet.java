@@ -1,27 +1,27 @@
 package com.kh.groumoa.member.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.groumoa.member.model.service.MemberService;
-import com.kh.groumoa.member.model.vo.MemberVO;
+import com.kh.groumoa.group.model.dao.GroupDao;
+import com.kh.groumoa.group.model.service.GroupService;
+import com.kh.groumoa.group.model.vo.GroupVO;
 
 /**
- * Servlet implementation class ManagerDetailServlet
+ * Servlet implementation class GroupDetailServlet
  */
-@WebServlet("/detail.mn")
-public class MemberDetailServlet extends HttpServlet {
+@WebServlet("/detail.gd")
+public class GroupDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberDetailServlet() {
+    public GroupDetailServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,20 +37,20 @@ public class MemberDetailServlet extends HttpServlet {
 			nno = Integer.parseInt(num);
 		}
 		
-		MemberVO member = new MemberService().selectMember(nno);
-		MemberVO memberG = new MemberService().selectMemberG(nno);
+		GroupVO group = new GroupService().selectGroup(nno);
+		GroupVO groupD = new GroupService().selectGroupD(nno);
 		
 		String page = "";
-		if(member != null) {
-			page = "views/manager/m_managerInfo.jsp";
-			request.setAttribute("member", member);
-			request.setAttribute("memberG", memberG);
+		if(group != null) {
+			page = "views/manager/m_managerGroupDetail.jsp";
+			request.setAttribute("group", group);
+			request.setAttribute("groupD", groupD);
 		} else {
 			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "회원 상세 조회 실패!");
+			request.setAttribute("msg", "그룹 상세 조회 실패!");
 		}
-		
 		request.getRequestDispatcher(page).forward(request, response);
+		
 	}
 
 	/**

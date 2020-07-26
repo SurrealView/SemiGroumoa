@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<% String successCode = (String) request.getAttribute("successCode"); %>
+    pageEncoding="UTF-8" import="com.kh.groumoa.group.model.vo.*"%>
+<% String successCode = (String) request.getAttribute("successCode");
+   GroupVO selectedGroup = (GroupVO) request.getAttribute("selectGroup");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,6 +31,13 @@
 			case "insertBoard" :
 				successMessage = "게시판 작성에 성공하셨습니다.";
 				movePath = "<%=request.getContextPath()%>/selectList.bo";
+				break;
+				
+			case "insertGroup" :
+				successMessage = "동호회 개설에 성공하셨습니다.";
+				request.setAttribute("selectedGroup", selectedGroup);
+				movePath = "<%=request.getContextPath()%>/selectOne.gr";
+				break;
 			}
 			
 			alert(successMessage);
