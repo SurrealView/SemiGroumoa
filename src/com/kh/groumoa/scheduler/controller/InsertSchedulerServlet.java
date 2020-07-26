@@ -39,6 +39,7 @@ public class InsertSchedulerServlet extends HttpServlet {
 		String schDetail = request.getParameter("schDetail");
 		String schDate = request.getParameter("schDate");
 //		String groupCode = request.getParameter("groupCode");
+		int groupCode = 3; //테스트용
 //		int writerCode = Integer.parseInt(request.getParameter("writerCode"));
 //		char status = request.getParameter("status").charAt(0);
 
@@ -57,7 +58,6 @@ public class InsertSchedulerServlet extends HttpServlet {
 		schedule.setSchDate(schDate);
 //		schedule.setWriterCode(writerCode);
 
-		int groupCode = 3;
 		
 		int result = new SchedulerService().insertSchedule(schedule);
 		System.out.println(schedule);

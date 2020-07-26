@@ -15,16 +15,16 @@ import com.kh.groumoa.fee.model.vo.FeeVO;
 import com.kh.groumoa.group.model.vo.GroupVO;
 
 /**
- * Servlet implementation class SelectFeeListServlet
+ * Servlet implementation class SelectFeeListLeaderServlet
  */
-@WebServlet("/selectList.fee")
-public class SelectFeeListServlet extends HttpServlet {
+@WebServlet("/selectListAsLeader.fee")
+public class SelectFeeListLeaderServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SelectFeeListServlet() {
+    public SelectFeeListLeaderServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,7 +33,6 @@ public class SelectFeeListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		int currentPage; //현제 페이지를 표시할 변수
 		int limit;		 //한 페이지에 게시글이 몇 개 보여질 것인지 표시
 		int maxPage;	 //전체 페이지에서 가장 마지막 페이지
@@ -78,11 +77,10 @@ public class SelectFeeListServlet extends HttpServlet {
 		
 		PageInfo pi = new PageInfo(limit, currentPage, maxPage, startPage, endPage, listCount);
 		ArrayList<FeeVO> list = new FeeService().selectList(pi, fee);
-		System.out.println(pi);
-		System.out.println("testFeeList : " + list);
+
 		String page = "";
 		if(list != null) {
-			page = "views/group/feeList.jsp";
+			page = "views/group/feeListManagement.jsp";
 			request.setAttribute("list", list);
 			request.setAttribute("pi", pi);
 		} else {
