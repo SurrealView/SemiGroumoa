@@ -403,4 +403,84 @@ public class MemberDao {
 
 	}
 
+	public MemberVO searchId(Connection con, MemberVO requestMember) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		MemberVO responseMember = new MemberVO();
+		
+		String query = prop.getProperty("searchId");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, requestMember.getUserName());
+			pstmt.setString(2, requestMember.getPhone());
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				responseMember.setEmail(rset.getString("EMAIL"));
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+				
+		return responseMember;
+	}
+	
+	public MemberVO searchPwd(Connection con, MemberVO requestMember) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		MemberVO responseMember = null;
+		
+		String query = prop.getProperty("searchPwd");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, requestMember.getEmail());
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				responseMember = new MemberVO();
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		
+		
+		return responseMember;
+	}
+
+	public int updateMemberPwd(Connection con, String email, String newPwd) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("updateMemberPwd");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, newPwd);
+			pstmt.setString(2, email);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 }

@@ -22,13 +22,19 @@
 				break;
 				
 			case "updateMember" :
-				successMessage = "회원 수정에 성공하셨습니다.";
+				successMessage = "회원 수정에 성공하셨습니다!";
 				movePath = "<%=request.getContextPath()%>/views/member/memberUpdateForm.jsp";
 				break;
 				
 			case "insertBoard" :
-				successMessage = "게시판 작성에 성공하셨습니다.";
+				successMessage = "게시판 작성에 성공하셨습니다!";
 				movePath = "<%=request.getContextPath()%>/selectList.bo";
+				break;
+				
+			case "deleteBoard" :
+				successMessage = "게시판 삭제에 성공하셨습니다!";
+				movePath = "<%=request.getContextPath()%>/selectListAsLeader.bo";
+				break;
 			}
 			
 			alert(successMessage);

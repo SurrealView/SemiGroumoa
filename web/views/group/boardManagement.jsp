@@ -118,11 +118,12 @@ int endPage = pi.getEndPage();
 		
 		<br><br><!-- 게시판 관리일경우 -->
 		<div class="table-div">
-			<h2 align="center">게시판</h2>         
+			<h2 align="center">게시판</h2>  
+			<form action="<%=request.getContextPath() %>/delete.bo" method="post" id="deletePost">
    			<table class="table table-striped boardTable" id="listArea">
                   <thead>
                     <tr>
-                      <th><input type="checkbox"></th>
+                      <th><input type="checkbox" id="selectAll"></th>
                       <th>글번호</th>
                       <th>분류</th>
                       <th>작성자</th>
@@ -132,10 +133,10 @@ int endPage = pi.getEndPage();
                     </tr>
                   </thead>
                   <tbody>
-                     <% for(BoardVO b : list) { %>
+                     <% for(BoardVO b : list) { %>      
 					<tr>
-						<input type="hidden" value="<%=b.getPostCode() %>">
-						<td><input type="checkbox"></td>
+						<input type="hidden" value="<%=b.getPostCode() %>" id="postCode">
+						<td><input type="checkbox" id="postItem"></td>
 						<td class="postItem"><%= b.getPostCode() %></td>
 						<td class="postItem"><%= b.getCategoryName() %></td>
 						<td class="postItem"><%= b.getMemberName() %></td>
@@ -147,6 +148,7 @@ int endPage = pi.getEndPage();
                     
                   </tbody>
                 </table>
+                </form>
                 </div>
                 <!-- 게시판 관리일경우 끝 -->
                 <!-- 댓글 관리일경우 --><!--  
@@ -242,10 +244,10 @@ int endPage = pi.getEndPage();
 		
 				
 				<div class="deleteBtn" style="float:left;">
-					<button class="">삭제</button>
+					<button class="delete">삭제</button>
 				</div>
 				<div class="writeBtn" style="float:left">
-					<button class="">작성하기</button>
+					<button class="" onclick="writePost();">작성하기</button>
 				</div>
 				<br>
                 <div class="searchbox" id="searchbox">
@@ -269,6 +271,13 @@ int endPage = pi.getEndPage();
 				var num = $(this).parent().children("input").val();
 				location.href="<%=request.getContextPath()%>/selectOneAsLeader.bo?num=" + num;
 			});
+			
+			$("#selectAll").click(function(){
+		        $("input[type=checkbox]").prop('checked', $(this).prop('checked'));
+
+			});
+			
+			
 		});
 		
 		
@@ -297,6 +306,26 @@ int endPage = pi.getEndPage();
 				$(".searchForm").submit();
 			}
 		}
+		
+		$(function(){
+			$(".delete").click(function(){
+				var postCode = [];
+				$.each($("#postItem:checked").parent().prev(), function(){
+					postCode.push($(this).val());
+					$(this).attr("name", "postCode");
+				});
+				
+				if(window.confirm('정말로 해당 게시물을 삭제하시겠습니까?')) {
+					$("#deletePost").submit();
+				}
+				
+			});
+		});
+		
+		function writePost() {
+			location.href='<%=request.getContextPath() %>/views/group/boardWrite.jsp';
+		}
+		
 		
 		</script>
 		<!-- footer 추가할것 -->

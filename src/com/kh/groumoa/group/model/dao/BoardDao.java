@@ -408,5 +408,28 @@ private Properties prop = new Properties();
 		
 		return list;
 	}
+	
+	//게시물 낱개 삭제
+	public int deleteBoard(Connection con, BoardVO boardVO) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("deleteBoard");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, boardVO.getPostCode());
+			pstmt.setInt(2, boardVO.getGroupCode());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
 
 }
