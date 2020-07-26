@@ -35,6 +35,10 @@
 				successMessage = "게시판 삭제에 성공하셨습니다!";
 				movePath = "<%=request.getContextPath()%>/selectListAsLeader.bo";
 				break;
+			case "deleteFee" :
+				successMessage = "회비 내역 삭제에 성공하셨습니다!";
+				movePath = "<%=request.getContextPath()%>/selectListAsLeader.fee";
+				break;
 			}
 			
 			alert(successMessage);

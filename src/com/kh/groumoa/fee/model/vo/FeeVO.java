@@ -1,6 +1,7 @@
 package com.kh.groumoa.fee.model.vo;
 
 public class FeeVO {
+	private int feeCode;
 	private int groupCode;
 	private int memberCode;
 	private String feeCategory;
@@ -11,14 +12,24 @@ public class FeeVO {
 	
 	public FeeVO() { }
 
-	public FeeVO(int groupCode, int memberCode, String feeCategory, String fee, String detail, String feeDate) {
+	public FeeVO(int feeCode,int groupCode, int memberCode, String feeCategory, String fee, String detail, String feeDate) {
 		super();
+		this.feeCode = feeCode;
 		this.groupCode = groupCode;
 		this.memberCode = memberCode;
 		this.feeCategory = feeCategory;
 		this.fee = fee;
 		this.detail = detail;
 		this.feeDate = feeDate;
+	}
+	
+
+	public int getFeeCode() {
+		return feeCode;
+	}
+
+	public void setFeeCode(int feeCode) {
+		this.feeCode = feeCode;
 	}
 
 	public String getFee() {
@@ -68,11 +79,12 @@ public class FeeVO {
 	public void setDetail(String detail) {
 		this.detail = detail;
 	}
+	
 
 	@Override
 	public String toString() {
-		return "FeeVO [groupCode=" + groupCode + ", memberCode=" + memberCode + ", feeCategory=" + feeCategory
-				+ ", fee=" + fee + ", detail=" + detail + ", feeDate=" + feeDate + "]";
+		return "FeeVO [feeCode=" + feeCode + ", groupCode=" + groupCode + ", memberCode=" + memberCode
+				+ ", feeCategory=" + feeCategory + ", fee=" + fee + ", detail=" + detail + ", feeDate=" + feeDate + "]";
 	}
 
 	

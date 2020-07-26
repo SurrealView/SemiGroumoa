@@ -123,18 +123,16 @@
 	margin-left: 25px;
 }
 
-.deleteBtn {
-	border-radius: 30px;
-	float: left;
-	margin-left: 30px;
-	margin-top: -45px;
+#deleteBtn {
+	width: 40px;
+	height: 30px;
+	border-radius: 5px;
+	background: white;
+	border: 1px solid lightgray;
+	margin-left: 25px;
 }
 
-.writeBtn {
-	border-radius: 30px;
-	margin-left: 90px;
-	margin-top: -45px;
-}
+
 
 .pageBtn{
 	border-radius: 5px;
@@ -147,23 +145,23 @@
 </head>
 <body>
 	<%@include file="../common/header/newHeader.jsp"%>
-	<%@include file="subMenubar_myGroup.jsp"%>
+	<%@include file="subMenubar.jsp"%>
 
 	<div class="content">
-		<p align="right"
-			style="font-size: 10px; padding-right: 25px; padding-top: 15px;">개인정보취급방침에
-			따라 최근 5년간의 내역이 제공됩니다.</p>
 		<div id="sub-title">
-			<span style="font-size: 40px">회비 내역</span>
+		<br>
+			<span style="font-size: 40px">회비 관리</span>
 		</div>
 		<br>
 		<br>
 		<br>
 		<!-- 게시판 관리일경우 -->
 		<div class="table-div">
+		<form action="<%=request.getContextPath() %>/delete.fee" method="post" id="deleteFee">
 			<table class="table table-striped">
 				<thead>
 					<tr>
+						<th><input type="checkbox" id="selectAllItems"></th>
 						<th>종류</th>
 						<th>결제금액</th>
 						<th>상세설명</th>
@@ -173,7 +171,8 @@
 				<tbody>
 					<% for(FeeVO f : list) { %>
 					<tr>
-						<%-- <input type="hidden" value="<%=f.getFeeCode() %>"> --%>
+						<input type="hidden" value="<%= f.getFeeCode() %>">
+						<td><input type="checkbox" id="feeElement"></td>
 						<td><%= f.getFeeCategory() %></td>
 						<td><%= f.getFee() %></td>
 						<td><%= f.getDetail() %></td>
@@ -182,8 +181,11 @@
 				<% } %>
 				</tbody>
 			</table>
+			</form>
 		</div>
-
+		<button id="deleteBtn">삭제</button>
+		<button id="insertBtn" style="float:right; margin-right: 25px" onclick="location.href='<%=request.getContextPath()%>/views/group/feeInsertForm.jsp'">쓰기</button>
+		<!-- 위 코드는 모임장일때만 작동하도록 함 -->
 
 		<br>
 				<div class="pagingArea" align="center">
@@ -214,20 +216,33 @@
 			
 			<button class="pageBtn" onclick="location.href='<%=request.getContextPath()%>/selectList.fee?currentPage=<%=maxPage%>'">>></button>
 		</div>
-		<%-- <div class="pagination-div">
-			<ul class="pagination">
-				<li class="page-item"><a class="page-link" href="'<%=request.getContextPath()%>/selectList.fee?currentPage=1'"><<</a></li>
-				<li class="page-item"><a class="page-link" href="'<%=request.getContextPath() %>/selectList.bo?currentPage=<%=currentPage - 1 %>'"><</a></li>
-				<li class="page-item"><a class="page-link" href="#">1</a></li>
-				<li class="page-item active"><a class="page-link" href="#">2</a></li>
-				<li class="page-item"><a class="page-link" href="#">3</a></li>
-				<li class="page-item"><a class="page-link" href="#">4</a></li>
-				<li class="page-item"><a class="page-link" href="#">5</a></li>
-				<li class="page-item"><a class="page-link" href="#">></a></li>
-				<li class="page-item"><a class="page-link" href="#">>></a></li>
-			</ul>
-		</div> --%>
+		
+
 	</div>
+	<script>
+	$(function(){
+		
+		$("#selectAllItems").click(function(){
+	        $("input[type=checkbox]").prop('checked', $(this).prop('checked'));
+
+		});
+		
+		$("#deleteBtn").click(function(){
+			var feeCode = [];
+			$.each($("#feeElement:checked").parent().prev(), function(){
+				feeCode.push($(this).val());
+				$(this).attr("name", "feeCode");
+			});
+			
+			if(window.confirm('정말로 해당 게시물을 삭제하시겠습니까?')) {
+				$("#deleteFee").submit();
+			}
+			
+		});
+		
+		
+	});
+	</script>
 	<%@include file="../common/footer/newFooter.jsp"%>
 </body>
 </html>
