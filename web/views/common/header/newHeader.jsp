@@ -22,7 +22,7 @@ body{
 	width: 100%;
 	height: 175px;
 	display: block;
-	background-color: white;
+	background-color: white; 
 }
 
 .logo_container {
@@ -169,12 +169,12 @@ body{
 				<%
 					} else {
 				%>
-				<td class="sub-menu"><a href="/groumoa/views/member/login.jsp"><img
-							class="sub-icons" src="/groumoa/resources/image/personal1.png"><br>마이페이지</a></td>
-				<td class="sub-menu"><a href="/groumoa/views/member/login.jsp"><img
-							class="sub-icons" src="/groumoa/resources/image/groupadd1.png"><br>모임개설</a></td>
-				<td class="sub-menu"><a href="/groumoa/views/member/login.jsp"><img
-							class="sub-icons" src="/groumoa/resources/image/groupmanage.png"><br>모임관리</a></td>
+				<td class="sub-menu"><a href="<%=request.getContextPath()%>/views/member/login.jsp"><img
+							class="sub-icons" src="<%=request.getContextPath()%>/resources/image/personal1.png"><br>마이페이지</a></td>
+				<td class="sub-menu"><a href="<%=request.getContextPath()%>/views/member/login.jsp"><img
+							class="sub-icons" src="<%=request.getContextPath()%>/resources/image/groupadd1.png"><br>모임개설</a></td>
+				<td class="sub-menu"><a href="<%=request.getContextPath()%>/views/member/login.jsp"><img
+							class="sub-icons" src="<%=request.getContextPath()%>/resources/image/groupmanage.png"><br>모임관리</a></td>
 				<%
 					}
 				%>

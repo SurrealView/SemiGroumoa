@@ -3,20 +3,30 @@ package com.kh.groumoa.fee.model.vo;
 public class FeeVO {
 	private int groupCode;
 	private int memberCode;
-	private String feeDate;
 	private String feeCategory;
+	private String fee;
 	private String detail;
+	private String feeDate;
 	//-- 단일 TB_FEE에 있는 변수들.
 	
 	public FeeVO() { }
 
-	public FeeVO(int groupCode, int memberCode, String feeDate, String feeCategory, String detail) {
+	public FeeVO(int groupCode, int memberCode, String feeCategory, String fee, String detail, String feeDate) {
 		super();
 		this.groupCode = groupCode;
 		this.memberCode = memberCode;
-		this.feeDate = feeDate;
 		this.feeCategory = feeCategory;
+		this.fee = fee;
 		this.detail = detail;
+		this.feeDate = feeDate;
+	}
+
+	public String getFee() {
+		return fee;
+	}
+
+	public void setFee(String fee) {
+		this.fee = fee;
 	}
 
 	public int getGroupCode() {
@@ -61,7 +71,9 @@ public class FeeVO {
 
 	@Override
 	public String toString() {
-		return "FeeVO [groupCode=" + groupCode + ", memberCode=" + memberCode + ", feeDate=" + feeDate
-				+ ", feeCategory=" + feeCategory + ", detail=" + detail + "]";
+		return "FeeVO [groupCode=" + groupCode + ", memberCode=" + memberCode + ", feeCategory=" + feeCategory
+				+ ", fee=" + fee + ", detail=" + detail + ", feeDate=" + feeDate + "]";
 	}
+
+	
 }
