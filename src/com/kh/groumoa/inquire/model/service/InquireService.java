@@ -4,7 +4,7 @@ import java.sql.Connection;
 
 import com.kh.groumoa.inquire.model.dao.InquireDao;
 import com.kh.groumoa.inquire.model.vo.InquireVO;
-import static com.kh.groumoa.common.JDBCTemplate.getConnection;
+import static com.kh.groumoa.common.JDBCTemplate.*;
 
 
 public class InquireService {
@@ -16,7 +16,14 @@ public class InquireService {
 		
 		int insertInquire = new InquireDao().insertInquire(con, requestInquire);
 		
-		return 0;
+		if(result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		return result;
+		
 	}
 	
 
