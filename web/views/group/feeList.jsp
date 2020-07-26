@@ -1,5 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"
+	import="com.kh.groumoa.fee.model.vo.FeeVO, java.util.ArrayList, com.kh.groumoa.common.*"%>
+<%
+	ArrayList<FeeVO> list = (ArrayList<FeeVO>) request.getAttribute("list");
+	PageInfo pi = (PageInfo) request.getAttribute("pi");
+	int listCount = pi.getTotalCount();
+	int currentPage = pi.getCurrentPage();
+	int maxPage = pi.getMaxPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -102,7 +112,7 @@
 }
 
 #division {
-	width:950px;
+	width: 950px;
 }
 
 #insertBtn {
@@ -150,7 +160,6 @@
 			<table class="table table-striped">
 				<thead>
 					<tr>
-						<th>번호</th>
 						<th>종류</th>
 						<th>결제금액</th>
 						<th>상세설명</th>
@@ -158,77 +167,15 @@
 					</tr>
 				</thead>
 				<tbody>
+					<% for(FeeVO f : list) { %>
 					<tr>
-						<td>1</td>
-						<td>입금</td>
-						<td>65,000</td>
-						<td>김형진</td>
-						<td>2020-07-05</td>
+						<%-- <input type="hidden" value="<%=f.getFeeCode() %>"> --%>
+						<td><%= f.getFeeCategory() %></td>
+						<td><%= f.getFee() %></td>
+						<td><%= f.getDetail() %></td>
+						<td><%= f.getFeeDate() %></td>
 					</tr>
-					<tr>
-						<td>1</td>
-						<td>출금</td>
-						<td>65,000</td>
-						<td>열승열</td>
-						<td>2020-07-05</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>입금</td>
-						<td>65,000</td>
-						<td>김형진</td>
-						<td>2020-07-05</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>출금</td>
-						<td>65,000</td>
-						<td>열승열</td>
-						<td>2020-07-05</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>입금</td>
-						<td>65,000</td>
-						<td>김형진</td>
-						<td>2020-07-05</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>출금</td>
-						<td>65,000</td>
-						<td>열승열</td>
-						<td>2020-07-05</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>입금</td>
-						<td>65,000</td>
-						<td>김형진</td>
-						<td>2020-07-05</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>출금</td>
-						<td>65,000</td>
-						<td>열승열</td>
-						<td>2020-07-05</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>입금</td>
-						<td>65,000</td>
-						<td>김형진</td>
-						<td>2020-07-05</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>출금</td>
-						<td>65,000</td>
-						<td>열승열</td>
-						<td>2020-07-05</td>
-					</tr>
-
+				<% } %>
 				</tbody>
 			</table>
 		</div>
