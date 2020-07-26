@@ -47,13 +47,14 @@ public class GroupDao {
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, group.getGroupName());
-			pstmt.setString(2, group.getRnCode());
-			pstmt.setString(3, group.getInterestCode());
-			pstmt.setString(4, group.getOpenYn());
-			pstmt.setString(5, group.getNickNameyn());
-			pstmt.setString(6, group.getGroupRule());
-			pstmt.setString(7, group.getDescription());
-			
+			pstmt.setInt(2, group.getGroupLeaderCode());
+			pstmt.setString(3, group.getRnCode());
+			pstmt.setString(4, group.getInterestCode());
+			pstmt.setString(5, group.getOpenYn());
+			pstmt.setString(6, group.getNickNameyn());
+			pstmt.setString(7, group.getGroupRule());
+			pstmt.setString(8, group.getDescription());
+	
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
@@ -138,11 +139,11 @@ public class GroupDao {
 			
 			if(rset.next()) {
 				region = new RegionVO();
-				region.setRnCode("RN_CODE");
+				region.setRnCode(rset.getString("RN_CODE"));
 				region.setRegionName(rset.getString("REGION_NAME"));
 				region.setRegionSpecific(rset.getString("REGION_SPECIFIC"));
 			}
-			
+			System.out.println("dao" + region);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -208,7 +209,7 @@ public class GroupDao {
 		return result;
 	}
 	
-	public GroupVO selectGroup(Connection con, String groupCode) {
+	public GroupVO selectGroup(Connection con, int groupCode) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		GroupVO group = null;
@@ -217,7 +218,7 @@ public class GroupDao {
 		System.out.println(groupCode);
 		try {
 			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, groupCode);
+			pstmt.setInt(1, groupCode);
 			
 			rset = pstmt.executeQuery();
 			
@@ -642,7 +643,7 @@ public class GroupDao {
 				g.setGroupLeaderCode(rset.getInt("GROUP_LEADER_CODE"));
 				g.setOpenDate(rset.getDate("OPEN_DATE"));
 				g.setInterest(rset.getString("INTEREST"));
-				g.setMemberCount(rset.getInt("POST"));
+				g.setMemberCount(rset.getInt("MEMBER_COUNT"));
 				g.setPostCount(rset.getInt("POST"));
 
 				list.add(g);

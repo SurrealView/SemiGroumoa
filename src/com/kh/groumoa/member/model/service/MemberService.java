@@ -169,8 +169,42 @@ public class MemberService {
 		
 		
 		return result;
+  }		
+
+	public int getGroupLeaderCount() {
+		Connection con = getConnection();
+		int result = new MemberDao().getGroupLeaderCount(con);
 		
+		close(con);
 		
+		return result;
+	}
+
+	public ArrayList<MemberVO> selectGroupLeaderList(PageInfo pi) {
+		Connection con = getConnection();
 		
+		ArrayList<MemberVO> list = new MemberDao().selectGroupLeaderList(con,pi);
+		
+		close(con);
+		
+		return list;
+	}
+
+	public int getGroupMemberCount() {
+		Connection con = getConnection();
+		int result = new MemberDao().selectGroupMemberList(con);
+		
+		close(con);
+		
+		return result;
+	}
+
+	public ArrayList<MemberVO> selectGroupMemberList(PageInfo pi) {
+		Connection con = getConnection();
+		ArrayList<MemberVO> list = new MemberDao().selectGroupMemberList(con, pi);
+		
+		close(con);
+		
+		return list;
 	}
 }

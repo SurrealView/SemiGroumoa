@@ -48,6 +48,15 @@ public class InsertQnaServlet extends HttpServlet {
 
 		int result = new InquireService().insertInquire(requestInquire);
 
+		String page = "";
+
+		if(result > 0) {
+			response.sendRedirect(request.getContextPath() + "/insert.qa");
+		} else {
+			request.setAttribute("msg", "공지사항 등록 실패!");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+		}
+
 	}
 
 	/**

@@ -5,7 +5,11 @@
 <head>
 <meta charset="UTF-8" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/groumoa/resources/css/menubar_style.css">
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
 <style>
+	body{
+	font-family: 'Do Hyeon', sans-serif;
+    }
   .section {
     width: 930px;
     height: 680px;
@@ -107,9 +111,13 @@
 		location.href="<%=request.getContextPath() %>/managerLeader.mn";
 	}
 	
-	function groupLeader(){}
+	function groupLeader(){
+		location.href="<%=request.getContextPath() %>/managerGroupLeader.mn";
+	}
 	
-	function member(){}
+	function member(){
+		location.href="<%=request.getContextPath() %>/managerGroupMember.mn";
+	}
 	
 	function everyGroup(){
 		location.href="<%=request.getContextPath() %>/groupList.gp";

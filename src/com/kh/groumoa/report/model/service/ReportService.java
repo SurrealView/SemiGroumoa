@@ -4,6 +4,7 @@ import static com.kh.groumoa.common.CustomUtil.inst;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.kh.groumoa.common.PageInfo;
 import com.kh.groumoa.common.model.vo.AttachmentVo;
@@ -26,6 +27,7 @@ public class ReportService {
 			
 			for(int i = 0; i < attachList.size(); i++) {
 				//리포트 아이디 추가 부분 필요.
+				attachList.get(i).setReportCode(reId);
 				result += rd.insertAttach(attachList.get(i));
 			}			
 		}
@@ -69,6 +71,30 @@ public class ReportService {
 		inst().closeCon();
 		
 		return reList;
-	}	
+	}
+
+	public HashMap<String, Object> selectFileMap(String reId) {
+		HashMap<String, Object> hmap = null;
+		
+		inst().setProp("/sql/driver.properties");		
+		Connection con = inst().getCon("url", "user", "password", "driver");
+		
+		ReportDao rd = new ReportDao();
+		
+		ReportVo re = rd.selectOneReport(reId);
+		
+		ArrayList<AttachmentVo> list = rd.selectFileList(reId);
+		
+		hmap = new HashMap<>();
+		
+		hmap.put("report", re);
+		hmap.put("attach", list);
+		
+		inst().closeCon();
+		
+		return hmap;
+	}
+
+	
 
 }

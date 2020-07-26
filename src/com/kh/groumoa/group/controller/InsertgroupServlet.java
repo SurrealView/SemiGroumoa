@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
-import java.util.GregorianCalendar;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,7 +17,7 @@ import com.kh.groumoa.common.MyFileRenamePolicy;
 import com.kh.groumoa.group.model.service.GroupService;
 import com.kh.groumoa.group.model.vo.Attachment;
 import com.kh.groumoa.group.model.vo.GroupVO;
-import com.kh.groumoa.member.model.vo.MemberInterestVO;
+import com.kh.groumoa.member.model.vo.MemberVO;
 import com.kh.groumoa.member.model.vo.RegionVO;
 import com.oreilly.servlet.MultipartRequest;
 
@@ -43,8 +42,10 @@ public class InsertgroupServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if(ServletFileUpload.isMultipartContent(request)) {
 			int maxSize = 1024 * 1024 * 10;
-	         
-	         String root = request.getSession().getServletContext().getRealPath("/");
+	        MemberVO loginUser = (MemberVO) request.getSession().getAttribute("loginUser");
+	        int groupLeaderCode = loginUser.getMemberCode();
+	        
+	        String root = request.getSession().getServletContext().getRealPath("/");
 	         
 	         String savePath = root + "thumbnail_uploadFiles/";
 	         
@@ -61,8 +62,8 @@ public class InsertgroupServlet extends HttpServlet {
 	            saveFiles.add(multiRequest.getFilesystemName(name));
 	            originFiles.add(multiRequest.getOriginalFileName(name));
 	         }
-			/*
-	        int groupCode = Integer.parseInt(multiRequest.getParameter("groupCode"));*/
+	        
+	     /*   String groupCode = multiRequest.getParameter("groupCode");*/ 
 			String rnCode = multiRequest.getParameter("rnCode");
 			String name = multiRequest.getParameter("groupName");
 			String description = multiRequest.getParameter("description");
@@ -92,9 +93,10 @@ public class InsertgroupServlet extends HttpServlet {
 			}  */
 		
 			
-			GroupVO group = new GroupVO();/*
-			group.setGroupCode(groupCode);*/
+			GroupVO group = new GroupVO();
+		/*	group.setGroupCode(Integer.parseInt(groupCode));*/
 			group.setGroupName(name);
+			group.setGroupLeaderCode(groupLeaderCode);
 			group.setRnCode(rnCode);
 			group.setInterestCode(interest);
 			group.setNickNameyn(nickNameyn);
@@ -107,7 +109,7 @@ public class InsertgroupServlet extends HttpServlet {
 			region.setRegionName(regionName);
 			region.setRegionSpecific(regionSpecific);
 			
-			
+			System.out.println("테스트1" + rnCode);
 			ArrayList<Attachment> fileList = new ArrayList<>();
 			for(int  i = originFiles.size() - 1; i >= 0; i--) {
 				Attachment at = new Attachment();
@@ -125,26 +127,19 @@ public class InsertgroupServlet extends HttpServlet {
 				fileList.add(at);
 			}
 			
-			System.out.println("fileList" + fileList);
-				
 			int result = new GroupService().insertGroup(group, fileList);
-			System.out.println("servlet" + result);
 			
-/*			GroupVO selectGroup = new GroupService().selectOne(groupCode);
-			System.out.println(selectGroup);*/
-			
+			GroupVO selectGroup = new GroupService().selectOne(group.getGroupCode());
+			System.out.println("지역코드" + rnCode);
 			RegionVO regionSearch = new GroupService().searchRegion(rnCode);
-			System.out.println(regionSearch);
-			
+			System.out.println("테스트2"+regionSearch);
 			String page = "";
 			if(result > 0) {
 				page = "views/group/groupUpdate.jsp";
 				request.setAttribute("group", group);
 				request.setAttribute("fileList", fileList);
 				request.setAttribute("regionSearch", regionSearch);
-  /*			request.setAttribute("selectGroup", selectGroup);*/
-				System.out.println(group);
-				System.out.println(fileList);
+				request.setAttribute("selectGroup", selectGroup);
 /*				response.sendRedirect(request.getContextPath() + "/views/group/groupUpdate.jsp");
 */			} else {
 				for(int i = 0; i < saveFiles.size(); i++) {
