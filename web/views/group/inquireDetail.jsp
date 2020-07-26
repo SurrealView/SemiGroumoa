@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="com.kh.groumoa.common.model.vo.*, com.kh.groumoa.inquire.model.vo.*,  java.util.*"%>
+	<%
+	InquireVO inquire = (InquireVO) request.getAttribute("inquire");
+	ArrayList<AttachmentVo> list = (ArrayList<AttachmentVo>) request.getAttribute("fileList");
+	int idx = 0;
+	AttachmentVo attach = list.get(idx);
+	
+	String fileList = "";
+		
+%>
 	
 <!DOCTYPE html>
 <html>
@@ -115,15 +124,15 @@
     <script>
         function uploadFile(){
             //alert("경고!");
-            $("#notice_upload").click();
+            $("#inquire_upload").click();
 
-            $("#notice_upload").change(function(){
-                $(".file_path").val($("#notice_upload").val());
+            $("#inquire_upload").change(function(){
+                $(".file_path").val($("#inquire_upload").val());
             });
         }
 
         $(function() {
-            $(".file_path").val($("#notice_upload").val());
+            $(".file_path").val($("#inquire_upload").val());
             
 /*             var txtArea = $("textArea");            
             var selectPos = txtArea.prop("selectionStart"); */

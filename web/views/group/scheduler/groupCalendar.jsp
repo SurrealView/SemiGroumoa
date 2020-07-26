@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-
+	pageEncoding="UTF-8"
+	import="com.kh.groumoa.scheduler.model.vo.SchedulerVO, java.util.ArrayList"%>
+<%
+	ArrayList<SchedulerVO> list = (ArrayList<SchedulerVO>) request.getAttribute("list");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,13 +17,13 @@
 <link href='../../../resources/fullcalendar/packages/list/main.min.css'
 	rel='stylesheet' />
 <!-- 테마 적용을 위한 부트스트랩 v4.0 -->
-<!-- <link
+<link
 	href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'
-	rel='stylesheet' /> -->
-<!-- <link href='https://use.fontawesome.com/releases/v5.0.6/css/all.css'
-	rel='stylesheet'> -->
-<!-- <link href='../../../resources/fullcalendar/packages/bootstrap/main.css'
-	rel='stylesheet' /> -->
+	rel='stylesheet' />
+<link href='https://use.fontawesome.com/releases/v5.0.6/css/all.css'
+	rel='stylesheet'>
+<link href='../../../resources/fullcalendar/packages/bootstrap/main.css'
+	rel='stylesheet' />
 <!-- bootstrap link end -->
 
 
@@ -37,18 +40,25 @@
 <script src='../../../resources/fullcalendar/packages/bootstrap/main.js'></script>
 
 <!-- popper.js 사용을 위한 jquery -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+	crossorigin="anonymous"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+	crossorigin="anonymous"></script>
 
 <script>
 	document.addEventListener('DOMContentLoaded', function() {
 		var calendarEl = document.getElementById('calendar');
-
 		var calendar = new FullCalendar.Calendar(calendarEl, {
 			/* dateClick : function() {
 				alert('a day has been clicked!');
-			}, */ 
+			}, */
 			plugins : [ 'dayGrid', 'timeGrid', 'list', 'interaction',
 					'bootstrap' ],
 			/* themeSystem : 'bootstrap', */
@@ -79,14 +89,26 @@
 			    })
 			}, */
 			events : [ 
-				{
-				id : '0000001',
-				title : '모임회',
-				start : '2020-07-25',
-				end : '2019-07-25',
-				description : 'event no.1'
-			} 
-				],
+			<% for(int i = 0; i < list.size(); i++) { 
+				SchedulerVO schedule = (SchedulerVO)list.get(i);
+				System.out.println(schedule);
+				System.out.println(schedule.getSchTitle());
+				System.out.println(schedule.getSchDate());
+				System.out.println(schedule.getSchDetail());
+				System.out.println();
+			%>
+			{
+				title : '<%=schedule.getSchTitle()%>',
+				start : '<%=schedule.getSchDate()%>',
+				description : '<%=schedule.getSchDetail()%>'
+			},
+			<% } %>
+			{
+				title : 'default',
+				start : '2019-01-01',
+				description : 'defualt'
+			}
+			],
 			dateClick : function(info) {
 				alert('Clicked on: ' + info.dateStr);
 				alert('Coordinates: ' + info.jsEvent.pageX + ','
@@ -94,13 +116,12 @@
 				alert('Current view: ' + info.view.type);
 			},
 			eventClick : function(info) {
-				alert('2020-07-25 오루 2시에 강남역 10번 출구로');
+				alert('클릭');
 				// 클릭시 해당 일자 배경색 바꿈
 				// info.dayEl.style.backgroundColor = 'magenta';
 			}
 		});
 		calendar.render();
-
 	});
 </script>
 <style>
@@ -133,7 +154,7 @@
 </head>
 <body>
 
-	<%@include file="/views/common/header/newHeader.jsp" %>
+	<%@include file="/views/common/header/newHeader.jsp"%>
 	<%@include file="../subMenubar.jsp"%>
 	<div id="outer">
 		<!-- 이 밖을 1000px로 감싼다. -->
@@ -143,14 +164,16 @@
 			<div id='calendar'></div>
 		</div>
 	</div>
-	<%@include file="/views/common/footer/newFooter.jsp" %>
-	<script>
-		/* 		$(function() {
-		 calendar.changeView('timeGrid', {
-		 start : '2020-07-01',
-		 end : '2020-07-05'
-		 });
-		 }); */
-	</script>
+	<%@include file="/views/common/footer/newFooter.jsp"%>
+<!-- 	<script>
+		(function() {
+			calendar.addEvent(event[{
+				title : '모임회',
+				start : '2020-07-19',
+				description : 'event no.3'
+			}]);
+			calendar.render();
+		}());
+	</script> -->
 </body>
 </html>
