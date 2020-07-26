@@ -28,6 +28,7 @@ public class SchedulerService {
 
 	public ArrayList<SchedulerVO> selectScheduleList(int groupCode) {
 		Connection con = getConnection();
+		
 		ArrayList<SchedulerVO> list = new SchedulerDao().selectScheduleList(con, groupCode);
 		
 		close(con);
