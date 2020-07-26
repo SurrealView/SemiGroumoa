@@ -76,8 +76,6 @@ public class SchedulerDao {
 				schedule.setWriterCode(rset.getInt("WRITER_CODE"));
 				schedule.setStatus(rset.getString("STATUS").charAt(0));
 				
-				System.out.println("list : " + list);
-				
 				list.add(schedule);
 			}
 		} catch (SQLException e) {
