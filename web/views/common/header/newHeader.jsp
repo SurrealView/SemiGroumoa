@@ -192,7 +192,7 @@ body{
 			<td class="my-menu"><a href="<%=request.getContextPath()%>/selectMyList.gr">가입한 동호회</a></td>
 			<% } %>
 
-			<td class="my-menu"><a href="#">공지사항</a></td>
+			<td class="my-menu"><a href="<%=request.getContextPath()%>/selectList.no">공지사항</a></td>
 			<td class="my-menu"><a href="#">QnA</a></td>
 			<td></td>
 		</tr>
