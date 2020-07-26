@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"
-	import="com.kh.groumoa.fee.model.vo.FeeVO, java.util.ArrayList, com.kh.groumoa.common.*"%>
+	pageEncoding="UTF-8" import="com.kh.groumoa.fee.model.vo.FeeVO, java.util.ArrayList, com.kh.groumoa.common.*"%>
 <%
 	ArrayList<FeeVO> list = (ArrayList<FeeVO>) request.getAttribute("list");
 	PageInfo pi = (PageInfo) request.getAttribute("pi");
@@ -136,6 +135,14 @@
 	margin-left: 90px;
 	margin-top: -45px;
 }
+
+.pageBtn{
+	border-radius: 5px;
+	border: 1px solid lightgray;
+	background: white;
+	width: 30px;
+	height: 30px;
+}
 </style>
 </head>
 <body>
@@ -182,10 +189,38 @@
 
 
 		<br>
-		<div class="pagination-div">
+				<div class="pagingArea" align="center">
+			<button class="pageBtn" onclick="location.href='<%=request.getContextPath()%>/selectList.fee?currentPage=1'"><<</button>
+			
+			<% if(currentPage <= 1) {%>
+			<button class="pageBtn" disabled><</button>
+			<%} else { %>
+			<button class="pageBtn" onclick="location.href='<%=request.getContextPath() %>/selectList.fee?currentPage=<%=currentPage - 1 %>'"><</button>
+			<% } %>
+			
+			<% for(int p = startPage; p <= endPage; p++) {
+				if(p == currentPage) {
+			%>
+				<button style="background: rgb(2,117,216); color:white" class="pageBtn" disabled><%= p %></button>
+			<%   } else { %>
+					<button class="pageBtn" onclick="location.href='<%=request.getContextPath()%>/selectList.fee?currentPage=<%=p%>'"><%=p %></button>
+			<%
+				}
+			}
+			%>
+			
+			<% if(currentPage >= maxPage) { %>
+			<button class="pageBtn" disabled>></button>
+			<%} else { %>
+			<button class="pageBtn" onclick="location.href='<%=request.getContextPath() %>/selectList.fee?currentPage=<%=currentPage + 1 %>'">></button>
+			<% } %>
+			
+			<button class="pageBtn" onclick="location.href='<%=request.getContextPath()%>/selectList.fee?currentPage=<%=maxPage%>'">>></button>
+		</div>
+		<%-- <div class="pagination-div">
 			<ul class="pagination">
-				<li class="page-item"><a class="page-link" href="#"><<</a></li>
-				<li class="page-item"><a class="page-link" href="#"><</a></li>
+				<li class="page-item"><a class="page-link" href="'<%=request.getContextPath()%>/selectList.fee?currentPage=1'"><<</a></li>
+				<li class="page-item"><a class="page-link" href="'<%=request.getContextPath() %>/selectList.bo?currentPage=<%=currentPage - 1 %>'"><</a></li>
 				<li class="page-item"><a class="page-link" href="#">1</a></li>
 				<li class="page-item active"><a class="page-link" href="#">2</a></li>
 				<li class="page-item"><a class="page-link" href="#">3</a></li>
@@ -194,7 +229,7 @@
 				<li class="page-item"><a class="page-link" href="#">></a></li>
 				<li class="page-item"><a class="page-link" href="#">>></a></li>
 			</ul>
-		</div>
+		</div> --%>
 	</div>
 	<%@include file="../common/footer/footer.jsp"%>
 </body>
