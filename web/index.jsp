@@ -19,6 +19,11 @@
 <style>
 body {
 	font-family: 'Poor Story', cursive;
+	
+	background-image: url('/groumoa/resources/image/backgroundImg.png');
+	background-position: 0% 10%;
+	background-size: 100% auto;
+	background-repeat: no-repeat;
 }
 
 #wrapper {
@@ -27,12 +32,16 @@ body {
 }
 
 #main-content {
-	width: 1000px;
 	height: 800px;
 }
 
-#myCarousel{
-	padding-top: 300px;
+#main-word{
+	color: white;
+	position: absolute;
+	left: 16%;
+	top: 125%;
+	font-size: 90pt;
+	font-family: '나눔명조','명조';
 }
 </style>
 </head>
@@ -40,47 +49,7 @@ body {
 	<%@include file="views/common/header/newHeader.jsp"%>
 	<div id="wrapper">
 		<div id="main-content">
-<!-- 
-			carousel
-			<div class="container">
-				<div id="myCarousel" class="carousel slide" data-ride="carousel">
-					Indicators
-					<ol class="carousel-indicators">
-						<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-						<li data-target="#myCarousel" data-slide-to="1"></li>
-						<li data-target="#myCarousel" data-slide-to="2"></li>
-					</ol>
-
-					Wrapper for slides
-					<div class="carousel-inner">
-						<div class="item active">
-							<img src="../../resources/image/main1.png" alt="main1"
-								style="width: 100%;">
-						</div>
-
-						<div class="item">
-							<img src="../../resources/image/main2.png" alt="main2" style="width: 100%;">
-						</div>
-
-						<div class="item">
-							<img src="../../resources/image/main3.png" alt="main3" style="width: 100%;">
-						</div>
-					</div>
-
-					Left and right controls
-					<a class="left carousel-control" href="#myCarousel"
-						data-slide="prev"> <span
-						class="glyphicon glyphicon-chevron-left"></span> <span
-						class="sr-only">Previous</span>
-					</a> <a class="right carousel-control" href="#myCarousel"
-						data-slide="next"> <span
-						class="glyphicon glyphicon-chevron-right"></span> <span
-						class="sr-only">Next</span>
-					</a>
-				</div>
-			</div>
-
- -->
+			<div id="main-word">"글자가 들어가는 곳"</div>
 		</div>
 	</div>
 	<%@include file="views/common/footer/newFooter.jsp"%>
