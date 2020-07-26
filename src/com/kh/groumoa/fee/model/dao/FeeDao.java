@@ -74,12 +74,17 @@ public class FeeDao {
 			pstmt.setInt(2, startRow);
 			pstmt.setInt(3, endRow);
 
+			System.out.println("startRow : "+startRow);
+			System.out.println("endRow : " + endRow);
+			
 			rset = pstmt.executeQuery();
 
 			list = new ArrayList<FeeVO>();
 
 			while (rset.next()) {
 				FeeVO f = new FeeVO();
+				f.setGroupCode(fee.getGroupCode());
+				f.setMemberCode(rset.getInt("MEMBER_CODE"));
 				f.setFeeCategory(rset.getString("FEE_CATEGORY"));
 				f.setDetail(rset.getString("DETAIL"));
 				f.setFee(rset.getString("FEE"));

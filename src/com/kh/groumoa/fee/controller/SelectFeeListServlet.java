@@ -78,8 +78,8 @@ public class SelectFeeListServlet extends HttpServlet {
 		
 		PageInfo pi = new PageInfo(limit, currentPage, maxPage, startPage, endPage, listCount);
 		ArrayList<FeeVO> list = new FeeService().selectList(pi, fee);
-		//System.out.println(pi);
-		//System.out.println("testFeeList : " + list);
+		System.out.println(pi);
+		System.out.println("testFeeList : " + list);
 		String page = "";
 		if(list != null) {
 			page = "views/group/feeList.jsp";
@@ -87,7 +87,7 @@ public class SelectFeeListServlet extends HttpServlet {
 			request.setAttribute("pi", pi);
 		} else {
 			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "게시판 조회 실패");
+			request.setAttribute("msg", "회비 내역 조회 실패");
 		}
 		
 		request.getRequestDispatcher(page).forward(request, response);
