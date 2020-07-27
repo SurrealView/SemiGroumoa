@@ -64,7 +64,7 @@
  	<div class="middle">
  		<div class="menu">
  			<li class="pageMain" id="messages">
- 				<a href="#messages" class="list"><img src="/groumoa/resources/image/menubar_home.png" width="10%">&nbsp;&nbsp;메인페이지</a>
+ 				<a href="<%=request.getContextPath()%>" class="list"><img src="/groumoa/resources/image/menubar_home.png" width="10%">&nbsp;&nbsp;메인페이지</a>
 <!--  				<div class="smenu">
  					<a href="#">공지</a>
  					<a href="#">공지2</a>
