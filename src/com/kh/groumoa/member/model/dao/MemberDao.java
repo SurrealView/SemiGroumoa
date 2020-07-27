@@ -232,7 +232,7 @@ public class MemberDao {
 		return listCount;
 	}
 
-	public ArrayList<MemberVO> selectList(Connection con, PageInfo pi, int groupCode) {
+	public ArrayList<MemberVO> selectList(Connection con, PageInfo pi) {
 		ArrayList<MemberVO> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -245,9 +245,8 @@ public class MemberDao {
 			int startRow = (pi.getCurrentPage() - 1) * pi.getLimit() + 1;
 			int endRow = startRow + pi.getLimit() -1;
 			
-			pstmt.setInt(1, groupCode);
-			pstmt.setInt(2, startRow);
-			pstmt.setInt(3, endRow);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
 			
 			rset = pstmt.executeQuery();
 			
@@ -718,6 +717,111 @@ public class MemberDao {
 			}
 				
 			return result;
+		}
+
+		public ArrayList<MemberVO> selectGroupMemberListMain(PageInfo pi, Connection con, int groupCode) {
+			ArrayList<MemberVO> list = null;
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			
+			String query = prop.getProperty("selectGroupMemberListMain");
+			
+			try {
+				pstmt = con.prepareStatement(query);
+				
+				int startRow = (pi.getCurrentPage() - 1) * pi.getLimit() + 1;
+				int endRow = startRow + pi.getLimit() - 1;
+
+				System.out.println("start" + startRow);
+				System.out.println("end" + endRow);
+							
+				pstmt.setInt(1, groupCode);
+				pstmt.setInt(2, startRow);
+				pstmt.setInt(3, endRow);
+				
+				rset = pstmt.executeQuery();
+				
+				list = new ArrayList<MemberVO>();
+
+				while (rset.next()) {
+					MemberVO m = new MemberVO();
+					m.setMemberCode(rset.getInt("MEMBER_CODE"));
+					m.setEmail(rset.getString("EMAIL"));
+					m.setUserName(rset.getString("MEMBER_NAME"));
+					m.setEnrollDate(rset.getDate("ENROLL_DATE"));
+					m.setGroupLeaderCode(rset.getInt("GROUP_LEADER_CODE"));
+					m.setPostCode(rset.getInt("POST"));
+					System.out.println(m);
+					list.add(m);
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+			
+			
+			return list;
+		}
+
+		public ManagerVO selectLeaderDetail(Connection con) {
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			ManagerVO list = null;
+			
+			String query = prop.getProperty("selectLeaderDetail");
+
+			try {
+				pstmt = con.prepareStatement(query);
+				
+				rset = pstmt.executeQuery();
+				
+				if(rset.next()) {
+					list = new ManagerVO();
+					list.setManagerName(rset.getString("MANAGER_NAME"));
+					list.setManagerId(rset.getString("MANAGER_ID"));
+					list.setManagerPwd(rset.getString("MANAGER_PWD"));
+				}
+				
+			
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+				close(rset);
+			}
+			
+			return list;
+		}
+
+		public ManagerVO selectLeaderDetailD(Connection con, int nno) {
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			ManagerVO list = null;
+			
+			String query = prop.getProperty("selectLeaderDetailD");
+
+			try {
+				pstmt = con.prepareStatement(query);
+				pstmt.setInt(1, nno);
+				
+				rset = pstmt.executeQuery();
+				
+				if(rset.next()) {
+					list = new ManagerVO();
+					list.setNoticeCode(rset.getString("NOTICE"));
+				}
+				
+			
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+				close(rset);
+			}
+			
+			return list;
 		}
 
 }

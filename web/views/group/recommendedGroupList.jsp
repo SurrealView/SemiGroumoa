@@ -70,7 +70,7 @@
 			
 			<div style="float: left; border-bottom: 1px solid black; width: 200px; text-align: center;">
 			<form action="<%=request.getContextPath() %>/selectOne.gr" method="post">
-				<input type="hidden" value="<%=recommendedGroupList.get(i).get(j).getGroupCode()%>">
+				<input type="hidden" name="groupCode" value="<%=recommendedGroupList.get(i).get(j).getGroupCode()%>">
 				<%
 							session.setAttribute("groupCode", recommendedGroupList.get(i).get(j).getGroupCode());
 				%>

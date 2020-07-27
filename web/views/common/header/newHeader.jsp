@@ -170,10 +170,8 @@ body {
 				%>
 				<td class="sub-menu"><a href="#"><img class="sub-icons"
 						src="<%=request.getContextPath()%>/resources/image/personal1.png"><br>마이페이지</a></td>
-				<td class="sub-menu"><a
-					href="<%=request.getContextPath()%>/views/group/groupInsert.jsp"><img
-						class="sub-icons"
-						src="<%=request.getContextPath()%>/resources/image/groupadd1.png"><br>모임개설</a></td>
+				<td class="sub-menu"><a	href="<%=request.getContextPath()%>/views/group/groupInsert.jsp">
+          <img class="sub-icons"	src="<%=request.getContextPath()%>/resources/image/groupadd1.png"><br>모임개설</a></td>
 				<td class="sub-menu"><a
 					href="<%=request.getContextPath()%>/selectListAsLeader.gr"><img
 						class="sub-icons"

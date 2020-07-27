@@ -62,7 +62,7 @@ int endPage = pi.getEndPage();
    		   	 <th>선택</th>
      		 <th>이름</th>
      		 <th>계정</th>
-     		 <th>가입일</th>
+     		 <th>비밀번호</th>
      		 <th>글/댓글/문의</th>
      		 <th>메모</th>
     	   </tr>
@@ -131,7 +131,7 @@ int endPage = pi.getEndPage();
 //				var num = $("#listArea").parent().children().eq(0).val();
 				var num = $("input:checkbox[name='code']:checked").val();
 				console.log(num);
-				location.href="<%=request.getContextPath()%>/managerLeader.mn?num=" + num;
+				location.href="<%=request.getContextPath()%>/LeaderDetail.ld?num=" + num;
 			});
 		});
 		
