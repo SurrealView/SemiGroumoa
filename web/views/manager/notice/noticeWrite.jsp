@@ -72,6 +72,7 @@
     </div>
 
     <script>
+    
         function uploadFile(){
             //alert("경고!");
             var node = document.getElementById('boardArea');

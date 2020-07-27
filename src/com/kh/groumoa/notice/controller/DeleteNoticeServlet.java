@@ -55,4 +55,5 @@ public class DeleteNoticeServlet extends HttpServlet {
 		doGet(request, response);
 	}
 
+	
 }

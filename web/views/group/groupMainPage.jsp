@@ -68,6 +68,12 @@
 	border: 1px solid black;
 }
 
+#resetting {
+	margin-right: 25px;
+	background: white;
+	border: 1px solid black;
+}
+
 .wrapper {
 	margin: auto;
 	height: auto;
@@ -142,7 +148,7 @@
 		</div>
 		<!-- 메뉴 끝 -->
 
-		<br> <input id="btn" type="button" value="가입하기"> <input
+		<br> <input id="btn" type="button" value="가입하기" onclick="joinPopup();"> <input
 			type="hidden" onclick="listCheck();"> <br> <br>
 
 		<div class="wrapper">
@@ -158,7 +164,7 @@
 				</tr>
 				<tr>
 					<td class="group-field">활동지</td>
-					<td><div id="group-title" class="group-desc"><%=group.getRegionName()%></div></td>
+ 					<td><div id="group-title" class="group-desc"><%=group.getRegionName()%></div></td>
 				</tr>
 
 				<tr>
@@ -179,7 +185,8 @@
 				</tr>
 			</table>
 			<div id="content3" style="margin-top: 25px">게시판?</div>
-		</div>
+		</div>		
+		<input id="resetting" type="button" value="가입하기" onclick="joinPopup();">
 	</div>
 	<%@include file="../common/footer/newFooter.jsp"%>
 
@@ -187,6 +194,10 @@
 		function listCheck() {
 			location.href="'<%=request.getContextPath()%>/groupMember.go'";
 		}
+		
+		function joinPopup() {
+			window.open("<%=request.getContextPath()%>/views/group/groupJoin.jsp", "", "width=350,height=400");
+		}		
 	</script>
 </body>
 </html>

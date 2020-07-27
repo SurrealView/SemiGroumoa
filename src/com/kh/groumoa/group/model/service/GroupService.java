@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import com.kh.groumoa.common.PageInfo;
+import com.kh.groumoa.common.model.vo.AttachmentVo;
 import com.kh.groumoa.group.model.dao.GroupDao;
 import com.kh.groumoa.group.model.vo.Attachment;
 import com.kh.groumoa.group.model.vo.GroupMemberVO;
@@ -184,7 +185,7 @@ public class GroupService {
 		InterestVO interest = new GroupDao().searchInterest(con, selectedGroup.getInterestCode());
 		
 		System.out.println(interest);
-		selectedGroup.setInterest(interest.getInterest());
+		selectedGroup.setInterest(interest.getInterest());		
 		
 		close(con);
 		return selectedGroup;
@@ -290,6 +291,17 @@ public class GroupService {
 		return listCount;
 	}
 
+	public AttachmentVo selectAttachment(int groupCode) {
+		
+		Connection con = getConnection();
+		
+		AttachmentVo attach = new GroupDao().selectAttachment(con, groupCode);
+		
+		close(con);
+		
+		return attach;
+  }
+
 	public GroupVO selectGroup(int nno) {
 		Connection con = getConnection();
 		GroupVO group = new GroupDao().selectGroupDetail(con, nno);
@@ -304,6 +316,7 @@ public class GroupService {
 		GroupVO groupD = new GroupDao().selecGroupD(con, nno);
 		close(con);
 		return groupD;
+
 	}
 
 }

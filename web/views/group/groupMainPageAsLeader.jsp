@@ -96,14 +96,6 @@
 	border: 1px solid lightgray;
 }
 
-#group-title {
-	
-}
-
-.group-desc {
-	
-}
-
 #content2 {
 	width: 950px;
 	display: block;
@@ -150,20 +142,24 @@
 				<a href="#">가입신청내역</a>
 			</div>
 		</div>
-		<!-- 메뉴 끝 -->
-		
+		<!-- 메뉴 끝 -->    
+    
 		<br> <input id="btn" type="button" value="가입하기">
 			<input id="expand" type="button" value="인원증설" style="float:right; margin-right: 5px;" 
 			onclick="location.href='<%=request.getContextPath()%>/views/group/buyProduct.jsp'">
 		 <input type="hidden" onclick="listCheck();">
-    <input id="btn" type="button" value="폐쇄하기" onclick="groupClose();"> <input
+    <input id="btn" type="button" value="폐쇄하기" onclick="groupClose();">
 				
 		<div class="wrapper">
 			<table class="table" id="content1">
 				<tr>
-					<td colspan="2" rowspan="4">
-						<div class="img-wrapper">
-							<img src="#" title="썸네일">
+         <td colspan="2" rowspan="4">
+					<div class="img-wrapper" onclick="clickThumbnail();">
+							<% if(thumbnail != null) { %>
+							<img id="thumbNail" src="<%=request.getContextPath() %>/notice_uploadFiles/<%=thumbnail.getChangeName() %>" title="썸네일" style="width:200px; height:200px;">
+							<% } else { %>
+							<img id="thumbNail" title="썸네일" style="width:200px; height:200px;">
+							<% } %>
 						</div>
 					</td>
 					<td width="15%" class="group-field">동호회명</td>
@@ -210,6 +206,26 @@
 			location.href = "<%=request.getContextPath()%>/GroupInfo.gi";
 			/* location.href=str; */
  			<%-- location.href="'<%=request.getContextPath()%>/GroupInfo.gi'"; --%>
+                  
+      function groupClose(){			
+			console.log("동아리폐쇄 열기");
+			window.open("<%=request.getContextPath()%>/views/group/groupClose.jsp", "", "width=350,height=400");
+		}
+		
+		function clickThumbnail(){
+			$("#upload_thumbnail").click();
+		}
+		
+		function uploadImg(value){
+			if(value.files && value.files[0]){
+				var reader = new FileReader();
+				
+				reader.onload = function(e) {
+					$("#thumbNail").attr("src", e.target.result);
+				}
+				
+				reader.readAsDataURL(value.files[0]);
+			}			
 	</script>
 </body>
 </html>

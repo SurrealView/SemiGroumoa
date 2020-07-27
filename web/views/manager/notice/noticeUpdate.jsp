@@ -5,6 +5,7 @@
 	ArrayList<AttachmentVo> list = (ArrayList<AttachmentVo>) request.getAttribute("fileList");
 	int idx = 0;
 	AttachmentVo attach = list.get(idx);
+	
 %>
 <!DOCTYPE html>
 <html>

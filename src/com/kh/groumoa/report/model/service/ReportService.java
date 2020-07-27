@@ -14,6 +14,7 @@ import com.kh.groumoa.report.model.vo.ReportVo;
 public class ReportService {
 
 	public int insertReport(ReportVo re, ArrayList<AttachmentVo> attachList) {
+		
 		int result = 0;				
 		inst().setProp("/sql/driver.properties");		
 		Connection con = inst().getCon("url", "user", "password", "driver");

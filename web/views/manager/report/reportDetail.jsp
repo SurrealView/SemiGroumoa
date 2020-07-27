@@ -85,6 +85,7 @@
                     <td><label>신고자ID</label></td>
                     <!-- <td colspan="2"><input type="text" name="reporter" value="신고자" readonly></td> -->
                     <td colspan="2"><%=report.getReporterID() %><input type="hidden" name="reporter" value="<%=report.getReporter() %>"></td>                    
+                    
                 </tr>
                 <tr>
                     <td><label>피신고자ID</label></td>

@@ -18,6 +18,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link href="/groumoa/resources/css/notice/noticeDetail.css" rel="stylesheet">
 </head>
+
 <body>
 	<%@ include file="/views/manager/menubar.jsp" %>
 	<div class="noticeSection">
