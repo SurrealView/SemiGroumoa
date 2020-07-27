@@ -100,6 +100,9 @@
 						<td colspan="6"><textarea name="schDetail" cols="67"
 								rows="20" style="resize: none"></textarea></td>
 					</tr>
+					<tr>
+						<td><input type="hidden" name="scheMember" value="<%= loginUser.getMemberCode()%>"></td>
+					</tr>
 
 				</table>
 				<br>

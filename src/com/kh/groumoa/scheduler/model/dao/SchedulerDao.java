@@ -35,9 +35,11 @@ public class SchedulerDao {
 
 		try {
 			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, schedule.getSchTitle());
-			pstmt.setString(2, schedule.getSchDetail());
-			pstmt.setString(3, schedule.getSchDate());
+			pstmt.setInt(1, schedule.getGroupCode());
+			pstmt.setString(2, schedule.getSchTitle());
+			pstmt.setString(3, schedule.getSchDetail());
+			pstmt.setString(4, schedule.getSchDate());
+			pstmt.setInt(5, schedule.getWriterCode());
 			
 			result = pstmt.executeUpdate();
 			
@@ -74,7 +76,6 @@ public class SchedulerDao {
 				schedule.setSchDate(rset.getString("SCH_DATE").substring(0,10));
 				schedule.setDateWritten(rset.getString("DATE_WRITTEN").substring(0, 10));
 				schedule.setWriterCode(rset.getInt("WRITER_CODE"));
-				schedule.setStatus(rset.getString("STATUS").charAt(0));
 				
 				list.add(schedule);
 			}
