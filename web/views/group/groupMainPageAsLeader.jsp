@@ -67,6 +67,10 @@
 	background: white;
 	border: 1px solid black;
 }
+#expand{
+	background: white;
+	border: 1px solid black;
+}
 
 .wrapper {
 	margin: auto;
@@ -147,9 +151,13 @@
 			</div>
 		</div>
 		<!-- 메뉴 끝 -->
-		<br> <input id="btn" type="button" value="폐쇄하기" onclick="groupClose();"> <input
-			type="hidden" onclick="listCheck();"> <br> <br>
-
+		
+		<br> <input id="btn" type="button" value="가입하기">
+			<input id="expand" type="button" value="인원증설" style="float:right; margin-right: 5px;" 
+			onclick="location.href='<%=request.getContextPath()%>/views/group/buyProduct.jsp'">
+		 <input type="hidden" onclick="listCheck();">
+    <input id="btn" type="button" value="폐쇄하기" onclick="groupClose();"> <input
+				
 		<div class="wrapper">
 			<table class="table" id="content1">
 				<tr>

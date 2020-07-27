@@ -1,5 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.kh.groumoa.product.model.vo.ProductBoughtVO, com.kh.groumoa.common.PageInfo, java.util.ArrayList
+    , com.kh.groumoa.common.CustomUtil"%>
+    <% ArrayList<ProductBoughtVO> list = (ArrayList<ProductBoughtVO>) request.getAttribute("list"); 
+    CustomUtil cu = new CustomUtil();
+PageInfo pi = (PageInfo) request.getAttribute("pi");
+int listCount = pi.getTotalCount();
+int currentPage = pi.getCurrentPage();
+int maxPage = pi.getMaxPage();
+int startPage = pi.getStartPage();
+int endPage = pi.getEndPage();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -97,22 +107,21 @@
 </style>
 </head>
 <body>
-	<%@include file="../common/header/header.jsp" %>
+	<%@include file="../common/header/newHeader.jsp" %>
 	<%@include file="subMenubar.jsp" %>
 	
 	<div class="content">
 		<p align="right" style="font-size:10px; padding-right: 25px; padding-top: 15px;">개인정보취급방침에 따라 최근 5년간의 내역이 제공됩니다.</p>
-		<div id="sub-title"><span style="font-size: 15px">게시판 관리</span></div>
+		<div id="sub-title"><span style="font-size: 15px">결제내역 관리</span></div>
 		
-		<span id="temp">* 게시판을 조회 및 수정하실 수 있습니다.</span>
+		<span id="temp">결제내역을 조회하실 수 있습니다.</span>
 		
 		<br><br><!-- 게시판 관리일경우 -->
 		<div class="table-div">
-			<h2 align="center">게시판</h2>         
+			<h2 align="center">결제내역</h2>         
    			<table class="table table-striped">
                   <thead>
                     <tr>
-                      <th>번호</th>
                       <th>결제금액(원)</th>
                       <th>결제상품</th>
                       <th>결제자</th>
@@ -120,95 +129,51 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td><a href="feeListDetail.jsp">1</a></td>
-                      <td>25,000</td>
-                      <td>인원증설</td>
-                      <td>김형진</td>
-                      <td>2020-07-05</td>
-                    </tr>
-                   <tr>
-                      <td><a href="#">1</a></td>
-                      <td>25,000</td>
-                      <td>인원증설</td>
-                      <td>김형진</td>
-                      <td>2020-07-05</td>
-                    </tr>
-                    <tr>
-                      <td><a href="#">1</a></td>
-                      <td>25,000</td>
-                      <td>인원증설</td>
-                      <td>김형진</td>
-                      <td>2020-07-05</td>
-                    </tr>
-                    <tr>
-                      <td><a href="#">1</a></td>
-                      <td>25,000</td>
-                      <td>인원증설</td>
-                      <td>김형진</td>
-                      <td>2020-07-05</td>
-                    </tr>
-                    <tr>
-                      <td><a href="#">1</a></td>
-                      <td>25,000</td>
-                      <td>인원증설</td>
-                      <td>김형진</td>
-                      <td>2020-07-05</td>
-                    </tr>
-                    <tr>
-                      <td><a href="#">1</a></td>
-                      <td>25,000</td>
-                      <td>인원증설</td>
-                      <td>김형진</td>
-                      <td>2020-07-05</td>
-                    </tr>
-                    <tr>
-                      <td><a href="#">1</a></td>
-                      <td>25,000</td>
-                      <td>인원증설</td>
-                      <td>김형진</td>
-                      <td>2020-07-05</td>
-                    </tr>
-                    <tr>
-                      <td><a href="#">1</a></td>
-                      <td>25,000</td>
-                      <td>인원증설</td>
-                      <td>김형진</td>
-                      <td>2020-07-05</td>
-                    </tr>
-                    <tr>
-                      <td><a href="#">1</a></td>
-                      <td>25,000</td>
-                      <td>인원증설</td>
-                      <td>김형진</td>
-                      <td>2020-07-05</td>
-                    </tr>
-                    <tr>
-                      <td><a href="#">1</a></td>
-                      <td>25,000</td>
-                      <td>인원증설</td>
-                      <td>김형진</td>
-                      <td>2020-07-05</td>
-                    </tr>
+                    <% for(ProductBoughtVO pb : list) { %>
+					<tr>
+						<input type="hidden" value="<%=pb.getPbCode() %>">
+						<td><%= pb.getProductPrice() %></td>
+						<td><%= pb.getProductDetail() %></td>
+						<td><%= pb.getPayerName() %></td>
+						<td><%= cu.sqlDateToString(pb.getPbDate()) %></td>
+					</tr>
+				<% } %>
+                  
                   </tbody>
                 </table>
                 </div>
             	
                 
                 <br>
-                <div class="pagination-div">
-                <ul class="pagination">
-                	<li class="page-item"><a class="page-link" href="#"><<</a></li>
-  					<li class="page-item"><a class="page-link" href="#"><</a></li>
-  					<li class="page-item"><a class="page-link" href="#">1</a></li>
-  					<li class="page-item active"><a class="page-link" href="#">2</a></li>
-  					<li class="page-item"><a class="page-link" href="#">3</a></li>
-  					<li class="page-item"><a class="page-link" href="#">4</a></li>
-  					<li class="page-item"><a class="page-link" href="#">5</a></li>
-  					<li class="page-item"><a class="page-link" href="#">></a></li>
-  					<li class="page-item"><a class="page-link" href="#">>></a></li>
-				</ul>
-				</div>
+                 <!-- 페이징 처리 버튼 -->
+		<div class="pagingArea" align="center">
+			<button onclick="location.href='<%=request.getContextPath()%>/selectHistory.pr?currentPage=1'"><<</button>
+			
+			<% if(currentPage <= 1) {%>
+			<button disabled><</button>
+			<%} else { %>
+			<button onclick="location.href='<%=request.getContextPath() %>/selectHistory.pr?currentPage=<%=currentPage - 1 %>'"><</button>
+			<% } %>
+			
+			<% for(int p = startPage; p <= endPage; p++) {
+				if(p == currentPage) {
+			%>
+				<button disabled><%=p %></button>
+			<%   } else { %>
+					<button onclick="location.href='<%=request.getContextPath()%>/selectHistory.pr?currentPage=<%=p%>'"><%=p %></button>
+			<%
+				}
+			}
+			%>
+			
+			<% if(currentPage >= maxPage) { %>
+			<button disabled>></button>
+			<%} else { %>
+			<button onclick="location.href='<%=request.getContextPath() %>/selectHistory.pr?currentPage=<%=currentPage + 1 %>'">></button>
+			<% } %>
+			
+			<button onclick="location.href='<%=request.getContextPath()%>/selectHistory.pr?currentPage=<%=maxPage%>'">>></button>
+		</div>
 		</div>
 		<!-- footer 추가할것 -->
 		<%@include file="../common/footer/footer.jsp" %>
