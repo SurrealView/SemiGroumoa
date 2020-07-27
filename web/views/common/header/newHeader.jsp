@@ -11,18 +11,21 @@
 <!-- <link
 	href="https://fonts.googleapis.com/css2?family=Poor+Story&display=swap"
 	rel="stylesheet"> -->
-	<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
-	
+<link
+	href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap"
+	rel="stylesheet">
+
 <style>
-body{
+body {
 	/* font-family: 'Poor Story', cursive; */
 	font-family: 'Do Hyeon', sans-serif;
 }
+
 .header {
 	width: 100%;
 	height: 175px;
 	display: block;
- 	background-color: white;
+	background-color: white;
 }
 
 .logo_container {
@@ -114,7 +117,7 @@ body{
 	color: gray;
 }
 
-.sub-icons{
+.sub-icons {
 	height: 50px;
 	width: 50px;
 }
@@ -135,8 +138,10 @@ body{
 					<form class="search-form"
 						action="<%=request.getContextPath()%>/search.gr" method="get">
 						<input type="text" placeholder="동호회 이름을 입력해주세요" name="groupName">
-						<button style="width:60px"><img
-							src="/groumoa/resources/image/search.png" style="width:20px; height:20px"></button>
+						<button style="width: 60px">
+							<img src="/groumoa/resources/image/search.png"
+								style="width: 20px; height: 20px">
+						</button>
 					</form>
 				</td>
 				<%
@@ -163,19 +168,29 @@ body{
 				<%
 					if (loginUser != null) {
 				%>
-				<td class="sub-menu"><a href="<%=request.getContextPath()%>/views/member/myPage.jsp">마이페이지</a></td>
-				<td class="sub-menu"><a href="<%=request.getContextPath()%>/views/group/groupInsert.jsp">모임개설</a></td>
+				<td class="sub-menu"><a href="#"><img class="sub-icons"
+						src="<%=request.getContextPath()%>/resources/image/personal1.png"><br>마이페이지</a></td>
+				<td class="sub-menu"><a	href="<%=request.getContextPath()%>/views/group/groupInsert.jsp">
+          <img class="sub-icons"	src="<%=request.getContextPath()%>/resources/image/groupadd1.png"><br>모임개설</a></td>
 				<td class="sub-menu"><a
-					href="<%=request.getContextPath()%>/selectListAsLeader.gr">모임관리</a></td>
+					href="<%=request.getContextPath()%>/selectListAsLeader.gr"><img
+						class="sub-icons"
+						src="<%=request.getContextPath()%>/resources/image/groupmanage.png"><br>모임관리</a></td>
 				<%
 					} else {
 				%>
-				<td class="sub-menu"><a href="<%=request.getContextPath()%>/views/member/login.jsp"><img
-							class="sub-icons" src="<%=request.getContextPath()%>/resources/image/personal1.png"><br>마이페이지</a></td>
-				<td class="sub-menu"><a href="<%=request.getContextPath()%>/views/member/login.jsp"><img
-							class="sub-icons" src="<%=request.getContextPath()%>/resources/image/groupadd1.png"><br>모임개설</a></td>
-				<td class="sub-menu"><a href="<%=request.getContextPath()%>/views/member/login.jsp"><img
-							class="sub-icons" src="<%=request.getContextPath()%>/resources/image/groupmanage.png"><br>모임관리</a></td>
+				<td class="sub-menu"><a
+					href="<%=request.getContextPath()%>/views/member/login.jsp"><img
+						class="sub-icons"
+						src="<%=request.getContextPath()%>/resources/image/personal1.png"><br>마이페이지</a></td>
+				<td class="sub-menu"><a
+					href="<%=request.getContextPath()%>/views/member/login.jsp"><img
+						class="sub-icons"
+						src="<%=request.getContextPath()%>/resources/image/groupadd1.png"><br>모임개설</a></td>
+				<td class="sub-menu"><a
+					href="<%=request.getContextPath()%>/views/member/login.jsp"><img
+						class="sub-icons"
+						src="<%=request.getContextPath()%>/resources/image/groupmanage.png"><br>모임관리</a></td>
 				<%
 					}
 				%>
@@ -188,12 +203,30 @@ body{
 		<tr>
 			<td id="blank"></td>
 
-			<%if(loginUser != null) { %>
-			<td class="my-menu"><a href="<%=request.getContextPath()%>/selectRecommendedList.gr">추천 동호회</a></td>
-			<td class="my-menu"><a href="<%=request.getContextPath()%>/selectMyList.gr">가입한 동호회</a></td>
-			<% } %>
+			<%
+				if (loginUser != null) {
+			%>
+			<td class="my-menu"><a
+				href="<%=request.getContextPath()%>/selectRecommendedList.gr">추천
+					동호회</a></td>
+			<td class="my-menu"><a
+				href="<%=request.getContextPath()%>/selectMyList.gr">가입한 동호회</a></td>
+			<%
+				}
+			%>
 			<%-- <td class="my-menu"><a href="<%=request.getContextPath()%>/select.in">공지사항</a></td> --%>
-		 	<td class="my-menu"><a href="<%=request.getContextPath()%>/selectList.no">공지사항</a></td>
+			<%
+				if (loginUser != null && loginUser.getEmail().equals("admin@groumoa.com")) {
+			%>
+			<td class="my-menu"><a
+				href="<%=request.getContextPath()%>/selectList.no">공지사항</a></td>
+			<%
+				} else {
+			%>
+			<td class="my-menu"><a href="#">공지사항</a></td>
+			<%
+				}
+			%>
 			<td class="my-menu"><a href="#">QnA</a></td>
 			<td></td>
 		</tr>
