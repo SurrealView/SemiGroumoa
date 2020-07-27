@@ -134,7 +134,7 @@
 		<!-- 메뉴. 지워도 됨 -->
 		<div class="tab" id="tab">
 			<div class="item active" id="board">
-				<a href="/groumoa/views/group/groupMainPage.jsp">메인페이지</a>
+				<a href="/groumoa/views/group/groupMainPageAsLeader.jsp">메인페이지</a>
 			</div>
 			<div class="item active" id="board">
 				<a href="#">가입신청내역</a>

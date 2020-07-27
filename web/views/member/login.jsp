@@ -43,7 +43,7 @@
                 <!-- 회원 로그인 시작 -->
                 <article class="tab member active">
                     <div class="logo-image" align="center">
-                        <img src="/groumoa/resources/image/logo_groumoa2.png"  style="width:50%; height:50%;">
+                        <img src="/groumoa/resources/image/logo_only_groumoa3.png"  style="width:50%; height:50%;">
                     </div>
                     <div class="tab_content" style="margin-top:-30px">
                         

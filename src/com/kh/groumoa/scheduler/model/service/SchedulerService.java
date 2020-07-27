@@ -26,10 +26,10 @@ public class SchedulerService {
 		return result;
 	}
 
-	public ArrayList<SchedulerVO> selectScheduleList(int groupCode) {
+	public ArrayList<SchedulerVO> selectList(int groupCode) {
 		Connection con = getConnection();
 		
-		ArrayList<SchedulerVO> list = new SchedulerDao().selectScheduleList(con, groupCode);
+		ArrayList<SchedulerVO> list = new SchedulerDao().selectList(con, groupCode);
 		
 		close(con);
 		

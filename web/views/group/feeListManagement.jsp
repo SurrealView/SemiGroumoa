@@ -189,12 +189,12 @@
 
 		<br>
 				<div class="pagingArea" align="center">
-			<button class="pageBtn" onclick="location.href='<%=request.getContextPath()%>/selectList.fee?currentPage=1'"><<</button>
+			<button class="pageBtn" onclick="location.href='<%=request.getContextPath()%>/selectListAsLeader?currentPage=1'"><<</button>
 			
 			<% if(currentPage <= 1) {%>
 			<button class="pageBtn" disabled><</button>
 			<%} else { %>
-			<button class="pageBtn" onclick="location.href='<%=request.getContextPath() %>/selectList.fee?currentPage=<%=currentPage - 1 %>'"><</button>
+			<button class="pageBtn" onclick="location.href='<%=request.getContextPath() %>/selectListAsLeader?currentPage=<%=currentPage - 1 %>'"><</button>
 			<% } %>
 			
 			<% for(int p = startPage; p <= endPage; p++) {
@@ -202,7 +202,7 @@
 			%>
 				<button style="background: rgb(2,117,216); color:white" class="pageBtn" disabled><%= p %></button>
 			<%   } else { %>
-					<button class="pageBtn" onclick="location.href='<%=request.getContextPath()%>/selectList.fee?currentPage=<%=p%>'"><%=p %></button>
+					<button class="pageBtn" onclick="location.href='<%=request.getContextPath()%>/selectListAsLeader.fee?currentPage=<%=p%>'"><%=p %></button>
 			<%
 				}
 			}
@@ -211,10 +211,10 @@
 			<% if(currentPage >= maxPage) { %>
 			<button class="pageBtn" disabled>></button>
 			<%} else { %>
-			<button class="pageBtn" onclick="location.href='<%=request.getContextPath() %>/selectList.fee?currentPage=<%=currentPage + 1 %>'">></button>
+			<button class="pageBtn" onclick="location.href='<%=request.getContextPath() %>/selectListAsLeader.fee?currentPage=<%=currentPage + 1 %>'">></button>
 			<% } %>
 			
-			<button class="pageBtn" onclick="location.href='<%=request.getContextPath()%>/selectList.fee?currentPage=<%=maxPage%>'">>></button>
+			<button class="pageBtn" onclick="location.href='<%=request.getContextPath()%>/selectListAsLeader.fee?currentPage=<%=maxPage%>'">>></button>
 		</div>
 		
 
