@@ -36,7 +36,7 @@ public class JoinGroupServlet extends HttpServlet {
 		
 		int result = new GroupService().joinGroup(group, loginUser);
 		
-		String page = "views/group/groupMainPage.jsp";
+		String page = "views/group/groupMainPage.jsp"; 
 		if(result > 0) {
 			page = "views/group/groupMainPage.jsp";			
 		} else {
