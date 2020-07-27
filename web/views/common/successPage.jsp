@@ -33,6 +33,11 @@
 				movePath = "<%=request.getContextPath()%>/selectList.bo";
 				break;
           
+      case "insertInquire" :
+				successMessage = "게시판 작성에 성공하셨습니다.";
+				movePath = "<%=request.getContextPath()%>/views/group/myInquiry.jsp";
+				break;
+          
 			case "insertGroup" :
 				successMessage = "동호회 개설에 성공하셨습니다.";
 				request.setAttribute("selectedGroup", selectedGroup);

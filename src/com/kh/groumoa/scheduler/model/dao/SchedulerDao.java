@@ -51,7 +51,7 @@ public class SchedulerDao {
 		return result;
 	}
 
-	public ArrayList<SchedulerVO> selectScheduleList(Connection con, int groupCode) {
+	public ArrayList<SchedulerVO> selectList(Connection con, int groupCode) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<SchedulerVO> list = null;

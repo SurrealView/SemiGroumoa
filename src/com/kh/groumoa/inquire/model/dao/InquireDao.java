@@ -8,6 +8,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import javax.print.attribute.standard.RequestingUserName;
+
 import com.kh.groumoa.inquire.model.vo.InquireVO;
 import static com.kh.groumoa.common.JDBCTemplate.close;
 
@@ -32,15 +34,16 @@ public class InquireDao {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
-		String qurey = prop.getProperty("insertInquire");
+		String query = prop.getProperty("insertInquire");
 		
 		try {
-			pstmt = con.prepareStatement(qurey);
-			pstmt.setString(1, requestInquire.getCategoryCode());
-			pstmt.setInt(2, requestInquire.getGroupCode());
-			pstmt.setInt(3, requestInquire.getWriterCode());
-			pstmt.setString(4, requestInquire.getTitle());
-			pstmt.setString(5, requestInquire.getDetail());
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, requestInquire.getQuestioner_Code());
+			pstmt.setString(2, requestInquire.getQna_Cate_Code());
+			pstmt.setString(3, requestInquire.getQna_Title());
+			pstmt.setString(4, requestInquire.getQna_Detail());
+			
+			
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
