@@ -32,22 +32,19 @@ public class GroupInfo extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		GroupVO group = (GroupVO) request.getSession().getAttribute("selectedGroup");
-		int groupCode = group.getGroupCode();
-		
-		GroupVO selectGroup = new GroupService().selectOne(group.getGroupCode());
 		
 		RegionVO regionSearch = new GroupService().searchRegion(group.getRnCode());
 		System.out.println("테스트2"+regionSearch);
 		
 		
 		String page = "";
-		if(selectGroup != null) {
+		if(regionSearch != null) {
 			page = "views/group/groupUpdate.jsp";
 /*			request.setAttribute("group", group);
 			request.setAttribute("fileList", fileList);*/
-			request.setAttribute("regionSearch", regionSearch);
-			request.getSession().setAttribute("selectedGroup", selectGroup);
-			System.out.println("selectGroup" + selectGroup);
+			request.setAttribute("regionSearch", regionSearch);/*
+			request.setAttribute("selectGroup", selectGroup);
+			System.out.println("selectGroup" + selectGroup);*/
 /*				response.sendRedirect(request.getContextPath() + "/views/group/groupUpdate.jsp");
 */			} else {
 /*			for(int i = 0; i < saveFiles.size(); i++) {

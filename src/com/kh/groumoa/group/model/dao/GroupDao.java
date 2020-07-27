@@ -232,6 +232,7 @@ public class GroupDao {
 				group.setInterestCode(rset.getString("INTEREST_CODE"));
 				group.setOpenYn(rset.getString("OPEN_YN"));
 				group.setNickNameyn(rset.getString("NICKNAME_YN"));
+				group.setRnCode(rset.getString("RN_CODE"));
 				group.setOpenDate(rset.getDate("OPEN_DATE"));
 				group.setGroupRule(rset.getString("GROUP_RULE"));
 				group.setDescription(rset.getString("DESCRIPTION"));
@@ -245,7 +246,7 @@ public class GroupDao {
 			close(con);
 			close(pstmt);
 		}
-		System.out.println(group);
+		
 		return group;
 	}
 
@@ -756,6 +757,34 @@ public class GroupDao {
 		}
 		System.out.println("테스트2"+groupG);
 		return groupG;
+	}
+
+
+	public int updateGroup(Connection con, GroupVO group) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("updateGroup");
+		
+		try {
+			
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, group.getRnCode());
+			pstmt.setString(2, group.getInterestCode());
+			pstmt.setString(3, group.getNickNameyn());
+			pstmt.setString(4, group.getGroupRule());
+			pstmt.setString(5, group.getDescription());
+			pstmt.setInt(6, group.getGroupCode());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 }

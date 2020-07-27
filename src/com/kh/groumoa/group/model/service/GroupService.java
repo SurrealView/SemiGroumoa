@@ -109,15 +109,17 @@ public class GroupService {
 
 	
 	//동호회 기본정보 수정
-	public int updateGroup(GroupVO group, ArrayList<Attachment> fileList) {
+	public int updateGroup(GroupVO group) {
 		Connection con = getConnection();
 		int result = 0;
 		int result1 = 0;
 		int result2 = 0;
 		
-		result1 = new GroupDao().updateThumbnailContent(con, group);
+		result = new GroupDao().updateGroup(con,group);
 		
-		if(result1 > 0) {
+		//result1 = new GroupDao().updateThumbnailContent(con, group);
+		
+/*		if(result1 > 0) {
 //			int groupCode = new GroupDao().selectCurrval(con);
 			
 			for(int i = 0; i < fileList.size(); i++) {
@@ -128,11 +130,11 @@ public class GroupService {
 			}
 			
 //			System.out.println(groupCode);
-		}
+		}*/
 		
-		if(result1 > 0 && result2 == fileList.size()) {
-			commit(con);
-			result = 1;
+		if(result > 0 /*&& result2 == fileList.size()*/) {
+			commit(con);/*
+			result = 1;*/
 		} else {
 			rollback(con);
 		}

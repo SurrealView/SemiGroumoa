@@ -205,9 +205,11 @@
 			location.href="'<%=request.getContextPath()%>/groupMember.go'";
 		}
 		function reSetting() {
-			console.log("<%=request.getContextPath()%>/groupUpdate.jsp");
- 			location.href="'<%=request.getContextPath()%>/GroupInfo.gi'";
-		}
+			<%-- String str =<%=request.getContextPath()%> + "/GroupInfo.gi"; --%> 
+			console.log("<%=request.getContextPath()%>/GroupInfo.gi");
+			location.href = "<%=request.getContextPath()%>/GroupInfo.gi";
+			/* location.href=str; */
+ 			<%-- location.href="'<%=request.getContextPath()%>/GroupInfo.gi'"; --%>
 	</script>
 </body>
 </html>
