@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="com.kh.groumoa.inquire.model.vo.InquireVO, java.util.ArrayList, com.kh.groumoa.common.*"%>
+<% ArrayList<InquireVO> list = (ArrayList<InquireVO>) request.getAttribute("list"); 
+PageInfo pi = (PageInfo) request.getAttribute("pi");
+int listCount = pi.getTotalCount();
+int currentPage = pi.getCurrentPage();
+int maxPage = pi.getMaxPage();
+int startPage = pi.getStartPage();
+int endPage = pi.getEndPage();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -163,6 +171,35 @@
 		</table>
 	</div>
 	</div>
+	<div class="pagingArea" align="center">
+			<button onclick="location.href='<%=request.getContextPath()%>/select.in?currentPage=1'"><<</button>
+			
+			<% if(currentPage <= 1) {%>
+			<button disabled><</button>
+			<%} else { %>
+			<button onclick="location.href='<%=request.getContextPath() %>/select.in?currentPage=<%=currentPage - 1 %>'"><</button>
+			<% } %>
+			
+			<% for(int p = startPage; p <= endPage; p++) {
+				if(p == currentPage) {
+			%>
+				<button disabled><%=p %></button>
+			<%   } else { %>
+					<button onclick="location.href='<%=request.getContextPath()%>/select.in?currentPage=<%=p%>'"><%=p %></button>
+			<%
+				}
+			}
+			%>
+			
+			<% if(currentPage >= maxPage) { %>
+			<button disabled>></button>
+			<%} else { %>
+			<button onclick="location.href='<%=request.getContextPath() %>/select.in?currentPage=<%=currentPage + 1 %>'">></button>
+			<% } %>
+			
+			<button onclick="location.href='<%=request.getContextPath()%>/select.in?currentPage=<%=maxPage%>'">>></button>
+		</div>
+		
 
 </body>
 </html>
