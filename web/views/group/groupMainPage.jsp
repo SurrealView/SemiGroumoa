@@ -196,7 +196,10 @@
 		}
 		
 		function joinPopup() {
-			window.open("<%=request.getContextPath()%>/views/group/groupJoin.jsp", "", "width=350,height=400");
+			<%-- window.open("<%=request.getContextPath()%>/views/group/groupJoin.jsp", "", "width=350,height=400"); --%>
+			<%-- location.href="'<%=request.getContextPath()%>/views/group/groupJoin.jsp'"; --%>
+<%-- 			console.log("<%=request.getContextPath()%>/views/group/groupJoin.jsp"); --%>
+			location.href="<%=request.getContextPath()%>/views/group/groupJoin.jsp";			
 		}		
 	</script>
 </body>

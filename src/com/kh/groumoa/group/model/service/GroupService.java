@@ -319,4 +319,21 @@ public class GroupService {
 
 	}
 
+	public int joinGroup(GroupVO group, MemberVO loginUser) {
+		
+		Connection con = getConnection();
+		
+		int result = new GroupDao().joinGroup(con, group.getGroupCode(), loginUser.getMemberCode());
+		
+		if(result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		close(con);
+		
+		return result;
+	}
+
 }
