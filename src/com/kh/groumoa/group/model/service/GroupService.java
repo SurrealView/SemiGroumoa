@@ -35,9 +35,9 @@ public class GroupService {
 			
 			for(int i = 0; i < fileList.size(); i++) {
 				fileList.get(i).setGroupCode(groupCode);
-//				group.setGroupCode(groupCode);
+				group.setGroupCode(groupCode);
 				
-				result2 += new GroupDao().insertAttachment(con, fileList.get(i));//수정필요
+				result2 += new GroupDao().insertAttachment(con, fileList.get(i));
 			}
 			System.out.println("test result2 : " + result2);
 			
@@ -61,7 +61,7 @@ public class GroupService {
 		Connection con = getConnection();
 		
 		RegionVO region = new GroupDao().searchRegion(con, rnCode);
-		
+		System.out.println("rn서비스" + rnCode);
 		if(region != null) {
 			commit(con);
 		} else {
@@ -91,7 +91,7 @@ public class GroupService {
 	}
 	
 	//동호회 입력내용 조회
-	public GroupVO selectOne(String groupCode) {
+	public GroupVO selectOne(int groupCode) {
 		Connection con = getConnection();
 		int result = 0;
 		
@@ -110,30 +110,32 @@ public class GroupService {
 
 	
 	//동호회 기본정보 수정
-	public int updateGroup(GroupVO group, ArrayList<Attachment> fileList) {
+	public int updateGroup(GroupVO group) {
 		Connection con = getConnection();
 		int result = 0;
 		int result1 = 0;
 		int result2 = 0;
 		
-		result1 = new GroupDao().updateThumbnailContent(con, group);
+		result = new GroupDao().updateGroup(con,group);
 		
-		if(result1 > 0) {
-			int groupCode = new GroupDao().selectCurrval(con);
+		//result1 = new GroupDao().updateThumbnailContent(con, group);
+		
+/*		if(result1 > 0) {
+//			int groupCode = new GroupDao().selectCurrval(con);
 			
 			for(int i = 0; i < fileList.size(); i++) {
-				fileList.get(i).setGroupCode(groupCode);
+				fileList.get(i).setGroupCode(group.getGroupCode());
 //				group.setGroupCode(groupCode);
 				
 				result2 += new GroupDao().updateAttachment(con, fileList.get(i));
 			}
 			
-			System.out.println(groupCode);
-		}
+//			System.out.println(groupCode);
+		}*/
 		
-		if(result1 > 0 && result2 == fileList.size()) {
-			commit(con);
-			result = 1;
+		if(result > 0 /*&& result2 == fileList.size()*/) {
+			commit(con);/*
+			result = 1;*/
 		} else {
 			rollback(con);
 		}
@@ -141,22 +143,6 @@ public class GroupService {
 		close(con);
 		
 		System.out.println("service" + result);
-		return result;
-	}
-	
-	//동호회 회원 추방
-	public int kickOut (int memberCode) {
-		Connection con = getConnection();
-		int result = 0;
-		
-		result = new GroupDao().kickOut(con, memberCode);
-		
-		if(result > 0) {
-			commit(con);
-		} else {
-			rollback(con);
-		}
-		
 		return result;
 	}
 	
@@ -314,6 +300,23 @@ public class GroupService {
 		close(con);
 		
 		return attach;
+  }
+
+	public GroupVO selectGroup(int nno) {
+		Connection con = getConnection();
+		GroupVO group = new GroupDao().selectGroupDetail(con, nno);
+		
+		close(con);
+		
+		return group;
+	}
+
+	public GroupVO selectGroupD(int nno) {
+		Connection con = getConnection();
+		GroupVO groupD = new GroupDao().selecGroupD(con, nno);
+		close(con);
+		return groupD;
+
 	}
 
 }

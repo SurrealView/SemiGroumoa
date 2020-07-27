@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.kh.groumoa.group.model.vo.*"%>
+<%
+	GroupVO group = (GroupVO) request.getAttribute("group");
+	GroupVO groupD = (GroupVO) request.getAttribute("groupD");
+	System.out.println("나오니:" + group);
+	System.out.println("나오니2" + groupD);
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -105,6 +111,9 @@
 		left: 200px;
 		position:absolute;
 	}
+	input[type=text] {
+		border: none;
+	}
 	
 </style>
 </head>
@@ -114,27 +123,27 @@
    		<div style="border-radius: 50%; height: 200px; width: 200px; background-color: gray; position: absolute; top: 50px; left: 250px;"></div>
    		<div class="managerList" id="managerlistup">
    		<div class="num" id="list1"><label>동호회명  </label>&nbsp;&nbsp;&nbsp;
-   		<input type="text"  class ="form-control" id="fname" name="fname"></div>
+   		<input type="text"  class ="form-control" id="fname" name="fname" value="<%=group.getGroupName() %>"></div>
    		<div class="num" id="list2"><label>모임장명  </label>&nbsp;&nbsp;&nbsp;
-   		<input type="text" class ="form-control" id="fname" name="fname"></div>
+   		<input type="text" class ="form-control" id="fname" name="fname" value="<%= group.getMemberName() %>"></div>
    		<div class="num" id="list3"><label>인원  </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-   		<input type="text" class ="form-control" id="fname" name="fname"></div>
+   		<input type="text" class ="form-control" id="fname" name="fname" value="<%= group.getMemberCount() %>"></div>
    		<div class="num" id="list4"><label>관심사 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-   		<input type="text" class ="form-control" id="fname" name="fname"></div>
+   		<input type="text" class ="form-control" id="fname" name="fname" value="<%=group.getInterest() %>"></div>
    		</div>
 	</div>
 	<div id="activity">
 		<label style="font-weight:bold; position:absolute; top:20px; left: 20px; font-size:20px;">상세정보</label>
 		<div id="list1">
 		<div class="activityList" id="list6"><label>개설일</label><br>
-		<input type="text" id="detail"></div>
+		<input type="text" id="detail" value="<%=group.getOpenDate() %>"></div>
     	<div class="activityList" id="list7"><label>결제 금액</label>
     	<input type="text" id="detail"></div>
     	</div>
    		<label id="write" style=" position:absolute; top:160px; left:20px; font-weight:bold; font-size:20px;">작성</label>
     	<div id="list2">
   	    <div class="activityList2" id="list9"><label>게시글</label>
-  	    <input type="text" id="detail"></div>
+  	    <input type="text" id="detail" value="<%=groupD.getPostCount() %>"></div>
         <div class="activityList2" id="list10"><label>댓글</label>
         <input type="text" id="detail"></div>
         <div class="activityList2" id="list11"><label>해산여부</label>
@@ -144,11 +153,12 @@
 	<div id="group">
 		<label style="font-weight:bold; position:absolute; top:20px; left:20px; font-size:20px;">모임장 정보</label>
 		<div class="groupList" id="list12"><label>이름</label><br>
-		<input type="text" id="detail"></div>
+		<input type="text" id="detail" value="<%=group.getGroupLeaderName() %>"></div>
 		<div class="groupList" id="list13"><label>계정</label><br>
-		<input type="text" id="detail"></div>
+		<input type="text" id="detail" value="<%=group.getEmail() %>"></div>
    		<div class="groupList" id="list14"><label>연락처</label>
-   		<input type="text" id="detail"></div>
+   		<input type="text" id="detail" value="<%=group.getPhone() %>"></div>
+   		
 	</div>
 </body>
 </html>

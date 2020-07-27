@@ -121,7 +121,7 @@
 			<div class="menu">문의하기</div>
 		</div>
 	</div>
-	<form action="<%=request.getContextPath()%>/insert.qa" method="post">
+	<form action="" method="post">
 		<div class="content">
 			<br> <br>
 			<div class="table-div">

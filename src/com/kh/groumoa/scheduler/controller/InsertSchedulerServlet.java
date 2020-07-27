@@ -39,6 +39,7 @@ public class InsertSchedulerServlet extends HttpServlet {
 		String schDetail = request.getParameter("schDetail");
 		String schDate = request.getParameter("schDate");
 //		String groupCode = request.getParameter("groupCode");
+		int groupCode = 3; //테스트용
 //		int writerCode = Integer.parseInt(request.getParameter("writerCode"));
 //		char status = request.getParameter("status").charAt(0);
 
@@ -57,18 +58,19 @@ public class InsertSchedulerServlet extends HttpServlet {
 		schedule.setSchDate(schDate);
 //		schedule.setWriterCode(writerCode);
 
+		
 		int result = new SchedulerService().insertSchedule(schedule);
 		System.out.println(schedule);
 		
-		ArrayList<SchedulerVO> list = new SchedulerService().selectSchedule() ;
+		ArrayList<SchedulerVO> list = new SchedulerService().selectList(groupCode) ;
 		
 		String page = "";
 		if (result > 0) {
 //			page = "/views/group/scheduler/groupCalendar.jsp";
 			request.setAttribute("schedule", schedule);
 			request.setAttribute("list", list);
-//			response.sendRedirect(request.getContextPath() + "/views/group/scheduler/groupCalendar.jsp");
-			response.sendRedirect(request.getContextPath() + "/views/group/scheduler/schedulePrintForm.jsp");
+			response.sendRedirect(request.getContextPath() + "/views/group/scheduler/groupCalendarManagement.jsp");
+//			response.sendRedirect(request.getContextPath() + "/views/group/scheduler/schedulePrintForm.jsp");
 		} else {
 			request.setAttribute("mag", "게시글 작성 실패");
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);

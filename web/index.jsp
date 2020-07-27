@@ -19,6 +19,10 @@
 <style>
 body {
 	font-family: 'Poor Story', cursive;
+	background-image: url('/groumoa/resources/image/backgroundImg.png');
+	background-position: 0% 10%;
+	background-size: 100% auto;
+	background-repeat: no-repeat;
 }
 
 #wrapper {
@@ -27,12 +31,38 @@ body {
 }
 
 #main-content {
-	width: 1000px;
 	height: 800px;
 }
 
-#myCarousel{
-	padding-top: 300px;
+.main-word {
+	/*  드래그 방지 */
+	-ms-user-select: none; 
+	-moz-user-select: -moz-none; 
+	-webkit-user-select: none; 
+	-khtml-user-select: none; 
+	user-select:none;
+	
+	color: white;
+	position: absolute;
+	font-family: '나눔명조', '명조';
+}
+
+#word1 {
+	left: 30%;
+	top: 115%;
+	font-size: 60pt;
+}
+
+#word2 {
+	left: 50%;
+	top: 125%;
+	font-size: 50pt;
+}
+
+#word3 {
+	left: 25%;
+	top: 130%;
+	font-size: 80pt;
 }
 </style>
 </head>
@@ -40,47 +70,9 @@ body {
 	<%@include file="views/common/header/newHeader.jsp"%>
 	<div id="wrapper">
 		<div id="main-content">
-<!-- 
-			carousel
-			<div class="container">
-				<div id="myCarousel" class="carousel slide" data-ride="carousel">
-					Indicators
-					<ol class="carousel-indicators">
-						<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-						<li data-target="#myCarousel" data-slide-to="1"></li>
-						<li data-target="#myCarousel" data-slide-to="2"></li>
-					</ol>
-
-					Wrapper for slides
-					<div class="carousel-inner">
-						<div class="item active">
-							<img src="../../resources/image/main1.png" alt="main1"
-								style="width: 100%;">
-						</div>
-
-						<div class="item">
-							<img src="../../resources/image/main2.png" alt="main2" style="width: 100%;">
-						</div>
-
-						<div class="item">
-							<img src="../../resources/image/main3.png" alt="main3" style="width: 100%;">
-						</div>
-					</div>
-
-					Left and right controls
-					<a class="left carousel-control" href="#myCarousel"
-						data-slide="prev"> <span
-						class="glyphicon glyphicon-chevron-left"></span> <span
-						class="sr-only">Previous</span>
-					</a> <a class="right carousel-control" href="#myCarousel"
-						data-slide="next"> <span
-						class="glyphicon glyphicon-chevron-right"></span> <span
-						class="sr-only">Next</span>
-					</a>
-				</div>
-			</div>
-
- -->
+			<div id="word1" class="main-word">세상의 모든</div>
+			<div id="word2" class="main-word">즐거움을 모아</div>
+			<div id="word3" class="main-word">그루모아</div>
 		</div>
 	</div>
 	<%@include file="views/common/footer/newFooter.jsp"%>

@@ -1,6 +1,7 @@
 package com.kh.groumoa.group.model.dao;
 
 import static com.kh.groumoa.common.JDBCTemplate.close;
+import static com.kh.groumoa.common.JDBCTemplate.getConnection;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -19,6 +20,7 @@ import com.kh.groumoa.common.model.vo.AttachmentVo;
 import com.kh.groumoa.group.model.vo.Attachment;
 import com.kh.groumoa.group.model.vo.GroupMemberVO;
 import com.kh.groumoa.group.model.vo.GroupVO;
+import com.kh.groumoa.member.model.dao.MemberDao;
 import com.kh.groumoa.member.model.vo.InterestVO;
 import com.kh.groumoa.member.model.vo.MemberInterestVO;
 import com.kh.groumoa.member.model.vo.MemberVO;
@@ -141,11 +143,11 @@ public class GroupDao {
 			
 			if(rset.next()) {
 				region = new RegionVO();
-				region.setRnCode("RN_CODE");
+				region.setRnCode(rset.getString("RN_CODE"));
 				region.setRegionName(rset.getString("REGION_NAME"));
 				region.setRegionSpecific(rset.getString("REGION_SPECIFIC"));
 			}
-			
+			System.out.println("dao" + region);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -211,7 +213,7 @@ public class GroupDao {
 		return result;
 	}
 	
-	public GroupVO selectGroup(Connection con, String groupCode) {
+	public GroupVO selectGroup(Connection con, int groupCode) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		GroupVO group = null;
@@ -220,7 +222,7 @@ public class GroupDao {
 		System.out.println(groupCode);
 		try {
 			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, groupCode);
+			pstmt.setInt(1, groupCode);
 			
 			rset = pstmt.executeQuery();
 			
@@ -232,6 +234,7 @@ public class GroupDao {
 				group.setInterestCode(rset.getString("INTEREST_CODE"));
 				group.setOpenYn(rset.getString("OPEN_YN"));
 				group.setNickNameyn(rset.getString("NICKNAME_YN"));
+				group.setRnCode(rset.getString("RN_CODE"));
 				group.setOpenDate(rset.getDate("OPEN_DATE"));
 				group.setGroupRule(rset.getString("GROUP_RULE"));
 				group.setDescription(rset.getString("DESCRIPTION"));
@@ -245,7 +248,7 @@ public class GroupDao {
 			close(con);
 			close(pstmt);
 		}
-		System.out.println(group);
+		
 		return group;
 	}
 
@@ -316,29 +319,6 @@ public class GroupDao {
 		
 		
 		return selectedGroup;
-	}
-
-	//동호회 회원 추방
-	public int kickOut(Connection con, int memberCode) {
-		PreparedStatement pstmt = null;
-		int result = 0;
-		
-		String query = prop.getProperty("kickOut");
-		
-		try {
-			pstmt = con.prepareStatement(query);
-			pstmt.setInt(1, memberCode);
-			
-			result = pstmt.executeUpdate();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-		
-		
-		return result;
 	}
 
 
@@ -640,12 +620,13 @@ public class GroupDao {
 			
 			while(rset.next()) {
 				GroupVO g = new GroupVO();
+				g.setGroupCode(rset.getInt("GROUP_CODE"));
 				g.setGroupName(rset.getString("GROUP_NAME"));
 				g.setMemberName(rset.getString("MEMBER_NAME"));
 				g.setGroupLeaderCode(rset.getInt("GROUP_LEADER_CODE"));
 				g.setOpenDate(rset.getDate("OPEN_DATE"));
 				g.setInterest(rset.getString("INTEREST"));
-				g.setMemberCount(rset.getInt("POST"));
+				g.setMemberCount(rset.getInt("MEMBER_COUNT"));
 				g.setPostCount(rset.getInt("POST"));
 
 				list.add(g);
@@ -713,7 +694,6 @@ public class GroupDao {
 		return name;
 	}
 
-
 	public AttachmentVo selectAttachment(Connection con, int groupCode) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -725,14 +705,16 @@ public class GroupDao {
 			pstmt = con.prepareStatement(query);
 			
 			pstmt.setInt(1, groupCode);
-			
-			rset = pstmt.executeQuery();
+      
+      rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
-				thumbnail.setFid(rset.getString("FID"));
+        
+      	thumbnail.setFid(rset.getString("FID"));
 				thumbnail.setOriginName(rset.getString("ORIGIN_NAME"));
 				thumbnail.setChangeName(rset.getString("CHANGE_NAME"));
 				thumbnail.setFilePath(rset.getString("FILE_PATH"));				
+        
 			}			
 			
 		} catch (SQLException e) {
@@ -744,5 +726,99 @@ public class GroupDao {
 		}
 		
 		return thumbnail;
+	}
+  
+	public GroupVO selectGroupDetail(Connection con, int nno) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		GroupVO member = null;
+		
+		String query = prop.getProperty("selectGroupDetail");
+
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, nno);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				member = new GroupVO();
+				
+				member.setGroupName(rset.getString("GROUP_NAME"));
+				member.setGroupLeaderCode(rset.getInt("GROUP_LEADER_CODE"));
+				member.setInterest(rset.getString("INTEREST"));
+				member.setMemberName(rset.getString("MEMBER_NAME"));
+				member.setEmail(rset.getString("EMAIL"));
+				member.setPhone(rset.getString("PHONE"));
+				member.setOpenDate(rset.getDate("OPEN_DATE"));
+			}
+			
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		System.out.println("테스트" + member);
+		return member;
+	}
+
+
+	public GroupVO selecGroupD(Connection con, int nno) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		GroupVO groupG = null;
+		
+		String query = prop.getProperty("selectGroupDetailG");
+
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, nno);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				groupG = new GroupVO();
+				groupG.setPostCount(rset.getInt("POST_COUNT"));
+			}
+			
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		System.out.println("테스트2"+groupG);
+		return groupG;
+	}
+
+
+	public int updateGroup(Connection con, GroupVO group) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("updateGroup");
+		
+		try {
+			
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, group.getRnCode());
+			pstmt.setString(2, group.getInterestCode());
+			pstmt.setString(3, group.getNickNameyn());
+			pstmt.setString(4, group.getGroupRule());
+			pstmt.setString(5, group.getDescription());
+			pstmt.setInt(6, group.getGroupCode());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 }

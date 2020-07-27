@@ -8,7 +8,7 @@ public class SchedulerVO {
 	private String schTitle;
 	private String schDetail;
 	private String schDate;
-	private Date dateWritten;
+	private String dateWritten;
 	private int groupCode;
 	private int writerCode;
 	private char status;
@@ -17,7 +17,7 @@ public class SchedulerVO {
 		super();
 	}
 
-	public SchedulerVO(String schCode, String schTitle, String schDetail, String schDate, Date dateWritten,
+	public SchedulerVO(String schCode, String schTitle, String schDetail, String schDate, String dateWritten,
 			int groupCode, int writerCode, char status) {
 		super();
 		this.schCode = schCode;
@@ -62,11 +62,11 @@ public class SchedulerVO {
 		this.schDate = schDate2;
 	}
 
-	public Date getDateWritten() {
+	public String getDateWritten() {
 		return dateWritten;
 	}
 
-	public void setDateWritten(Date dateWritten) {
+	public void setDateWritten(String dateWritten) {
 		this.dateWritten = dateWritten;
 	}
 

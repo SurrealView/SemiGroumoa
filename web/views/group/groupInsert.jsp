@@ -11,12 +11,13 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
-	.content{
+	.content-1{
 		width:1000px;
 		height:1500px;
 		margin:0 auto;
-		border: 1px solid #e2d8d8;
 		border-radius: 10px;
+		border: 1px solid lightgray;
+   		display: block;
 	}
 	.tab{
 		width:950px;
@@ -61,14 +62,14 @@
         display: block;
         margin: 0px auto;
     }
-	table{
+	#groupTable {
 		position:absolute;
 		left:270px;
 		width:980px;
 		border-left:hidden;
 	}
 	
-	table tr td {
+	#groupTable tr td {
 		padding-left:20px;
 		padding-top:20px;
 		padding-bottom:20px;
@@ -150,7 +151,7 @@
 <body>
 	<%@include file="../common/header/newHeader.jsp"%>
 	<%@include file="subMenubar.jsp" %>
-	<div class="content">
+	<div class="content-1">
 		<p align="right" style="font-size:10px; padding-right: 25px; padding-top: 15px;">개인정보취급방침에 따라 최근 5년간의 내역이 제공됩니다.</p>
 		<div id="sub-title"><span style="font-size: 15px">기본정보</span></div>
 		<div class="tab" id="tab">
@@ -160,7 +161,7 @@
 		<br><br>
      <div class="wrapper">
      <form id="insertForm" action="<%=request.getContextPath() %>/insert.gr" method="post" encType="multipart/form-data">
-	  <table border="1">
+	  <table border="1" id="groupTable">
         <tr>
             <td colspan="6" height="50px" style="border-right:hidden; border-top:hidden;">동호회이름
             &nbsp;<input type="text" style="width:350px" class="form-control" name="groupName">
@@ -207,43 +208,43 @@
 	 			<br>
 	 			<br>
 	 			
-	 			<input type="checkbox" id="I01" name="interest" value="I01" onclick="doOpenCheck(this);">
+	 			<input type="radio" id="I01" name="interest" value="I01">
 	 			<label for="I1" class="interest">문화/공연</label>
-	 			<input type="checkbox" id="I02" name="interest" value="I02" onclick="doOpenCheck(this);">
+	 			<input type="radio" id="I02" name="interest" value="I02">
 	 			<label for="I2" class="interest">게임/오락</label>
-	 			<input type="checkbox" id="I03" name="interest" value="I03" onclick="doOpenCheck(this);">
+	 			<input type="radio" id="I03" name="interest" value="I03">
 	 			<label for="I3" class="interest">아웃도어/여행</label>
-	 			<input type="checkbox" id="I04" name="interest" value="I04" onclick="doOpenCheck(this);">
+	 			<input type="radio" id="I04" name="interest" value="I04">
 	 			<label for="I4" class="interest">운동/스포츠</label>
-	 			<input type="checkbox" id="I05" name="interest" value="I05" onclick="doOpenCheck(this);">
+	 			<input type="radio" id="I05" name="interest" value="I05">
 	 			<label for="I5" class="interest">인문학/책/글</label>
-	 			<input type="checkbox" id="I06" name="interest" value="I06" onclick="doOpenCheck(this);">
+	 			<input type="radio" id="I06" name="interest" value="I06">
 	 			<label for="I6" class="interest">업종/직무</label>
-	 			<input type="checkbox" id="I07" name="interest" value="I07" onclick="doOpenCheck(this);">
-	 			<label for="I7" class="interest">외국/언어</label>
-	 			<input type="checkbox" id="I08" name="interest" value="I08" onclick="doOpenCheck(this);">
+	 			<input type="radio" id="I07" name="interest" value="I07">
+	 			<label for="I7" class="interest">외국/언어</label><br>
+	 			<input type="radio" id="I08" name="interest" value="I08">
 	 			<label for="I8" class="interest">음악/악기</label>
-	 			<input type="checkbox" id="I09" name="interest" value="I09" onclick="doOpenCheck(this);">
+	 			<input type="radio" id="I09" name="interest" value="I09">
 	 			<label for="I9" class="interest">패션/뷰티</label>
-	 			<input type="checkbox" id="I10" name="interest" value="I10" onclick="doOpenCheck(this);">
-	 			<label for="I10" class="interest">공예/만들기</label>&nbsp;&nbsp;&nbsp;
-	 			<input type="checkbox" id="I11" name="interest" value="I11" onclick="doOpenCheck(this);">
-	 			<label for="I11" class="interest">댄스/무용</label>&nbsp;&nbsp;&nbsp;&nbsp;
-	 			<input type="checkbox" id="I12" name="interest" value="I12" onclick="doOpenCheck(this);">
-	 			<label for="I12" class="interest">사교/인맥</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	 			<input type="checkbox" id="I13" name="interest" value="I13" onclick="doOpenCheck(this);">
-	 			<label for="I13" class="interest">사진</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	 			<input type="checkbox" id="I14" name="interest" value="I14" onclick="doOpenCheck(this);">
+	 			<input type="radio" id="I10" name="interest" value="I10">
+	 			<label for="I10" class="interest">공예/만들기</label>&nbsp;&nbsp;
+	 			<input type="radio" id="I11" name="interest" value="I11">
+	 			<label for="I11" class="interest">댄스/무용</label>&nbsp;&nbsp;
+	 			<input type="radio" id="I12" name="interest" value="I12">
+	 			<label for="I12" class="interest">사교/인맥</label>&nbsp;&nbsp;&nbsp;&nbsp;
+	 			<input type="radio" id="I13" name="interest" value="I13">
+	 			<label for="I13" class="interest">사진</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 			<input type="radio" id="I14" name="interest" value="I14">
 	 			<label for="I14" class="interest">차/오토바이</label><br>
-	 			<input type="checkbox" id="I15" name="interest" value="I15" onclick="doOpenCheck(this);">
+	 			<input type="radio" id="I15" name="interest" value="I15">
 	 			<label for="I15" class="interest">요리/제조</label>
-	 			<input type="checkbox" id="I16" name="interest" value="I16" onclick="doOpenCheck(this);">
+	 			<input type="radio" id="I16" name="interest" value="I16">
 	 			<label for="I16" class="interest">가족/결혼</label>
-	 			<input type="checkbox" id="I17" name="interest" value="I17" onclick="doOpenCheck(this);">
-	 			<label for="I17" class="interest">반려동물</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	 			<input type="checkbox" id="I18" name="interest" value="I18" onclick="doOpenCheck(this);">
-	 			<label for="I18" class="interest">봉사활동</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	 			<input type="checkbox" id="I19" name="interest" value="I19" onclick="doOpenCheck(this);">
+	 			<input type="radio" id="I17" name="interest" value="I17">
+	 			<label for="I17" class="interest">반려동물</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 			<input type="radio" id="I18" name="interest" value="I18">
+	 			<label for="I18" class="interest">봉사활동</label>&nbsp;&nbsp;&nbsp;&nbsp;
+	 			<input type="radio" id="I19" name="interest" value="I19">
 	 			<label for="I19" class="interest">자유주제</label>
 	 			
             </td>
@@ -293,16 +294,16 @@
             <input type="reset" id="cancelBtn" value="취소">
         </form>
      </div>
-     
+
      <script>
-      	function doOpenCheck(chk){
+/*       	function doOpenCheck(chk){
     	    var obj = document.getElementsByName("interest");
     	    for(var i=0; i<obj.length; i++){
     	        if(obj[i] != chk){
     	            obj[i].checked = false;
     	        }
     	    }
-    	}
+    	} */
      	
      	$(function(){
      		$("#subBtn").hide();
@@ -343,5 +344,6 @@
         })
     </script> --%>
 </div>
+	<%@include file="../common/footer/newFooter.jsp" %>
 </body>
 </html>

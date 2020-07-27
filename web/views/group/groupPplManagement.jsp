@@ -2,11 +2,11 @@
     pageEncoding="UTF-8" import="com.kh.groumoa.member.model.vo.*, com.kh.groumoa.group.model.vo.*, com.kh.groumoa.common.*, java.util.*" %>
 <%
 	ArrayList<MemberVO> list = (ArrayList<MemberVO>) request.getAttribute("list");
-/*  	PageInfo pi = (PageInfo) request.getAttribute("pi");
+  	PageInfo pi = (PageInfo) request.getAttribute("pi");
 	int currentPage = pi.getCurrentPage();
 	int maxPage = pi.getMaxPage();
 	int startPage = pi.getStartPage();
-	int endPage = pi.getEndPage();	 */ 
+	int endPage = pi.getEndPage();	 
 %>
 <!DOCTYPE html>
 <html>
@@ -140,7 +140,7 @@
 </style>
 </head>
 <body>
-	<!-- 여기 헤더 추가할것 -->
+	<%@include file="../common/header/newHeader.jsp"%>
 	<%@include file="subMenubar.jsp" %>
 	<div class="content">
 		<p align="right" style="font-size:10px; padding-right: 25px; padding-top: 15px;">개인정보취급방침에 따라 최근 5년간의 내역이 제공됩니다.</p>
@@ -152,7 +152,7 @@
 		<br><br>
 		<div class="table-div">
 			<h2 align="center">회원</h2>         
-   			<form id="kickoutForm" method="post">
+   			<form id="kickout" method="post" action="<%=request.getContextPath() %>/kickout.ko">
    			<table class="table table-striped">
                   <thead>
                     <tr>
@@ -169,7 +169,7 @@
                    	<% for(MemberVO m : list) { %>
                     <tr>
                       <input type="hidden" name="check">
-                      <td><input type="checkbox"></td>
+                      <td><input type="checkbox" id="checkList"></td>
                       <td><a href="pplManagement-detail.jsp"><%=m.getMemberCode() %></a></td>
                       <td><%= m.getUserName() %></td>
                       <td><%= m.getGroupCode() %></td>
@@ -308,36 +308,43 @@
 				</ul>
 				</div>
  -->		
-<%--  				<div class="pagination-div" align="center">
-					<button onclick="location.href='<%=request.getContextPath()%>/groupPpl.bo?currentPage=1'"><<</button>
-					
-					<% if(currentPage <= 1) { %>
-					<button disabled><</button>
-					<% } else { %>
-					<button onclick="location.href='<%=request.getContextPath()%>/groupPpl.bo?currentPage=<%=currentPage - 1%>'"><</button>
-					<% } %>
-					
-					<% for(int p = startPage; p <= endPage; p++) { 
-							if(p == currentPage) {
-					%>
-								<button disabled><%= p %></button>
-					<%      } else { %>
-								<button onclick="location.href='<%=request.getContextPath()%>/groupPpl.bo?currentPage=<%=p%>'"><%= p %></button>
-					<%  
-					        }
-						}
-					%>
-					
-					<% if(currentPage >= maxPage) { %>
-					<button disabled>></button>
-					<% } else { %>
-					<button onclick="location.href='<%=request.getContextPath()%>/groupPpl.bo?currentPage=<%=currentPage + 1%>'">></button>
-					<% } %>
+				 <div class="pagingArea" align="center">
+			<button onclick="location.href='<%=request.getContextPath()%>/managerGroupMember.mn?currentPage=1'"><<</button>
+			
+			<% if(currentPage <= 1) { %>
+			<button disabled><</button>
+			<% } else { %>
+			<button onclick="location.href='<%=request.getContextPath()%>/managerGroupMember.mn?currentPage=<%=currentPage - 1%>'"><</button>
+			<% } %>
+			
+			<% for(int p = startPage; p <= endPage; p++) { 
+					if(p == currentPage) {
+			%>
+						<button disabled><%= p %></button>
+			<%      } else { %>
+						<button onclick="location.href='<%=request.getContextPath()%>/managerGroupMember.mn?currentPage=<%=p%>'"><%= p %></button>
+			<%  
+			        }
+				}
+			%>
+			
+			<% if(currentPage >= maxPage) { %>
+			<button disabled>></button>
+			<% } else { %>
+			<button onclick="location.href='<%=request.getContextPath()%>/managerGroupMember.mn?currentPage=<%=currentPage + 1%>'">></button>
+			<% } %>
+		
+			<button onclick="location.href='<%=request.getContextPath()%>/managerGroupMember.mn?currentPage=<%=maxPage%>'">>></button>
+			<br>
+			<div id="Btn">
+				<button id="backBtn">이전페이지</button>&nbsp;
+				<button id="detailBtn">정보확인</button>
+			</div>
+			
+		</div> 
+
 				
-					<button onclick="location.href='<%=request.getContextPath()%>/groupPpl.bo?currentPage=<%=maxPage%>'">>></button>
-				</div>
- --%>				
-				<button class="kickBtn" onclick="kickout();">강퇴하기</button>
+				<button class="kickBtn">강퇴하기</button>
 				<button class="inviteBtn">초대하기</button>
 				</form>
                 <div class="searchbox" id="searchbox">
@@ -359,7 +366,20 @@
 			$("#kickoutForm").attr("action", "<%=request.getContextPath()%>/kickout.ko");
 		}
 		
-		function kickout() {
+		$("#kickBtn").click(function(){
+			var member = [];
+			$.each($("#checkList:checked").parent().prev(), function(){
+				feeCode.push($(this).val());
+				$(this).attr("name", "memberCode");
+			});
+			
+			if(window.confirm('정말로 해당 게시물을 삭제하시겠습니까?')) {
+				$("#kickout").submit();
+			}
+			
+		});
+		
+<%-- 		function kickout() {
 			var kick = document.getElementsByName("check");
 			
 			console.log(hobby);
@@ -384,7 +404,8 @@
 				gang = null;
 			}
 			
-		}
+		} --%>
 		</script>
+		<%@include file="../common/footer/newFooter.jsp" %>
 </body>
 </html>

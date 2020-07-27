@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.groumoa.common.PageInfo;
+import com.kh.groumoa.member.model.vo.ManagerVO;
 import com.kh.groumoa.member.model.vo.MemberInterestVO;
 import com.kh.groumoa.member.model.vo.MemberVO;
 
@@ -231,52 +232,49 @@ public class MemberDao {
 		return listCount;
 	}
 
-	public ArrayList<MemberVO> selectList(Connection con, PageInfo pi) {
+	public ArrayList<MemberVO> selectList(Connection con, PageInfo pi, int groupCode) {
 		ArrayList<MemberVO> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-
+		
 		String query = prop.getProperty("selectList");
-
+		
 		try {
 			pstmt = con.prepareStatement(query);
-
+			
 			int startRow = (pi.getCurrentPage() - 1) * pi.getLimit() + 1;
-			int endRow = startRow + pi.getLimit() - 1;
-
-			System.out.println("start" + startRow);
-			System.out.println("end" + endRow);
-
-			pstmt.setInt(1, startRow);
-			pstmt.setInt(2, endRow);
-
+			int endRow = startRow + pi.getLimit() -1;
+			
+			pstmt.setInt(1, groupCode);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
 			rset = pstmt.executeQuery();
-
+			
 			list = new ArrayList<MemberVO>();
-
-			while (rset.next()) {
+			
+			if(rset.next()) {
 				MemberVO m = new MemberVO();
 				m.setMemberCode(rset.getInt("MEMBER_CODE"));
 				m.setEmail(rset.getString("EMAIL"));
 				m.setUserName(rset.getString("MEMBER_NAME"));
 				m.setEnrollDate(rset.getDate("ENROLL_DATE"));
 				m.setPostCode(rset.getInt("POST"));
-				System.out.println(m);
+				
 				list.add(m);
 			}
-
+			System.out.println("dao list"+list);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			close(rset);
 			close(pstmt);
+			close(con);
 		}
-		System.out.println(list);
-		return list;
+		return list;	
 	}
 
-	public ArrayList<MemberVO> selectLeader(Connection con, PageInfo pi) {
-		ArrayList<MemberVO> list = null;
+	public ArrayList<ManagerVO> selectLeader(Connection con, PageInfo pi) {
+		ArrayList<ManagerVO> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
@@ -290,22 +288,22 @@ public class MemberDao {
 
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, endRow);
-
+			
 			rset = pstmt.executeQuery();
 
-			list = new ArrayList<MemberVO>();
+			list = new ArrayList<ManagerVO>();
 
 			while (rset.next()) {
-				MemberVO m = new MemberVO();
-				m.setMemberCode(rset.getInt("MEMBER_CODE"));
-				m.setEmail(rset.getString("EMAIL"));
-				m.setUserName(rset.getString("MEMBER_NAME"));
-				m.setEnrollDate(rset.getDate("ENROLL_DATE"));
-				m.setGroupLeaderyn(rset.getString("GROUP_LEADER_YN"));
-
+				ManagerVO m = new ManagerVO();
+				m.setManagerCode(rset.getString("MANAGER_CODE"));
+				m.setManagerName(rset.getString("MANAGER_NAME"));
+				m.setManagerId(rset.getString("MANAGER_ID"));
+				m.setManagerPwd(rset.getString("MANAGER_PWD"));
+				m.setNoticeCode(rset.getString("NOTICE_CODE"));
+				
 				list.add(m);
 			}
-
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -330,13 +328,14 @@ public class MemberDao {
 			if (rset.next()) {
 				listCount = rset.getInt(1);
 			}
-
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(stmt);
 			close(rset);
 		}
+		
 		return listCount;
 	}
 
@@ -349,23 +348,25 @@ public class MemberDao {
 
 		try {
 			pstmt = con.prepareStatement(query);
-			//SQL 수정.... 필요
 			pstmt.setInt(1, nno);
 			
 			rset = pstmt.executeQuery();
+			
 			if(rset.next()) {
 				member = new MemberVO();
 				
+				member.setPostCode(rset.getInt("POST"));
+				member.setPenaltyCode(rset.getInt("PENALTY"));
+				member.setEnrollDate(rset.getDate("ENROLL_DATE"));
 				member.setUserName(rset.getString("MEMBER_NAME"));
 				member.setEmail(rset.getString("EMAIL"));
-				member.setUserPwd(rset.getString("MEMBER_PWD"));
-				member.setEnrollDate(rset.getDate("ENROLL_DATE"));
-				member.setPostCode(rset.getInt("POST_CODE"));
-				member.setGroupCode(rset.getInt("GROUP_CODE"));
 				member.setGroupName(rset.getString("GROUP_NAME"));
-				member.setPenaltyCode(rset.getInt("PENALTY_CODE"));
+				member.setUserPwd(rset.getString("MEMBER_PWD"));
+				member.setQuestion(rset.getInt("QUESTION"));
+				member.setReply(rset.getInt("REPLY"));
 			}
-
+			
+		
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -402,5 +403,321 @@ public class MemberDao {
 		return result;
 
 	}
+
+
+	public MemberVO searchId(Connection con, MemberVO requestMember) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		MemberVO responseMember = new MemberVO();
+		
+		String query = prop.getProperty("searchId");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, requestMember.getUserName());
+			pstmt.setString(2, requestMember.getPhone());
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				responseMember.setEmail(rset.getString("EMAIL"));
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+				
+		return responseMember;
+	}
+	
+	public MemberVO searchPwd(Connection con, MemberVO requestMember) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		MemberVO responseMember = null;
+		
+		String query = prop.getProperty("searchPwd");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, requestMember.getEmail());
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				responseMember = new MemberVO();
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+      			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return responseMember;
+	}
+
+	public int updateMemberPwd(Connection con, String email, String newPwd) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("updateMemberPwd");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, newPwd);
+			pstmt.setString(2, email);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+  }
+
+	public int getGroupLeaderCount(Connection con) {
+		Statement stmt = null;
+		int listCount = 0;
+		ResultSet rset = null;
+
+		String query = prop.getProperty("listGroupLeaderCount");
+
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+
+			if (rset.next()) {
+				listCount = rset.getInt(1);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+			close(rset);
+		}
+
+		return listCount;
+	}
+
+	public ArrayList<MemberVO> selectGroupLeaderList(Connection con, PageInfo pi) {
+		ArrayList<MemberVO> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String query = prop.getProperty("selectGroupLeader");
+
+		try {
+			pstmt = con.prepareStatement(query);
+
+			int startRow = (pi.getCurrentPage() - 1) * pi.getLimit() + 1;
+			int endRow = startRow + pi.getLimit() - 1;
+
+			System.out.println("start" + startRow);
+			System.out.println("end" + endRow);
+
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+
+			rset = pstmt.executeQuery();
+
+			list = new ArrayList<MemberVO>();
+
+			while (rset.next()) {
+				MemberVO m = new MemberVO();
+				m.setGroupLeaderCode(rset.getInt("GROUP_LEADER_CODE"));
+				m.setEmail(rset.getString("EMAIL"));
+				m.setUserName(rset.getString("MEMBER_NAME"));
+				m.setEnrollDate(rset.getDate("ENROLL_DATE"));
+				m.setPostCode(rset.getInt("POST"));
+				System.out.println(m);
+				list.add(m);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		System.out.println(list);
+		return list;
+	}
+
+	public int selectGroupMemberList(Connection con) {
+		Statement stmt = null;
+		int listCount = 0;
+		ResultSet rset = null;
+
+		String query = prop.getProperty("listGroupMemberCount");
+
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+
+			if (rset.next()) {
+				listCount = rset.getInt(1);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+			close(rset);
+		}
+
+		return listCount;
+	}
+
+	public ArrayList<MemberVO> selectGroupMemberList(Connection con, PageInfo pi) {
+		ArrayList<MemberVO> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String query = prop.getProperty("selectGroupMemberList");
+
+		try {
+			pstmt = con.prepareStatement(query);
+
+			int startRow = (pi.getCurrentPage() - 1) * pi.getLimit() + 1;
+			int endRow = startRow + pi.getLimit() - 1;
+
+			System.out.println("start" + startRow);
+			System.out.println("end" + endRow);
+
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+
+			rset = pstmt.executeQuery();
+
+			list = new ArrayList<MemberVO>();
+
+			while (rset.next()) {
+				MemberVO m = new MemberVO();
+				m.setGroupCode(rset.getInt("GROUP_CODE"));
+				m.setMemberCode(rset.getInt("MEMBER_CODE"));
+				m.setEmail(rset.getString("EMAIL"));
+				m.setUserName(rset.getString("MEMBER_NAME"));
+				m.setEnrollDate(rset.getDate("ENROLL_DATE"));
+				m.setPostCode(rset.getInt("POST"));
+				list.add(m);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		System.out.println(list);
+		return list;
+	}
+
+	public MemberVO selectMemberG(Connection con, int nno) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		MemberVO memberG = null;
+		
+		String query = prop.getProperty("selectMemberG");
+
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, nno);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				memberG = new MemberVO();
+				
+				memberG.setGroupName(rset.getString("GROUP_NAME"));
+				memberG.setGroupLeaderCode(rset.getInt("GROUP_LEADER_CODE"));
+			}
+			
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return memberG;
+	}
+
+	public ArrayList<MemberVO> selectGroupMemberList(PageInfo pi, Connection con, int memberCode, int groupCode) {
+		ArrayList<MemberVO> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("selectGroupMemberList");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getLimit() + 1;
+			int endRow = startRow + pi.getLimit() - 1;
+
+			System.out.println("start" + startRow);
+			System.out.println("end" + endRow);
+						
+			pstmt.setInt(1, memberCode);
+			pstmt.setInt(2, groupCode);
+			pstmt.setInt(3, startRow);
+			pstmt.setInt(4, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<MemberVO>();
+
+			while (rset.next()) {
+				MemberVO m = new MemberVO();
+				m.setGroupLeaderCode(rset.getInt("GROUP_LEADER_CODE"));
+				m.setEmail(rset.getString("EMAIL"));
+				m.setUserName(rset.getString("MEMBER_NAME"));
+				System.out.println(m);
+				list.add(m);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		
+		return list;
+	}
+	
+	//동호회 회원 추방
+		public int kickOut(Connection con, int memberCode, int groupCode) {
+			PreparedStatement pstmt = null;
+			int result = 0;
+				
+			String query = prop.getProperty("kickOut");
+				
+			try {
+				pstmt = con.prepareStatement(query);
+				pstmt.setInt(1, memberCode);
+				pstmt.setInt(2, groupCode);
+					
+				result = pstmt.executeUpdate();
+					
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+				
+			return result;
+		}
 
 }

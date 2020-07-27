@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>자주하는 질문</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 <script
@@ -17,16 +17,19 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
 #QNA {
-	text-align: center;
-	align: center;
+	text-align: left;
 	border-bottom: 1px solid black;
-	width: 250px;
+	width: 550px;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 #qwer {
 	text-align: center;
-	align: center;
-	
+	margin-left:  auto;
+	margin-right: auto;
+	width: 550px;
+	height: 40px;
 }
 
 .content {
@@ -135,8 +138,9 @@
 			<div class="menu">문의하기</div>
 		</div>
 	</div>
-	<div id="qwer">
-		<table border="1">
+	<br><br><br>
+	<div >
+		<table border="1" id="qwer">
 			<tr>
 				<td>자주하는 질문(99)</td>
 				<td>회원(20)</td>
@@ -153,7 +157,7 @@
 			</tr>
 		</table>
 	</div>
-
+	<br><br>
 	<div id="QNA">
 		자주하는 질문</div>
 	<div class="content">

@@ -51,7 +51,7 @@ public class SchedulerDao {
 		return result;
 	}
 
-	public ArrayList<SchedulerVO> selectSchedule(Connection con) {
+	public ArrayList<SchedulerVO> selectList(Connection con, int groupCode) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<SchedulerVO> list = null;
@@ -60,20 +60,21 @@ public class SchedulerDao {
 		
 		try {
 			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, groupCode);
 			rset = pstmt.executeQuery();
 			
 			list = new ArrayList<>();
 			
 			while(rset.next()) {
 				SchedulerVO schedule = new SchedulerVO();
-				schedule.getSchCode();
-				schedule.getGroupCode();
-				schedule.getSchTitle();
-				schedule.getSchDetail();
-				schedule.getSchDate();
-				schedule.getDateWritten();
-				schedule.getWriterCode();
-				schedule.getStatus();
+				schedule.setSchCode(rset.getString("SCH_CODE"));
+				schedule.setGroupCode(rset.getInt("GROUP_CODE"));
+				schedule.setSchTitle(rset.getString("SCH_TITLE"));
+				schedule.setSchDetail(rset.getString("SCH_DETAIL"));
+				schedule.setSchDate(rset.getString("SCH_DATE").substring(0,10));
+				schedule.setDateWritten(rset.getString("DATE_WRITTEN").substring(0, 10));
+				schedule.setWriterCode(rset.getInt("WRITER_CODE"));
+				schedule.setStatus(rset.getString("STATUS").charAt(0));
 				
 				list.add(schedule);
 			}

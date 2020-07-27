@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="com.kh.groumoa.fee.model.vo.FeeVO, java.util.ArrayList, com.kh.groumoa.common.*"%>
+<%
+	ArrayList<FeeVO> list = (ArrayList<FeeVO>) request.getAttribute("list");
+	PageInfo pi = (PageInfo) request.getAttribute("pi");
+	int listCount = pi.getTotalCount();
+	int currentPage = pi.getCurrentPage();
+	int maxPage = pi.getMaxPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -102,7 +111,7 @@
 }
 
 #division {
-	width:950px;
+	width: 950px;
 }
 
 #insertBtn {
@@ -126,31 +135,35 @@
 	margin-left: 90px;
 	margin-top: -45px;
 }
+
+.pageBtn{
+	border-radius: 5px;
+	border: 1px solid lightgray;
+	background: white;
+	width: 30px;
+	height: 30px;
+}
 </style>
 </head>
 <body>
 	<%@include file="../common/header/newHeader.jsp"%>
-	<%@include file="subMenubar.jsp"%>
+	<%@include file="subMenubar_myGroup.jsp"%>
 
 	<div class="content">
 		<p align="right"
 			style="font-size: 10px; padding-right: 25px; padding-top: 15px;">개인정보취급방침에
 			따라 최근 5년간의 내역이 제공됩니다.</p>
 		<div id="sub-title">
-			<span style="font-size: 20px">회비 내역</span>
+			<span style="font-size: 40px">회비 내역</span>
 		</div>
 		<br>
-		<hr id="division">
-		<input id="insertBtn" type="button" value="쓰기">
-		<!-- <span id="temp">* 게시판을 조회 및 수정하실 수 있습니다.</span> <br> -->
-		<!-- 위 코드는 모임장일때만 작동하도록 함 -->
+		<br>
 		<br>
 		<!-- 게시판 관리일경우 -->
 		<div class="table-div">
 			<table class="table table-striped">
 				<thead>
 					<tr>
-						<th>번호</th>
 						<th>종류</th>
 						<th>결제금액</th>
 						<th>상세설명</th>
@@ -158,87 +171,53 @@
 					</tr>
 				</thead>
 				<tbody>
+					<% for(FeeVO f : list) { %>
 					<tr>
-						<td>1</td>
-						<td>입금</td>
-						<td>65,000</td>
-						<td>김형진</td>
-						<td>2020-07-05</td>
+						<%-- <input type="hidden" value="<%=f.getFeeCode() %>"> --%>
+						<td><%= f.getFeeCategory() %></td>
+						<td><%= f.getFee() %></td>
+						<td><%= f.getDetail() %></td>
+						<td><%= f.getFeeDate() %></td>
 					</tr>
-					<tr>
-						<td>1</td>
-						<td>출금</td>
-						<td>65,000</td>
-						<td>열승열</td>
-						<td>2020-07-05</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>입금</td>
-						<td>65,000</td>
-						<td>김형진</td>
-						<td>2020-07-05</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>출금</td>
-						<td>65,000</td>
-						<td>열승열</td>
-						<td>2020-07-05</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>입금</td>
-						<td>65,000</td>
-						<td>김형진</td>
-						<td>2020-07-05</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>출금</td>
-						<td>65,000</td>
-						<td>열승열</td>
-						<td>2020-07-05</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>입금</td>
-						<td>65,000</td>
-						<td>김형진</td>
-						<td>2020-07-05</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>출금</td>
-						<td>65,000</td>
-						<td>열승열</td>
-						<td>2020-07-05</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>입금</td>
-						<td>65,000</td>
-						<td>김형진</td>
-						<td>2020-07-05</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>출금</td>
-						<td>65,000</td>
-						<td>열승열</td>
-						<td>2020-07-05</td>
-					</tr>
-
+				<% } %>
 				</tbody>
 			</table>
 		</div>
 
 
 		<br>
-		<div class="pagination-div">
+				<div class="pagingArea" align="center">
+			<button class="pageBtn" onclick="location.href='<%=request.getContextPath()%>/selectList.fee?currentPage=1'"><<</button>
+			
+			<% if(currentPage <= 1) {%>
+			<button class="pageBtn" disabled><</button>
+			<%} else { %>
+			<button class="pageBtn" onclick="location.href='<%=request.getContextPath() %>/selectList.fee?currentPage=<%=currentPage - 1 %>'"><</button>
+			<% } %>
+			
+			<% for(int p = startPage; p <= endPage; p++) {
+				if(p == currentPage) {
+			%>
+				<button style="background: rgb(2,117,216); color:white" class="pageBtn" disabled><%= p %></button>
+			<%   } else { %>
+					<button class="pageBtn" onclick="location.href='<%=request.getContextPath()%>/selectList.fee?currentPage=<%=p%>'"><%=p %></button>
+			<%
+				}
+			}
+			%>
+			
+			<% if(currentPage >= maxPage) { %>
+			<button class="pageBtn" disabled>></button>
+			<%} else { %>
+			<button class="pageBtn" onclick="location.href='<%=request.getContextPath() %>/selectList.fee?currentPage=<%=currentPage + 1 %>'">></button>
+			<% } %>
+			
+			<button class="pageBtn" onclick="location.href='<%=request.getContextPath()%>/selectList.fee?currentPage=<%=maxPage%>'">>></button>
+		</div>
+		<%-- <div class="pagination-div">
 			<ul class="pagination">
-				<li class="page-item"><a class="page-link" href="#"><<</a></li>
-				<li class="page-item"><a class="page-link" href="#"><</a></li>
+				<li class="page-item"><a class="page-link" href="'<%=request.getContextPath()%>/selectList.fee?currentPage=1'"><<</a></li>
+				<li class="page-item"><a class="page-link" href="'<%=request.getContextPath() %>/selectList.bo?currentPage=<%=currentPage - 1 %>'"><</a></li>
 				<li class="page-item"><a class="page-link" href="#">1</a></li>
 				<li class="page-item active"><a class="page-link" href="#">2</a></li>
 				<li class="page-item"><a class="page-link" href="#">3</a></li>
@@ -247,8 +226,8 @@
 				<li class="page-item"><a class="page-link" href="#">></a></li>
 				<li class="page-item"><a class="page-link" href="#">>></a></li>
 			</ul>
-		</div>
+		</div> --%>
 	</div>
-	<%@include file="../common/footer/footer.jsp"%>
+	<%@include file="../common/footer/newFooter.jsp"%>
 </body>
 </html>

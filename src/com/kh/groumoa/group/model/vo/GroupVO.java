@@ -27,12 +27,16 @@ public class GroupVO implements java.io.Serializable {
 	private int postCount;
 	private String memberName;
 	
+	//관리자 페이지 동호회 상세 보기
+	private String email;
+	private String phone;
+	
 	public GroupVO() {}
 
 	public GroupVO(int groupCode, String groupName, String rnCode, String interestCode, String nickNameyn,
 			String openYn, Date openDate, String groupRule, String description, String status, int groupLeaderCode,
 			String groupLeaderYn, String regionName, String interest, String groupLeaderName, int memberCount,
-			int postCount, String memberName) {
+			int postCount, String memberName, String email, String phone) {
 		super();
 		this.groupCode = groupCode;
 		this.groupName = groupName;
@@ -52,6 +56,8 @@ public class GroupVO implements java.io.Serializable {
 		this.memberCount = memberCount;
 		this.postCount = postCount;
 		this.memberName = memberName;
+		this.email = email;
+		this.phone = phone;
 	}
 
 	public int getGroupCode() {
@@ -198,6 +204,22 @@ public class GroupVO implements java.io.Serializable {
 		this.memberName = memberName;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
 	@Override
 	public String toString() {
 		return "GroupVO [groupCode=" + groupCode + ", groupName=" + groupName + ", rnCode=" + rnCode + ", interestCode="
@@ -205,7 +227,10 @@ public class GroupVO implements java.io.Serializable {
 				+ ", groupRule=" + groupRule + ", description=" + description + ", status=" + status
 				+ ", groupLeaderCode=" + groupLeaderCode + ", groupLeaderYn=" + groupLeaderYn + ", regionName="
 				+ regionName + ", interest=" + interest + ", groupLeaderName=" + groupLeaderName + ", memberCount="
-				+ memberCount + ", postCount=" + postCount + ", memberName=" + memberName + "]";
+				+ memberCount + ", postCount=" + postCount + ", memberName=" + memberName + ", email=" + email
+				+ ", phone=" + phone + "]";
 	}
+
+	
 
 }

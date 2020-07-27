@@ -1,10 +1,15 @@
 package com.kh.groumoa.inquire.model.service;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
+import com.kh.groumoa.group.model.dao.BoardDao;
+import com.kh.groumoa.group.model.vo.BoardVO;
 import com.kh.groumoa.inquire.model.dao.InquireDao;
 import com.kh.groumoa.inquire.model.vo.InquireVO;
-import static com.kh.groumoa.common.JDBCTemplate.getConnection;
+import com.kh.groumoa.member.model.vo.MemberVO;
+
+import static com.kh.groumoa.common.JDBCTemplate.*;
 
 
 public class InquireService {
@@ -14,9 +19,26 @@ public class InquireService {
 		
 		int result = 0;
 		
-		int insertInquire = new InquireDao().insertInquire(con, requestInquire);
+		result = new InquireDao().insertInquire(con, requestInquire);
 		
-		return 0;
+		if(result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		return result;
+		
+	}
+
+	public ArrayList<InquireVO> selectInquireList(MemberVO loginUser) {
+		Connection con = getConnection();
+		
+		ArrayList<InquireVO> list = new InquireDao().selectList(con, pi, inquire);
+		
+		close(con);
+		
+		return list;
 	}
 	
 

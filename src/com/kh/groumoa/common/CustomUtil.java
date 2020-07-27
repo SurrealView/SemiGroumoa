@@ -3,14 +3,21 @@ package com.kh.groumoa.common;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.charset.Charset;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Base64;
 import java.util.Properties;
+import java.util.Random;
 
 public class CustomUtil {
 	private static CustomUtil instance = null;
@@ -265,4 +272,48 @@ public class CustomUtil {
 			e.printStackTrace();
 		}
 	}
+	
+	public String generateRandomString(int length) {
+			int leftLimit = 48; // numeral '0'
+		    int rightLimit = 122; // letter 'z'
+		    int targetStringLength = length;
+		    Random random = new Random();
+		 
+		    String generatedString = random.ints(leftLimit, rightLimit + 1)
+		      .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
+		      .limit(targetStringLength)
+		      .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+		      .toString();
+		 
+	    return generatedString;
+	}
+	
+	public String getSha512(String pwd) {
+		String encPwd = "";
+		
+		try {
+		
+			MessageDigest md = MessageDigest.getInstance("SHA-512");
+			
+			byte[] bytes = pwd.getBytes(Charset.forName("UTF-8"));
+			md.update(bytes);
+			
+			encPwd = Base64.getEncoder().encodeToString(md.digest());
+			
+		} catch (NoSuchAlgorithmException e) {
+			
+			e.printStackTrace();
+		}
+		
+		return encPwd;
+	}
+	
+	public String sqlDateToString(Date date) {
+		
+		 DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");  
+         String strDate = dateFormat.format(date);  
+        
+		return strDate;
+	}
+	
 }

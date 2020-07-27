@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="com.kh.groumoa.common.model.vo.*"%>
+	pageEncoding="UTF-8"%>
 <%
 	GroupVO group = (GroupVO) session.getAttribute("selectedGroup");
-	AttachmentVo thumbnail = (AttachmentVo) session.getAttribute("thumbnail");
 %>
 <!DOCTYPE html>
 <html>
@@ -34,12 +33,6 @@
 	margin-top: 0px;
 	margin-left: 25px;
 	border-bottom: 1px solid #e2d8d8;
-}
-
-#resetting {
-	margin-right: 25px;
-	background: white;
-	border: 1px solid black;
 }
 
 .item {
@@ -74,6 +67,10 @@
 	background: white;
 	border: 1px solid black;
 }
+#expand{
+	background: white;
+	border: 1px solid black;
+}
 
 .wrapper {
 	margin: auto;
@@ -97,14 +94,6 @@
 	width: 200px;
 	height: 200px;
 	border: 1px solid lightgray;
-}
-
-#group-title {
-	
-}
-
-.group-desc {
-	
 }
 
 #content2 {
@@ -132,6 +121,12 @@
 	border: 1px solid lightgray;
 	height: 300px;
 }
+
+#resetting{
+	margin-right: 25px;
+	background: white;
+	border: 1px solid black;
+}
 </style>
 </head>
 <body>
@@ -141,22 +136,24 @@
 		<!-- 메뉴. 지워도 됨 -->
 		<div class="tab" id="tab">
 			<div class="item active" id="board">
-				<a href="/groumoa/views/group/groupMainPage.jsp">메인페이지</a>
+				<a href="/groumoa/views/group/groupMainPageAsLeader.jsp">메인페이지</a>
 			</div>
 			<div class="item active" id="board">
 				<a href="#">가입신청내역</a>
 			</div>
 		</div>
-		<!-- 메뉴 끝 -->
-
-		<!-- <br> <input id="btn" type="button" value="폐쇄하기"> <input
-			type="hidden" onclick="listCheck();"> <br> <br> -->
-		<br> <input id="btn" type="button" value="폐쇄하기" onclick="groupClose();"><br> <br>
-
+		<!-- 메뉴 끝 -->    
+    
+		<br> <input id="btn" type="button" value="가입하기">
+			<input id="expand" type="button" value="인원증설" style="float:right; margin-right: 5px;" 
+			onclick="location.href='<%=request.getContextPath()%>/views/group/buyProduct.jsp'">
+		 <input type="hidden" onclick="listCheck();">
+    <input id="btn" type="button" value="폐쇄하기" onclick="groupClose();">
+				
 		<div class="wrapper">
 			<table class="table" id="content1">
 				<tr>
-					<td colspan="2" rowspan="4">
+         <td colspan="2" rowspan="4">
 					<div class="img-wrapper" onclick="clickThumbnail();">
 							<% if(thumbnail != null) { %>
 							<img id="thumbNail" src="<%=request.getContextPath() %>/notice_uploadFiles/<%=thumbnail.getChangeName() %>" title="썸네일" style="width:200px; height:200px;">
@@ -190,22 +187,27 @@
 					<td width="600px" class="group-board">회비?</td>
 				</tr>
 			</table>
-			<div id="content3" style="margin-top: 25px">게시판?</div>			
-		</div>		
-		<input type="file" id="upload_thumbnail" name="upload_thumbnail" style="display:none;" onchange="uploadImg(this);">
-		<div align="center">
-			<br><br><br><br>
-			<input id="resetting" type="button" value="수정하기" onclick="reSetting();">
+			<div id="content3" style="margin-top: 25px">게시판?</div>
+			<div align="center">
+				<br><br><br>
+				<input id="resetting" type="button" value="수정하기" onclick="reSetting();">
+			</div>
 		</div>
 	</div>
 	<%@include file="../common/footer/newFooter.jsp"%>
 
 	<script>
-		<%-- function listCheck() {
-			location.href="<%=request.getContextPath()%>/groupMember.go";
-		} --%>
-		
-		function groupClose(){			
+		function listCheck() {
+			location.href="'<%=request.getContextPath()%>/groupMember.go'";
+		}
+		function reSetting() {
+			<%-- String str =<%=request.getContextPath()%> + "/GroupInfo.gi"; --%> 
+			console.log("<%=request.getContextPath()%>/GroupInfo.gi");
+			location.href = "<%=request.getContextPath()%>/GroupInfo.gi";
+			/* location.href=str; */
+ 			<%-- location.href="'<%=request.getContextPath()%>/GroupInfo.gi'"; --%>
+                  
+      function groupClose(){			
 			console.log("동아리폐쇄 열기");
 			window.open("<%=request.getContextPath()%>/views/group/groupClose.jsp", "", "width=350,height=400");
 		}
@@ -224,7 +226,6 @@
 				
 				reader.readAsDataURL(value.files[0]);
 			}			
-		}
 	</script>
 </body>
 </html>
