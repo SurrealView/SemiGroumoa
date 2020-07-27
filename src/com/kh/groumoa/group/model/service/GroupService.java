@@ -320,7 +320,7 @@ public class GroupService {
 	}
 
 	public int joinGroup(GroupVO group, MemberVO loginUser) {
-		
+		System.out.println("service");
 		Connection con = getConnection();
 		
 		int result = new GroupDao().joinGroup(con, group.getGroupCode(), loginUser.getMemberCode());
