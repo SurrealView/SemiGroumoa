@@ -225,6 +225,7 @@
 		<button class=""
 			onclick="location.href='<%=request.getContextPath()%>/views/group/inquire.jsp'">작성하기</button>
 	</div>
+	
 
 
 
