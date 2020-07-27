@@ -8,6 +8,8 @@ import static com.kh.groumoa.common.JDBCTemplate.rollback;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import org.apache.catalina.Manager;
+
 import com.kh.groumoa.common.PageInfo;
 import com.kh.groumoa.group.model.dao.BoardDao;
 import com.kh.groumoa.group.model.dao.GroupDao;
@@ -245,4 +247,31 @@ public class MemberService {
 		
 		return list;
 	}
+
+	public ArrayList<MemberVO> selectGroupMemberListMain(PageInfo pi, int groupCode) {
+		Connection con = getConnection();
+		
+		ArrayList<MemberVO> list = new MemberDao().selectGroupMemberListMain(pi, con, groupCode);
+		
+		close(con);
+		
+		return list;
+	}
+
+	public ManagerVO selectLeaderDetail() {
+			Connection con = getConnection();
+			ManagerVO list = new MemberDao().selectLeaderDetail(con);
+			
+			close(con);
+			return list;
+		}
+
+	public ManagerVO selectLeaderDetailD(int nno) {
+		Connection con = getConnection();
+		ManagerVO list = new MemberDao().selectLeaderDetailD(con, nno);
+		
+		close(con);
+		return list;
+	}
+
 }
