@@ -28,19 +28,19 @@
 
 
 <script src='../../../resources/fullcalendar/packages/core/main.js'></script>
-<script src='../../../resources/fullcalendar/packages/daygrid/main.js'></script>
 <script
-	src='../../../resources/fullcalendar/packages/core/locales/ko.js'></script>
+	src="../../../resources/fullcalendar/packages/interaction/main.js"></script>
+<script src='../../../resources/fullcalendar/packages/daygrid/main.js'></script>
 <script
 	src="../../../resources/fullcalendar/packages/timegrid/main.min.js"></script>
 <script src="../../../resources/fullcalendar/packages/list/main.min.js"></script>
-<!-- interaction 끌어오기. 플러그인에 표시해야 이벤트 작동 -->
 <script
-	src="../../../resources/fullcalendar/packages/interaction/main.js"></script>
+	src='../../../resources/fullcalendar/packages/core/locales/ko.js'></script>
+<!-- interaction 끌어오기. 플러그인에 표시해야 이벤트 작동 -->
 <script src='../../../resources/fullcalendar/packages/bootstrap/main.js'></script>
 
 <!-- popper.js 사용을 위한 jquery -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+<!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
 	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
 	crossorigin="anonymous"></script>
 <script
@@ -50,71 +50,25 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
 	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-	crossorigin="anonymous"></script>
+	crossorigin="anonymous"></script> -->
 
 <script>
 	document.addEventListener('DOMContentLoaded', function() {
 		var calendarEl = document.getElementById('calendar');
 		var calendar = new FullCalendar.Calendar(calendarEl, {
-			/* dateClick : function() {
-				alert('a day has been clicked!');
-			}, */
-			plugins : [ 'dayGrid', 'timeGrid', 'list', 'interaction',
-					'bootstrap' ],
-			/* themeSystem : 'bootstrap', */
-			editable : true,
-			locale : 'ko',
-			customButtons : {
-				addEventBtn : {
-					theme : 'true',
-					text : '일정추가',
-					click : function() {
-						//스케줄러에 이벤트를 추가할 페이지로 이동
-						location.href = 'scheduleInsertForm.jsp';
-					}
-				}
-			},
+			plugins : [ 'dayGrid', 'timeGrid', 'list', 'interaction'],
 			header : {
-				left : 'addEventBtn today',
+				left : 'today',
 				center : 'title',
 				right : 'prevYear,prev,next,nextYear'
 			},
-			/* eventRender: function(event, element) {
-			    $(element).popover({
-			        placement : 'top',
-			        html : true,
-			        trigger : 'hover',
-			        title : event.title + ' <a href="#" class="close" data-dismiss="alert">×</a>',
-			        content : '<p>' + event.start + '</p><p>' + event.end + '<p>' + event.description + '</p>'
-			    })
-			}, */
-			events : [ 
-			<% for(int i = 0; i < list.size(); i++) { 
-				SchedulerVO schedule = (SchedulerVO)list.get(i);
-				System.out.println(schedule);
-				System.out.println(schedule.getSchTitle());
-				System.out.println(schedule.getSchDate());
-				System.out.println(schedule.getSchDetail());
-				System.out.println();
-			%>
-			{
-				title : '<%=schedule.getSchTitle()%>',
-				start : '<%=schedule.getSchDate()%>',
-				description : '<%=schedule.getSchDetail()%>'
-			},
-			<% } %>
-			{
+			locale : 'ko',
+			editable : true,
+			events : [{
 				title : 'default',
 				start : '2019-01-01',
 				description : 'defualt'
-			}
-			],
-			dateClick : function(info) {
-				alert('Clicked on: ' + info.dateStr);
-				alert('Coordinates: ' + info.jsEvent.pageX + ','
-						+ info.jsEvent.pageY);
-				alert('Current view: ' + info.view.type);
-			},
+			}],
 			eventClick : function(info) {
 				alert('클릭');
 				// 클릭시 해당 일자 배경색 바꿈
@@ -155,7 +109,7 @@
 <body>
 
 	<%@include file="/views/common/header/newHeader.jsp"%>
-	<%@include file="../subMenubar.jsp"%>
+	<%@include file="../subMenubar_myGroup.jsp"%>
 	<div id="outer">
 		<!-- 이 밖을 1000px로 감싼다. -->
 		<div id="cal-wrap">

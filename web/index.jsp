@@ -35,6 +35,13 @@ body {
 }
 
 .main-word {
+	/*  드래그 방지 */
+	-ms-user-select: none; 
+	-moz-user-select: -moz-none; 
+	-webkit-user-select: none; 
+	-khtml-user-select: none; 
+	user-select:none;
+	
 	color: white;
 	position: absolute;
 	font-family: '나눔명조', '명조';
