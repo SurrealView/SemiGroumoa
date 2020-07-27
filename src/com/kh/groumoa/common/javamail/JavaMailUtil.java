@@ -44,13 +44,12 @@ public class JavaMailUtil {
 	
 	private static Message prepareMessage(Session session, String MyAccountEmail, String recepient, String newPwd) {
 		
-		String myAccountEmail = "skrt1533@gmail.com";
-		String password = "";//내 계정 비밀번호 적기
+		
 		
 		try {
 			
 			Message message = new MimeMessage(session);
-			message.setFrom(new InternetAddress(myAccountEmail));
+			message.setFrom(new InternetAddress(MyAccountEmail));
 			message.setRecipient(Message.RecipientType.TO, new InternetAddress(recepient));
 			message.setSubject("그루모아 새 비밀번호");
 			message.setText("당신의 새 비밀번호는 " + newPwd + "입니다.");

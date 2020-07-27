@@ -37,11 +37,11 @@ public class SelectOneGroupAsLeaderServlet extends HttpServlet {
 		
 		GroupVO selectedGroup = new GroupService().selectOneGroup(requestGroup);
 
-		AttachmentVo attach = new GroupService().selectAttachment(requestGroup.getGroupCode());
+		//AttachmentVo attach = new GroupService().selectAttachment(requestGroup.getGroupCode());
 		
 		if(selectedGroup != null) {
 			request.getSession().setAttribute("selectedGroup", selectedGroup);
-			request.getSession().setAttribute("thumbnail", attach);
+			//request.getSession().setAttribute("thumbnail", attach);
 			response.sendRedirect("views/group/groupMainPageAsLeader.jsp");//동호회메인페이지로 경로 변경 필요
 		} else {
 			request.setAttribute("msg", "그룹 페이지 보이기 실패!");
