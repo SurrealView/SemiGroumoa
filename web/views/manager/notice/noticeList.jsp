@@ -110,28 +110,20 @@
          <td class="list"><%=n.getNoticeTitle() %></td>
          <td class="list"><%=n.getNoticeDate() %></td>
          </tr>
-      <% } %>      
-      <!-- <tr class="noticeTitle">
-         <td><input type="checkbox"></td>
-         <td></td>
-         <td>공지</td>
-         <td>김형진</td>
-         <td>방가방가</td>
-         <td>2020-07-05</td>
-         <td>2</td>
-      </tr> -->       
+      <% } %>
       </tbody>
       </table>
       <div class="userBtnArea">
       	<button onclick="writeNotice();">글쓰기</button>
       	<button onclick="deleteNotice();">삭제하기</button>
-      </div>
-      <div class="pageArea" align="center">   	
+      </div>                  
+      </form>      
+      <div class="pageArea" align="center">
       	<button onclick="location.href='<%=request.getContextPath()%>/selectList.no?currentPage=1'">처음으로</button>      	
-      	<% if(currentPage >= 1) { %>
+      	<% if(currentPage <= 1) { %>
       	<button disabled>←</button>
       	<%} else { %>
-      	<button onclick="location.href='<%=request.getContextPath()%>/selectList.no?currentPage=<%= currentPage - 1%>'"></button>
+      	<button onclick="location.href='<%=request.getContextPath()%>/selectList.no?currentPage=<%= currentPage - 1%>'">←</button>
       	<%} %>
       	
       	<% for(int p = startPage; p <= endPage; p++) { 
@@ -148,11 +140,9 @@
       	<% } else { %>
       	<button onclick="location.href='<%=request.getContextPath()%>/selectList.no?currentPage=<%= currentPage + 1%>'">→</button>
       	<% } %>      	
-      	<button onclick="location.href='<%=request.getContextPath()%>/selectList.no?currentPage=<%= maxPage%>'">맨끝으로</button>
-      </div>
+      	<button onclick="location.href='<%=request.getContextPath()%>/selectList.no?currentPage=<%= maxPage %>'">맨끝으로</button>
+      </div>      
       
-      </form>      
-            
     </div>
     
     <script>

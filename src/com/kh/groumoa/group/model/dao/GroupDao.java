@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.groumoa.common.PageInfo;
+import com.kh.groumoa.common.model.vo.AttachmentVo;
 import com.kh.groumoa.group.model.vo.Attachment;
 import com.kh.groumoa.group.model.vo.GroupMemberVO;
 import com.kh.groumoa.group.model.vo.GroupVO;
@@ -709,5 +711,38 @@ public class GroupDao {
 		}
 		
 		return name;
+	}
+
+
+	public AttachmentVo selectAttachment(Connection con, int groupCode) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		AttachmentVo thumbnail = null;
+		
+		String query = prop.getProperty("selectAttachment");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			pstmt.setInt(1, groupCode);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				thumbnail.setFid(rset.getString("FID"));
+				thumbnail.setOriginName(rset.getString("ORIGIN_NAME"));
+				thumbnail.setChangeName(rset.getString("CHANGE_NAME"));
+				thumbnail.setFilePath(rset.getString("FILE_PATH"));				
+			}			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return thumbnail;
 	}
 }

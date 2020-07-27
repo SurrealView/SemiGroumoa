@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import static com.kh.groumoa.common.CustomUtil.inst;
 
 import com.kh.groumoa.common.PageInfo;
+import com.kh.groumoa.notice.model.service.NoticeService;
+import com.kh.groumoa.notice.model.vo.NoticeVo;
 import com.kh.groumoa.report.model.service.ReportService;
 import com.kh.groumoa.report.model.vo.ReportVo;
 
@@ -33,19 +35,27 @@ public class SelectReportListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+								
 		int currentPage;
 		int limit;
-		
-		ReportService rs = new ReportService();
-		
-		currentPage = 1;
+		int nowPage = 0;
+		ReportService rs = new ReportService();			
+		currentPage= 1;
+		if(request.getParameter("currentPage") != null) {
+			/*String str = (String) request.getParameter("currentPage");
+			currentPage = Integer.parseInt(str);*/
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));	
+			nowPage = Integer.parseInt(request.getParameter("currentPage"));
+			
+			currentPage = nowPage;
+		}		
 		limit = 10;
-		
 		int listCount = rs.getListCount();
 		
 		PageInfo pi = inst().getPageInfo(currentPage, limit, listCount);
 		
-		ArrayList<ReportVo> reList = rs.selectList(pi);
+		ArrayList<ReportVo> reList = rs.selectList(pi);	
+		
 		
 		String page = "";
 		

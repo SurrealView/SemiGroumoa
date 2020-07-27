@@ -8,6 +8,7 @@
    int maxPage = pi.getMaxPage();
    int startPage = pi.getStartPage();
    int endPage = pi.getEndPage();
+   
    MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
 %>
 <!DOCTYPE html>
@@ -101,13 +102,14 @@
       </table>
       <div class="userBtnArea">
       	<button onclick="writeReport();">글쓰기</button>
-      </div>
-      <div class="pageArea" align="center">   	
+      </div>                              
+      </form>      
+      <div class="pageArea" align="center">
       	<button onclick="location.href='<%=request.getContextPath()%>/selectList.re?currentPage=1'">처음으로</button>      	
-      	<% if(currentPage >= 1) { %>
+      	<% if(currentPage <= 1) { %>
       	<button disabled>←</button>
       	<%} else { %>
-      	<button onclick="location.href='<%=request.getContextPath()%>/selectList.re?currentPage=<%= currentPage - 1%>'"></button>
+      	<button onclick="location.href='<%=request.getContextPath()%>/selectList.re?currentPage=<%= currentPage - 1%>'">←</button>
       	<%} %>
       	
       	<% for(int p = startPage; p <= endPage; p++) { 
@@ -116,7 +118,7 @@
       		<button disabled><%=p %></button>
       	<% } else {%>
       		<button onclick="location.href='<%=request.getContextPath()%>/selectList.re?currentPage=<%=p%>'"><%=p%></button>
-      	<% }
+      	<%}
       	} %>
       	
       	<% if(currentPage >= maxPage) { %>
@@ -124,11 +126,8 @@
       	<% } else { %>
       	<button onclick="location.href='<%=request.getContextPath()%>/selectList.re?currentPage=<%= currentPage + 1%>'">→</button>
       	<% } %>      	
-      	<button onclick="location.href='<%=request.getContextPath()%>/selectList.re?currentPage=<%= maxPage%>'">맨끝으로</button>
+      	<button onclick="location.href='<%=request.getContextPath()%>/selectList.re?currentPage=<%= maxPage %>'">맨끝으로</button>
       </div>
-      
-      </form>      
-            
     </div>
     
     <script>

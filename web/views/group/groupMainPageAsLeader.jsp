@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="com.kh.groumoa.common.model.vo.*"%>
 <%
 	GroupVO group = (GroupVO) session.getAttribute("selectedGroup");
+	AttachmentVo thumbnail = (AttachmentVo) session.getAttribute("thumbnail");
 %>
 <!DOCTYPE html>
 <html>
@@ -33,6 +34,12 @@
 	margin-top: 0px;
 	margin-left: 25px;
 	border-bottom: 1px solid #e2d8d8;
+}
+
+#resetting {
+	margin-right: 25px;
+	background: white;
+	border: 1px solid black;
 }
 
 .item {
@@ -142,15 +149,20 @@
 		</div>
 		<!-- 메뉴 끝 -->
 
-		<br> <input id="btn" type="button" value="가입하기"> <input
-			type="hidden" onclick="listCheck();"> <br> <br>
+		<!-- <br> <input id="btn" type="button" value="폐쇄하기"> <input
+			type="hidden" onclick="listCheck();"> <br> <br> -->
+		<br> <input id="btn" type="button" value="폐쇄하기" onclick="groupClose();"><br> <br>
 
 		<div class="wrapper">
 			<table class="table" id="content1">
 				<tr>
 					<td colspan="2" rowspan="4">
-						<div class="img-wrapper">
-							<img src="#" title="썸네일">
+					<div class="img-wrapper" onclick="clickThumbnail();">
+							<% if(thumbnail != null) { %>
+							<img id="thumbNail" src="<%=request.getContextPath() %>/notice_uploadFiles/<%=thumbnail.getChangeName() %>" title="썸네일" style="width:200px; height:200px;">
+							<% } else { %>
+							<img id="thumbNail" title="썸네일" style="width:200px; height:200px;">
+							<% } %>
 						</div>
 					</td>
 					<td width="15%" class="group-field">동호회명</td>
@@ -178,15 +190,40 @@
 					<td width="600px" class="group-board">회비?</td>
 				</tr>
 			</table>
-			<div id="content3" style="margin-top: 25px">게시판?</div>
+			<div id="content3" style="margin-top: 25px">게시판?</div>			
+		</div>		
+		<input type="file" id="upload_thumbnail" name="upload_thumbnail" style="display:none;" onchange="uploadImg(this);">
+		<div align="center">
+			<br><br><br><br>
+			<input id="resetting" type="button" value="수정하기" onclick="reSetting();">
 		</div>
 	</div>
 	<%@include file="../common/footer/newFooter.jsp"%>
 
 	<script>
-		function listCheck() {
-			location.href="<%=request.getContextPath()%>
-		/groupMember.go";
+		<%-- function listCheck() {
+			location.href="<%=request.getContextPath()%>/groupMember.go";
+		} --%>
+		
+		function groupClose(){			
+			console.log("동아리폐쇄 열기");
+			window.open("<%=request.getContextPath()%>/views/group/groupClose.jsp", "", "width=350,height=400");
+		}
+		
+		function clickThumbnail(){
+			$("#upload_thumbnail").click();
+		}
+		
+		function uploadImg(value){
+			if(value.files && value.files[0]){
+				var reader = new FileReader();
+				
+				reader.onload = function(e) {
+					$("#thumbNail").attr("src", e.target.result);
+				}
+				
+				reader.readAsDataURL(value.files[0]);
+			}			
 		}
 	</script>
 </body>

@@ -79,7 +79,7 @@
                     <td><label>신고자ID</label></td>
                     <!-- <td colspan="2"><input type="text" name="reporter" value="신고자" readonly></td> -->
                     <% if(loginUser != null) { %>
-                    <td colspan="2"><%=loginUser.getMemberCode() %> <%=loginUser.getEmail() %><input type="hidden" name="reporter" value="<%=loginUser.getMemberCode() %>"></td>
+                    <td colspan="2"><%-- <%=loginUser.getMemberCode() %> --%> <%=loginUser.getEmail() %><input type="hidden" name="reporter" value="<%=loginUser.getMemberCode() %>"></td>
                     <!-- //<input type="text" name="reporter" value="신고자" readonly> -->
                     <% } else { %>
                     <td colspan="2"></td>
