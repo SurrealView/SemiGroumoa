@@ -46,10 +46,13 @@ public class SearchPwdServlet extends HttpServlet {
 		if(responseMember != null) {
 			//System.out.println("not null");
 			
-			String newPwd = new CustomUtil().generateRandomString(8);
+			CustomUtil cu = new CustomUtil();
+			String newPwd = cu.generateRandomString(8);
+			String newEncPwd = cu.getSha512(newPwd);
 			//System.out.println("test newPwd : " + newPwd);
 			
-			int result = new MemberService().updateMemberPwd(email, newPwd);
+			
+			int result = new MemberService().updateMemberPwd(email, newEncPwd);
 			
 			System.out.println(result);
 			//이메일로 변경된 비밀번호 발송하는 로직 추가
