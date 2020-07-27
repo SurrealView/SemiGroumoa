@@ -5,6 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>동아리 가입하기</title>
 <style>
     body {
@@ -23,7 +24,7 @@
 <body>
     <br>
     <div class="content">
-    <form id="joinGroup">
+    <form id="joinGroup" method="post">
     <table align="center">
     	<thead>
     		<th colspan="2">동아리 가입</th>
@@ -45,12 +46,14 @@
     </table>        
         <br><br>
         <input type="button" onClick="window.close();" value="닫기">
-        <input type="button" onClick="joinIn();" value="신청하기">
+        <!-- <input type="button" onClick="joinIn();" value="신청하기"> -->
+        <button onclick="joinIn()">신청하기</button>
     </form>    
     </div>
     <script>
     function joinIn() {
-    	<%-- $("#joinGroup").attr("action", "<%=request.getContextPath()%>"); --%>
+    	$("#joinGroup").attr("action", "<%=request.getContextPath()%>/join.gr");    	
+    	window.close();
     }
     
     function joinRules() {

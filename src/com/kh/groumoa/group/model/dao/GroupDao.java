@@ -821,4 +821,27 @@ public class GroupDao {
 		
 		return result;
 	}
+
+
+	public int joinGroup(Connection con, int groupCode, int memberCode) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("joinGroup");
+		
+		try {			
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, memberCode);
+			pstmt.setInt(2, groupCode);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+				
+		return result;
+	}
 }
