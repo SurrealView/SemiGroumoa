@@ -125,6 +125,12 @@
 	border: 1px solid lightgray;
 	height: 300px;
 }
+
+#resetting{
+	margin-right: 25px;
+	background: white;
+	border: 1px solid black;
+}
 </style>
 </head>
 <body>
@@ -141,8 +147,7 @@
 			</div>
 		</div>
 		<!-- 메뉴 끝 -->
-
-		<br> <input id="btn" type="button" value="가입하기"> <input
+		<br> <input id="btn" type="button" value="폐쇄하기" onclick="groupClose();"> <input
 			type="hidden" onclick="listCheck();"> <br> <br>
 
 		<div class="wrapper">
@@ -179,6 +184,10 @@
 				</tr>
 			</table>
 			<div id="content3" style="margin-top: 25px">게시판?</div>
+			<div align="center">
+				<br><br><br>
+				<input id="resetting" type="button" value="수정하기" onclick="reSetting();">
+			</div>
 		</div>
 	</div>
 	<%@include file="../common/footer/newFooter.jsp"%>
@@ -186,6 +195,10 @@
 	<script>
 		function listCheck() {
 			location.href="'<%=request.getContextPath()%>/groupMember.go'";
+		}
+		function reSetting() {
+			console.log("<%=request.getContextPath()%>/groupUpdate.jsp");
+ 			location.href="'<%=request.getContextPath()%>/GroupInfo.gi'";
 		}
 	</script>
 </body>

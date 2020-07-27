@@ -111,6 +111,9 @@
 		left: 200px;
 		position:absolute;
 	}
+	input[type=text] {
+		border: none;
+	}
 	
 </style>
 </head>

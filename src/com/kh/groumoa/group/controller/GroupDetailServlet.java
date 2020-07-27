@@ -1,4 +1,4 @@
-package com.kh.groumoa.member.controller;
+package com.kh.groumoa.group.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

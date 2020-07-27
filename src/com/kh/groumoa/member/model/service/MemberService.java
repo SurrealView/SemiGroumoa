@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import com.kh.groumoa.common.PageInfo;
 import com.kh.groumoa.group.model.dao.BoardDao;
+import com.kh.groumoa.group.model.dao.GroupDao;
 import com.kh.groumoa.group.model.vo.BoardVO;
 import com.kh.groumoa.group.model.vo.GroupVO;
 import com.kh.groumoa.member.model.dao.MemberDao;
@@ -105,10 +106,10 @@ public class MemberService {
 	}
 
 
-	public ArrayList<MemberVO> selectList(PageInfo pi) {
+	public ArrayList<MemberVO> selectList(PageInfo pi, int groupCode) {
 		Connection con = getConnection();
 
-		ArrayList<MemberVO> list = new MemberDao().selectList(con, pi);
+		ArrayList<MemberVO> list = new MemberDao().selectList(con, pi, groupCode);
 
 		close(con);
 
@@ -217,5 +218,31 @@ public class MemberService {
 		close(con);
 		
 		return memberG;
+	}
+
+	//동호회 회원 추방
+	public int kickOut (int memberCode, int groupCode) {
+		Connection con = getConnection();
+		int result = 0;
+		
+		result = new MemberDao().kickOut(con, memberCode, groupCode);
+		
+		if(result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		return result;
+	}
+
+	public ArrayList<MemberVO> selectGroupMemberList(PageInfo pi, int memberCode, int groupCode) {
+		Connection con = getConnection();
+		
+		ArrayList<MemberVO> list = new MemberDao().selectGroupMemberList(pi, con, memberCode, groupCode);
+		
+		close(con);
+		
+		return list;
 	}
 }

@@ -318,29 +318,6 @@ public class GroupDao {
 		return selectedGroup;
 	}
 
-	//동호회 회원 추방
-	public int kickOut(Connection con, int memberCode) {
-		PreparedStatement pstmt = null;
-		int result = 0;
-		
-		String query = prop.getProperty("kickOut");
-		
-		try {
-			pstmt = con.prepareStatement(query);
-			pstmt.setInt(1, memberCode);
-			
-			result = pstmt.executeUpdate();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-		
-		
-		return result;
-	}
-
 
 	public ArrayList<GroupMemberVO> selectList(Connection con, String groupCode) {
 		PreparedStatement pstmt = null;
@@ -780,4 +757,5 @@ public class GroupDao {
 		System.out.println("테스트2"+groupG);
 		return groupG;
 	}
+
 }
