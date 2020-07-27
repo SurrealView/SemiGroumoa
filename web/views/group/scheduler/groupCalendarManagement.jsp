@@ -3,6 +3,7 @@
 	import="com.kh.groumoa.scheduler.model.vo.SchedulerVO, java.util.ArrayList"%>
 <%
 	ArrayList<SchedulerVO> list = (ArrayList<SchedulerVO>) request.getAttribute("list");
+System.out.println("list" + list);
 %>
 <!DOCTYPE html>
 <html>
@@ -79,7 +80,23 @@
 					}
 				}
 			},
-			events : [{
+			events : [
+				
+				<%if (list != null) {
+				for (SchedulerVO sch : list) {
+					System.out.println(sch);
+					System.out.println(sch.getSchTitle());
+					System.out.println(sch.getSchDate());
+					System.out.println(sch.getSchDetail());
+					System.out.println();%>
+				{
+					title : '<%=sch.getSchTitle()%>',
+					start : '<%=sch.getSchDate()%>',
+					description : '<%=sch.getSchDetail()%>'
+				},
+				<%}
+			}%>	
+			{
 				title : 'default',
 				start : '2019-01-01',
 				description : 'defualt'
@@ -98,6 +115,7 @@
 		});
 		calendar.render();
 	});
+	
 </script>
 <style>
 #outer {
@@ -140,7 +158,7 @@
 		</div>
 	</div>
 	<%@include file="/views/common/footer/newFooter.jsp"%>
-<!-- 	<script>
+	<!-- 	<script>
 		(function() {
 			calendar.addEvent(event[{
 				title : '모임회',

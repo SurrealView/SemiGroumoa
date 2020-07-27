@@ -11,14 +11,13 @@ public class SchedulerVO {
 	private String dateWritten;
 	private int groupCode;
 	private int writerCode;
-	private char status;
 	
 	public SchedulerVO() {
 		super();
 	}
 
 	public SchedulerVO(String schCode, String schTitle, String schDetail, String schDate, String dateWritten,
-			int groupCode, int writerCode, char status) {
+			int groupCode, int writerCode) {
 		super();
 		this.schCode = schCode;
 		this.schTitle = schTitle;
@@ -27,7 +26,6 @@ public class SchedulerVO {
 		this.dateWritten = dateWritten;
 		this.groupCode = groupCode;
 		this.writerCode = writerCode;
-		this.status = status;
 	}
 
 	public String getSchCode() {
@@ -86,19 +84,12 @@ public class SchedulerVO {
 		this.writerCode = writerCode;
 	}
 
-	public char getStatus() {
-		return status;
-	}
-
-	public void setStatus(char status) {
-		this.status = status;
-	}
 
 	@Override
 	public String toString() {
 		return "ScheduleVO [schCode=" + schCode + ", schTitle=" + schTitle + ", schDetail=" + schDetail + ", schDate="
 				+ schDate + ", dateWritten=" + dateWritten + ", groupCode=" + groupCode + ", writerCode=" + writerCode
-				+ ", status=" + status + "]";
+				+ "]";
 	}
 	
 }
