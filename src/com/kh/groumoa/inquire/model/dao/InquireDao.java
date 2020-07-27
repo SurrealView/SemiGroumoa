@@ -6,10 +6,12 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import javax.print.attribute.standard.RequestingUserName;
 
+import com.kh.groumoa.common.PageInfo;
 import com.kh.groumoa.inquire.model.vo.InquireVO;
 import static com.kh.groumoa.common.JDBCTemplate.close;
 
@@ -53,6 +55,14 @@ public class InquireDao {
 		}
 		
 		return result;
+	}
+
+
+	public ArrayList<InquireVO> selectInquireList(Connection con, PageInfo pi, InquireVO inquire) {
+		
+		
+		
+		return null;
 	}
 
 }
