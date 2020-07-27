@@ -143,22 +143,6 @@ public class GroupService {
 		return result;
 	}
 	
-	//동호회 회원 추방
-	public int kickOut (int memberCode) {
-		Connection con = getConnection();
-		int result = 0;
-		
-		result = new GroupDao().kickOut(con, memberCode);
-		
-		if(result > 0) {
-			commit(con);
-		} else {
-			rollback(con);
-		}
-		
-		return result;
-	}
-	
 	//회원 조회
 	public ArrayList<GroupMemberVO> selectList(String groupCode) {
 		Connection con = getConnection();

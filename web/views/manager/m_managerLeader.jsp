@@ -131,7 +131,7 @@ int endPage = pi.getEndPage();
 //				var num = $("#listArea").parent().children().eq(0).val();
 				var num = $("input:checkbox[name='code']:checked").val();
 				console.log(num);
-				location.href="<%=request.getContextPath()%>/detail.mn?num=" + num;
+				location.href="<%=request.getContextPath()%>/managerLeader.mn?num=" + num;
 			});
 		});
 		

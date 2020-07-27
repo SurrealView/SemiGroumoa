@@ -1,14 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="com.kh.groumoa.common.model.vo.*, com.kh.groumoa.inquire.model.vo.*,  java.util.*"%>
-	<%
-	InquireVO inquire = (InquireVO) request.getAttribute("inquire");
-	ArrayList<AttachmentVo> list = (ArrayList<AttachmentVo>) request.getAttribute("fileList");
-	int idx = 0;
-	AttachmentVo attach = list.get(idx);
+	pageEncoding="UTF-8" import="com.kh.groumoa.inquire.model.vo.InquireVO, com.kh.groumoa.member.model.vo.MemberVO" %>
 	
-	String fileList = "";
-		
-%>
+	<% InquireVO i = (InquireVO) request.getAttribute("inquire"); %>
+	<% MemberVO m = (MemberVO) request.getAttribute("member"); %>
+
 	
 <!DOCTYPE html>
 <html>
@@ -81,62 +76,29 @@
 	<div id="ask">1:1 문의하기</div>
 	<div class="qWrite">
         <div class="qWriterInfo" align="center">
-        <form>
-            <table id="QWriteArea">
-                <tr>
-                    <td><label>이름 </label></td>
-                    <td colspan="2"><input type="text" name="qManager"></td>
-                    <td><label>연락처 </label></td>
-                    <td><input type="tel" name="noTel"></td>
-                </tr>
-                <tr>
-                    <td><label>이메일 </label></td>
-                    <td colspan="6"><input type="email" name="qEmail"></td>
-                </tr>
-                <tr>
-                    <td><label>제목</label></td>                    
-                    <td colspan="5"><input type="text" placeholder="제목을입력해주세요" style="width:400px" name="qTitle"></td>
-                    <td colspan="1">
-                    <select name="kind">
-                        <option value="default">분류</option>
-                        <option value="normal">일반</option>
-                        <option value="error">오류</option>
-                        <option value="account">계정</option>
-                        <option value="fuction">기능</option>
-                    </select>
-                </td>
-                </tr>
-                <tr>
-                    <td><label>내용</label></td>
-                    <td colspan="6"><textarea cols="67" rows="20" style="resize:none" name="qContent"></textarea></td>
-                </tr>
-                <tr>
-                    <td>파일첨부</td>
-                    <td colspan="4"><input type="text" class="file_path" placeholder="파일을 올려주세요" readonly style="width:400px" name="filePath"></td>
-                    <td colspan="3"><a class="upload" href="#" onclick="uploadFile();">파일선택</a></td>                
+        <form action="#">
+                    <label>이름 </label>
+                    <input type="text" name="qManager" value="<%=loginUser.getMemberName() %>" readonly>
+                    <label>연락처 </label>
+                    <input type="tel" name="noTel" value="<%= loginUser.getPhone()%>" readonly>
+                    <label>이메일 </label>
+                    <input type="email" name="qEmail" value="<%= loginUser.getEmail()%>" readonly>
+                    <label>제목</label>                   
+                    <input type="text" placeholder="제목을입력해주세요" style="width:400px" name="qTitle" value="<%=i.getQna_Title() %>">
+                    <label>분류</label>
+                    <input type="text"  id="category" name="category" value="<%=i.getCategoryName()%>" readonly>
+                    <label>내용</label>
+                    <textarea cols="67" rows="20" style="resize:none" name="qContent" readonly><%=i.getDetail()%></textarea>
+     
+             	    <label>파일첨부</label>
+                    <input type="text" class="file_path" placeholder="파일을 올려주세요" readonly style="width:400px" name="filePath">
+                    <a class="upload" href="#" onclick="uploadFile();">파일선택</a>               
                     <input type="file" id="notice_upload" name="notice_upload" style="display: none;">
-                </tr>
-            </table>
+
             <button type="submit" class="qWriteBtn">등록하기</button>
             </form>
         </div>   
     </div>
-    <script>
-        function uploadFile(){
-            //alert("경고!");
-            $("#inquire_upload").click();
-
-            $("#inquire_upload").change(function(){
-                $(".file_path").val($("#inquire_upload").val());
-            });
-        }
-
-        $(function() {
-            $(".file_path").val($("#inquire_upload").val());
-            
-/*             var txtArea = $("textArea");            
-            var selectPos = txtArea.prop("selectionStart"); */
-        })
-    </script>
+   
 </body>
 </html>

@@ -333,7 +333,64 @@
      		}
      	}
      	
-     	function(){
+     	function radio(){
+     		var st =  $(":input:radio[name=interest]:chcked").val();
+     		$("input:radio[name=interest]:input[value='<%= selectGroup.getInterest()%>']").attr("checked", true);
+     		console.log(<%= selectGroup.getInterest()%>);
+     	
+     	
+<%--      	$(function(){
+     		
+			var arr = '<%= selectGroup.getInterest()%>';      
+   			
+   			console.log(arr);
+   			
+   			$("input[name=interest]").each(function(){
+   				for(var i = 0; i < arr.length; i++) {
+   					if($(this).val() == arr[i]) {
+   						$(this).attr("checked", true);
+   					}
+   				}
+   			}); --%>
+     		
+<%--      		$("#interest").click(function() {
+
+    			var resultValue = $("#interest").val();
+
+    			$("input[name=interest][value="<%= selectGroup.getInterest()%>"]").attr("checked", true);
+
+    		}); --%>
+     		
+<%-- 			var arr = '<%= selectGroup.getInterest()%>';     
+   			
+   			console.log(arr);
+   			
+   			$("input[name=interest]").attr("checked", true);
+   			
+   			var irr = '<%=selectGroup.getOpenYn() %>';
+   			console.log(irr);
+   			$("input[name=openYn]").attr("checked", true);
+   			
+   			var brr = '<%=selectGroup.getNickNameyn() %>';
+   			console.log(brr);
+   			$("input[name=nickNameyn]").attr("checked", true); --%>
+   			
+/*    			$('input[name="interest"]').change(function() {
+   			    $('input[name="interest"]').each(function() {    
+   			        var checked = $(this).prop('checked');  
+   			    });
+   			});
+			 */
+<%-- 			var arr = '<%=selectGroup.setOpenYn("openYn")%>'
+			$("input[name=openYn]").val(arr);
+			var irr = '<%=selectGroup.setNickNameyn("nickNameyn")%>'
+			$("input[name=nickNameyn]").val(irr); --%>
+<%-- 			$("[name=interest]").filter("[value=${'<%=selectGroup.setInterest("interest")%>'}]").prop("checked",true)
+			$("[name=openYn]").filter("[value=${'<%=selectGroup.setOpenYn("openYn")%>'}]").prop("checked",true)
+			$("[name=nickNameyn]").filter("[value=${'<%=selectGroup.setNickNameyn("nickNameyn")%>'}]").prop("checked",true) --%>
+     /* 	}); */
+     
+<%--      	function(){
      		
      		var exp = '<%= selectGroup.getInterest()%>';
      		var num = document.getElementsByName('interest');
@@ -341,8 +398,8 @@
      			if(num[i].checked == true)
      		}
      		
- <%--     		$("input:radio[name='interest']:radio[value='<%= selectGroup.getInterest()%>']").prop("checked", true); --%>
-     	}
+     		$("input:radio[name='interest']:radio[value='<%= selectGroup.getInterest()%>']").prop("checked", true);
+     	} --%>
      	
 <%--      	$(function(){
 			var exp = '<%= selectGroup.getInterest()%>';
@@ -356,16 +413,16 @@
    						$(this).attr("checked", true);
    					}
    				}   --%>
-<%--    			var temp = '<%=selectGroup.getOpenYn() %>'.val(); --%>  		
+<%-- <%--    			var temp = '<%=selectGroup.getOpenYn() %>'.val(); --%>  		
    			var temp = $(':radio[name="openYn"]:checked').val(); 
-<%--   			var tempt = openYn.val(); --%>
+  			var tempt = openYn.val();
     		$("input[name=openYn]").val(temp);
 
-<%--    			var arr = '<%=selectGroup.getNickNameyn() %>'.val(); --%>
+   			var arr = '<%=selectGroup.getNickNameyn() %>'.val();
    			var test = $(':radio[name="nickNameyn"]:checked').val();
    			$("input[name=nickNameyn]").val(test);
    			
-   		});
+   		};
      	
      </script>
    

@@ -129,6 +129,12 @@
 	border: 1px solid lightgray;
 	height: 300px;
 }
+
+#resetting{
+	margin-right: 25px;
+	background: white;
+	border: 1px solid black;
+}
 </style>
 </head>
 <body>
@@ -138,7 +144,7 @@
 		<!-- 메뉴. 지워도 됨 -->
 		<div class="tab" id="tab">
 			<div class="item active" id="board">
-				<a href="/groumoa/views/group/groupMainPage.jsp">메인페이지</a>
+				<a href="/groumoa/views/group/groupMainPageAsLeader.jsp">메인페이지</a>
 			</div>
 			<div class="item active" id="board">
 				<a href="#">가입신청내역</a>
@@ -149,8 +155,8 @@
 		<br> <input id="btn" type="button" value="가입하기">
 			<input id="expand" type="button" value="인원증설" style="float:right; margin-right: 5px;" 
 			onclick="location.href='<%=request.getContextPath()%>/views/group/buyProduct.jsp'">
-		 <input
-			type="hidden" onclick="listCheck();"> <br> <br>
+		 <input type="hidden" onclick="listCheck();">
+    <input id="btn" type="button" value="폐쇄하기" onclick="groupClose();"> <input
 				
 		<div class="wrapper">
 			<table class="table" id="content1">
@@ -186,6 +192,10 @@
 				</tr>
 			</table>
 			<div id="content3" style="margin-top: 25px">게시판?</div>
+			<div align="center">
+				<br><br><br>
+				<input id="resetting" type="button" value="수정하기" onclick="reSetting();">
+			</div>
 		</div>
 	</div>
 	<%@include file="../common/footer/newFooter.jsp"%>
@@ -193,6 +203,10 @@
 	<script>
 		function listCheck() {
 			location.href="'<%=request.getContextPath()%>/groupMember.go'";
+		}
+		function reSetting() {
+			console.log("<%=request.getContextPath()%>/groupUpdate.jsp");
+ 			location.href="'<%=request.getContextPath()%>/GroupInfo.gi'";
 		}
 	</script>
 </body>

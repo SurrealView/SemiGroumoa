@@ -72,28 +72,28 @@
 	<div id="ask">1:1 문의하기</div>
 	<div class="qWrite">
         <div class="qWriterInfo" align="center">
-        <form>
+        <form action="<%=request.getContextPath() %>/insert.qa" method="post">
+        <input type="hidden" name="writerCode" value="<%=loginUser.getMemberCode() %>">
             <table id="QWriteArea">
                 <tr>
                     <td><label>이름 </label></td>
-                    <td colspan="2"><input type="text" name="qManager"></td>
+                    <td colspan="2"><input type="text" name="qManager" value="<%=loginUser.getUserName() %>" readonly></td>
                     <td><label>연락처 </label></td>
-                    <td><input type="tel" name="noTel"></td>
+                    <td><input type="tel" name="noTel" value="<%=loginUser.getPhone()%>"></td>
                 </tr>
                 <tr>
                     <td><label>이메일 </label></td>
-                    <td colspan="6"><input type="email" name="qEmail"></td>
+                    <td colspan="6"><input type="email" name="qEmail" value="<%=loginUser.getEmail()%>"></td>
                 </tr>
                 <tr>
                     <td><label>제목</label></td>                    
                     <td colspan="5"><input type="text" placeholder="제목을입력해주세요" style="width:400px" name="qTitle"></td>
                     <td colspan="1">
-                    <select name="kind">
-                        <option value="default">분류</option>
-                        <option value="normal">일반</option>
-                        <option value="error">오류</option>
-                        <option value="account">계정</option>
-                        <option value="fuction">기능</option>
+                    <select name="category">
+                        <option value="Q1">일반</option>
+                        <option value="Q2">오류</option>
+                        <option value="Q3">계정</option>
+                        <option value="Q4">기능</option>
                     </select>
                 </td>
                 </tr>
@@ -115,15 +115,15 @@
     <script>
         function uploadFile(){
             //alert("경고!");
-            $("#notice_upload").click();
+            $("#inquire_upload").click();
 
-            $("#notice_upload").change(function(){
-                $(".file_path").val($("#notice_upload").val());
+            $("#inquire_upload").change(function(){
+                $(".file_path").val($("#inquire_upload").val());
             });
         }
 
         $(function() {
-            $(".file_path").val($("#notice_upload").val());
+            $(".file_path").val($("#inquire_upload").val());
             
 /*             var txtArea = $("textArea");            
             var selectPos = txtArea.prop("selectionStart"); */
