@@ -31,32 +31,39 @@ public class InsertQnaServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String title = request.getParameter("title");
+		String title = request.getParameter("qTitle");
 		String categoryCode = request.getParameter("category");
-		int groupCode = Integer.parseInt(request.getParameter("groupCode"));
-		int writerCode = Integer.parseInt(request.getParameter("writer"));
-		String detail = request.getParameter("detail");
-
-		String requestAttachment = request.getParameter("attachment");//로직 추가해야됨
-
+		System.out.println(categoryCode);
+		//int groupCode = Integer.parseInt(request.getParameter("groupCode"));
+		//int groupCode = 2; //임시
+		String temp = request.getParameter("writerCode");
+		System.out.println("temp : " + temp);
+		int writerCode = Integer.parseInt(temp);
+//		System.out.println("test writerCode : " + writerCode);
+		String detail = request.getParameter("qContent");
+		
+		
+		//String requestAttachment = request.getParameter("attachment");//로직 추가해야됨
+		
 		InquireVO requestInquire = new InquireVO();
-		requestInquire.setTitle(title);
-		requestInquire.setCategoryCode(categoryCode);
-		requestInquire.setGroupCode(groupCode);
-		requestInquire.setWriterCode(writerCode);
-		requestInquire.setDetail(detail);
-
+		requestInquire.setQna_Title(title);
+		requestInquire.setQna_Cate_Code(categoryCode);
+		requestInquire.setQuestioner_Code(writerCode);
+		requestInquire.setQna_Detail(detail);
+		
 		int result = new InquireService().insertInquire(requestInquire);
-
+		
 		String page = "";
-
 		if(result > 0) {
-			response.sendRedirect(request.getContextPath() + "/insert.qa");
+			page = "/views/common/successPage.jsp";
+			//response.sendRedirect(page);
+			request.setAttribute("successCode", "insertInquire");//successPage에 insertBoard에 해당하는 속성값 만들기
+			request.getRequestDispatcher(page).forward(request, response);
 		} else {
-			request.setAttribute("msg", "공지사항 등록 실패!");
-			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
-		}
-
+			page = "views/common/errorPage.jsp";
+			request.setAttribute("msg", "게시판 작성 실패!");
+			request.getRequestDispatcher(page).forward(request, response);
+	}
 	}
 
 	/**
