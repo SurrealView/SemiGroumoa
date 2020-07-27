@@ -252,7 +252,7 @@ public class MemberDao {
 			
 			list = new ArrayList<MemberVO>();
 			
-			if(rset.next()) {
+			while (rset.next()) {
 				MemberVO m = new MemberVO();
 				m.setMemberCode(rset.getInt("MEMBER_CODE"));
 				m.setEmail(rset.getString("EMAIL"));
