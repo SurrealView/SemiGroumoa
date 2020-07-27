@@ -63,7 +63,7 @@
                                         <label for="remember">로그인 상태 유지</label>
                                     </li>
                                     <li class="join"><a href="<%=request.getContextPath()%>/views/member/signup.jsp">회원가입</a></li>
-                                    <li class="find"><a href="#">아이디 / 비밀번호찾기</a></li>
+                                    <li class="find"><a href="searchIdPwd.jsp">아이디 / 비밀번호찾기</a></li>
                                 </ul>
                                 <p class="error_msg">
                                                                     </p>

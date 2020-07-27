@@ -1,15 +1,18 @@
 package com.kh.groumoa.group.model.service;
 
+import static com.kh.groumoa.common.JDBCTemplate.close;
+import static com.kh.groumoa.common.JDBCTemplate.commit;
+import static com.kh.groumoa.common.JDBCTemplate.getConnection;
+import static com.kh.groumoa.common.JDBCTemplate.rollback;
+
 import java.sql.Connection;
 import java.util.ArrayList;
 
 import com.kh.groumoa.common.PageInfo;
 import com.kh.groumoa.group.model.dao.BoardDao;
+import com.kh.groumoa.group.model.dao.ReplyDao;
 import com.kh.groumoa.group.model.vo.BoardVO;
-import com.kh.groumoa.group.model.vo.GroupVO;
-
-
-import static com.kh.groumoa.common.JDBCTemplate.*;
+import com.kh.groumoa.group.model.vo.ReplyVO;
 
 
 
@@ -154,5 +157,42 @@ public class BoardService {
 		
 		return list;
 	}
+
+
+	//게시물 n개 삭제
+	public int deleteBoard(ArrayList<BoardVO> requestBoardArray) {
+		Connection con = getConnection();
+		
+		int result = 0;
+		int[] resultArr = new int[requestBoardArray.size()];
+		
+		for (int i = 0; i < requestBoardArray.size(); i++) {
+
+			int resultEach = new BoardDao().deleteBoard(con, requestBoardArray.get(i));
+
+			resultArr[i] = resultEach;
+		}
+		
+		for (int i = 0; i < resultArr.length; i++) {
+			if (resultArr[i] == 0) {
+				result = 0;
+				break;
+			}
+			result = 1;
+		}
+
+		if (result != 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+
+		close(con);
+
+		return result;
+	}
+
+
+
 
 }

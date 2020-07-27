@@ -30,6 +30,8 @@ public class MemberVO implements java.io.Serializable {
 	private String groupName;
 	private int penaltyCode;
 	private int groupLeaderCode;
+	private int question;
+	private int reply;
 	
 	
 	public MemberVO() {
@@ -40,7 +42,8 @@ public class MemberVO implements java.io.Serializable {
 
 	public MemberVO(int memberCode, String email, String userName, String userPwd, String gender, String rnCode,
 			String address, String phone, String birthDate, Date enrollDate, String status, int groupCode,
-			String groupLeaderyn, int num, int postCode, String groupName, int penaltyCode, int groupLeaderCode) {
+			String groupLeaderyn, int num, int postCode, String groupName, int penaltyCode, int groupLeaderCode,
+			int question, int reply) {
 		super();
 		this.memberCode = memberCode;
 		this.email = email;
@@ -60,6 +63,8 @@ public class MemberVO implements java.io.Serializable {
 		this.groupName = groupName;
 		this.penaltyCode = penaltyCode;
 		this.groupLeaderCode = groupLeaderCode;
+		this.question = question;
+		this.reply = reply;
 	}
 
 
@@ -243,6 +248,26 @@ public class MemberVO implements java.io.Serializable {
 	}
 
 
+	public int getQuestion() {
+		return question;
+	}
+
+
+	public void setQuestion(int question) {
+		this.question = question;
+	}
+
+
+	public int getReply() {
+		return reply;
+	}
+
+
+	public void setReply(int reply) {
+		this.reply = reply;
+	}
+
+
 	@Override
 	public String toString() {
 		return "MemberVO [memberCode=" + memberCode + ", email=" + email + ", userName=" + userName + ", userPwd="
@@ -250,7 +275,7 @@ public class MemberVO implements java.io.Serializable {
 				+ ", birthDate=" + birthDate + ", enrollDate=" + enrollDate + ", status=" + status + ", groupCode="
 				+ groupCode + ", groupLeaderyn=" + groupLeaderyn + ", num=" + num + ", postCode=" + postCode
 				+ ", groupName=" + groupName + ", penaltyCode=" + penaltyCode + ", groupLeaderCode=" + groupLeaderCode
-				+ "]";
+				+ ", question=" + question + ", reply=" + reply + "]";
 	}
 
 }

@@ -48,61 +48,12 @@ int endPage = pi.getEndPage();
 	tr {
 		border-bottom:1px solid black;
 	}
-/*	.everylist {
-		width:1200px;
-		height:650px;
-		position:absolute;
-		top: 90px;
-		left: 230px;
-		background-color: white;
-	}
-	
-	#name {
-		font-weight: bold;
-		font-size:20px;
-		position:absolute;
-		left:20px;
-	}
-	
-	.table {
-    width: 100%;
-    max-width: 100%;
-    margin-bottom: 20px;
-    border-collapse: collapse;
-    text-align:center;
-	}
-	
-	table {
-    border-spacing: 0;
-    border-collapse: collapse;
-    border-color: black;
-    vertical-align: middle;
-	}*/
-	
-/*	thead{
-		display: table-header-group;
-    	vertical-align: middle;
-    	border-color: inherit;
-	}
-	
-	tbody {
-    	vertical-align: middle;
-    	border-color: inherit;
-	} */
+
 
 </style>
 </head>
 <body>
-<!--	<div class="everylist" id="jeje"><label id="title">전체 사용자</label>
-		<div class="round" id="round" style="border-radius: 50%; height: 200px; width: 200px; background-color: gray; position: absolute; top: 80px; left: 50px;"></div>
-		<div class="listup" id="list">
-			<div class="item" id="item1"><label>동호회명</label>&nbsp;&nbsp;<input type="text"></div>
-			<div class="item" id="item2"><label>해산 사유</label>&nbsp;&nbsp;<input type="text"></div>
-			<div class="item" id="item4"><label style="float:left">해산 사유 상세</label>&nbsp;&nbsp;<textarea style="width:350px; height:150px; resize:none;"></textarea></div>
-		</div>
-	</div>
-		<button id="jejeBtn">해산하기</button><button id="canBtn">취소하기</button>
- -->	
+
  		<div class="everylist">
               <table class="table table-hover">
                 <h4 id="name">전체 동호회</h4>
@@ -138,12 +89,12 @@ int endPage = pi.getEndPage();
         </tbody>
       </table>
           <div class="pagingArea" align="center">
-			<button onclick="location.href='<%=request.getContextPath()%>/managerPpl.mn?currentPage=1'"><<</button>
+			<button onclick="location.href='<%=request.getContextPath()%>/groupList.gp?currentPage=1'"><<</button>
 			
 			<% if(currentPage <= 1) { %>
 			<button disabled><</button>
 			<% } else { %>
-			<button onclick="location.href='<%=request.getContextPath()%>/managerPpl.mn?currentPage=<%=currentPage - 1%>'"><</button>
+			<button onclick="location.href='<%=request.getContextPath()%>/groupList.gp?currentPage=<%=currentPage - 1%>'"><</button>
 			<% } %>
 			
 			<% for(int p = startPage; p <= endPage; p++) { 
@@ -151,7 +102,7 @@ int endPage = pi.getEndPage();
 			%>
 						<button disabled><%= p %></button>
 			<%      } else { %>
-						<button onclick="location.href='<%=request.getContextPath()%>/managerPpl.mn?currentPage=<%=p%>'"><%= p %></button>
+						<button onclick="location.href='<%=request.getContextPath()%>/groupList.gp?currentPage=<%=p%>'"><%= p %></button>
 			<%  
 			        }
 				}
@@ -160,10 +111,10 @@ int endPage = pi.getEndPage();
 			<% if(currentPage >= maxPage) { %>
 			<button disabled>></button>
 			<% } else { %>
-			<button onclick="location.href='<%=request.getContextPath()%>/managerPpl.mn?currentPage=<%=currentPage + 1%>'">></button>
+			<button onclick="location.href='<%=request.getContextPath()%>/groupList.gp?currentPage=<%=currentPage + 1%>'">></button>
 			<% } %>
 		
-			<button onclick="location.href='<%=request.getContextPath()%>/managerPpl.mn?currentPage=<%=maxPage%>'">>></button>
+			<button onclick="location.href='<%=request.getContextPath()%>/groupList.gp?currentPage=<%=maxPage%>'">>></button>
 			<br>
 			<div id="Btn">
 				<button id="detailBtn">정보확인</button>&nbsp;
@@ -186,7 +137,7 @@ int endPage = pi.getEndPage();
 //				var num = $("#listArea").parent().children().eq(0).val();
 				var num = $("input:checkbox[name='code']:checked").val();
 				console.log(num);
-				location.href="<%=request.getContextPath()%>/detail.mn?num=" + num;
+				location.href="<%=request.getContextPath()%>/detail.gd?num=" + num;
 			});
 		});
 		

@@ -13,6 +13,7 @@ import com.kh.groumoa.group.model.dao.BoardDao;
 import com.kh.groumoa.group.model.vo.BoardVO;
 import com.kh.groumoa.group.model.vo.GroupVO;
 import com.kh.groumoa.member.model.dao.MemberDao;
+import com.kh.groumoa.member.model.vo.ManagerVO;
 import com.kh.groumoa.member.model.vo.MemberInterestVO;
 import com.kh.groumoa.member.model.vo.MemberVO;
 
@@ -63,10 +64,10 @@ public class MemberService {
 		return result;
 	}
 
-	public ArrayList<MemberVO> selectLeader(PageInfo pi) {
+	public ArrayList<ManagerVO> selectLeader(PageInfo pi) {
 		Connection con = getConnection();
 
-		ArrayList<MemberVO> list = new MemberDao().selectLeader(con, pi);
+		ArrayList<ManagerVO> list = new MemberDao().selectLeader(con, pi);
 
 		close(con);
 
@@ -117,9 +118,9 @@ public class MemberService {
 	public int getLeaderCount() {
 		Connection con = getConnection();
 		int listCount = new MemberDao().getLeaderCount(con);
-
+		
 		close(con);
-
+		
 		return listCount;
 	}
 
@@ -132,6 +133,44 @@ public class MemberService {
 
 		return result;
 	}
+
+	public MemberVO searchId(MemberVO requestMember) {
+		Connection con = getConnection();
+		
+		MemberVO responseMember = new MemberDao().searchId(con, requestMember);
+		
+		close(con);
+		
+		return responseMember;
+	}
+
+	public MemberVO searchPwd(MemberVO requestMember) {
+		Connection con = getConnection();
+		
+		MemberVO responseMember = new MemberDao().searchPwd(con, requestMember);
+		
+		close(con);
+		
+		return responseMember;
+	}
+
+	public int updateMemberPwd(String email, String newPwd) {
+		
+		Connection con = getConnection();
+		
+		int result = new MemberDao().updateMemberPwd(con, email, newPwd);
+		
+		if(result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		close(con);
+		
+		
+		return result;
+  }		
 
 	public int getGroupLeaderCount() {
 		Connection con = getConnection();
@@ -168,5 +207,15 @@ public class MemberService {
 		close(con);
 		
 		return list;
+	}
+
+	public MemberVO selectMemberG(int nno) {
+		Connection con = getConnection();
+		
+		MemberVO memberG = new MemberDao().selectMemberG(con, nno);
+		
+		close(con);
+		
+		return memberG;
 	}
 }

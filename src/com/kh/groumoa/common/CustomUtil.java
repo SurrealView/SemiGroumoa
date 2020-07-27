@@ -3,14 +3,15 @@ package com.kh.groumoa.common;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.Properties;
+import java.util.Random;
 
 public class CustomUtil {
 	private static CustomUtil instance = null;
@@ -265,4 +266,20 @@ public class CustomUtil {
 			e.printStackTrace();
 		}
 	}
+	
+	public String generateRandomString(int length) {
+			int leftLimit = 48; // numeral '0'
+		    int rightLimit = 122; // letter 'z'
+		    int targetStringLength = length;
+		    Random random = new Random();
+		 
+		    String generatedString = random.ints(leftLimit, rightLimit + 1)
+		      .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
+		      .limit(targetStringLength)
+		      .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+		      .toString();
+		 
+	    return generatedString;
+	}
+	
 }

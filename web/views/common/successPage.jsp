@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<% String successCode = (String) request.getAttribute("successCode"); %>
+    pageEncoding="UTF-8" import="com.kh.groumoa.group.model.vo.*"%>
+<% String successCode = (String) request.getAttribute("successCode");
+   GroupVO selectedGroup = (GroupVO) request.getAttribute("selectGroup");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,20 +24,37 @@
 				break;
 				
 			case "updateMember" :
-				successMessage = "회원 수정에 성공하셨습니다.";
+				successMessage = "회원 수정에 성공하셨습니다!";
 				movePath = "<%=request.getContextPath()%>/views/member/memberUpdateForm.jsp";
 				break;
 				
 			case "insertBoard" :
-				successMessage = "게시판 작성에 성공하셨습니다.";
+				successMessage = "게시판 작성에 성공하셨습니다!";
 				movePath = "<%=request.getContextPath()%>/selectList.bo";
 				break;
-			
-			case "insertInquire" :
+          
+      case "insertInquire" :
 				successMessage = "게시판 작성에 성공하셨습니다.";
 				movePath = "<%=request.getContextPath()%>/views/group/myInquiry.jsp";
 				break;
+          
+			case "insertGroup" :
+				successMessage = "동호회 개설에 성공하셨습니다.";
+				request.setAttribute("selectedGroup", selectedGroup);
+				movePath = "<%=request.getContextPath()%>/selectOne.gr";
+      	break;
+          
+			case "deleteBoard" :
+				successMessage = "게시판 삭제에 성공하셨습니다!";
+				movePath = "<%=request.getContextPath()%>/selectListAsLeader.bo";
+				break;
+          
+			case "deleteFee" :
+				successMessage = "회비 내역 삭제에 성공하셨습니다!";
+				movePath = "<%=request.getContextPath()%>/selectListAsLeader.fee";
+				break;
 			}
+			
 			alert(successMessage);
 			
 			location.href = movePath;

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.groumoa.common.PageInfo;
 import com.kh.groumoa.member.model.service.MemberService;
+import com.kh.groumoa.member.model.vo.ManagerVO;
 import com.kh.groumoa.member.model.vo.MemberVO;
 
 /**
@@ -50,34 +51,33 @@ public class ManagerLeaderServlet extends HttpServlet {
 		
 		//전체 목록 갯수를 조회
 		int listCount = new MemberService().getLeaderCount();
-		System.out.println("list count : " + listCount);
 		
 		//총 페이지 수 계산
 		//예를 들면 목록 갯수가 123개 이면
 		//총 필요한 페이지 수는 13개이다.
 		maxPage = (int)((double) listCount / limit + 0.9);
-		
+
 		//현재 페이지에 보여줄 시작 페이지 수 (10개씩 보여지게 할 경우)
 		//아래 쪽 페이지 수가 10개씩 보여진다면
 		//1, 11, 21, 31 ...
 		startPage = (((int) ((double) currentPage / 10 + 0.9)) - 1) * 10 + 1;
-		
+
 		//목록 아래쪽에 보여질 마지막 페이지 수(10, 20, 30, ...)
-		endPage = startPage + 5 - 1;
+		endPage = startPage + 10 - 1;
 		
 		if(maxPage < endPage) {
 			endPage = maxPage;
 		}
 		
-		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
-		
-		ArrayList<MemberVO> list = new MemberService().selectLeader(pi);
+		PageInfo pi = new PageInfo(limit, currentPage, maxPage, startPage, endPage, listCount);
+		System.out.println(pi);
+		ArrayList<ManagerVO> list = new MemberService().selectLeader(pi);
 		
 		System.out.println("리스트 : " + list);
 		
 		String page = "";
 		if(list != null) {
-			page = "views/manager/m_managerppl.jsp";
+			page = "views/manager/m_managerLeader.jsp";
 			request.setAttribute("list", list);
 			request.setAttribute("pi", pi);
 		} else {
@@ -85,7 +85,7 @@ public class ManagerLeaderServlet extends HttpServlet {
 			request.setAttribute("msg", "회원 조회 실패!");
 		}
 		request.getRequestDispatcher(page).forward(request, response);
-	}
+	}  
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

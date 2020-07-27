@@ -38,11 +38,13 @@ public class MemberDetailServlet extends HttpServlet {
 		}
 		
 		MemberVO member = new MemberService().selectMember(nno);
+		MemberVO memberG = new MemberService().selectMemberG(nno);
 		
 		String page = "";
 		if(member != null) {
 			page = "views/manager/m_managerInfo.jsp";
 			request.setAttribute("member", member);
+			request.setAttribute("memberG", memberG);
 		} else {
 			page = "views/common/errorPage.jsp";
 			request.setAttribute("msg", "회원 상세 조회 실패!");

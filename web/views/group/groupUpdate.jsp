@@ -333,10 +333,22 @@
      		}
      	}
      	
-     	$(function(){
-			var exp = '<%=selectGroup.getInterest() %>'.val();	
+     	function(){
+     		
+     		var exp = '<%= selectGroup.getInterest()%>';
+     		var num = document.getElementsByName('interest');
+     		for(var i =0; i<num.length; i++) {
+     			if(num[i].checked == true)
+     		}
+     		
+ <%--     		$("input:radio[name='interest']:radio[value='<%= selectGroup.getInterest()%>']").prop("checked", true); --%>
+     	}
+     	
+<%--      	$(function(){
+			var exp = '<%= selectGroup.getInterest()%>';
+			console.log(exp);
  /*     		var exp = $(':radio[name="interest"]:checked').val();*/
-    		$("input[name=interest]").val(exp);
+    		$("input[name=interest]").val(exp); --%>
  
  <%--      		$("input[name=interest]").each(function(){
  				for(var i = 0; i < arr.length; i++) {
@@ -350,8 +362,8 @@
     		$("input[name=openYn]").val(temp);
 
 <%--    			var arr = '<%=selectGroup.getNickNameyn() %>'.val(); --%>
-   			var temp = $(':radio[name="nickNameyn"]:checked').val();
-   			$("input[name=nickNameyn]").val(arr);
+   			var test = $(':radio[name="nickNameyn"]:checked').val();
+   			$("input[name=nickNameyn]").val(test);
    			
    		});
      	

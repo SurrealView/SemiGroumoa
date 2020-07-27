@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.kh.groumoa.member.model.vo.*"%>
-<% MemberVO member = (MemberVO) request.getAttribute("member"); %>
+<% MemberVO member = (MemberVO) request.getAttribute("member"); 
+   MemberVO memberG = (MemberVO) request.getAttribute("memberG");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -122,7 +124,7 @@
    		<div class="num" id="list2"><label>계정  </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
    		<input type="text" class ="form-control" id="fname" name="fname" value="<%= member.getEmail() %>"></div>
    		<div class="num" id="list3"><label>비밀번호</label>&nbsp;
-   		<input type="text" class ="form-control" id="fname" name="fname" value="<%= member.getUserPwd() %>">
+   		<input type="text" class ="form-control" id="fname" name="fname" value="<%= member.getUserPwd() %>" style ="width:700px;">
    		<br>(변경시에만 입력)</div>
    		<div class="num" id="list4"><label>구분 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
    		<input type="text" class ="form-control" id="fname" name="fname"></div>
@@ -141,19 +143,19 @@
   	    <div class="activityList2" id="list9"><label>게시글</label>
   	    <input type="text" id="detail" value=<%= member.getPostCode() %>></div>
         <div class="activityList2" id="list10"><label>댓글</label>
-        <input type="text" id="detail"></div>
+        <input type="text" id="detail" value=<%= member.getReply() %>></div>
         <div class="activityList2" id="list11"><label>제재횟수</label>
         <input type="text" id="detail" value=<%= member.getPenaltyCode() %>></div>
         <div class="activityList2" id="list14"><label>문의횟수</label>
-        <input type="text" id="detail"></div>
+        <input type="text" id="detail" value=<%= member.getQuestion() %>></div>
         </div>
 	</div>
 	<div id="group">
 		<label style="font-weight:bold; position:absolute; top:20px; left:20px; font-size:20px;">가입한 모임</label>
 		<div class="groupList" id="list12"><label>동호회명</label><br>
-		<input type="text" id="detail" value=<%= member.getGroupCode() %>></div>
+		<input type="text" id="detail" value=<%= memberG.getGroupCode() %>></div>
 		<div class="groupList" id="list13"><label>직책</label><br>
-		<input type="text" id="detail" value=<%= member.getAddress() %>></div>
+		<input type="text" id="detail" value=<%= memberG.getGroupLeaderCode() %>></div>
 	</div>
 </body>
 </html>
