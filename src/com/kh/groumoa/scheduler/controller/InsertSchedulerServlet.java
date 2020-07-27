@@ -62,15 +62,15 @@ public class InsertSchedulerServlet extends HttpServlet {
 		int result = new SchedulerService().insertSchedule(schedule);
 		System.out.println(schedule);
 		
-		ArrayList<SchedulerVO> list = new SchedulerService().selectScheduleList(groupCode) ;
+		ArrayList<SchedulerVO> list = new SchedulerService().selectList(groupCode) ;
 		
 		String page = "";
 		if (result > 0) {
 //			page = "/views/group/scheduler/groupCalendar.jsp";
 			request.setAttribute("schedule", schedule);
 			request.setAttribute("list", list);
-//			response.sendRedirect(request.getContextPath() + "/views/group/scheduler/groupCalendar.jsp");
-			response.sendRedirect(request.getContextPath() + "/views/group/scheduler/schedulePrintForm.jsp");
+			response.sendRedirect(request.getContextPath() + "/views/group/scheduler/groupCalendarManagement.jsp");
+//			response.sendRedirect(request.getContextPath() + "/views/group/scheduler/schedulePrintForm.jsp");
 		} else {
 			request.setAttribute("mag", "게시글 작성 실패");
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);

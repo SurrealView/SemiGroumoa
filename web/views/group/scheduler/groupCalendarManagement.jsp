@@ -79,22 +79,11 @@
 					}
 				}
 			},
-			/* eventRender: function(event, element) {
-			    $(element).popover({
-			        placement : 'top',
-			        html : true,
-			        trigger : 'hover',
-			        title : event.title + ' <a href="#" class="close" data-dismiss="alert">×</a>',
-			        content : '<p>' + event.start + '</p><p>' + event.end + '<p>' + event.description + '</p>'
-			    })
-			}, */
-			events : [ 
-			/* {
+			events : [{
 				title : 'default',
 				start : '2019-01-01',
 				description : 'defualt'
-			} */
-			],
+			}],
 			dateClick : function(info) {
 				alert('Clicked on: ' + info.dateStr);
 				alert('Coordinates: ' + info.jsEvent.pageX + ','
