@@ -9,22 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.groumoa.group.model.service.BoardService;
+import com.google.gson.Gson;
 import com.kh.groumoa.group.model.service.ReplyService;
-import com.kh.groumoa.group.model.vo.BoardVO;
 import com.kh.groumoa.group.model.vo.ReplyVO;
 
 /**
- * Servlet implementation class SelectOneBoardServlet
+ * Servlet implementation class InsertReplyServlet
  */
-@WebServlet("/selectOne.bo")
-public class SelectOneBoardServlet extends HttpServlet {
+@WebServlet("/insertReply.bo")
+public class InsertReplyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SelectOneBoardServlet() {
+    public InsertReplyServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,26 +32,24 @@ public class SelectOneBoardServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int num = Integer.parseInt(request.getParameter("num"));
+		int writerCode = Integer.parseInt(request.getParameter("writerCode"));
+		int postCode = Integer.parseInt(request.getParameter("postCode"));
+		String content = request.getParameter("content");
 		
-		System.out.println("select boardNum : " + num);
+		System.out.println("writerCode : " + writerCode);
+		System.out.println("postCode : " + postCode);
+		System.out.println("content : " + content);
 		
-		BoardVO board = new BoardService().selectOne(num);
-		System.out.println("select one board : " + board);
+		ReplyVO reply = new ReplyVO();
+		reply.setPostCode(postCode);
+		reply.setWriterCode(writerCode);
+		reply.setDetail(content);
 		
-		ArrayList<ReplyVO> replyList = new ReplyService().selectReplyList(num);
+		ArrayList<ReplyVO> replyList = new ReplyService().insertReply(reply);
 		
-		String page = "";
-		
-		if(board != null) {
-			page = "views/group/board-detail.jsp";
-			request.setAttribute("board", board);
-			request.setAttribute("replyList", replyList);
-		} else {
-			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "게시판 상세 조회 실패");
-		}
-		request.getRequestDispatcher(page).forward(request, response);
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+		new Gson().toJson(replyList, response.getWriter());
 	}
 
 	/**

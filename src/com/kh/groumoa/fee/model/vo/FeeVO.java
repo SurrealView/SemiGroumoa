@@ -1,22 +1,43 @@
 package com.kh.groumoa.fee.model.vo;
 
 public class FeeVO {
+	private int feeCode;
 	private int groupCode;
 	private int memberCode;
-	private String feeDate;
 	private String feeCategory;
+	private String fee;
 	private String detail;
+	private String feeDate;
 	//-- 단일 TB_FEE에 있는 변수들.
 	
 	public FeeVO() { }
 
-	public FeeVO(int groupCode, int memberCode, String feeDate, String feeCategory, String detail) {
+	public FeeVO(int feeCode,int groupCode, int memberCode, String feeCategory, String fee, String detail, String feeDate) {
 		super();
+		this.feeCode = feeCode;
 		this.groupCode = groupCode;
 		this.memberCode = memberCode;
-		this.feeDate = feeDate;
 		this.feeCategory = feeCategory;
+		this.fee = fee;
 		this.detail = detail;
+		this.feeDate = feeDate;
+	}
+	
+
+	public int getFeeCode() {
+		return feeCode;
+	}
+
+	public void setFeeCode(int feeCode) {
+		this.feeCode = feeCode;
+	}
+
+	public String getFee() {
+		return fee;
+	}
+
+	public void setFee(String fee) {
+		this.fee = fee;
 	}
 
 	public int getGroupCode() {
@@ -58,10 +79,13 @@ public class FeeVO {
 	public void setDetail(String detail) {
 		this.detail = detail;
 	}
+	
 
 	@Override
 	public String toString() {
-		return "FeeVO [groupCode=" + groupCode + ", memberCode=" + memberCode + ", feeDate=" + feeDate
-				+ ", feeCategory=" + feeCategory + ", detail=" + detail + "]";
+		return "FeeVO [feeCode=" + feeCode + ", groupCode=" + groupCode + ", memberCode=" + memberCode
+				+ ", feeCategory=" + feeCategory + ", fee=" + fee + ", detail=" + detail + ", feeDate=" + feeDate + "]";
 	}
+
+	
 }
