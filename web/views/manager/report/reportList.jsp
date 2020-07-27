@@ -139,8 +139,7 @@
     		
     		console.log(num);
     		location.href ="<%=request.getContextPath()%>/selectOne.re?num=" + num;
-    	});	
-    	  	
+    	});	    	  	
     });   
     function writeReport(){
     	$("#reportListForm").attr("action", "<%=request.getContextPath()%>/views/manager/report/reportWrite.jsp");

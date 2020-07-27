@@ -71,4 +71,5 @@ public class SelectOneNoticeServlet extends HttpServlet {
 		doGet(request, response);
 	}
 
+	
 }

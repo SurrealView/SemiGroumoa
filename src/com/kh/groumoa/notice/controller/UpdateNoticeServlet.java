@@ -145,4 +145,5 @@ public class UpdateNoticeServlet extends HttpServlet {
 		doGet(request, response);
 	}
 
+	
 }

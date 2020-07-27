@@ -142,7 +142,6 @@
       	<% } %>      	
       	<button onclick="location.href='<%=request.getContextPath()%>/selectList.no?currentPage=<%= maxPage %>'">맨끝으로</button>
       </div>      
-      
     </div>
     
     <script>

@@ -133,7 +133,7 @@
             
 /*             var txtArea = $("textArea");            
             var selectPos = txtArea.prop("selectionStart"); */
-        })
+        });
     </script>
 </body>
 </html>
