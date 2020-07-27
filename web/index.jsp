@@ -19,7 +19,6 @@
 <style>
 body {
 	font-family: 'Poor Story', cursive;
-	
 	background-image: url('/groumoa/resources/image/backgroundImg.png');
 	background-position: 0% 10%;
 	background-size: 100% auto;
@@ -35,13 +34,28 @@ body {
 	height: 800px;
 }
 
-#main-word{
+.main-word {
 	color: white;
 	position: absolute;
-	left: 16%;
+	font-family: '나눔명조', '명조';
+}
+
+#word1 {
+	left: 30%;
+	top: 115%;
+	font-size: 60pt;
+}
+
+#word2 {
+	left: 50%;
 	top: 125%;
-	font-size: 90pt;
-	font-family: '나눔명조','명조';
+	font-size: 50pt;
+}
+
+#word3 {
+	left: 25%;
+	top: 130%;
+	font-size: 80pt;
 }
 </style>
 </head>
@@ -49,7 +63,9 @@ body {
 	<%@include file="views/common/header/newHeader.jsp"%>
 	<div id="wrapper">
 		<div id="main-content">
-			<div id="main-word">"글자가 들어가는 곳"</div>
+			<div id="word1" class="main-word">세상의 모든</div>
+			<div id="word2" class="main-word">즐거움을 모아</div>
+			<div id="word3" class="main-word">그루모아</div>
 		</div>
 	</div>
 	<%@include file="views/common/footer/newFooter.jsp"%>

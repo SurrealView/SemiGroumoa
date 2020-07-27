@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"
+	import="com.kh.groumoa.inquire.model.vo.InquireVO, java.util.ArrayList, com.kh.groumoa.common.*"%>
+<%
+	ArrayList<InquireVO> list = (ArrayList<InquireVO>) request.getAttribute("list");
+	PageInfo pi = (PageInfo) request.getAttribute("pi");
+	int currentPage = pi.getCurrentPage();
+	int maxPage = pi.getMaxPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -110,7 +119,8 @@
 #searchbox input {
 	float: left;
 }
-#myAsk { 
+
+#myAsk {
 	border-bottom: 1px solid black;
 	text-align: left;
 	width: 1000px;
@@ -118,7 +128,9 @@
 	margin-right: auto;
 	margin-top: 50px;
 }
+
 #table-div {
+	
 }
 </style>
 </head>
@@ -134,35 +146,94 @@
 	</div>
 	<div id="myAsk">나의 문의내역</div>
 	<div class="content">
-	<div class="table-div">
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th>등록일</th>
-					<th>문의제목</th>
-					<th>문의상태</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>2020.07.07</td>
-					<td>계정이 해킹당한거 같아요</td>
-					<td>답변대기</td>
-				</tr>
-				<tr>
-					<td>2020.07.08</td>
-					<td>동호회 비용관련 문의</td>
-					<td>답변대기</td>
-				</tr>
-				<tr>
-					<td>2020.07.14</td>
-					<td>사이트 내 오류가 있어요!</td>
-					<td>답변대기</td>
-				</tr>
-			</tbody>
-		</table>
+		<div class="table-div">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>등록일</th>
+						<th>문의제목</th>
+						<th>문의상태</th>
+					</tr>
+				</thead>
+				<tbody>
+					<%
+						for (InquireVO i : list) {
+					%>
+					<tr>
+						<input type="hidden" value="<%=i.getQna_Code()%>">
+						<td><%=i.getQna_Date()%></td>
+						<td><%=i.getQna_Title()%></td>
+						<td><%=i.getIsanswered()%></td>
+					</tr>
+					<%
+						}
+					%>
+				</tbody>
+			</table>
+		</div>
 	</div>
+	<div class="pagingArea" align="center">
+		<button
+			onclick="location.href='<%=request.getContextPath()%>/select.in?currentPage=1'"><<</button>
+
+		<%
+			if (currentPage <= 1) {
+		%>
+		<button disabled><</button>
+		<%
+			} else {
+		%>
+		<button
+			onclick="location.href='<%=request.getContextPath()%>/select.in?currentPage=<%=currentPage - 1%>'"><</button>
+		<%
+			}
+		%>
+
+		<%
+			for (int p = startPage; p <= endPage; p++) {
+				if (p == currentPage) {
+		%>
+		<button disabled><%=p%></button>
+		<%
+			} else {
+		%>
+		<button
+			onclick="location.href='<%=request.getContextPath()%>/select.in?currentPage=<%=p%>'"><%=p%></button>
+		<%
+			}
+			}
+		%>
+
+		<%
+			if (currentPage >= maxPage) {
+		%>
+		<button disabled>></button>
+		<%
+			} else {
+		%>
+		<button
+			onclick="location.href='<%=request.getContextPath()%>/select.in?currentPage=<%=currentPage + 1%>'">></button>
+		<%
+			}
+		%>
+
+		<button
+			onclick="location.href='<%=request.getContextPath()%>/select.in?currentPage=<%=maxPage%>'">>></button>
 	</div>
+	<br>
+	<div class="writeBtn" style="float: left">
+		<button class=""
+			onclick="location.href='<%=request.getContextPath()%>/views/group/inquire.jsp'">작성하기</button>
+	</div>
+	
+
+
+
 
 </body>
 </html>
+
+
+
+
+
