@@ -127,9 +127,9 @@
 						회사 소개
 					</h1>
 					<a href="<%=request.getContextPath()%>/views/pages/personalInfoRule.jsp" onclick="window.open(this.href, '_blank', 
-                'width=700px, height=750px, toolbars=no, scrollbars=no, resizable=no'); return false;">서비스 약관 및 정책</a> 
+                'width=700px, height=750px, toolbars=no, scrollbars=no, resizable=no'); return false;">개인 정보 취급 방침</a> 
                 	<a href="<%=request.getContextPath()%>/views/pages/serviceTermsRule.jsp" onclick="window.open(this.href, '_blank', 
-                'width=700px, height=750px, toolbars=no, scrollbars=no, resizable=no'); return false;">개인 정보 취급 방침</a>
+                'width=700px, height=750px, toolbars=no, scrollbars=no, resizable=no'); return false;">서비스 약관 및 정책</a>
 				</div>
 				<div class="footer-third">
 					<h1>Shortcut</h1>
