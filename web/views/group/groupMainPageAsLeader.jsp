@@ -67,7 +67,8 @@
 	background: white;
 	border: 1px solid black;
 }
-#expand{
+
+#expand {
 	background: white;
 	border: 1px solid black;
 }
@@ -122,7 +123,7 @@
 	height: 300px;
 }
 
-#resetting{
+#resetting {
 	margin-right: 25px;
 	background: white;
 	border: 1px solid black;
@@ -142,42 +143,45 @@
 				<a href="#">가입신청내역</a>
 			</div>
 		</div>
-		<!-- 메뉴 끝 -->    
-    
-		<br> <input id="btn" type="button" value="가입하기">
-			<input id="expand" type="button" value="인원증설" style="float:right; margin-right: 5px;" 
+		<!-- 메뉴 끝 -->
+
+		<br> 
+		<!-- <input id="btn" type="button" value="가입하기">  -->
+		<input id="expand" type="button" value="인원증설" style="float: right; margin-right: 25px;"
 			onclick="location.href='<%=request.getContextPath()%>/views/group/buyProduct.jsp'">
-		 <input type="hidden" onclick="listCheck();">
-    <input id="btn" type="button" value="폐쇄하기" onclick="groupClose();">
-				
+		<input id="btn" type="button" value="폐쇄하기" onclick="groupClose();" style="margin-left:20px;">
+		<input type="hidden" onclick="listCheck();"> 
+
 		<div class="wrapper">
 			<table class="table" id="content1">
 				<tr>
-         <td colspan="2" rowspan="4">
-					<div class="img-wrapper" onclick="clickThumbnail();">
-							<% if(thumbnail != null) { %>
+					<td colspan="2" rowspan="4">
+						<div class="img-wrapper" onclick="clickThumbnail();">
+							<img id="thumbNail" title="썸네일"
+								style="width: 200px; height: 200px;">
+							<%-- 	<% if(thumbnail != null) { %>
 							<img id="thumbNail" src="<%=request.getContextPath() %>/notice_uploadFiles/<%=thumbnail.getChangeName() %>" title="썸네일" style="width:200px; height:200px;">
 							<% } else { %>
 							<img id="thumbNail" title="썸네일" style="width:200px; height:200px;">
-							<% } %>
+							<% } %> --%>
 						</div>
 					</td>
 					<td width="15%" class="group-field">동호회명</td>
-					<td width="85%"><div id="group-title" class="group-desc"><%= group.getGroupName() %></div></td>
+					<td width="85%"><div id="group-title" class="group-desc"><%=group.getGroupName()%></div></td>
 				</tr>
 				<tr>
 					<td class="group-field">활동지</td>
-					<td><div id="group-title" class="group-desc"><%= group.getRegionName() %></div></td>
+					<td><div id="group-title" class="group-desc"><%=group.getRegionName()%></div></td>
 				</tr>
 
 				<tr>
 					<td class="group-field">분야</td>
-					<td><div id="group-title" class="group-desc"><%= group.getInterest() %></div></td>
+					<td><div id="group-title" class="group-desc"><%=group.getInterest()%></div></td>
 				</tr>
 
 				<tr>
 					<td class="group-field">개설일</td>
-					<td><div id="group-title" class="group-desc"><%= group.getOpenDate() %></div></td>
+					<td><div id="group-title" class="group-desc"><%=group.getOpenDate()%></div></td>
 				</tr>
 			</table>
 			<table id="content2" style="margin-top: 25px">
@@ -188,9 +192,10 @@
 				</tr>
 			</table>
 			<div id="content3" style="margin-top: 25px">게시판?</div>
+			<input type="file" id="upload_thumbnail" name="upload_thumbnail" style="display:none;" onchange="uploadImg(this);">
 			<div align="center">
-				<br><br><br>
-				<input id="resetting" type="button" value="수정하기" onclick="reSetting();">
+				<br> <br> <br> <input id="resetting" type="button"
+					value="수정하기" onclick="reSetting();">
 			</div>
 		</div>
 	</div>
@@ -200,14 +205,16 @@
 		function listCheck() {
 			location.href="'<%=request.getContextPath()%>/groupMember.go'";
 		}
+		
 		function reSetting() {
 			<%-- String str =<%=request.getContextPath()%> + "/GroupInfo.gi"; --%> 
 			console.log("<%=request.getContextPath()%>/GroupInfo.gi");
 			location.href = "<%=request.getContextPath()%>/GroupInfo.gi";
 			/* location.href=str; */
  			<%-- location.href="'<%=request.getContextPath()%>/GroupInfo.gi'"; --%>
-                  
-      function groupClose(){			
+		}
+		
+     	function groupClose(){			
 			console.log("동아리폐쇄 열기");
 			window.open("<%=request.getContextPath()%>/views/group/groupClose.jsp", "", "width=350,height=400");
 		}
@@ -225,7 +232,8 @@
 				}
 				
 				reader.readAsDataURL(value.files[0]);
-			}			
+			}	
+		}
 	</script>
 </body>
 </html>
