@@ -304,4 +304,20 @@ public class GroupService {
 		return listCount;
 	}
 
+	public GroupVO selectGroup(int nno) {
+		Connection con = getConnection();
+		GroupVO group = new GroupDao().selectGroupDetail(con, nno);
+		
+		close(con);
+		
+		return group;
+	}
+
+	public GroupVO selectGroupD(int nno) {
+		Connection con = getConnection();
+		GroupVO groupD = new GroupDao().selecGroupD(con, nno);
+		close(con);
+		return groupD;
+	}
+
 }

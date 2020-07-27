@@ -83,12 +83,12 @@ int endPage = pi.getEndPage();
         
        
        <div class="pagingArea" align="center">
-			<button onclick="location.href='<%=request.getContextPath()%>/managerPpl.mn?currentPage=1'"><<</button>
+			<button onclick="location.href='<%=request.getContextPath()%>/managerGroupMember.mn?currentPage=1'"><<</button>
 			
 			<% if(currentPage <= 1) { %>
 			<button disabled><</button>
 			<% } else { %>
-			<button onclick="location.href='<%=request.getContextPath()%>/managerPpl.mn?currentPage=<%=currentPage - 1%>'"><</button>
+			<button onclick="location.href='<%=request.getContextPath()%>/managerGroupMember.mn?currentPage=<%=currentPage - 1%>'"><</button>
 			<% } %>
 			
 			<% for(int p = startPage; p <= endPage; p++) { 
@@ -96,7 +96,7 @@ int endPage = pi.getEndPage();
 			%>
 						<button disabled><%= p %></button>
 			<%      } else { %>
-						<button onclick="location.href='<%=request.getContextPath()%>/managerPpl.mn?currentPage=<%=p%>'"><%= p %></button>
+						<button onclick="location.href='<%=request.getContextPath()%>/managerGroupMember.mn?currentPage=<%=p%>'"><%= p %></button>
 			<%  
 			        }
 				}
@@ -105,10 +105,10 @@ int endPage = pi.getEndPage();
 			<% if(currentPage >= maxPage) { %>
 			<button disabled>></button>
 			<% } else { %>
-			<button onclick="location.href='<%=request.getContextPath()%>/managerPpl.mn?currentPage=<%=currentPage + 1%>'">></button>
+			<button onclick="location.href='<%=request.getContextPath()%>/managerGroupMember.mn?currentPage=<%=currentPage + 1%>'">></button>
 			<% } %>
 		
-			<button onclick="location.href='<%=request.getContextPath()%>/managerPpl.mn?currentPage=<%=maxPage%>'">>></button>
+			<button onclick="location.href='<%=request.getContextPath()%>/managerGroupMember.mn?currentPage=<%=maxPage%>'">>></button>
 			<br>
 			<div id="Btn">
 				<button id="backBtn">이전페이지</button>&nbsp;

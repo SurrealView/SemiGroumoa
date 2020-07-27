@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.kh.groumoa.group.model.vo.*, java.util.*, com.kh.groumoa.common.*" %>
-<% ArrayList<GroupVO> list = (ArrayList<GroupVO>) request.getAttribute("list"); 
+    pageEncoding="UTF-8" import="com.kh.groumoa.member.model.vo.MemberVO, java.util.*, com.kh.groumoa.common.*"%>
+<% ArrayList<MemberVO> list = (ArrayList<MemberVO>) request.getAttribute("list"); 
 PageInfo pi = (PageInfo) request.getAttribute("pi");
 int listCount = pi.getTotalCount();
 int currentPage = pi.getCurrentPage();
@@ -14,8 +14,9 @@ int endPage = pi.getEndPage();
 <meta charset="UTF-8">
 <%@ include file="menubar.jsp" %>
 <title>Groumoa</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style>
-		.everylist {
+	.everylist {
 		width:1200px;
 		height:650px;
 		position:absolute;
@@ -41,60 +42,52 @@ int endPage = pi.getEndPage();
 		padding:10px;
 	}
 	
-	tbody tr:nth-child(odd) {
-		background-color:rgb(211,211,211);
-	}
-	
 	tr {
 		border-bottom:1px solid black;
 	}
 
-
 </style>
 </head>
-<body>
-
+<body> 
  		<div class="everylist">
-              <table class="table table-hover">
-                <h4 id="name">전체 동호회</h4>
+                <h4 id="name">전체 사용자&nbsp;<%=pi.getTotalCount() %>명</h4>
                 <br>
                 <br>
                 <br>
                 <hr>
-        <thead>
+              <table id="listArea">
+           <thead>
    		   <tr>
-   		   	 <th><input type="checkbox"></th>
-     		 <th>모임명</th>
-     		 <th>모임장</th>
-     		 <th>개설일</th>
-     		 <th>관심사</th>
-     		 <th>인원</th>
-     		 <th>게시글</th>
+   		   	 <th>선택</th>
+     		 <th>이름</th>
+     		 <th>계정</th>
+     		 <th>가입일</th>
+     		 <th>글/댓글/문의</th>
      		 <th>메모</th>
     	   </tr>
-  		  </thead>
-    	<tbody>
-     	   <% for(GroupVO g : list) { %>
+    	   </thead>
+           <tbody>
+    	   <% for(MemberVO m : list) { %>
      	   <tr>
-       		 <td><input type="checkbox" name="code" onclick="but(this)" value="<%= g.getGroupCode() %>"></td>
-        	 <td><%= g.getGroupName() %></td>
-             <td><%= g.getMemberName() %></td>
-             <td><%= g.getOpenDate() %></td>
-             <td><%= g.getInterest() %></td>
-		     <td><%= g.getMemberCount() %></td>
-		     <td><%= g.getPostCount() %></td>
+       		 <td><input type="checkbox" name="code" onclick="but(this)" value="<%= m.getMemberCode() %>"></td>
+        	 <td><%= m.getUserName() %></td>
+             <td><%= m.getEmail() %></td>
+             <td><%= m.getEnrollDate() %></td>
+		     <td><%= m.getPostCode() %></td>
              <td><input type="checkbox"></td>
           </tr>
           <% } %>
-        </tbody>
+          </tbody>
       </table>
-          <div class="pagingArea" align="center">
-			<button onclick="location.href='<%=request.getContextPath()%>/groupList.gp?currentPage=1'"><<</button>
+        
+       
+       <div class="pagingArea" align="center">
+			<button onclick="location.href='<%=request.getContextPath()%>/managerGroupLeader.mn?currentPage=1'"><<</button>
 			
 			<% if(currentPage <= 1) { %>
 			<button disabled><</button>
 			<% } else { %>
-			<button onclick="location.href='<%=request.getContextPath()%>/groupList.gp?currentPage=<%=currentPage - 1%>'"><</button>
+			<button onclick="location.href='<%=request.getContextPath()%>/managerGroupLeader.mn?currentPage=<%=currentPage - 1%>'"><</button>
 			<% } %>
 			
 			<% for(int p = startPage; p <= endPage; p++) { 
@@ -102,7 +95,7 @@ int endPage = pi.getEndPage();
 			%>
 						<button disabled><%= p %></button>
 			<%      } else { %>
-						<button onclick="location.href='<%=request.getContextPath()%>/groupList.gp?currentPage=<%=p%>'"><%= p %></button>
+						<button onclick="location.href='<%=request.getContextPath()%>/managerGroupLeader.mn?currentPage=<%=p%>'"><%= p %></button>
 			<%  
 			        }
 				}
@@ -111,10 +104,10 @@ int endPage = pi.getEndPage();
 			<% if(currentPage >= maxPage) { %>
 			<button disabled>></button>
 			<% } else { %>
-			<button onclick="location.href='<%=request.getContextPath()%>/groupList.gp?currentPage=<%=currentPage + 1%>'">></button>
+			<button onclick="location.href='<%=request.getContextPath()%>/managerGroupLeader.mn?currentPage=<%=currentPage + 1%>'">></button>
 			<% } %>
 		
-			<button onclick="location.href='<%=request.getContextPath()%>/groupList.gp?currentPage=<%=maxPage%>'">>></button>
+			<button onclick="location.href='<%=request.getContextPath()%>/managerGroupLeader.mn?currentPage=<%=maxPage%>'">>></button>
 			<br>
 			<div id="Btn">
 				<button id="detailBtn">정보확인</button>&nbsp;
@@ -137,7 +130,7 @@ int endPage = pi.getEndPage();
 //				var num = $("#listArea").parent().children().eq(0).val();
 				var num = $("input:checkbox[name='code']:checked").val();
 				console.log(num);
-				location.href="<%=request.getContextPath()%>/detail.gd?num=" + num;
+				location.href="<%=request.getContextPath()%>/detail.mn?num=" + num;
 			});
 		});
 		

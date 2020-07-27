@@ -140,6 +140,7 @@ public class InsertgroupServlet extends HttpServlet {
 				request.setAttribute("fileList", fileList);
 				request.setAttribute("regionSearch", regionSearch);
 				request.setAttribute("selectGroup", selectGroup);
+				System.out.println("selectGroup" + selectGroup);
 /*				response.sendRedirect(request.getContextPath() + "/views/group/groupUpdate.jsp");
 */			} else {
 				for(int i = 0; i < saveFiles.size(); i++) {

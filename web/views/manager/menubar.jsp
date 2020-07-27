@@ -75,8 +75,8 @@
  				<div class="smenu">
  					<a onclick="every();">전체 사용자</a>
  					<a onclick="leader();">관리자</a>
- 					<a onclick="groupLeader();">모임장</a>
- 					<a onclick="member();">일반회원</a>
+ 	<!-- 			<a onclick="groupLeader();">모임장</a>
+ 					<a onclick="member();">일반회원</a>  -->
  				</div>
  			</li>
  			<li class="pageMain" id="items">
