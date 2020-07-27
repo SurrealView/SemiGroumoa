@@ -1,4 +1,4 @@
-package com.kh.groumoa.group.controller;
+package com.kh.groumoa.product.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,23 +10,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.groumoa.common.PageInfo;
-import com.kh.groumoa.group.model.service.GroupService;
 import com.kh.groumoa.group.model.vo.GroupVO;
-import com.kh.groumoa.member.model.dao.MemberDao;
-import com.kh.groumoa.member.model.service.MemberService;
-import com.kh.groumoa.member.model.vo.MemberVO;
+import com.kh.groumoa.product.model.service.ProductService;
+import com.kh.groumoa.product.model.vo.ProductBoughtVO;
 
 /**
- * Servlet implementation class KickoutServlet
+ * Servlet implementation class SelectPaymentHistoryServlet
  */
-@WebServlet("/kickout.ko")
-public class KickoutServlet extends HttpServlet {
+@WebServlet("/selectHistory.pr")
+public class SelectPaymentHistoryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public KickoutServlet() {
+    public SelectPaymentHistoryServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,14 +33,7 @@ public class KickoutServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		GroupVO group = (GroupVO) request.getSession().getAttribute("selectedGroup");
-		int groupCode = group.getGroupCode();
 		
-		System.out.println("test groupCode : " + groupCode);
-		
-		int memberCode = Integer.parseInt(request.getParameter("memberCode"));
-		
-		int result = new MemberService().kickOut(memberCode, groupCode);
 		
 		int currentPage; //현제 페이지를 표시할 변수
 		int limit;		 //한 페이지에 게시글이 몇 개 보여질 것인지 표시
@@ -51,6 +42,13 @@ public class KickoutServlet extends HttpServlet {
 		int endPage;     //한 번에 표시될 페이지가 끝나는 페이지
 		
 		currentPage = 1;
+		
+		//그룹코드 받아오기 및 BoardVO객체에 그룹코드 설정
+		GroupVO group = (GroupVO) request.getSession().getAttribute("selectedGroup");
+		int groupCode = group.getGroupCode();
+		
+		ProductBoughtVO product = new ProductBoughtVO();
+		product.setGroupCode(groupCode);
 		
 		//전달받은 request가 있다면 전달받은 값으로 덮어 씀
 		if(request.getParameter("currentPage") != null) {
@@ -61,7 +59,8 @@ public class KickoutServlet extends HttpServlet {
 		limit = 10;
 		
 		//전체 목록 갯수를 조회
-		int listCount = new MemberService().getListCount();
+		int listCount = new ProductService().getListCount(product);
+		//System.out.println("list count : " + listCount);
 		
 		//총 페이지 수 계산
 		//예를 들면 목록 갯수가 123개 이면
@@ -81,22 +80,18 @@ public class KickoutServlet extends HttpServlet {
 		}
 		
 		PageInfo pi = new PageInfo(limit, currentPage, maxPage, startPage, endPage, listCount);
-		System.out.println(pi);
-		
-		ArrayList<MemberVO> list = new MemberService().selectGroupMemberList(pi, memberCode, groupCode);
-		
+		ArrayList<ProductBoughtVO> list = new ProductService().selectList(pi, product);
+		//System.out.println(pi);
+		//System.out.println("testBoardList : " + list);
+		System.out.println(list);
 		String page = "";
-		if(result > 0) {
-			if(list != null) {
-				page = "views/member/groupPplManagement.jsp";
-				request.setAttribute("list", list);
-			} else {
-				page = "views/common/errorPage.jsp";
-				request.setAttribute("msg", "멤버 추방 실패!");
-			}
+		if(list != null) {
+			page = "views/group/productBoughtList.jsp";
+			request.setAttribute("list", list);
+			request.setAttribute("pi", pi);
 		} else {
-			request.setAttribute("msg", "멤버 추방 실패!");
-			request.getRequestDispatcher("views/common/errorPage.jsp");
+			page = "views/common/errorPage.jsp";
+			request.setAttribute("msg", "결제내역 조회 실패");
 		}
 		
 		request.getRequestDispatcher(page).forward(request, response);

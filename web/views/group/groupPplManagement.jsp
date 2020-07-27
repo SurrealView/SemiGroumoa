@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.kh.groumoa.member.model.vo.*, com.kh.groumoa.group.model.vo.*, com.kh.groumoa.common.*, java.util.*" %>
 <%
- 	GroupVO selctedGroup = (GroupVO) request.getSession().getAttribute("selectedGroup"); 
+	ArrayList<MemberVO> list = (ArrayList<MemberVO>) request.getAttribute("list");
   	PageInfo pi = (PageInfo) request.getAttribute("pi");
 	int currentPage = pi.getCurrentPage();
 	int maxPage = pi.getMaxPage();
@@ -152,7 +152,7 @@
 		<br><br>
 		<div class="table-div">
 			<h2 align="center">회원</h2>         
-   			<form id="kickoutForm" method="post">
+   			<form id="kickout" method="post" action="<%=request.getContextPath() %>/kickout.ko">
    			<table class="table table-striped">
                   <thead>
                     <tr>
@@ -166,16 +166,16 @@
                     </tr>
                   </thead>
                   <tbody>
-                   	<% for(GroupVO m : selectedGroup) { %>
+                   	<% for(MemberVO m : list) { %>
                     <tr>
                       <input type="hidden" name="check">
-                      <td><input type="checkbox"></td>
-                      <td><a href="pplManagement-detail.jsp"><%=m.getGroupCode() %></a></td>
-                      <td><%= m.getMemberName() %></td>
+                      <td><input type="checkbox" id="checkList"></td>
+                      <td><a href="pplManagement-detail.jsp"><%=m.getMemberCode() %></a></td>
+                      <td><%= m.getUserName() %></td>
                       <td><%= m.getGroupCode() %></td>
                       <td><%= m.getPhone() %></td>
                       <td><%= m.getEmail() %></td>
-                      <td><%= m.getOpenDate() %></td>
+                      <td><%= m.getEnrollDate() %></td>
                     </tr>
                     <% } %> 
                   </tbody>
@@ -344,7 +344,7 @@
 		</div> 
 
 				
-				<button class="kickBtn" onclick="kickout();">강퇴하기</button>
+				<button class="kickBtn">강퇴하기</button>
 				<button class="inviteBtn">초대하기</button>
 				</form>
                 <div class="searchbox" id="searchbox">
@@ -366,7 +366,20 @@
 			$("#kickoutForm").attr("action", "<%=request.getContextPath()%>/kickout.ko");
 		}
 		
-		function kickout() {
+		$("#kickBtn").click(function(){
+			var member = [];
+			$.each($("#checkList:checked").parent().prev(), function(){
+				feeCode.push($(this).val());
+				$(this).attr("name", "memberCode");
+			});
+			
+			if(window.confirm('정말로 해당 게시물을 삭제하시겠습니까?')) {
+				$("#kickout").submit();
+			}
+			
+		});
+		
+<%-- 		function kickout() {
 			var kick = document.getElementsByName("check");
 			
 			console.log(hobby);
@@ -391,7 +404,7 @@
 				gang = null;
 			}
 			
-		}
+		} --%>
 		</script>
 		<%@include file="../common/footer/newFooter.jsp" %>
 </body>

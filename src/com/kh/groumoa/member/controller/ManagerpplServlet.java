@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.groumoa.common.PageInfo;
+import com.kh.groumoa.group.model.vo.GroupVO;
 import com.kh.groumoa.member.model.service.MemberService;
 import com.kh.groumoa.member.model.vo.MemberVO;
 
@@ -32,6 +33,9 @@ public class ManagerpplServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		GroupVO selectedGroup = (GroupVO)request.getSession().getAttribute("selectedGroup");
+	    int groupCode = selectedGroup.getGroupCode();
 		
 		int currentPage; //현제 페이지를 표시할 변수
 		int limit;		 //한 페이지에 게시글이 몇 개 보여질 것인지 표시
@@ -71,7 +75,7 @@ public class ManagerpplServlet extends HttpServlet {
 		
 		PageInfo pi = new PageInfo(limit, currentPage, maxPage, startPage, endPage, listCount);
 		System.out.println(pi);
-		ArrayList<MemberVO> list = new MemberService().selectList(pi);
+		ArrayList<MemberVO> list = new MemberService().selectList(pi, groupCode);
 		
 		System.out.println("리스트 : " + list);
 		

@@ -133,13 +133,14 @@ public class InsertgroupServlet extends HttpServlet {
 			System.out.println("지역코드" + rnCode);
 			RegionVO regionSearch = new GroupService().searchRegion(rnCode);
 			System.out.println("테스트2"+regionSearch);
+			selectGroup.setRegionName(regionSearch.getRegionName()+ " " + regionSearch.getRegionSpecific());
 			String page = "";
 			if(result > 0) {
-				page = "views/group/groupUpdate.jsp";
-				request.setAttribute("group", group);
+				page = "views/group/groupMainPageAsLeader.jsp";
+	/*			request.setAttribute("group", group);
 				request.setAttribute("fileList", fileList);
-				request.setAttribute("regionSearch", regionSearch);
-				request.setAttribute("selectGroup", selectGroup);
+				request.setAttribute("regionSearch", regionSearch);*/
+				request.getSession().setAttribute("selectedGroup", selectGroup);
 				System.out.println("selectGroup" + selectGroup);
 /*				response.sendRedirect(request.getContextPath() + "/views/group/groupUpdate.jsp");
 */			} else {

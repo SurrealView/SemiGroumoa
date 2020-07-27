@@ -40,7 +40,7 @@ public class updateGroupServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(ServletFileUpload.isMultipartContent(request)) {
+		/*if(ServletFileUpload.isMultipartContent(request)) {
 			int maxSize = 1024 * 1024 * 10;
 	        MemberVO loginUser = (MemberVO) request.getSession().getAttribute("loginUser");
 	        int groupLeaderCode = loginUser.getMemberCode();
@@ -121,30 +121,40 @@ public class updateGroupServlet extends HttpServlet {
 			System.out.println("그룹2" + selectGroup);
 			
 			RegionVO regionSearch = new GroupService().searchRegion(rnCode);
-			System.out.println(regionSearch);
+			System.out.println(regionSearch);*/
+		
+			GroupVO selectedGroup = (GroupVO) request.getSession().getAttribute("selectedGroup");
+			
+			int result = new GroupService().updateGroup(selectedGroup);
+			System.out.println("servlet" + result);
+			
+			GroupVO selectGroup = new GroupService().selectOne(selectedGroup.getGroupCode());
+			
+			RegionVO regionSearch = new GroupService().searchRegion(selectedGroup.getRnCode());
+			System.out.println("테스트2"+regionSearch);
 			
 			String page = "";
-			if(result > 0) {
-				page = "views/group/groupUpdate.jsp";
-				request.setAttribute("group", group);
-				request.setAttribute("fileList", fileList);
+			if(selectGroup != null) {
+				page = "views/group/groupAfterUpdate.jsp";
+				/*request.setAttribute("group", group);*/
+/*				request.setAttribute("fileList", fileList);*/
 				request.setAttribute("regionSearch", regionSearch);
-				request.setAttribute("selectGroup", selectGroup);
-				System.out.println("test1 : " + group);
-				System.out.println(fileList);
+				request.getSession().setAttribute("selectedGroup", selectGroup);
+				System.out.println("test1 : " + selectGroup);
+/*				System.out.println(fileList);*/
 			} else {
-				for(int i = 0; i < saveFiles.size(); i++) {
+/*				for(int i = 0; i < saveFiles.size(); i++) {
 					File failedFile = new File(savePath + saveFiles.get(i));
 						
 					failedFile.delete();							
 				}
-				
+				*/
 				page = "views/common/errorPage.jsp";
 				request.setAttribute("msg", "동호회 등록 실패!!");
 			}
 			request.getRequestDispatcher(page).forward(request, response);	
 		}
-	}
+/*	}*/
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

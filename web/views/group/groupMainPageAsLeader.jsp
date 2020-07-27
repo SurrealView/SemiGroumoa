@@ -67,6 +67,10 @@
 	background: white;
 	border: 1px solid black;
 }
+#expand{
+	background: white;
+	border: 1px solid black;
+}
 
 .wrapper {
 	margin: auto;
@@ -125,6 +129,12 @@
 	border: 1px solid lightgray;
 	height: 300px;
 }
+
+#resetting{
+	margin-right: 25px;
+	background: white;
+	border: 1px solid black;
+}
 </style>
 </head>
 <body>
@@ -141,10 +151,13 @@
 			</div>
 		</div>
 		<!-- 메뉴 끝 -->
-
-		<br> <input id="btn" type="button" value="가입하기"> <input
-			type="hidden" onclick="listCheck();"> <br> <br>
-
+		
+		<br> <input id="btn" type="button" value="가입하기">
+			<input id="expand" type="button" value="인원증설" style="float:right; margin-right: 5px;" 
+			onclick="location.href='<%=request.getContextPath()%>/views/group/buyProduct.jsp'">
+		 <input type="hidden" onclick="listCheck();">
+    <input id="btn" type="button" value="폐쇄하기" onclick="groupClose();"> <input
+				
 		<div class="wrapper">
 			<table class="table" id="content1">
 				<tr>
@@ -179,6 +192,10 @@
 				</tr>
 			</table>
 			<div id="content3" style="margin-top: 25px">게시판?</div>
+			<div align="center">
+				<br><br><br>
+				<input id="resetting" type="button" value="수정하기" onclick="reSetting();">
+			</div>
 		</div>
 	</div>
 	<%@include file="../common/footer/newFooter.jsp"%>
@@ -187,6 +204,12 @@
 		function listCheck() {
 			location.href="'<%=request.getContextPath()%>/groupMember.go'";
 		}
+		function reSetting() {
+			<%-- String str =<%=request.getContextPath()%> + "/GroupInfo.gi"; --%> 
+			console.log("<%=request.getContextPath()%>/GroupInfo.gi");
+			location.href = "<%=request.getContextPath()%>/GroupInfo.gi";
+			/* location.href=str; */
+ 			<%-- location.href="'<%=request.getContextPath()%>/GroupInfo.gi'"; --%>
 	</script>
 </body>
 </html>
