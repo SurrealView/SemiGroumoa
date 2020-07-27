@@ -106,10 +106,10 @@ public class MemberService {
 	}
 
 
-	public ArrayList<MemberVO> selectList(PageInfo pi, int groupCode) {
+	public ArrayList<MemberVO> selectList(PageInfo pi) {
 		Connection con = getConnection();
 
-		ArrayList<MemberVO> list = new MemberDao().selectList(con, pi, groupCode);
+		ArrayList<MemberVO> list = new MemberDao().selectList(con, pi);
 
 		close(con);
 

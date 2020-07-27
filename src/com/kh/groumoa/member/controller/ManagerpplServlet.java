@@ -33,10 +33,7 @@ public class ManagerpplServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		GroupVO selectedGroup = (GroupVO)request.getSession().getAttribute("selectedGroup");
-	    int groupCode = selectedGroup.getGroupCode();
-		
+				
 		int currentPage; //현제 페이지를 표시할 변수
 		int limit;		 //한 페이지에 게시글이 몇 개 보여질 것인지 표시
 		int maxPage;	 //전체 페이지에서 가장 마지막 페이지
@@ -75,7 +72,7 @@ public class ManagerpplServlet extends HttpServlet {
 		
 		PageInfo pi = new PageInfo(limit, currentPage, maxPage, startPage, endPage, listCount);
 		System.out.println(pi);
-		ArrayList<MemberVO> list = new MemberService().selectList(pi, groupCode);
+		ArrayList<MemberVO> list = new MemberService().selectList(pi);
 		
 		System.out.println("리스트 : " + list);
 		

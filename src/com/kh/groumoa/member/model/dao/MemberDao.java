@@ -232,7 +232,7 @@ public class MemberDao {
 		return listCount;
 	}
 
-	public ArrayList<MemberVO> selectList(Connection con, PageInfo pi, int groupCode) {
+	public ArrayList<MemberVO> selectList(Connection con, PageInfo pi) {
 		ArrayList<MemberVO> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -245,9 +245,8 @@ public class MemberDao {
 			int startRow = (pi.getCurrentPage() - 1) * pi.getLimit() + 1;
 			int endRow = startRow + pi.getLimit() -1;
 			
-			pstmt.setInt(1, groupCode);
-			pstmt.setInt(2, startRow);
-			pstmt.setInt(3, endRow);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
 			
 			rset = pstmt.executeQuery();
 			
