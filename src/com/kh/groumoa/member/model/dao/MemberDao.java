@@ -270,7 +270,6 @@ public class MemberDao {
 			close(pstmt);
 			close(con);
 		}
-		
 		return list;	
 	}
 
