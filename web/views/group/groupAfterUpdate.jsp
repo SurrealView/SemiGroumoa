@@ -1,14 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.kh.groumoa.group.model.vo.*, com.kh.groumoa.member.model.vo.*, java.util.*" %>
-<%  /* GroupVO group = (GroupVO) request.getAttribute("group"); */
- 	RegionVO region = (RegionVO) request.getAttribute("regionSearch");
+<% 	RegionVO region = (RegionVO) request.getAttribute("regionSearch");
  	GroupVO Group = (GroupVO) session.getAttribute("selectedGroup");
-	/* GroupVO selectGroup = (GroupVO) request.getAttribute("selectGroup"); */
-	/*	GroupVO insertGroup = (GroupVO) request.getAttribute("insertGroup");*/
-	/* System.out.println("테스트3" + selectGroup); */
 	System.out.println("테스트4" + region);
-/* 	ArrayList<Attachment> fileList = (ArrayList<Attachment>) request.getAttribute("fileList");
-	Attachment thumbNail = fileList.get(0); */
+	System.out.println("테스트5" + Group);
 	String openYn = (String)request.getAttribute("openYn");
 %>
 <!DOCTYPE html>
@@ -171,7 +166,7 @@
 		
 		<br><br>
      <div class="wrapper">
-     <form id="updateForm" action="<%=request.getContextPath() %>/update.gr" method="post"><!--  encType="multipart/form-data" -->
+     <form id="updateForm" action="<%=request.getContextPath() %>/update.gr" method="post" encType="multipart/form-data">
 	  <table border="1" id="groupTable">
         <tr>
             <td colspan="6" height="50px" style="border-right:hidden; border-top:hidden;">동호회이름
@@ -183,7 +178,34 @@
         <tr>
             <td colspan="12" height="50px" style="border-right:hidden;">동호회 활동 지역
             &nbsp;<input type="text" style="width:350px" class="form-control" name="rnCode" value="<%=region.getRegionName() %> <%=region.getRegionSpecific() %>" readonly>
-
+<!--             <select class="form-control" name="rnCode" readonly>
+	 				<option value="R0001">서울시 동작구</option>
+	 				<option value="R0002">서울시 강동구</option>
+	 				<option value="R0003">서울시 강서구</option>
+	 				<option value="R0004">서울시 강북구</option>
+	 				<option value="R0005">서울시 관악구</option>
+	 				<option value="R0006">서울시 광진구</option>
+	 				<option value="R0007">서울시 구로구</option>
+	 				<option value="R0008">서울시 금천구</option>
+	 				<option value="R0009">서울시 노원구</option>
+	 				<option value="R0010">서울시 동대문구</option>
+	 				<option value="R0011">서울시 도봉구</option>
+	 				<option value="R0012">서울시 동작구</option>
+	 				<option value="R0013">서울시 마포구</option>
+	 				<option value="R0014">서울시 서대문구</option>
+	 				<option value="R0015">서울시 성동구</option>
+	 				<option value="R0016">서울시 성북구</option>
+	 				<option value="R0017">서울시 서초구</option>
+	 				<option value="R0018">서울시 송파구</option>
+	 				<option value="R0019">서울시 영등포구</option>
+	 				<option value="R0020">서울시 용산구</option>
+	 				<option value="R0021">서울시 양천구</option>
+	 				<option value="R0022">서울시 은평구</option>
+	 				<option value="R0023">서울시 송로구</option>
+	 				<option value="R0024">서울시 중구</option>
+	 				<option value="R0025">서울시 중랑구</option>
+	 			</select> -->
+          <!-- &nbsp;<input type="text" style="width:350px" class="form-control" name="rnCode">  -->
             </td>
         </tr>
         <tr>
@@ -274,7 +296,7 @@
         </table>
           <br>
           <br>
-            <input type="submit" id="deleteBtn" value="수정">
+            <input type="submit" id="deleteBtn" value="확인">
             <input type="reset" id="cancelBtn" value="취소">
         </form>
      </div>
@@ -306,97 +328,6 @@
      			reader.readAsDataURL(value.files[0]);
      		}
      	}
-     	
-<%--      	function radio(){
-     		var st =  $(":input:radio[name=interest]:chcked").val();
-     		$("input:radio[name=interest]:input[value='<%= selectGroup.getInterest()%>']").attr("checked", true);
-     		console.log(<%= selectGroup.getInterest()%>);
-     	 --%>
-     	
-<%--      	$(function(){
-     		
-			var arr = '<%= selectGroup.getInterest()%>';      
-   			
-   			console.log(arr);
-   			
-   			$("input[name=interest]").each(function(){
-   				for(var i = 0; i < arr.length; i++) {
-   					if($(this).val() == arr[i]) {
-   						$(this).attr("checked", true);
-   					}
-   				}
-   			}); --%>
-     		
-<%--      		$("#interest").click(function() {
-
-    			var resultValue = $("#interest").val();
-
-    			$("input[name=interest][value="<%= selectGroup.getInterest()%>"]").attr("checked", true);
-
-    		}); --%>
-     		
-<%-- 			var arr = '<%= selectGroup.getInterest()%>';     
-   			
-   			console.log(arr);
-   			
-   			$("input[name=interest]").attr("checked", true);
-   			
-   			var irr = '<%=selectGroup.getOpenYn() %>';
-   			console.log(irr);
-   			$("input[name=openYn]").attr("checked", true);
-   			
-   			var brr = '<%=selectGroup.getNickNameyn() %>';
-   			console.log(brr);
-   			$("input[name=nickNameyn]").attr("checked", true); --%>
-   			
-/*    			$('input[name="interest"]').change(function() {
-   			    $('input[name="interest"]').each(function() {    
-   			        var checked = $(this).prop('checked');  
-   			    });
-   			});
-			 */
-<%-- 			var arr = '<%=selectGroup.setOpenYn("openYn")%>'
-			$("input[name=openYn]").val(arr);
-			var irr = '<%=selectGroup.setNickNameyn("nickNameyn")%>'
-			$("input[name=nickNameyn]").val(irr); --%>
-<%-- 			$("[name=interest]").filter("[value=${'<%=selectGroup.setInterest("interest")%>'}]").prop("checked",true)
-			$("[name=openYn]").filter("[value=${'<%=selectGroup.setOpenYn("openYn")%>'}]").prop("checked",true)
-			$("[name=nickNameyn]").filter("[value=${'<%=selectGroup.setNickNameyn("nickNameyn")%>'}]").prop("checked",true) --%>
-     /* 	}); */
-     
-<%--      	function(){
-     		
-     		var exp = '<%= selectGroup.getInterest()%>';
-     		var num = document.getElementsByName('interest');
-     		for(var i =0; i<num.length; i++) {
-     			if(num[i].checked == true)
-     		}
-     		
-     		$("input:radio[name='interest']:radio[value='<%= selectGroup.getInterest()%>']").prop("checked", true);
-     	} --%>
-     	
-<%--      	$(function(){
-			var exp = '<%= selectGroup.getInterest()%>';
-			console.log(exp);
- /*     		var exp = $(':radio[name="interest"]:checked').val();*/
-    		$("input[name=interest]").val(exp); --%>
- 
- <%--      		$("input[name=interest]").each(function(){
- 				for(var i = 0; i < arr.length; i++) {
-   					if($(this).val() == arr[i]) {
-   						$(this).attr("checked", true);
-   					}
-   				}   --%>
-<%-- <%--    			var temp = '<%=selectGroup.getOpenYn() %>'.val(); --%>  		
-<%--    			var temp = $(':radio[name="openYn"]:checked').val(); 
-  			var tempt = openYn.val();
-    		$("input[name=openYn]").val(temp);
-
-   			var arr = '<%=selectGroup.getNickNameyn() %>'.val();
-   			var test = $(':radio[name="nickNameyn"]:checked').val();
-   			$("input[name=nickNameyn]").val(test);
-   			
-   		}; --%>
      	
      </script>
    
