@@ -57,7 +57,7 @@ int endPage = pi.getEndPage();
 
  		<div class="everylist">
               <table class="table table-hover">
-                <h4 id="name">전체 동호회</h4>
+                <h4 id="name">전체 동호회&nbsp;<%=pi.getTotalCount() %>개</h4>
                 <br>
                 <br>
                 <br>
