@@ -94,7 +94,9 @@
                 <tr>
                     <td><label>제목</label></td>                    
                     <td colspan="5"><pre style="width:400px"><%=report.getReportTitle() %></pre></td>
-                    <td colspan="1"><%=report.getReportCategory() %></td>
+                    <td colspan="1"><%=report.getReportCategoryName() %></td>
+                    <%-- <td colspan="1"><%=report.getReportCategory() %></td> --%>
+
                 </tr>
                 <tr>
                     <td><label>내용</label></td>
