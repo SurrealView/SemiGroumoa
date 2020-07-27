@@ -16,14 +16,14 @@ import com.kh.groumoa.scheduler.model.service.SchedulerService;
 /**
  * Servlet implementation class SelectSchedulerListServlet
  */
-@WebServlet("/selectList.sch")
-public class SelectSchedulerListServlet extends HttpServlet {
+@WebServlet("/selectListAsLeader.sch")
+public class SelectScheListLeaderServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SelectSchedulerListServlet() {
+    public SelectScheListLeaderServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,15 +35,13 @@ public class SelectSchedulerListServlet extends HttpServlet {
 		GroupVO group = (GroupVO) request.getSession().getAttribute("selectedGroup");
 		int groupCode = group.getGroupCode(); //그룹 코드 받아오기
 		
-		System.out.println("groupCode : " + groupCode);
-		
-		ArrayList<SchedulerVO> list = new SchedulerService().selectScheduleList(groupCode);
+		ArrayList<SchedulerVO> list = new SchedulerService().selectList(groupCode);
 		
 //		System.out.println(list);
 //		System.out.println(list.size());
 		String page = "";
 		if(list != null) {
-			page = "views/group/scheduler/groupCalendar.jsp";
+			page = "views/group/scheduler/groupCalendarManagement.jsp";
 			request.setAttribute("list", list);
 		} else {
 			page = "views/common/errorPage.jsp";
