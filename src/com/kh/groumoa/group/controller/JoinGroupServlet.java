@@ -36,6 +36,15 @@ public class JoinGroupServlet extends HttpServlet {
 		
 		int result = new GroupService().joinGroup(group, loginUser);
 		
+		String page = "views/group/groupMainPage.jsp"; 
+		if(result > 0) {
+			page = "views/group/groupMainPage.jsp";			
+		} else {
+			page = "common/errorPage.jsp";
+			request.setAttribute("msg", "그룹 가입에 실패했습니다.");
+		}
+		
+		request.getRequestDispatcher(page).forward(request, response);
 	}
 
 	/**

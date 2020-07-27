@@ -149,6 +149,7 @@ public class ReportDao {
 				re.setReporterID(rset.getString("EMAIL1"));
 				re.setReportedID(rset.getString("EMAIL2"));
 				re.setReportCategory(rset.getString("REPORT_CATEGORY"));
+				re.setReportCategoryName(rset.getString("REPORT_CATEGORY_NAME"));
 				re.setReportDate(rset.getDate("REPORT_DATE"));
 				re.setReportTitle(rset.getString("REPORT_TITLE"));
 				re.setReportDetail(rset.getString("REPORT_DETAIL"));
@@ -232,7 +233,8 @@ public class ReportDao {
 				re.setReportCode(reId);
 				re.setReporter(rset.getInt("REPORTER"));
 				re.setReported(rset.getInt("REPORTED"));
-				re.setReportCategory(rset.getString("REPORT_CATEGORY"));
+				/*re.setReportCategory(rset.getString("REPORT_CATEGORY"));*/
+				re.setReportCategoryName(rset.getString("REPORT_CATEGORY_NAME"));
 				re.setReportDate(rset.getDate("REPORT_DATE"));
 				re.setReportTitle(rset.getString("REPORT_TITLE"));
 				re.setReportDetail(rset.getString("REPORT_DETAIL"));
