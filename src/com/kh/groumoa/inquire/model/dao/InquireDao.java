@@ -1,10 +1,11 @@
 package com.kh.groumoa.inquire.model.dao;
 
+import static com.kh.groumoa.common.JDBCTemplate.close;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,9 +15,6 @@ import java.util.Properties;
 
 import com.kh.groumoa.common.PageInfo;
 import com.kh.groumoa.inquire.model.vo.InquireVO;
-
-import static com.kh.groumoa.common.JDBCTemplate.close;
-
 
 public class InquireDao {
 	private Properties prop = new Properties();
@@ -60,116 +58,93 @@ public class InquireDao {
 		return result;
 	}
 
-	public int getListCount(Connection con) {
-		Statement stmt = null;
-		int listCount = 0;
-		ResultSet rset = null;
 
-		String query = prop.getProperty("listCount");
-
-		try {
-			stmt = con.createStatement();
-			rset = stmt.executeQuery(query);
-
-			if(rset.next()) {
-				listCount = rset.getInt(1);
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(stmt);
-			close(rset);
-		}
-
-
-		return listCount;
+	public ArrayList<InquireVO> selectInquireList(Connection con, PageInfo pi, InquireVO inquire) {
+		
+		
+		
+		return null;
 	}
 
+	   public ArrayList<InquireVO> selectList(Connection con, PageInfo pi) {
+	      Statement stmt = null;
+	      ResultSet rset = null;
+	      ArrayList<InquireVO> list = null;
 
-	public ArrayList<InquireVO> selectList(Connection con, PageInfo pi) {
-		Statement stmt = null;
-		ResultSet rset = null;
-		ArrayList<InquireVO> list = null;
+	      String query = prop.getProperty("selectList");
 
-		String query = prop.getProperty("selectList");
+	      try {
+	         stmt = con.createStatement();
+	         rset = stmt.executeQuery(query);
 
-		try {
-			stmt = con.createStatement();
-			rset = stmt.executeQuery(query);
+	         list = new ArrayList<InquireVO>();
 
-			list = new ArrayList<InquireVO>();
+	         while(rset.next()) {
+	            InquireVO i = new InquireVO();
 
-			while(rset.next()) {
-				InquireVO i = new InquireVO();
+	            i.setQna_Code(rset.getString("QNA_CODE"));
+	            i.setQuestioner_Code(rset.getInt("QUESTIONER_CODE"));
+	            i.setQna_Cate_Code(rset.getString("QNA_CATE_CODE"));
+	            i.setQna_Title(rset.getString("QNA_TITLE"));
+	            i.setQna_Detail(rset.getString("QNA_DETAIL"));
+	            i.setQna_Date(rset.getDate("QNA_DATE"));
+	            i.setQna_Reply(rset.getString("QNA_REPLY"));
+	            i.setIsanswered(rset.getString("ISANSWERED"));
+	            
+	            list.add(i);
 
-				i.setQna_Code(rset.getString("QNA_CODE"));
-				i.setQuestioner_Code(rset.getInt("QUESTIONER_CODE"));
-				i.setQna_Cate_Code(rset.getString("QNA_CATE_CODE"));
-				i.setQna_Title(rset.getString("QNA_TITLE"));
-				i.setQna_Detail(rset.getString("QNA_DETAIL"));
-				i.setQna_Date(rset.getDate("QNA_DATE"));
-				i.setQna_Reply(rset.getString("QNA_REPLY"));
-				i.setIsanswered(rset.getString("ISANSWERED"));
-				
-				list.add(i);
+	         }
 
-			}
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	      } finally {
+	         close(stmt);
+	         close(rset);
+	      }
 
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(stmt);
-			close(rset);
-		}
-
-		return list;
-	}
+	      return list;
+	   }
 
 
 	public ArrayList<InquireVO> selectQna(Connection con) {
-		 Statement stmt = null;
-		 ResultSet rset = null;
-		 
-		 ArrayList<InquireVO> selectQna = null;
-		 
-		 String query = prop.getProperty("selectList");
-		 
-		 try {
-				stmt = con.createStatement();
-				rset = stmt.executeQuery(query);
+	       Statement stmt = null;
+	       ResultSet rset = null;
+	       
+	       ArrayList<InquireVO> selectQna = null;
+	       
+	       String query = prop.getProperty("selectList");
+	       
+	       try {
+	            stmt = con.createStatement();
+	            rset = stmt.executeQuery(query);
 
-				selectQna = new ArrayList<InquireVO>();
+	            selectQna = new ArrayList<InquireVO>();
 
-				while(rset.next()) {
-					InquireVO i = new InquireVO();
+	            while(rset.next()) {
+	               InquireVO i = new InquireVO();
 
-					i.setQna_Code(rset.getString("QNA_CODE"));
-					i.setQuestioner_Code(rset.getInt("QUESTIONER_CODE"));
-					i.setQna_Cate_Code(rset.getString("QNA_CATE_CODE"));
-					i.setQna_Title(rset.getString("QNA_TITLE"));
-					i.setQna_Detail(rset.getString("QNA_DETAIL"));
-					i.setQna_Date(rset.getDate("QNA_DATE"));
-					i.setQna_Reply(rset.getString("QNA_REPLY"));
-					i.setIsanswered(rset.getString("ISANSWERED"));
-					
-					selectQna.add(i);
+	               i.setQna_Code(rset.getString("QNA_CODE"));
+	               i.setQuestioner_Code(rset.getInt("QUESTIONER_CODE"));
+	               i.setQna_Cate_Code(rset.getString("QNA_CATE_CODE"));
+	               i.setQna_Title(rset.getString("QNA_TITLE"));
+	               i.setQna_Detail(rset.getString("QNA_DETAIL"));
+	               i.setQna_Date(rset.getDate("QNA_DATE"));
+	               i.setQna_Reply(rset.getString("QNA_REPLY"));
+	               i.setIsanswered(rset.getString("ISANSWERED"));
+	               
+	               selectQna.add(i);
 
-				}
+	            }
 
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} finally {
-				close(stmt);
-				close(rset);
-			}
+	         } catch (SQLException e) {
+	            e.printStackTrace();
+	         } finally {
+	            close(stmt);
+	            close(rset);
+	         }
 
-			return selectQna;
-		 
-	}
-
-
-
-
+	         return selectQna;
+	       
+	   }
 
 }
