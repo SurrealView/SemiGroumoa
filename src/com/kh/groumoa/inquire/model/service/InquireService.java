@@ -1,15 +1,16 @@
 package com.kh.groumoa.inquire.model.service;
 
+import static com.kh.groumoa.common.JDBCTemplate.close;
+import static com.kh.groumoa.common.JDBCTemplate.commit;
+import static com.kh.groumoa.common.JDBCTemplate.getConnection;
+import static com.kh.groumoa.common.JDBCTemplate.rollback;
+
 import java.sql.Connection;
 import java.util.ArrayList;
 
-import com.kh.groumoa.group.model.dao.BoardDao;
-import com.kh.groumoa.group.model.vo.BoardVO;
+import com.kh.groumoa.common.PageInfo;
 import com.kh.groumoa.inquire.model.dao.InquireDao;
 import com.kh.groumoa.inquire.model.vo.InquireVO;
-import com.kh.groumoa.member.model.vo.MemberVO;
-
-import static com.kh.groumoa.common.JDBCTemplate.*;
 
 
 public class InquireService {
@@ -31,15 +32,26 @@ public class InquireService {
 		
 	}
 
-	public ArrayList<InquireVO> selectInquireList(MemberVO loginUser) {
+	public ArrayList<InquireVO> selectInquireList(PageInfo pi) {
 		Connection con = getConnection();
 		
-		ArrayList<InquireVO> list = new InquireDao().selectList(con, pi, inquire);
+		ArrayList<InquireVO> list = new InquireDao().selectList(con, pi);
 		
 		close(con);
 		
 		return list;
 	}
 	
+	
+	
+	public ArrayList<InquireVO> selectInquire() {
+	      Connection con = getConnection();
+	      
+	      ArrayList<InquireVO> selectQna = new InquireDao().selectQna(con);
+	      
+	      close(con);
+	      
+	      return selectQna;
+	   }
 
 }

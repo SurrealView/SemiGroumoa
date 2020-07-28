@@ -36,6 +36,15 @@ public class SelectInquireListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		ArrayList<InquireVO> selectQna = new InquireService().selectInquire();
+	      //System.out.println("selectQna : " + selectQna);
+	      String page = "";
+	      
+	      if(selectQna != null) {
+	         page = "/views/group/myInquiry.jsp";
+	         request.setAttribute("selectQna", selectQna);
+	         request.getRequestDispatcher(page).forward(request, response);
+	      }
 		
 	}
 
