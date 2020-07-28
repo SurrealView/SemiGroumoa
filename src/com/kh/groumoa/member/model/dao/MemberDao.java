@@ -213,7 +213,7 @@ public class MemberDao {
 		ResultSet rset = null;
 
 		String query = prop.getProperty("listCount");
-
+		System.out.println(query);
 		try {
 			stmt = con.createStatement();
 			rset = stmt.executeQuery(query);
