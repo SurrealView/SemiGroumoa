@@ -9,13 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.groumoa.common.PageInfo;
-import com.kh.groumoa.group.model.service.BoardService;
-import com.kh.groumoa.group.model.vo.BoardVO;
-import com.kh.groumoa.group.model.vo.GroupVO;
 import com.kh.groumoa.inquire.model.service.InquireService;
 import com.kh.groumoa.inquire.model.vo.InquireVO;
-import com.kh.groumoa.member.model.vo.MemberVO;
 
 /**
  * Servlet implementation class SelectInquireListServlet

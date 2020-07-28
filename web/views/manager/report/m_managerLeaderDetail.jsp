@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<%@ include file="menubar.jsp" %>
+<%@ include file="../menubar.jsp" %>
 <title>Groumoa</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style>
