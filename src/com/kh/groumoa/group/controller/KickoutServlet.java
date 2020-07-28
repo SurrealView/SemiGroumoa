@@ -39,7 +39,7 @@ public class KickoutServlet extends HttpServlet {
 		int groupCode = group.getGroupCode();
 		
 		System.out.println("test groupCode : " + groupCode);
-		
+
 		int memberCode = Integer.parseInt(request.getParameter("memberCode"));
 		
 		int result = new MemberService().kickOut(memberCode, groupCode);
@@ -78,8 +78,9 @@ public class KickoutServlet extends HttpServlet {
 		String page = "";
 		if(result > 0) {
 			if(list != null) {
-				page = "views/member/groupPplManagement.jsp";
+				page = "views/group/groupPplManagement.jsp";
 				request.setAttribute("list", list);
+				request.setAttribute("pi", pi);
 			} else {
 				page = "views/common/errorPage.jsp";
 				request.setAttribute("msg", "멤버 추방 실패!");

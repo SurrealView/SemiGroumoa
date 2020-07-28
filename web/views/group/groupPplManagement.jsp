@@ -6,7 +6,8 @@
 	int currentPage = pi.getCurrentPage();
 	int maxPage = pi.getMaxPage();
 	int startPage = pi.getStartPage();
-	int endPage = pi.getEndPage();	 
+	int endPage = pi.getEndPage();
+	int listCount = pi.getTotalCount();
 %>
 <!DOCTYPE html>
 <html>
@@ -169,8 +170,8 @@
                    	<% for(MemberVO m : list) { %>
                     <tr>
                       <input type="hidden" name="check">
-                      <td><input type="checkbox" id="checkList"></td>
                       <input type="hidden" value="<%=m.getMemberCode() %>" id="memberCode" name="memberCode">
+                      <td><input type="checkbox" id="checkList"></td>
                       <td><a href="pplManagement-detail.jsp"><%=m.getMemberCode() %></a></td>
                       <td><%= m.getUserName() %></td>
                       <td><%= m.getGroupCode() %></td>
