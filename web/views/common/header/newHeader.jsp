@@ -202,7 +202,6 @@ body {
 	<table class="table-nav-bar">
 		<tr>
 			<td id="blank"></td>
-
 			<%
 				if (loginUser != null) {
 			%>
