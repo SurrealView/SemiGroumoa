@@ -223,11 +223,11 @@ body {
 			<%
 				} else {
 			%>
-			<td class="my-menu"><a href="#">공지사항</a></td>
+			<td class="my-menu"><a href="<%=request.getContextPath()%>/select.in">공지사항</a></td>
 			<%
 				}
 			%>
-			<td class="my-menu"><a href="#">QnA</a></td>
+			<td class="my-menu"><a href="<%=request.getContextPath()%>/insert.qa">QnA</a></td>
 			<td></td>
 		</tr>
 	</table>

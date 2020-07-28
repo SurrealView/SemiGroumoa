@@ -37,8 +37,6 @@ public class SelectScheListLeaderServlet extends HttpServlet {
 		
 		ArrayList<SchedulerVO> list = new SchedulerService().selectList(groupCode);
 		
-//		System.out.println(list);
-//		System.out.println(list.size());
 		String page = "";
 		if(list != null) {
 			page = "views/group/scheduler/groupCalendarManagement.jsp";
