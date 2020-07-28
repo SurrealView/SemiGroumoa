@@ -1,6 +1,8 @@
 package com.kh.groumoa.inquire.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,7 +17,7 @@ import com.kh.groumoa.inquire.model.vo.InquireVO;
 /**
  * Servlet implementation class InsertQnaServlet
  */
-@WebServlet(name = "InsertQaServlet", urlPatterns = { "/insert.qa" })
+@WebServlet("/insert.qa")
 public class InsertQnaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -52,9 +54,16 @@ public class InsertQnaServlet extends HttpServlet {
 		requestInquire.setQna_Detail(detail);
 		
 		int result = new InquireService().insertInquire(requestInquire);
-		
+		ArrayList<InquireVO> selectQna = new InquireService().selectInquire();
 		String page = "";
-		if(result > 0) {
+		
+		if(selectQna != null) {
+			page = "/views/group/myInquiry.jsp";
+			request.setAttribute("selectQna", selectQna);
+			request.getRequestDispatcher(page).forward(request, response);
+		}
+		
+		/* if(result > 0) {
 			page = "/views/common/successPage.jsp";
 			//response.sendRedirect(page);
 			request.setAttribute("successCode", "insertInquire");//successPage에 insertBoard에 해당하는 속성값 만들기
@@ -63,7 +72,7 @@ public class InsertQnaServlet extends HttpServlet {
 			page = "views/common/errorPage.jsp";
 			request.setAttribute("msg", "게시판 작성 실패!");
 			request.getRequestDispatcher(page).forward(request, response);
-	}
+	} */
 	}
 
 	/**

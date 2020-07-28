@@ -1,14 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"
 	import="com.kh.groumoa.inquire.model.vo.InquireVO, java.util.ArrayList, com.kh.groumoa.common.*"%>
-<%
-	ArrayList<InquireVO> list = (ArrayList<InquireVO>) request.getAttribute("list");
-	PageInfo pi = (PageInfo) request.getAttribute("pi");
-	int currentPage = pi.getCurrentPage();
-	int maxPage = pi.getMaxPage();
-	int startPage = pi.getStartPage();
-	int endPage = pi.getEndPage();
-%>
+	<%ArrayList<InquireVO> selectQna = (ArrayList<InquireVO>) request.getAttribute("selectQna"); %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -157,7 +151,7 @@
 				</thead>
 				<tbody>
 					<%
-						for (InquireVO i : list) {
+						for (InquireVO i : selectQna) {
 					%>
 					<tr>
 						<input type="hidden" value="<%=i.getQna_Code()%>">
@@ -171,64 +165,8 @@
 				</tbody>
 			</table>
 		</div>
+		<button onclick="location.href='<%=request.getContextPath()%>/insert.qa'">작성하기</button>
 	</div>
-	<div class="pagingArea" align="center">
-		<button
-			onclick="location.href='<%=request.getContextPath()%>/select.in?currentPage=1'"><<</button>
-
-		<%
-			if (currentPage <= 1) {
-		%>
-		<button disabled><</button>
-		<%
-			} else {
-		%>
-		<button
-			onclick="location.href='<%=request.getContextPath()%>/select.in?currentPage=<%=currentPage - 1%>'"><</button>
-		<%
-			}
-		%>
-
-		<%
-			for (int p = startPage; p <= endPage; p++) {
-				if (p == currentPage) {
-		%>
-		<button disabled><%=p%></button>
-		<%
-			} else {
-		%>
-		<button
-			onclick="location.href='<%=request.getContextPath()%>/select.in?currentPage=<%=p%>'"><%=p%></button>
-		<%
-			}
-			}
-		%>
-
-		<%
-			if (currentPage >= maxPage) {
-		%>
-		<button disabled>></button>
-		<%
-			} else {
-		%>
-		<button
-			onclick="location.href='<%=request.getContextPath()%>/select.in?currentPage=<%=currentPage + 1%>'">></button>
-		<%
-			}
-		%>
-
-		<button
-			onclick="location.href='<%=request.getContextPath()%>/select.in?currentPage=<%=maxPage%>'">>></button>
-	</div>
-	<br>
-	<div class="writeBtn" style="float: left">
-		<button class=""
-			onclick="location.href='<%=request.getContextPath()%>/views/group/inquire.jsp'">작성하기</button>
-	</div>
-	
-
-
-
 
 </body>
 </html>
