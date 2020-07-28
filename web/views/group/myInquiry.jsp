@@ -165,7 +165,7 @@
 				</tbody>
 			</table>
 		</div>
-		<button onclick="location.href='<%=request.getContextPath()%>/insert.qa'">작성하기</button>
+		<button onclick="location.href='<%=request.getContextPath()%>/views/group/inquire.jsp'">작성하기</button>
 	</div>
 
 </body>

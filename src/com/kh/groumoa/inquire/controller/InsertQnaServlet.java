@@ -39,7 +39,7 @@ public class InsertQnaServlet extends HttpServlet {
 		//int groupCode = Integer.parseInt(request.getParameter("groupCode"));
 		//int groupCode = 2; //임시
 		String temp = request.getParameter("writerCode");
-		System.out.println("temp : " + temp);
+//		System.out.println("temp : " + temp);
 		int writerCode = Integer.parseInt(temp);
 //		System.out.println("test writerCode : " + writerCode);
 		String detail = request.getParameter("qContent");
