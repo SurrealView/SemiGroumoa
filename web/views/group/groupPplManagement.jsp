@@ -170,6 +170,7 @@
                     <tr>
                       <input type="hidden" name="check">
                       <td><input type="checkbox" id="checkList"></td>
+                      <input type="hidden" value="<%=m.getMemberCode() %>" id="memberCode" name="memberCode">
                       <td><a href="pplManagement-detail.jsp"><%=m.getMemberCode() %></a></td>
                       <td><%= m.getUserName() %></td>
                       <td><%= m.getGroupCode() %></td>
@@ -342,11 +343,11 @@
 			</div>
 			
 		</div> 
-
+	</form>
 				
-				<button class="kickBtn">강퇴하기</button>
+				<button type ="button" class="kickBtn">강퇴하기</button>
 				<button class="inviteBtn">초대하기</button>
-				</form>
+				
                 <div class="searchbox" id="searchbox">
 					<form>
 						<select class="form-control">
@@ -367,13 +368,13 @@
 		}
 		
 		$("#kickBtn").click(function(){
-			var member = [];
+			var memberCode = [];
 			$.each($("#checkList:checked").parent().prev(), function(){
-				feeCode.push($(this).val());
+				memberCode.push($(this).val());
 				$(this).attr("name", "memberCode");
 			});
 			
-			if(window.confirm('정말로 해당 게시물을 삭제하시겠습니까?')) {
+			if(window.confirm('정말로 해당 회원을 강퇴하시겠습니까?')) {
 				$("#kickout").submit();
 			}
 			

@@ -62,7 +62,7 @@ public class groupMemberList extends HttpServlet {
 		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
 		
 		int groupCode = Integer.parseInt(request.getParameter("groupCode"));
-		
+		System.out.println(groupCode);
 		ArrayList<MemberVO> list = new GroupService().groupMemberList(pi, groupCode);
 		
 		String page = "";
