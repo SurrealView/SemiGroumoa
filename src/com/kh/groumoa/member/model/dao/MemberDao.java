@@ -252,7 +252,7 @@ public class MemberDao {
 			
 			list = new ArrayList<MemberVO>();
 			
-			if(rset.next()) {
+			while (rset.next()) {
 				MemberVO m = new MemberVO();
 				m.setMemberCode(rset.getInt("MEMBER_CODE"));
 				m.setEmail(rset.getString("EMAIL"));
@@ -734,7 +734,7 @@ public class MemberDao {
 
 				System.out.println("start" + startRow);
 				System.out.println("end" + endRow);
-							
+				System.out.println("그룹코드"+groupCode);
 				pstmt.setInt(1, groupCode);
 				pstmt.setInt(2, startRow);
 				pstmt.setInt(3, endRow);
@@ -742,15 +742,15 @@ public class MemberDao {
 				rset = pstmt.executeQuery();
 				
 				list = new ArrayList<MemberVO>();
-
-				while (rset.next()) {
+				System.out.println(query);
+				while(rset.next()) {					
 					MemberVO m = new MemberVO();
 					m.setMemberCode(rset.getInt("MEMBER_CODE"));
 					m.setEmail(rset.getString("EMAIL"));
 					m.setUserName(rset.getString("MEMBER_NAME"));
 					m.setEnrollDate(rset.getDate("ENROLL_DATE"));
+					m.setPhone(rset.getString("PHONE"));
 					m.setGroupLeaderCode(rset.getInt("GROUP_LEADER_CODE"));
-					m.setPostCode(rset.getInt("POST"));
 					System.out.println(m);
 					list.add(m);
 				}

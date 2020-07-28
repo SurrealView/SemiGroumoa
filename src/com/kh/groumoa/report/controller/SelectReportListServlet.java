@@ -49,6 +49,7 @@ public class SelectReportListServlet extends HttpServlet {
 			
 			currentPage = nowPage;
 		}		
+		
 		limit = 10;
 		int listCount = rs.getListCount();
 		

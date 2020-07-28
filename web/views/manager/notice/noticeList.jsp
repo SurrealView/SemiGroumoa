@@ -81,9 +81,9 @@
 <body>
 	<%@ include file="/views/manager/menubar.jsp" %>
 	<div class="content">      
-      <span id="temp">* 질문에 대한 조회 및 답변을 작성하실 수 있습니다.</span>
+      <span id="temp">* 공지사항의 작성 및 수정과 삭제를 진행하실 수 있습니다.</span>
       <br>
-      <h2 id="name" align="center">Q&A 게시판</h4>
+      <h2 id="name" align="center">공지사항</h4>
       <hr>
       <br><br><!-- 게시판 관리일경우 -->
       <form id="noticeListForm" method="post">

@@ -39,7 +39,7 @@ public class GroupService {
 				
 				result2 += new GroupDao().insertAttachment(con, fileList.get(i));
 			}
-			System.out.println("test result2 : " + result2);
+			
 			
 		}
 		
@@ -320,7 +320,7 @@ public class GroupService {
 	}
 
 	public int joinGroup(GroupVO group, MemberVO loginUser) {
-		
+		System.out.println("service");
 		Connection con = getConnection();
 		
 		int result = new GroupDao().joinGroup(con, group.getGroupCode(), loginUser.getMemberCode());

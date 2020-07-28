@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<% boolean isAnswered = true; %>
+<% boolean isAnswered = false; %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -157,10 +157,10 @@
       <tbody>
       <tr class="answerTitle">
          <td><input type="checkbox"></td>
-         <td><a href="boardManagement-detail.jsp">1</a></td>
-         <td>공지</td>
-         <td>김형진</td>
-         <td>방가방가</td>
+         <td>2</td>
+         <td>환불</td>
+         <td>임시완</td>
+         <td>환불 질문입니다.</td>
          <td>2020-07-05</td>
          <td>2</td>
       </tr>
@@ -174,12 +174,12 @@
        	</td>
        	<tr class="answerTitle">
          <td><input type="checkbox"></td>
-         <td><a href="boardManagement-detail.jsp">1</a></td>
-         <td>공지</td>
-         <td>김형진</td>
-         <td>방가방가</td>
+         <td>1</td>
+         <td>기타</td>
+         <td>임시완</td>
+         <td>동호회 생성 질문입니다.</td>
          <td>2020-07-05</td>
-         <td>2</td>
+         <td>3</td>
       </tr>
       <tr class="answerContent">
     	<td colspan="7">                    	

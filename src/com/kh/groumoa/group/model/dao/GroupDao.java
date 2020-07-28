@@ -826,7 +826,7 @@ public class GroupDao {
 	public int joinGroup(Connection con, int groupCode, int memberCode) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		
+
 		String query = prop.getProperty("joinGroup");
 		
 		try {			

@@ -91,7 +91,8 @@
          <%-- <input type="checkbox" name="ckNotice" value="<%=n.getNoticeCode()%>"></td> --%>
          <input type="hidden" value="<%=re.getReportCode() %>">
          <td class="list" id="rowNum"><%=re.getRno() %></td>
-         <td class="list"><%=re.getReportCategory() %></td>
+         <%-- <td class="list"><%=re.getReportCategory() %></td> --%>
+         <td class="list"><%=re.getReportCategoryName() %></td>
          <td class="list"><%=re.getReporterID() %></td>
          <td class="list"><%=re.getReportedID() %></td>
          <td class="list"><%=re.getReportTitle() %></td>

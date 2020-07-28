@@ -9,6 +9,7 @@ public class ReportVo {
 	String reporterID;
 	String reportedID;
 	String reportCategory;
+	String reportCategoryName;
 	Date reportDate;
 	String reportTitle;
 	String reportDetail;
@@ -120,6 +121,14 @@ public class ReportVo {
 
 	public void setReportedID(String reportedID) {
 		this.reportedID = reportedID;
+	}
+	
+	public String getReportCategoryName() {
+		return reportCategoryName;
+	}
+
+	public void setReportCategoryName(String reportCategoryName) {
+		this.reportCategoryName = reportCategoryName;
 	}
 
 	@Override
