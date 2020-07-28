@@ -33,7 +33,7 @@ public class SelectInquireListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ArrayList<InquireVO> selectQna = new InquireService().selectInquire();
-		System.out.println("selectQna : " + selectQna);
+		//System.out.println("selectQna : " + selectQna);
 		String page = "";
 		
 		if(selectQna != null) {
