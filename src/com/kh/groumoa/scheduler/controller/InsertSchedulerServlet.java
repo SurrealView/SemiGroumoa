@@ -35,11 +35,12 @@ public class InsertSchedulerServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		/* String schCode = request.getParameter("schCode"); */
+		
 		String schTitle = request.getParameter("schTitle");
 		String schDetail = request.getParameter("schDetail");
 		String schDate = request.getParameter("schDate");
 		int writerCode = Integer.parseInt(request.getParameter("scheMember"));
+		
 		GroupVO group = (GroupVO) request.getSession().getAttribute("selectedGroup");
 		int groupCode = group.getGroupCode();
 
