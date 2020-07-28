@@ -181,6 +181,7 @@
                     <% } %> 
                   </tbody>
                 </table>
+                </form>
                 </div>
                 
                 <!-- 회원일 경우 --><!--  
@@ -343,9 +344,9 @@
 			</div>
 			
 		</div> 
-	</form>
+	
 				
-				<button type ="button" class="kickBtn">강퇴하기</button>
+				<button type ="button" class="kickBtn" id="kickBtn">강퇴하기</button>
 				<button class="inviteBtn">초대하기</button>
 				
                 <div class="searchbox" id="searchbox">
@@ -365,8 +366,8 @@
 		<script>
 		function kickout(){
 			$("#kickoutForm").attr("action", "<%=request.getContextPath()%>/kickout.ko");
-		}
 		
+		}
 		$("#kickBtn").click(function(){
 			var memberCode = [];
 			$.each($("#checkList:checked").parent().prev(), function(){

@@ -39,7 +39,7 @@ public class GroupService {
 				
 				result2 += new GroupDao().insertAttachment(con, fileList.get(i));
 			}
-			System.out.println("test result2 : " + result2);
+			
 			
 		}
 		
