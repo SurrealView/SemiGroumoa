@@ -62,39 +62,18 @@ public class InsertgroupServlet extends HttpServlet {
 	            saveFiles.add(multiRequest.getFilesystemName(name));
 	            originFiles.add(multiRequest.getOriginalFileName(name));
 	         }
-	        
-	     /*   String groupCode = multiRequest.getParameter("groupCode");*/ 
+	         
 			String rnCode = multiRequest.getParameter("rnCode");
 			String name = multiRequest.getParameter("groupName");
 			String description = multiRequest.getParameter("description");
-/*			String [] iarr = request.getParameterValues("interest");
-*/			String interest = multiRequest.getParameter("interest");
+			String interest = multiRequest.getParameter("interest");
 			String openYn = multiRequest.getParameter("openYn");
 			String nickNameyn = multiRequest.getParameter("nickNameyn");
 			String groupRule = multiRequest.getParameter("groupRule");
 			String regionName = multiRequest.getParameter("regionName");
-			String regionSpecific = multiRequest.getParameter("regionSpecific");
-			
-/*			String interest = "";
-			if(iarr != null) {
-				for(int i = 0; i < iarr.length; i++) {
-					interest += iarr[i];
-				}
-			}
-*/			
-/*			System.out.println("interest" + interest);
-*/		
-/*			ArrayList<MemberInterestVO> requestMemberInterest = new ArrayList<MemberInterestVO>();
-			for(int i = 0; i < iarr.length; i++) {
-				MemberInterestVO memberInterest = new MemberInterestVO();
-				memberInterest.setInterestCode(iarr[i]);
-				
-				requestMemberInterest.add(memberInterest);
-			}  */
-		
+			String regionSpecific = multiRequest.getParameter("regionSpecific");		
 			
 			GroupVO group = new GroupVO();
-		/*	group.setGroupCode(Integer.parseInt(groupCode));*/
 			group.setGroupName(name);
 			group.setGroupLeaderCode(groupLeaderCode);
 			group.setRnCode(rnCode);
@@ -130,10 +109,11 @@ public class InsertgroupServlet extends HttpServlet {
 			int result = new GroupService().insertGroup(group, fileList);
 			
 			GroupVO selectGroup = new GroupService().selectOne(group.getGroupCode());
-			System.out.println("지역코드" + rnCode);
+			
 			RegionVO regionSearch = new GroupService().searchRegion(rnCode);
-			System.out.println("테스트2"+regionSearch);
+			
 			selectGroup.setRegionName(regionSearch.getRegionName()+ " " + regionSearch.getRegionSpecific());
+			
 			String page = "";
 			if(result > 0) {
 				page = "views/group/groupMainPageAsLeader.jsp";
